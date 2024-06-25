@@ -14,6 +14,18 @@ book:
   chapters:
     - index.qmd
     - intro.qmd
+    - getting_started.qmd
+    - programming_primers.qmd
+    - data_wrangling.qmd
+    - data_vis.qmd
+    - data_variety.qmd
+    - open_science.qmd
+    - code_management.qmd
+    - regression_classification.qmd
+    - supervised_ml_I.qmd
+    - supervised_ml_II.qmd
+    - randomforest.qmd
+    - interpretable-ml.qmd
     - basicr.qmd
     - ggplot.qmd
     - references.qmd
