@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Applied Geodata Science - 10&nbsp; Supervised machine learning I</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./supervised_ml_II.html" rel="next">
+<link href="./regression_classification.html" rel="prev">
+<link href="./figures/favicon.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<meta name="twitter:title" content="Applied Geodata Science - 10&nbsp; Supervised machine learning I">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="figures/supervised_ml.png">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./images/logo.png" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title"></span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./index.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools tools-wide">
+    <a href="https://github.com/stineb/agds_book/" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+              <i class="bi bi-bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+      </ul>
+    </div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./supervised_ml_I.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Supervised machine learning I</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./getting_started.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting started</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./programming_primers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Programming primers</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data_wrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data wrangling</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data_vis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data visualisation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data_variety.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data variety</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./open_science.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Open science practices</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./code_management.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Code management</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./regression_classification.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Regression and classification</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./supervised_ml_I.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Supervised machine learning I</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./supervised_ml_II.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Supervised machine learning II</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./randomforest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Random Forest</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./interpretable-ml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Interpretable Machine Learning</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">10.1</span> Learning objectives</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup"><span class="header-section-number">10.2</span> Setup</a></li>
+  <li><a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial"><span class="header-section-number">10.3</span> Tutorial</a>
+  <ul class="collapse">
+  <li><a href="#what-is-supervised-machine-learning" id="toc-what-is-supervised-machine-learning" class="nav-link" data-scroll-target="#what-is-supervised-machine-learning"><span class="header-section-number">10.3.1</span> What is supervised machine learning?</a></li>
+  <li><a href="#overfitting" id="toc-overfitting" class="nav-link" data-scroll-target="#overfitting"><span class="header-section-number">10.3.2</span> Overfitting</a></li>
+  <li><a href="#data-and-the-modelling-challenge" id="toc-data-and-the-modelling-challenge" class="nav-link" data-scroll-target="#data-and-the-modelling-challenge"><span class="header-section-number">10.3.3</span> Data and the modelling challenge</a></li>
+  <li><a href="#k-nearest-neighbours" id="toc-k-nearest-neighbours" class="nav-link" data-scroll-target="#k-nearest-neighbours"><span class="header-section-number">10.3.4</span> K-nearest neighbours</a></li>
+  <li><a href="#model-formulation" id="toc-model-formulation" class="nav-link" data-scroll-target="#model-formulation"><span class="header-section-number">10.3.5</span> Model formulation</a></li>
+  <li><a href="#data-splitting" id="toc-data-splitting" class="nav-link" data-scroll-target="#data-splitting"><span class="header-section-number">10.3.6</span> Data splitting</a></li>
+  <li><a href="#preprocessing" id="toc-preprocessing" class="nav-link" data-scroll-target="#preprocessing"><span class="header-section-number">10.3.7</span> Pre-processing</a></li>
+  <li><a href="#putting-it-all-together-half-way" id="toc-putting-it-all-together-half-way" class="nav-link" data-scroll-target="#putting-it-all-together-half-way"><span class="header-section-number">10.3.8</span> Putting it all together (half-way)</a></li>
+  </ul></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">10.4</span> Exercises</a></li>
+  <li><a href="#report-exercises" id="toc-report-exercises" class="nav-link" data-scroll-target="#report-exercises"><span class="header-section-number">10.5</span> Report Exercises</a>
+  <ul class="collapse">
+  <li><a href="#comparison-of-the-linear-regression-and-knn-models" id="toc-comparison-of-the-linear-regression-and-knn-models" class="nav-link" data-scroll-target="#comparison-of-the-linear-regression-and-knn-models">Comparison of the linear regression and KNN models</a></li>
+  <li><a href="#the-role-of-k" id="toc-the-role-of-k" class="nav-link" data-scroll-target="#the-role-of-k">The role of k</a></li>
+  <li><a href="#deliverables-for-the-report" id="toc-deliverables-for-the-report" class="nav-link" data-scroll-target="#deliverables-for-the-report">Deliverables for the report</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="supervisedmli" class="quarto-section-identifier"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Supervised machine learning I</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p><strong>Chapter lead author: Benjamin Stocker</strong></p>
+<section id="learning-objectives" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">10.1</span> Learning objectives</h2>
+<p>Machine learning may appear magical. The ability of machine learning algorithms to detect patterns and make predictions is fascinating. However, several challenges have to be met in the process of formulating, training, and evaluating the models. In this and the next chapter (Chapter @ref(supervisedmlii)), we will discuss some basics of supervised machine learning and how to achieve best predictive results.</p>
+<p>Basic steps of the implementation of supervised machine learning are introduced, including data splitting, pre-processing, model formulation, and the implementation of these steps using the {caret} and {recipes} R packages. A focus is put on learning the concept of the bias-variance trade-off and overfitting.</p>
+<p>Contents of this Chapter are inspired and partly adopted by the excellent book <a href="https://bradleyboehmke.github.io/HOmachine%20learning/">Hands-On Machine Learning in R by Boehmke &amp; Greenwell</a>.</p>
+</section>
+<section id="setup" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="setup"><span class="header-section-number">10.2</span> Setup</h2>
+<p>In this Chapter, we will need the following libraries</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(recipes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="tutorial" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="tutorial"><span class="header-section-number">10.3</span> Tutorial</h2>
+<section id="what-is-supervised-machine-learning" class="level3" data-number="10.3.1">
+<h3 data-number="10.3.1" class="anchored" data-anchor-id="what-is-supervised-machine-learning"><span class="header-section-number">10.3.1</span> What is supervised machine learning?</h3>
+<p>Supervised machine learning is a type of machine learning where the model is trained using <em>labeled</em> data and the goal is to predict the output for new, unseen data. This corresponds to the approach of model fitting that we’ve seen in Chapter @ref(regressionclassification). In contrast, <em>unsupervised machine learning</em> is a type of machine learning where the algorithms learn from data without being provided with labeled targets. The algorithms aim to identify patterns and relationships in the data without any guidance. Examples include clustering and dimensionality reduction.</p>
+<p>In supervised machine learning, we use a set of <em>predictors</em> <span class="math inline">\(X\)</span> (also known as <em>features</em>, or <em>independent variables</em>) and observed values of a target variable <span class="math inline">\(Y\)</span> that are recorded in parallel, to find a model <span class="math inline">\(f(X) = \hat{Y}\)</span> that yields a good match between <span class="math inline">\(Y\)</span> and <span class="math inline">\(\hat{Y}\)</span> and that can be used for reliably predicting <span class="math inline">\(Y\)</span> for new (“unseen”) data points <span class="math inline">\(X_\text{new}\)</span> - data that has not been used during model fitting/training. The hat on <span class="math inline">\(\hat{Y}\)</span> denotes an estimate. Some algorithms can even handle predictions of multiple target variables simultaneously (e.g., neural networks).</p>
+<p>From above definitions, we can note a few key ingredients of supervised machine learning:</p>
+<ul>
+<li>Input data (predictors)</li>
+<li>Target data recorded in parallel with predictors</li>
+<li>A model that estimates <span class="math inline">\(f(X) = \hat{Y}\)</span>, made of mathematical operations relating <span class="math inline">\(X\)</span> to <span class="math inline">\(\hat{Y}\)</span> and of model parameters (coefficients) that are calibrated to yield the best match of <span class="math inline">\(Y\)</span> and <span class="math inline">\(\hat{Y}\)</span></li>
+<li>A metric measuring how good the match between <span class="math inline">\(Y\)</span> and <span class="math inline">\(\hat{Y}\)</span> is - the <em>loss</em> function</li>
+<li>An algorithm (the <em>optimiser</em>) to find the best set of parameters that minimize the loss</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/supervised_ml.png" class="img-fluid figure-img" style="width:60.0%"></p>
+<figcaption class="figure-caption">Supervised machine learning ingredients, adopted from <a href="https://www.manning.com/books/deep-learning-with-r">Chollet and Allaire (2018)</a>.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The type of modelling approach of supervised machine learning is very similar to fitting regression models as we did in Chapter @ref(regressionclassification). In a sense, supervised machine learning is just another empirical (or statistical) modelling approach. However, you may not want to call linear regression a machine learning algorithm because there is no iterative learning involved. Furthermore, machine learning differs from traditional statistical modelling methods in that it makes no assumptions regarding the data generation process and underlying distributions (<a href="https://projecteuclid.org/journals/statistical-science/volume-16/issue-3/Statistical-Modeling--The-Two-Cultures-with-comments-and-a/10.1214/ss/1009213726.full">Breiman, 2001</a>).</p>
+<p>Nevertheless, contrasting a bivariate linear regression model with a complex machine learning algorithm is instructive. Also linear regression provides a prediction <span class="math inline">\(\hat{Y} = f(X)\)</span>, just like other (proper) machine learning algorithms do. The functional form of a bivariate linear regression is not particularly flexible (just a straight line for the best fit between predictors and targets) and it has only two parameters (slope and intercept). At the other extreme are, for example, deep neural networks. They are extremely flexible, can learn highly non-linear relationships and deal with interactions between a large number of predictors. They also contain very large numbers of parameters (typically on the order of <span class="math inline">\(10^4 - 10^7\)</span>). You can imagine that their high flexibility allows these types of algorithms to very effectively learn from the data, but also bears the risk of <em>overfitting</em>. What is overfitting?</p>
+</section>
+<section id="overfitting" class="level3" data-number="10.3.2">
+<h3 data-number="10.3.2" class="anchored" data-anchor-id="overfitting"><span class="header-section-number">10.3.2</span> Overfitting</h3>
+<p><em>This example is based on <a href="https://scikit-learn.org/stable/auto_examples/model_selection/plot_underfitting_overfitting.htmachine%20learning">this example from scikit-learn</a>.</em></p>
+<p>Let’s assume that there is some true underlying relationship between a single predictor <span class="math inline">\(X\)</span> and the target variable <span class="math inline">\(Y\)</span>. We don’t know this relationship and the observations contain a (normally distributed) error. Based on our training data, we fit three polynomial models that differ with respect to their complexity. We fit a polynomial of degree 1, 4, and 15 to the observations. A polynomial of degree <span class="math inline">\(N\)</span> is given by: <span class="math display">\[
+y = \sum_{n=0}^N a_n x^n
+\]</span> <span class="math inline">\(a_n\)</span> are the coefficients, i.e., model parameters. The goal of the training is to find the coefficients <span class="math inline">\(a_n\)</span> so that the predicted <span class="math inline">\(\hat{Y}\)</span> fits observed <span class="math inline">\(Y\)</span> best. From the above definition, the polynomial of degree 15 has 16 parameters, while the polynomial of degree 1 has two parameters (and corresponds to a simple bivariate linear regression). You can imagine that the polynomial of degree 15 is much more flexible and should thus yield the closest fit to the training data. This is indeed the case.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="supervised_ml_I_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>We can use the same fitted models on data that was <em>not</em> used for model fitting - the <em>test data</em>. This is what’s done below. Again, the same true underlying relationship is used, but we sample a new set of data points <span class="math inline">\(X_\text{new}\)</span> and add a new sample of errors on top of the true relationship.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="supervised_ml_I_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>You see that, using the test set, we find that “poly4” actually performs best - it has a much lower RMSE than “poly15”. Apparently, “poly15” was <em>overfitted</em>. Apparently, it used its flexibility to fit not only the shape of the true underlying relationship, but also the observation errors on top of it. This has the implication that, when this model is used for making predictions for data that was not used for training, it will yield misguided predictions that are affected by the errors in the training set. This is the reason why “poly15” performed worse on the test set than the other models.</p>
+<p>From the figures above, we can also conclude that “poly1” was underfitted - it performed worse than “poly4” also on the validation set.</p>
+<p>The <em>out-of-sample performance</em> of “poly15” gets even worse when applying the fitted polynomial models to data that extends beyond the range in <span class="math inline">\(X\)</span> that was used for model training. Here, we’re extending just 20% to the right.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="supervised_ml_I_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>You see that the RMSE for “poly15” literally explodes. The model is hopelessly overfitted and completely useless for prediction, although it looked like it fitted the data best when we considered only the training results. This is a fundamental challenge in machine learning - finding the model with the best <em>generalisability</em>. That is, a model that not only fits the training data well, but also performs well on unseen data.</p>
+<p>The phenomenon of fitting and overfitting as a function of the <em>model complexity</em> is also referred to as the <em>bias-variance trade-off</em>. The bias describes how well a model matches the training set (average error). A model with low bias will match the data set closely and vice versa. The variance describes how much a model changes when you train it using different portions of your data set. “poly15” has a high variance. On the other extreme, “poly1” has a high bias. It’s not affected by the noise in observations, but its predictions are also far off the observations. In machine learning (as in all statistical modelling), we are challenged to balance this trade-off.</p>
+<p>This Chapter and Chapter @ref(supervisedmlii) introduce the methods for achieving the best model <em>generalisability</em> and find the sweet spot between high bias and high variance. One of the key steps of the machine learning modelling process is motivated by the example above: the separation of the data into a <em>training</em> and a <em>testing</em> set (<em>data splitting</em>). Only by withholding part of the data from the model training, we have a good basis for testing the model on that unseen data for evaluating its generalisability. Additional steps that may be required or beneficial for effective model training and their implementation in R are introduced in this and the next Chapter. Depending on your application or research question, it may also be of interest to evaluate the relationships embodied in <span class="math inline">\(f(X)\)</span> or to quantify the <em>importance</em> of different predictors in our model. This is referred to as <em>model interpretation</em> and is not (currently) included in this book.</p>
+<p>Of course, a plethora of algorithms exist that do the job of <span class="math inline">\(Y = f(X)\)</span>. Each of them has its own strengths and limitations. It is beyond the scope of this course to introduce a larger number of machine learning algorithms. For illustration purposes in this chapter, we will use and introduce the K-nearest-Neighbors (KNN) algorithm and compare its performance to a multivariate linear regression for illustration purposes. Chapter @ref(randomforest) introduces Random Forest.</p>
+</section>
+<section id="data-and-the-modelling-challenge" class="level3" data-number="10.3.3">
+<h3 data-number="10.3.3" class="anchored" data-anchor-id="data-and-the-modelling-challenge"><span class="header-section-number">10.3.3</span> Data and the modelling challenge</h3>
+<p>We’re returning to ecosystem flux data that we’ve used in Chapters @ref(datawrangling) and @ref(datavis). Here, we’re using daily data from the evergreen site in Davos, Switzerland (CH-Dav) to avoid effects of seasonally varying foliage cover for which the data does not contain information. To address such additional effects, we would have to, for example, combine the flux and meteorological data with remotely sensed surface greenness data.</p>
+<p>The data set <code>FLX_CH-Dav_FLUXNET2015_FULLSET_DD_1997-2014_1-3.csv</code> contains a time series of the ecosystem gross primary production (GPP) and a range of meteorological variables, measured in parallel. In this chapter, we formulate a model for predicting GPP from a set of <em>covariates</em> (other variables that vary in parallel, here the meteorological variables). This is to say that <code>GPP_NT_VUT_REF</code> is the <em>target</em> variable, and other variables that are available in our dataset are the <em>predictors.</em></p>
+<p>Let’s read the data, select suitable variables, interpret missing value codes, and select only good-quality data (where at least 80% of the underlying half-hourly data was good quality measured data, and not gap-filled).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>daily_fluxes <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"./data/FLX_CH-Dav_FLUXNET2015_FULLSET_DD_1997-2014_1-3.csv"</span>) <span class="sc">|&gt;</span>  </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># select only the variables we are interested in</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(TIMESTAMP,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                GPP_NT_VUT_REF,    <span class="co"># the target</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                <span class="fu">ends_with</span>(<span class="st">"_QC"</span>),  <span class="co"># quality control info</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                <span class="fu">ends_with</span>(<span class="st">"_F"</span>),   <span class="co"># includes all all meteorological covariates</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                <span class="sc">-</span><span class="fu">contains</span>(<span class="st">"JSB"</span>)   <span class="co"># weird useless variable</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                ) <span class="sc">|&gt;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># convert to a nice date object</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">TIMESTAMP =</span> lubridate<span class="sc">::</span><span class="fu">ymd</span>(TIMESTAMP)) <span class="sc">|&gt;</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># set all -9999 to NA</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), <span class="sc">~</span><span class="fu">na_if</span>(., <span class="sc">-</span><span class="dv">9999</span>))) <span class="sc">|&gt;</span> </span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># retain only data based on &gt;=80% good-quality measurements</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># overwrite bad data with NA (not dropping rows)</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">GPP_NT_VUT_REF =</span> <span class="fu">ifelse</span>(NEE_VUT_REF_QC <span class="sc">&lt;</span> <span class="fl">0.8</span>, <span class="cn">NA</span>, GPP_NT_VUT_REF),</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>                <span class="at">TA_F           =</span> <span class="fu">ifelse</span>(TA_F_QC        <span class="sc">&lt;</span> <span class="fl">0.8</span>, <span class="cn">NA</span>, TA_F),</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>                <span class="at">SW_IN_F        =</span> <span class="fu">ifelse</span>(SW_IN_F_QC     <span class="sc">&lt;</span> <span class="fl">0.8</span>, <span class="cn">NA</span>, SW_IN_F),</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>                <span class="at">LW_IN_F        =</span> <span class="fu">ifelse</span>(LW_IN_F_QC     <span class="sc">&lt;</span> <span class="fl">0.8</span>, <span class="cn">NA</span>, LW_IN_F),</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>                <span class="at">VPD_F          =</span> <span class="fu">ifelse</span>(VPD_F_QC       <span class="sc">&lt;</span> <span class="fl">0.8</span>, <span class="cn">NA</span>, VPD_F),</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>                <span class="at">PA_F           =</span> <span class="fu">ifelse</span>(PA_F_QC        <span class="sc">&lt;</span> <span class="fl">0.8</span>, <span class="cn">NA</span>, PA_F),</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>                <span class="at">P_F            =</span> <span class="fu">ifelse</span>(P_F_QC         <span class="sc">&lt;</span> <span class="fl">0.8</span>, <span class="cn">NA</span>, P_F),</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>                <span class="at">WS_F           =</span> <span class="fu">ifelse</span>(WS_F_QC        <span class="sc">&lt;</span> <span class="fl">0.8</span>, <span class="cn">NA</span>, WS_F)) <span class="sc">|&gt;</span> </span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># drop QC variables (no longer needed)</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span><span class="fu">ends_with</span>(<span class="st">"_QC"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p>To reproduce this code chunk, you can download the file <code>FLX_CH-Dav_FLUXNET2015_FULLSET_DD_1997-2014_1-3.csv</code> from <a href="https://raw.githubusercontent.com/geco-bern/agds/main/data/FLX_CH-Dav_FLUXNET2015_FULLSET_DD_1997-2014_1-3.csv">here</a> and read it from the local path where the file is stored on your machine. All data files used in this tutorials are stored <a href="https://github.com/geco-bern/agds/tree/main/data">here</a>.</p>
+</blockquote>
+<p>The steps above are considered data <em>wrangling</em> and are <em>not</em> part of the modelling process. After completing this tutorial, you will understand this distinction.</p>
+</section>
+<section id="k-nearest-neighbours" class="level3" data-number="10.3.4">
+<h3 data-number="10.3.4" class="anchored" data-anchor-id="k-nearest-neighbours"><span class="header-section-number">10.3.4</span> K-nearest neighbours</h3>
+<p>Before we start with the model training workflow, let’s introduce the K-nearest neighbour (KNN) algorithm. It serves the purpose of demonstrating the bias-variance trade-off. As the name suggests, KNN uses the <span class="math inline">\(k\)</span> observations that are “nearest” to the new record for which we want to make a prediction. It then calculates their average (for regression) or most frequent value (for classification) and uses it as the prediction of the target value. “Nearest” is determined by some distance metric evaluated based on the values of the predictors. In our example (<code>GPP_NT_VUT_REF ~ .</code>), KNN would determine the <span class="math inline">\(k\)</span> days (rows in a data frame) where conditions, given by our set of predictors, were most similar (nearest) to the day for which we seek a prediction. Then, it calculates the prediction as the average (mean) GPP value of these days. Determining “nearest” neighbors is commonly based on either the <em>Euclidean</em> or <em>Manhattan</em> distances between two data points <span class="math inline">\(X_a\)</span> and <span class="math inline">\(X_b\)</span>, considering all <span class="math inline">\(P\)</span> predictors <span class="math inline">\(j\)</span>.</p>
+<p>Euclidean distance: <span class="math display">\[
+\sqrt{ \sum_{j=1}^P (X_{a,j} - X_{b,j})^2  } \\
+\]</span></p>
+<p>Manhattan distance: <span class="math display">\[
+\sum_{j=1}^P | X_{a,j} - X_{b,j} |
+\]</span></p>
+<p>In two-dimensional space, the Euclidean distance measures the length of a straight line between two points (remember Pythagoras!). The Manhattan distance is called this way because it measures the distance you would have to walk to get from point <span class="math inline">\(a\)</span> to point <span class="math inline">\(b\)</span> in Manhattan, New York, where you cannot cut corners but have to follow a rectangular grid of streets. <span class="math inline">\(|x|\)</span> is the absolute value of <span class="math inline">\(X\)</span> ( <span class="math inline">\(|-x| = x\)</span>).</p>
+<p>KNN is a simple algorithm that uses knowledge of the “local” data structure for prediction. A drawback is that the model “training” has to be done for each prediction step and the computation time of the training increases with <span class="math inline">\(x \times p\)</span>. KNNs are often used, for example, to impute values (fill missing values, see also below) and have the advantage that predicted values are always within the range of observed values of the target variable.</p>
+</section>
+<section id="model-formulation" class="level3" data-number="10.3.5">
+<h3 data-number="10.3.5" class="anchored" data-anchor-id="model-formulation"><span class="header-section-number">10.3.5</span> Model formulation</h3>
+<p>The aim of supervised machine learning is to find a model <span class="math inline">\(\hat{Y} = f(X)\)</span> so that <span class="math inline">\(\hat{Y}\)</span> agrees well with observations <span class="math inline">\(Y\)</span>. We typically start with a research question where <span class="math inline">\(Y\)</span> is given - naturally - by the problem we are addressing and we have a data set at hand where one or multiple predictors (or “features”) <span class="math inline">\(X\)</span> are recorded along with <span class="math inline">\(Y\)</span>. From our data, we have information about how GPP (ecosystem-level photosynthesis) depends on a set of abiotic factors, mostly meteorological measurements.</p>
+<section id="formula-notation" class="level4" data-number="10.3.5.1">
+<h4 data-number="10.3.5.1" class="anchored" data-anchor-id="formula-notation"><span class="header-section-number">10.3.5.1</span> Formula notation</h4>
+<p>In R, it is common to use the <em>formula</em> notation to specify the target and predictor variables. You have encountered formulas before, e.g., for a linear regression using the <code>lm()</code> function. To specify a linear regression model for <code>GPP_NT_VUT_REF</code> with three predictors <code>SW_IN_F</code>, <code>VPD_F</code>, and <code>TA_F</code>, to be fitted to data <code>daily_fluxes</code>, we write:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(GPP_NT_VUT_REF <span class="sc">~</span> SW_IN_F <span class="sc">+</span> VPD_F <span class="sc">+</span> TA_F, <span class="at">data =</span> daily_fluxes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="the-generic-train" class="level4" data-number="10.3.5.2">
+<h4 data-number="10.3.5.2" class="anchored" data-anchor-id="the-generic-train"><span class="header-section-number">10.3.5.2</span> The generic <code>train()</code></h4>
+<p>The way we formulate a model can be understood as being independent of the algorithm, or <em>engine</em>, that takes care of fitting <span class="math inline">\(f(X)\)</span>. The R package <a href="https://topepo.github.io/caret/">{caret}</a> provides a unified interface for using different machine learning algorithms implemented in separate packages. In other words, it acts as a <em>wrapper</em> for multiple different model fitting, or machine learning algorithms. This has the advantage that it unifies the interface - the way arguments are provided and outputs are returned. {caret} also provides implementations for a set of commonly used tools for data processing, model training, and evaluation. We’ll use {caret} here for model training with the function <code>train()</code>. Note however, that using a specific algorithm, which is implemented in a specific package outside {caret}, also requires that the respective package be installed and loaded. Using {caret} for specifying the same linear regression model as above, the base-R <code>lm()</code> function, can be done with {caret} in a generalized form as:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r fold-show code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>caret<span class="sc">::</span><span class="fu">train</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">form =</span> GPP_NT_VUT_REF <span class="sc">~</span> SW_IN_F <span class="sc">+</span> VPD_F <span class="sc">+</span> TA_F, </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> daily_fluxes <span class="sc">|&gt;</span> <span class="fu">drop_na</span>(),  <span class="co"># drop missing values</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">trControl =</span> caret<span class="sc">::</span><span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"none"</span>),  <span class="co"># no resampling</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"lm"</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Linear Regression 
+
+2729 samples
+   3 predictor
+
+No pre-processing
+Resampling: None </code></pre>
+</div>
+</div>
+<p>Note the argument specified as <code>trControl = trainControl(method = "none")</code>. This suppresses the default approach to model fitting in {caret} - to <em>resample</em> using <em>bootstrapping</em>. More on that in Chapter @ref(supervisedmlii). Note also that we dropped all rows that contained at least one missing value - necessary to apply the least squares method for the linear regression model fitting. It’s advisable to apply this data removal step only at the very last point of the data processing and modelling workflow. Alternative algorithms may be able to deal with missing values and we want to avoid losing information along the workflow.</p>
+<p>Of course, it is an overkill to write this as in the code chunk above compared to just writing <code>lm(...)</code>. The advantage of the unified interface is that we can simply replace the <code>method</code> argument to use a different model fitting algorithm. For example, to use KNN, we just can write:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r fold-show code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>caret<span class="sc">::</span><span class="fu">train</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">form =</span> GPP_NT_VUT_REF <span class="sc">~</span> SW_IN_F <span class="sc">+</span> VPD_F <span class="sc">+</span> TA_F, </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> daily_fluxes <span class="sc">|&gt;</span> <span class="fu">drop_na</span>(), </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">trControl =</span> caret<span class="sc">::</span><span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"none"</span>),</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"knn"</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>k-Nearest Neighbors 
+
+2729 samples
+   3 predictor
+
+No pre-processing
+Resampling: None </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="data-splitting" class="level3" data-number="10.3.6">
+<h3 data-number="10.3.6" class="anchored" data-anchor-id="data-splitting"><span class="header-section-number">10.3.6</span> Data splitting</h3>
+<p>The introductory example demonstrated the importance of validating the fitted model with data that was <em>not</em> used for training. Thus, we can test the model’s <em>generalisability</em> to new (“unseen”) data. The essential step that enables us to assess the model’s <em>generalization error</em> is to hold out part of the data from training and set it aside (leaving it absolutely untouched!) for <em>testing</em>.</p>
+<p>There is no fixed rule for how much data are to be used for training and testing, respectively. We have to balance a trade-off:</p>
+<ul>
+<li>Spending too much data for training will leave us with too little data for testing and the test results may not be robust. In this case, the sample size for getting robust validation statistics is not sufficiently large and we don’t know for sure whether we are safe from an over-fit model.</li>
+<li>Spending too much data for validation will leave us with too little data for training. In this case, the machine learning algorithm may not be successful at finding real relationships due to insufficient amounts of training data.</li>
+</ul>
+<p>Typical splits are between 60-80% for training. However, in cases where the number of data points is very large, the gains from having more training data are marginal, but come at the cost of adding to the already high computational burden of model training.</p>
+<p>In environmental sciences, the number of predictors is often smaller than the sample size (<span class="math inline">\(p &lt; n\)</span>), because it is typically easier to collect repeated observations of a particular variable than to expand the set of variables being observed. Nevertheless, in cases where the number <span class="math inline">\(p\)</span> gets large, it is important, and for some algorithms mandatory, to maintain <span class="math inline">\(p &lt; n\)</span> for model training.</p>
+<p>An important aspect to consider when splitting the data is to make sure that all “states” of the system for which we have data are well represented in training and testing sets. A particularly challenging case is posed when it is of particular interest that the algorithm learns relationships <span class="math inline">\(f(X)\)</span> under rare conditions <span class="math inline">\(X\)</span>, for example meteorological extreme events. If not addressed with particular measures, model training tends to achieve good model performance for the most common conditions. A simple way to put more emphasis for model training on extreme conditions is to compensate by sampling overly proportional from such cases for the training data set.</p>
+<p>Several alternative functions for the data splitting step are available from different packages in R. We use the the <em>rsample</em> package here as it allows to additionally make sure that data from the full range of a given variable’s values (<code>VPD_F</code> in the example below) are well covered in both training and testing sets.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)  <span class="co"># for reproducibility</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>split <span class="ot">&lt;-</span> rsample<span class="sc">::</span><span class="fu">initial_split</span>(daily_fluxes, <span class="at">prop =</span> <span class="fl">0.7</span>, <span class="at">strata =</span> <span class="st">"VPD_F"</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>daily_fluxes_train <span class="ot">&lt;-</span> rsample<span class="sc">::</span><span class="fu">training</span>(split)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>daily_fluxes_test <span class="ot">&lt;-</span> rsample<span class="sc">::</span><span class="fu">testing</span>(split)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Plot the distribution of values in the training and testing sets.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>plot_data <span class="ot">&lt;-</span> daily_fluxes_train <span class="sc">|&gt;</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">split =</span> <span class="st">"train"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">bind_rows</span>(daily_fluxes_test <span class="sc">|&gt;</span> </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">split =</span> <span class="st">"test"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">9</span>, <span class="at">names_to =</span> <span class="st">"variable"</span>, <span class="at">values_to =</span> <span class="st">"value"</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>plot_data <span class="sc">|&gt;</span> </span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> value, <span class="at">y =</span> ..density.., <span class="at">color =</span> split)) <span class="sc">+</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>variable, <span class="at">scales =</span> <span class="st">"free"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="supervised_ml_I_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="preprocessing" class="level3" data-number="10.3.7">
+<h3 data-number="10.3.7" class="anchored" data-anchor-id="preprocessing"><span class="header-section-number">10.3.7</span> Pre-processing</h3>
+<p>Data pre-processing is aimed at preparing the data for use in a specific model fitting procedure and at improving the effectiveness of model training. The splitting of the data into a training and test set makes sure that no information from the test set is used during or before model training. It is important that absolutely no information from the test set finds its way into the training set (<em>data leakage</em>).</p>
+<p>In a general sense, pre-processing involve data transformations where the transformation functions use parameters that are determined on the data itself. Consider, for example, the <em>standardization</em>. That is, the linear transformation of a vector of values to have zero mean (data is <em>centered</em>, <span class="math inline">\(\mu = 0\)</span>) and a standard deviation of 1 (data is <em>scaled</em> to <span class="math inline">\(\sigma = 1\)</span>). In order to avoid data leakage, the mean and standard deviation have to be determined on the training set only. Then, the normalization of the training and the test sets both use the set of (<span class="math inline">\(\mu, \sigma\)</span>) determined on the training set. Data leakage would occur if the (<span class="math inline">\(\mu, \sigma\)</span>) would be determined on data containing values from the test set.</p>
+<p>Often, multiple splits of the data are considered during model training. Hence, an even larger number of data transformation parameters (<span class="math inline">\(\mu, \sigma\)</span> in the example of normalization) have to be determined and transformations applied to the multiple splits of the data. {caret} deals with this for you and the transformations do not have to be “manually” applied before applying the <code>train()</code> function call. Instead, the data pre-processing is considered an integral step of model training and instructions are specified as part of the <code>train()</code> function call and along with the un-transformed data.</p>
+<p>The <a href="https://recipes.tidymodels.org/">{recipes}</a> package provides an even more powerful way for specifying the <em>formula</em> and pre-processing steps in one go. It is compatible with the <code>train()</code> function of {caret}. For the same formula as above, and an example where the data <code>daily_fluxes_train</code> is to be normalized (centered and scaled), we can specify a “recipe” using the pipe operator as:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>pp <span class="ot">&lt;-</span> recipes<span class="sc">::</span><span class="fu">recipe</span>(GPP_NT_VUT_REF <span class="sc">~</span> SW_IN_F <span class="sc">+</span> VPD_F <span class="sc">+</span> TA_F, <span class="at">data =</span> daily_fluxes_train) <span class="sc">|&gt;</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  recipes<span class="sc">::</span><span class="fu">step_center</span>(recipes<span class="sc">::</span><span class="fu">all_numeric</span>(), <span class="sc">-</span>recipes<span class="sc">::</span><span class="fu">all_outcomes</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  recipes<span class="sc">::</span><span class="fu">step_scale</span>(recipes<span class="sc">::</span><span class="fu">all_numeric</span>(), <span class="sc">-</span>recipes<span class="sc">::</span><span class="fu">all_outcomes</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The first line with the <code>recipe()</code> function call assigns <em>roles</em> to the different variables. <code>GPP_NT_VUT_REF</code> is an <em>outcome</em> (in “{recipes} speak”). Then, we used selectors to apply the recipe step to several variables at once. The first selector, <code>all_numeric()</code>, selects all variables that are either integers or real values. The second selector, <code>-all_outcomes()</code> removes any outcome (target) variables from this recipe step. The returned object <code>pp</code> does <em>not</em> contain a normalized version of the data frame <code>daily_fluxes_train</code>, but rather the information that allows us to apply a specific set of pre-processing steps also to any other data set.</p>
+<p>The object <code>pp</code> can then be supplied to <code>train()</code> as its first argument:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>caret<span class="sc">::</span><span class="fu">train</span>(</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  pp, </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> daily_fluxes_train, </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"knn"</span>,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">trControl =</span> caret<span class="sc">::</span><span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"none"</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The example above showed data standardization as a data pre-processing step. Data pre-processing may be done with different aims, as described in sub-sections below.</p>
+<section id="standardization" class="level4" data-number="10.3.7.1">
+<h4 data-number="10.3.7.1" class="anchored" data-anchor-id="standardization"><span class="header-section-number">10.3.7.1</span> Standardization</h4>
+<p>Several algorithms explicitly require data to be standardized so that values of all predictors vary within a comparable range. The necessity of this step becomes obvious when considering KNN, where the magnitude of the distance is strongly influenced by the order of magnitude of the predictor values. Here are the ranges and quantiles of the available variables.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>daily_fluxes <span class="sc">|&gt;</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), <span class="sc">~</span><span class="fu">quantile</span>(.x, <span class="at">probs =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="dv">1</span>), <span class="at">na.rm =</span> <span class="cn">TRUE</span>))) <span class="sc">|&gt;</span> </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">t</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>(<span class="at">rownames =</span> <span class="st">"variable"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setNames</span>(<span class="fu">c</span>(<span class="st">"variable"</span>, <span class="st">"min"</span>, <span class="st">"q25"</span>, <span class="st">"q50"</span>, <span class="st">"q75"</span>, <span class="st">"max"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 6
+  variable           min     q25    q50    q75    max
+  &lt;chr&gt;            &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+1 GPP_NT_VUT_REF  -4.23    0.773   2.87   5.45  12.3 
+2 TA_F           -21.9    -1.47    3.51   8.72  20.7 
+3 SW_IN_F          3.30   77.8   135.   214.   366.  
+4 LW_IN_F        138.    243.    279.   308.   365.  
+5 VPD_F            0.001   0.959   2.23   4.06  16.6 
+6 PA_F            80.4    83.2    83.7   84.1   85.6 
+7 P_F              0       0       0      1.6   92.1 
+8 WS_F             0.405   1.56    1.93   2.34   6.54</code></pre>
+</div>
+</div>
+<p>We see for example, that typical values of <code>LW_IN_F</code> are by a factor 100 larger than values of <code>VPD_F</code>. A distance calculated based on these raw values would therefore be strongly dominated by the difference in <code>LW_IN_F</code> values, and differences in <code>VPD_F</code> would hardly affect the distance. Therefore, the data must be <em>standardized</em> before using it with the KNN algorithm (and other algorithms, including Neural Networks). Standardization is done to each variable separately, by centering and scaling each to have <span class="math inline">\(\mu = 0\)</span> and <span class="math inline">\(\sigma = 1\)</span>.</p>
+<p>The steps for centering and scaling using the recipes package are described above.</p>
+<p>Standardization can be done not only by centering and scaling (as described above), but also by <em>scaling to within range</em>, where values are scaled such that the minimum value within each variable (column) is 0 and the maximum is 1.</p>
+<p>As seen above for the feature engineering example, the object <code>pp</code> does not contain a standardized version of the data frame <code>daily_fluxes_train</code>, but rather the information that allows us to apply the same standardization also to other data. In other words, <code>recipe(..., data = daily_fluxes_train) |&gt; step_center(...) |&gt; step_scale(...)</code> doesn’t actually transform <code>daily_fluxes_train</code>. There are two more steps involved to get there. This might seem bothersome at first but their separation is critical in the context of model training and data leakage, and translates the conception of the pre-processing as a “recipe” into the way we write the code.</p>
+<p>To actually transform the data, we first have to “prepare” the recipe:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>pp_prep <span class="ot">&lt;-</span> recipes<span class="sc">::</span><span class="fu">prep</span>(pp, <span class="at">training =</span> daily_fluxes_train) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Finally we can actually transform the data. That is, “juice” the prepared recipe.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>daily_fluxes_juiced <span class="ot">&lt;-</span> recipes<span class="sc">::</span><span class="fu">juice</span>(pp_prep)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Note, if we are to apply the prepared recipe to <em>new</em> data, we’ll have to <code>bake()</code> it.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>daily_fluxes_baked <span class="ot">&lt;-</span> recipes<span class="sc">::</span><span class="fu">bake</span>(pp_prep, <span class="at">new_data =</span> daily_fluxes_train)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># confirm that juice and bake return identical objects when given the same data</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">all_equal</span>(daily_fluxes_juiced, daily_fluxes_baked)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: `all_equal()` was deprecated in dplyr 1.1.0.
+ℹ Please use `all.equal()` instead.
+ℹ And manually order the rows/cols as needed</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p>The effect is of standardization is illustrated by comparing original and transformed variables:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># prepare data for plotting</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>plot_data_original <span class="ot">&lt;-</span> daily_fluxes_train <span class="sc">|&gt;</span> </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">one_of</span>(<span class="fu">c</span>(<span class="st">"SW_IN_F"</span>, <span class="st">"VPD_F"</span>, <span class="st">"TA_F"</span>))) <span class="sc">|&gt;</span> </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(SW_IN_F, VPD_F, TA_F), <span class="at">names_to =</span> <span class="st">"var"</span>, <span class="at">values_to =</span> <span class="st">"val"</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>plot_data_juiced <span class="ot">&lt;-</span> daily_fluxes_juiced <span class="sc">|&gt;</span> </span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">one_of</span>(<span class="fu">c</span>(<span class="st">"SW_IN_F"</span>, <span class="st">"VPD_F"</span>, <span class="st">"TA_F"</span>))) <span class="sc">|&gt;</span> </span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(SW_IN_F, VPD_F, TA_F), <span class="at">names_to =</span> <span class="st">"var"</span>, <span class="at">values_to =</span> <span class="st">"val"</span>)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="co"># plot density</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>plot_1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> plot_data_original, <span class="fu">aes</span>(val, ..density..)) <span class="sc">+</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>var)</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="co"># plot density by var</span></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>plot_2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> plot_data_juiced, <span class="fu">aes</span>(val, ..density..)) <span class="sc">+</span></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>() <span class="sc">+</span></span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>var)</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a><span class="co"># combine both plots</span></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(plot_1, plot_2, <span class="at">nrow =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="supervised_ml_I_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="handling-missing-data" class="level4" data-number="10.3.7.2">
+<h4 data-number="10.3.7.2" class="anchored" data-anchor-id="handling-missing-data"><span class="header-section-number">10.3.7.2</span> Handling missing data</h4>
+<p>Several machine learning algorithms require missing values to be removed. That is, if any of the cells in one row has a missing value, the entire cell gets removed. This can lead to severe data loss. In cases where missing values appear predominantly in only a few variables, it may be advantageous to drop the affected variable from the data for modelling. In other cases, it may be advantageous to fill missing values (data <em>imputation</em>, see next section). Although such imputed data is “fake”, it may be preferred to impute values than to drop entire rows and thus get the benefit of being able to use the information contained in available (real) values of affected rows. Whether or not imputation is preferred should be determined based on the model skill for an an out-of-sample test (more on that later).</p>
+<p>Visualizing missing data is the essential first step in making decisions about dropping rows with missing data versus removing predictors from the model (which would imply too much data removal).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>visdat<span class="sc">::</span><span class="fu">vis_miss</span>(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  daily_fluxes,</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">cluster =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">warn_large_data =</span> <span class="cn">FALSE</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="supervised_ml_I_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Here, the variable <code>LW_IN_F</code> (longwave radiation) if affected by a lot of missing data. Note that we applied a data cleaning step along with the data read-in at the very top of this Chapter. There, we applied a filtering criterion where values are only retained if at least 80% of the underlying half-hourly data is actual measured (and not gap-filled) data. Whether to drop the variable for further modelling should be informed also by our understanding of the data and the processes relevant for the modelling task. Here, the modelling target is GPP and the carbon cycle specialists among the readers may know that longwave radiation is not a known important control on GPP (ecosystem photosynthesis). Therefore, we may consider dropping this variable from the dataset for our modelling task. The remaining variables are affected by less frequent missingness with which we will deal otherwise.</p>
+</section>
+<section id="imputation" class="level4" data-number="10.3.7.3">
+<h4 data-number="10.3.7.3" class="anchored" data-anchor-id="imputation"><span class="header-section-number">10.3.7.3</span> Imputation</h4>
+<p>Imputation refers to the replacement of missing values with with a “best guess” value (<a href="https://bradleyboehmke.github.io/HOmachine%20learning/">Boehmke and Greenwell</a>). Different approaches exist for determining that best guess. The most basic approach is to impute missing values with the mean or median of the available values of the same variable, which can be implemented using <code>step_impute_*()</code> from the {recipes} package. For example, to impute the median for all predictors separately:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>pp <span class="sc">|&gt;</span> </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_impute_median</span>(<span class="fu">all_predictors</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Imputing by the mean or median is “uninformative”. We may use information about the co-variation of multiple variables for imputing missing values. For example, for imputing missing VPD values, we may consider the fact that VPD tends to be high when air temperature is high. Therefore, missing VPD values can be modeled as a function of other co-variates (predictors). Several approaches to modelling missing values are available through the {recipes} package (see <a href="https://recipes.tidymodels.org/reference/index.htmachine%20learning#step-functions-imputation">here</a>). For example, we can use KNN with five neighbors as:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>pp <span class="sc">|&gt;</span> </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_impute_knn</span>(<span class="fu">all_predictors</span>(), <span class="at">neighbors =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="one-hot-encoding" class="level4" data-number="10.3.7.4">
+<h4 data-number="10.3.7.4" class="anchored" data-anchor-id="one-hot-encoding"><span class="header-section-number">10.3.7.4</span> One-hot encoding</h4>
+<p>For machine learning algorithms that require that all predictors be numerical (e.g., neural networks, or KNN), categorical predictors have to be pre-processed and converted into new numerical predictors. The most common such transformation is <em>one-hot encoding</em>, where a categorical predictor variable that has <span class="math inline">\(N\)</span> levels is replaced by <span class="math inline">\(N\)</span> new variables that contain either zeros or ones depending whether the value of the categorical feature corresponds to the respective column. Because this creates perfect collinearity between these new column, we can also drop one of them. This is referred to as <em>dummy encoding</em>. The example below demonstrates what one-hot encoding does.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># original data frame</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">color =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"red"</span>, <span class="st">"green"</span>, <span class="st">"blue"</span>))</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 2
+     id color
+  &lt;int&gt; &lt;chr&gt;
+1     1 red  
+2     2 red  
+3     3 green
+4     4 blue </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># after one-hot encoding</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>dmy <span class="ot">&lt;-</span> <span class="fu">dummyVars</span>(<span class="st">"~ ."</span>, <span class="at">data =</span> df, <span class="at">sep =</span> <span class="st">"_"</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="fu">predict</span>(dmy, <span class="at">newdata =</span> df))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  id colorblue colorgreen colorred
+1  1         0          0        1
+2  2         0          0        1
+3  3         0          1        0
+4  4         1          0        0</code></pre>
+</div>
+</div>
+<p>Note that in a case where color is strictly one of <code>c("red", "red", "green", "blue")</code> (and not, for example, <code>"yellow"</code>), then one of the columns added by <code>dummyVars()</code> is obsolete (if it’s neither <code>"red"</code>, nor <code>"green"</code>, it must be <code>"blue"</code>) - columns are collinear. This can be avoided by <code>setting fullRank = FALSE</code>.</p>
+<p>Using the recipes package, one-hot encoding is implemented by:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">recipe</span>(GPP_NT_VUT_REF <span class="sc">~</span> ., <span class="at">data =</span> daily_fluxes) <span class="sc">|&gt;</span> </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_dummy</span>(<span class="fu">all_nominal</span>(), <span class="at">one_hot =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="zero-variance-predictors" class="level4" data-number="10.3.7.5">
+<h4 data-number="10.3.7.5" class="anchored" data-anchor-id="zero-variance-predictors"><span class="header-section-number">10.3.7.5</span> Zero-variance predictors</h4>
+<p>Sometimes, the data generation process yields variables that have the same value in each observation. And sometimes this is due to failure of the measurement device or some other bug in the data collection pipeline. Either way, this may cause some algorithms to crash or become unstable. Such “zero-variance” predictors are usually removed altogether. The same applies also to variables with “near-zero variance”. That is, variables where only a few unique values occur with a high frequency in the entire data set. The danger is that, when data is split into training and testing sets, the variable may effectively become a “zero-variance” variable within the training subset.</p>
+<p>We can test for zero-variance or near-zero variance predictors by quantifying the following metrics:</p>
+<ul>
+<li>Frequency ratio: Ratio of the frequency of the most common predictor over the second most common predictor. This should be near 1 for well-behaved predictors and get very large for problematic ones.</li>
+<li>Percent unique values: The number of unique values divided by the total number of rows in the data set (times 100). For problematic variables, this ratio gets small (approaches 1/100).</li>
+</ul>
+<p>The function <code>nearZeroVar</code> of the {caret} package flags suspicious variables (<code>zeroVar = TRUE</code> or <code>nzv = TRUE</code>). In our data set, we don’t find any:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>caret<span class="sc">::</span><span class="fu">nearZeroVar</span>(daily_fluxes, <span class="at">saveMetrics =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               freqRatio percentUnique zeroVar   nzv
+TIMESTAMP       1.000000    100.000000   FALSE FALSE
+GPP_NT_VUT_REF  1.000000     93.732887   FALSE FALSE
+TA_F            1.000000     83.951932   FALSE FALSE
+SW_IN_F         1.500000     95.375723   FALSE FALSE
+LW_IN_F         1.000000     43.170064   FALSE FALSE
+VPD_F           1.142857     60.450259   FALSE FALSE
+PA_F            1.090909     37.906906   FALSE FALSE
+P_F            10.268072      5.978096   FALSE FALSE
+WS_F            1.083333     34.758138   FALSE FALSE</code></pre>
+</div>
+</div>
+<p>Using the recipes package, we can add a step that removes zero-variance predictors by:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>pp <span class="sc">|&gt;</span> </span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">step_zv</span>(<span class="fu">all_predictors</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="target-engineering" class="level4" data-number="10.3.7.6">
+<h4 data-number="10.3.7.6" class="anchored" data-anchor-id="target-engineering"><span class="header-section-number">10.3.7.6</span> Target engineering</h4>
+<p>Target engineering refers to pre-processing of the target variable. Its application can enable improved predictions, particularly for models that make assumptions about prediction errors or when the target variable follows a “special” distribution (e.g., heavily skewed distribution, or where the target variable is a fraction that is naturally bounded by 0 and 1). A simple log-transformation of the target variable can often resolve issues with skewed distributions. An implication of a log-transformation is that errors in predicting values in the upper end of the observed range are “discounted” in their weight compared to errors in the lower range.</p>
+<p>In our data set, the variable <code>WS_F</code> (wind speed) is skewed. The target variable that we have considered so far (<code>GPP_NT_VUT_REF</code>) is not skewed. In a case where we would consider <code>WS_F</code> to be our target variable, we would thus consider applying a log-transformation.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>plot_1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> daily_fluxes, <span class="fu">aes</span>(<span class="at">x =</span> WS_F, <span class="at">y =</span> ..density..)) <span class="sc">+</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Original"</span>)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>plot_2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> daily_fluxes, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(WS_F), <span class="at">y =</span> ..density..)) <span class="sc">+</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Log-transformed"</span>)</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(plot_1, plot_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="supervised_ml_I_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Log transformation as part of the pre-processing is specified using the <code>step_log()</code> function, here applied to the model target variable (<code>all_outcomes()</code>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>recipes<span class="sc">::</span><span class="fu">recipe</span>(WS_F <span class="sc">~</span> ., <span class="at">data =</span> daily_fluxes) <span class="sc">|&gt;</span>   <span class="co"># it's of course non-sense to model wind speed like this</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  recipes<span class="sc">::</span><span class="fu">step_log</span>(<span class="fu">all_outcomes</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>A log-transformation doesn’t necessarily result in a perfect normal distribution of transformed values. The <em>Box-Cox</em> can get us closer. It can be considered a generalization of the log-transformation. Values are transformed according to the following function:</p>
+<p><span class="math display">\[
+y(\lambda) = \begin{cases}
+\frac{Y^\lambda-1}{\lambda}, &amp;\; y \neq 0\\
+\log(Y),                     &amp;\; y = 0
+\end{cases}
+\]</span></p>
+<p><span class="math inline">\(\lambda\)</span> is treated as a parameter that is fitted such that the resulting distribution of values <span class="math inline">\(Y\)</span> approaches the normal distribution. To specify a Box-Cox-transformation as part of the pre-processing, we can use <code>step_BoxCox()</code> from the {recipes} package.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>pp <span class="ot">&lt;-</span> recipes<span class="sc">::</span><span class="fu">recipe</span>(WS_F <span class="sc">~</span> ., <span class="at">data =</span> daily_fluxes_train) <span class="sc">|&gt;</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  recipes<span class="sc">::</span><span class="fu">step_BoxCox</span>(<span class="fu">all_outcomes</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>How do transformed values look like?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>prep_pp <span class="ot">&lt;-</span> recipes<span class="sc">::</span><span class="fu">prep</span>(pp, <span class="at">training =</span> daily_fluxes_train <span class="sc">|&gt;</span> <span class="fu">drop_na</span>())</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>daily_fluxes_baked <span class="ot">&lt;-</span> <span class="fu">bake</span>(prep_pp, <span class="at">new_data =</span> daily_fluxes_test <span class="sc">|&gt;</span> <span class="fu">drop_na</span>())</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>daily_fluxes_baked <span class="sc">|&gt;</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> WS_F, <span class="at">y =</span> ..density..)) <span class="sc">+</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Box-Cox-transformed"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="supervised_ml_I_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Note that the Box-Cox-transformation can only be applied to values that are strictly positive. In our example, wind speed (<code>WS_F</code>) is. If this is not satisfied, a Yeo-Johnson transformation can be applied.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>recipes<span class="sc">::</span><span class="fu">recipe</span>(WS_F <span class="sc">~</span> ., <span class="at">data =</span> daily_fluxes) <span class="sc">|&gt;</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  recipes<span class="sc">::</span><span class="fu">step_YeoJohnson</span>(<span class="fu">all_outcomes</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="putting-it-all-together-half-way" class="level3" data-number="10.3.8">
+<h3 data-number="10.3.8" class="anchored" data-anchor-id="putting-it-all-together-half-way"><span class="header-section-number">10.3.8</span> Putting it all together (half-way)</h3>
+<p>Let’s recap. We have a dataset <code>daily_fluxes</code> and we want to predict ecosystem GPP (<code>GPP_NT_VUT_REF</code>) from a set of predictors - environmental covariates that were measured in parallel to GPP. Let’s compare the performance of a multivariate linear regression and KNN model in terms of its generalisation to data that was not used for model fitting. The following pieces are implemented:</p>
+<ul>
+<li>Missing data: We’ve seen that the predictor <code>LW_IN_F</code> has lots of missing values and - given <em>a priori</em> knowledge is not critical for predicting GPP and we’ll drop it.</li>
+<li>Data cleaning: Data (<code>daily_fluxes</code>) was cleaned based on quality control information upon reading the data at the beginning of this Chapter. Before modelling, we’re checking the distribution of the target value here again to make sure it is “well-behaved”.</li>
+<li>Imputation: We drop rows with missing data for model training, instead of imputing them.</li>
+<li>Some of the predictors are distintively not normally distributed. Let’s Box-Cox transform all predictors as a pre-processing step.</li>
+<li>We have to standardize the data in order to use it for KNN.</li>
+<li>We have no variable where zero-variance was detected and we have no categorical variables that have to be transformed by one-hot encoding to be used in KNN.</li>
+<li>We use a data split, whithholding 30% for testing.</li>
+<li>Fit two models: a linear regression model and KNN.</li>
+<li>Take <span class="math inline">\(k=10\)</span> for the KNN model. Other choices are possible and will affect the prediction error on the training and the testing data in different manners. We’ll learn more about the optimal choice of <span class="math inline">\(k\)</span> (<em>hyperparameter tuning</em>) in the next chapter.</li>
+<li>Fit models to minimize the root mean square error (RMSE) between predictions and observations. More on the choice of the <code>metric</code> argument in <code>train()</code> (<em>loss function</em>) in the next chapter.</li>
+<li>For the KNN model, use <span class="math inline">\(k=8\)</span>.</li>
+</ul>
+<p>These steps are implemented by the code below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Data cleaning: looks ok, no obviously bad data</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co"># no long tail, therefore no further target engineering</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>daily_fluxes <span class="sc">|&gt;</span> </span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> GPP_NT_VUT_REF, <span class="at">y =</span> ..count..)) <span class="sc">+</span> </span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="supervised_ml_I_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Data splitting</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1982</span>)  <span class="co"># for reproducibility</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>split <span class="ot">&lt;-</span> rsample<span class="sc">::</span><span class="fu">initial_split</span>(daily_fluxes, <span class="at">prop =</span> <span class="fl">0.7</span>, <span class="at">strata =</span> <span class="st">"VPD_F"</span>)</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>daily_fluxes_train <span class="ot">&lt;-</span> rsample<span class="sc">::</span><span class="fu">training</span>(split)</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>daily_fluxes_test <span class="ot">&lt;-</span> rsample<span class="sc">::</span><span class="fu">testing</span>(split)</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Model and pre-processing formulation, use all variables but LW_IN_F</span></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>pp <span class="ot">&lt;-</span> recipes<span class="sc">::</span><span class="fu">recipe</span>(GPP_NT_VUT_REF <span class="sc">~</span> SW_IN_F <span class="sc">+</span> VPD_F <span class="sc">+</span> TA_F, </span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>                      <span class="at">data =</span> daily_fluxes_train <span class="sc">|&gt;</span> <span class="fu">drop_na</span>()) <span class="sc">|&gt;</span> </span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>  recipes<span class="sc">::</span><span class="fu">step_BoxCox</span>(recipes<span class="sc">::</span><span class="fu">all_predictors</span>()) <span class="sc">|&gt;</span> </span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>  recipes<span class="sc">::</span><span class="fu">step_center</span>(recipes<span class="sc">::</span><span class="fu">all_numeric</span>(), <span class="sc">-</span>recipes<span class="sc">::</span><span class="fu">all_outcomes</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>  recipes<span class="sc">::</span><span class="fu">step_scale</span>(recipes<span class="sc">::</span><span class="fu">all_numeric</span>(), <span class="sc">-</span>recipes<span class="sc">::</span><span class="fu">all_outcomes</span>())</span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit linear regression model</span></span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>mod_lm <span class="ot">&lt;-</span> caret<span class="sc">::</span><span class="fu">train</span>(</span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>  pp, </span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> daily_fluxes_train <span class="sc">|&gt;</span> <span class="fu">drop_na</span>(), </span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"lm"</span>,</span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">trControl =</span> caret<span class="sc">::</span><span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"none"</span>),</span>
+<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">metric =</span> <span class="st">"RMSE"</span></span>
+<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb37-22"><a href="#cb37-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-23"><a href="#cb37-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit KNN model</span></span>
+<span id="cb37-24"><a href="#cb37-24" aria-hidden="true" tabindex="-1"></a>mod_knn <span class="ot">&lt;-</span> caret<span class="sc">::</span><span class="fu">train</span>(</span>
+<span id="cb37-25"><a href="#cb37-25" aria-hidden="true" tabindex="-1"></a>  pp, </span>
+<span id="cb37-26"><a href="#cb37-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> daily_fluxes_train <span class="sc">|&gt;</span> <span class="fu">drop_na</span>(), </span>
+<span id="cb37-27"><a href="#cb37-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"knn"</span>,</span>
+<span id="cb37-28"><a href="#cb37-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">trControl =</span> caret<span class="sc">::</span><span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"none"</span>),</span>
+<span id="cb37-29"><a href="#cb37-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">tuneGrid =</span> <span class="fu">data.frame</span>(<span class="at">k =</span> <span class="dv">8</span>),</span>
+<span id="cb37-30"><a href="#cb37-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">metric =</span> <span class="st">"RMSE"</span></span>
+<span id="cb37-31"><a href="#cb37-31" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can use the model objects <code>mod_lm</code> and <code>mod_knn</code> to add the fitted values to the training and the test data, both using the generic function <code>predict(..., newdata = ...)</code>. The code below implements the prediction step, the measuring of the prediction skill, and the visualisation of predicted versus observed values on the test and training sets, bundled into one function - <code>eval_model()</code> - which we will re-use for each fitted model object.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make model evaluation into a function to reuse code</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>eval_model <span class="ot">&lt;-</span> <span class="cf">function</span>(mod, df_train, df_test){</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># add predictions to the data frames</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  df_train <span class="ot">&lt;-</span> df_train <span class="sc">|&gt;</span> </span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">drop_na</span>()</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>  df_train<span class="sc">$</span>fitted <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod, <span class="at">newdata =</span> df_train)</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>  df_test <span class="ot">&lt;-</span> df_test <span class="sc">|&gt;</span> </span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">drop_na</span>()</span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>  df_test<span class="sc">$</span>fitted <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod, <span class="at">newdata =</span> df_test)</span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># get metrics tables</span></span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>  metrics_train <span class="ot">&lt;-</span> df_train <span class="sc">|&gt;</span> </span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>    yardstick<span class="sc">::</span><span class="fu">metrics</span>(GPP_NT_VUT_REF, fitted)</span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>  metrics_test <span class="ot">&lt;-</span> df_test <span class="sc">|&gt;</span> </span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a>    yardstick<span class="sc">::</span><span class="fu">metrics</span>(GPP_NT_VUT_REF, fitted)</span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># extract values from metrics tables</span></span>
+<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a>  rmse_train <span class="ot">&lt;-</span> metrics_train <span class="sc">|&gt;</span> </span>
+<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(.metric <span class="sc">==</span> <span class="st">"rmse"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(.estimate)</span>
+<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a>  rsq_train <span class="ot">&lt;-</span> metrics_train <span class="sc">|&gt;</span> </span>
+<span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(.metric <span class="sc">==</span> <span class="st">"rsq"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(.estimate)</span>
+<span id="cb38-27"><a href="#cb38-27" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb38-28"><a href="#cb38-28" aria-hidden="true" tabindex="-1"></a>  rmse_test <span class="ot">&lt;-</span> metrics_test <span class="sc">|&gt;</span> </span>
+<span id="cb38-29"><a href="#cb38-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(.metric <span class="sc">==</span> <span class="st">"rmse"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb38-30"><a href="#cb38-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(.estimate)</span>
+<span id="cb38-31"><a href="#cb38-31" aria-hidden="true" tabindex="-1"></a>  rsq_test <span class="ot">&lt;-</span> metrics_test <span class="sc">|&gt;</span> </span>
+<span id="cb38-32"><a href="#cb38-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(.metric <span class="sc">==</span> <span class="st">"rsq"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb38-33"><a href="#cb38-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pull</span>(.estimate)</span>
+<span id="cb38-34"><a href="#cb38-34" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb38-35"><a href="#cb38-35" aria-hidden="true" tabindex="-1"></a>  <span class="co"># visualise as a scatterplot</span></span>
+<span id="cb38-36"><a href="#cb38-36" aria-hidden="true" tabindex="-1"></a>  <span class="co"># adding information of metrics as sub-titles</span></span>
+<span id="cb38-37"><a href="#cb38-37" aria-hidden="true" tabindex="-1"></a>  plot_1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> df_train, <span class="fu">aes</span>(GPP_NT_VUT_REF, fitted)) <span class="sc">+</span></span>
+<span id="cb38-38"><a href="#cb38-38" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb38-39"><a href="#cb38-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb38-40"><a href="#cb38-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="dv">1</span>, <span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dotted"</span>) <span class="sc">+</span></span>
+<span id="cb38-41"><a href="#cb38-41" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="fu">bquote</span>( <span class="fu">italic</span>(R)<span class="sc">^</span><span class="dv">2</span> <span class="sc">==</span> .(<span class="fu">format</span>(rsq_train, <span class="at">digits =</span> <span class="dv">2</span>)) <span class="sc">~</span><span class="er">~</span></span>
+<span id="cb38-42"><a href="#cb38-42" aria-hidden="true" tabindex="-1"></a>                            RMSE <span class="sc">==</span> .(<span class="fu">format</span>(rmse_train, <span class="at">digits =</span> <span class="dv">3</span>))),</span>
+<span id="cb38-43"><a href="#cb38-43" aria-hidden="true" tabindex="-1"></a>         <span class="at">title =</span> <span class="st">"Training set"</span>) <span class="sc">+</span></span>
+<span id="cb38-44"><a href="#cb38-44" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_classic</span>()</span>
+<span id="cb38-45"><a href="#cb38-45" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb38-46"><a href="#cb38-46" aria-hidden="true" tabindex="-1"></a>  plot_2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> df_test, <span class="fu">aes</span>(GPP_NT_VUT_REF, fitted)) <span class="sc">+</span></span>
+<span id="cb38-47"><a href="#cb38-47" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb38-48"><a href="#cb38-48" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb38-49"><a href="#cb38-49" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="dv">1</span>, <span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dotted"</span>) <span class="sc">+</span></span>
+<span id="cb38-50"><a href="#cb38-50" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="fu">bquote</span>( <span class="fu">italic</span>(R)<span class="sc">^</span><span class="dv">2</span> <span class="sc">==</span> .(<span class="fu">format</span>(rsq_test, <span class="at">digits =</span> <span class="dv">2</span>)) <span class="sc">~</span><span class="er">~</span></span>
+<span id="cb38-51"><a href="#cb38-51" aria-hidden="true" tabindex="-1"></a>                            RMSE <span class="sc">==</span> .(<span class="fu">format</span>(rmse_test, <span class="at">digits =</span> <span class="dv">3</span>))),</span>
+<span id="cb38-52"><a href="#cb38-52" aria-hidden="true" tabindex="-1"></a>         <span class="at">title =</span> <span class="st">"Test set"</span>) <span class="sc">+</span></span>
+<span id="cb38-53"><a href="#cb38-53" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_classic</span>()</span>
+<span id="cb38-54"><a href="#cb38-54" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb38-55"><a href="#cb38-55" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(plot_1, plot_2)</span>
+<span id="cb38-56"><a href="#cb38-56" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb38-57"><a href="#cb38-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(out)</span>
+<span id="cb38-58"><a href="#cb38-58" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb38-59"><a href="#cb38-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-60"><a href="#cb38-60" aria-hidden="true" tabindex="-1"></a><span class="co"># linear regression model</span></span>
+<span id="cb38-61"><a href="#cb38-61" aria-hidden="true" tabindex="-1"></a><span class="fu">eval_model</span>(<span class="at">mod =</span> mod_lm, <span class="at">df_train =</span> daily_fluxes_train, <span class="at">df_test =</span> daily_fluxes_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="supervised_ml_I_files/figure-html/lmknn-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Evaluation of the linear regression and the KNN models on the training and the test set.</figcaption>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># KNN</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">eval_model</span>(<span class="at">mod =</span> mod_knn, <span class="at">df_train =</span> daily_fluxes_train, <span class="at">df_test =</span> daily_fluxes_test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="supervised_ml_I_files/figure-html/lmknn-2.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Evaluation of the linear regression and the KNN models on the training and the test set.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>It is advisable to keep workflow notebooks (this RMarkdown file) light and legible. Therefore, code chunks should not be excessively long and functions should be kept in a <code>./R/*.R</code> file, which can be loaded. This also facilitates debugging code inside the function. Here, the function <code>eval_model()</code> is part of the book’s <em>git</em> repository, stored in the sub-directory <code>./R/</code>, and used also in later chapters.</p>
+</section>
+</section>
+<section id="exercises" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="exercises"><span class="header-section-number">10.4</span> Exercises</h2>
+<p>There are no exercises with provided solutions for this Chapter.</p>
+</section>
+<section id="report-exercises" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="report-exercises"><span class="header-section-number">10.5</span> Report Exercises</h2>
+<section id="comparison-of-the-linear-regression-and-knn-models" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="comparison-of-the-linear-regression-and-knn-models">Comparison of the linear regression and KNN models</h3>
+<p>The figures above show the evaluation of the model performances of the linear regression and the KNN model, evaluated on the training and test set. This exercise is to interpret and understand the observed differences. Implement the following points:</p>
+<ol type="1">
+<li>Adopt the code from this Chapter for fitting and evaluating the linear regression model and the KNN into your own RMarkdown file. Name the file <code>./vignettes/re_ml_01.Rmd</code>. Keep larger functions in a separate file in an appropriate directory and load the function definition as part of the RMarkdown.</li>
+<li>Interpret observed differences in the context of the bias-variance trade-off:</li>
+</ol>
+<ul>
+<li>Why is the difference between the evaluation on the training and the test set larger for the KNN model than for the linear regression model?</li>
+<li>Why does the evaluation on the test set indicate a better model performance of the KNN model than the linear regression model?</li>
+<li>How would you position the KNN and the linear regression model along the spectrum of the bias-variance trade-off?</li>
+</ul>
+<ol start="3" type="1">
+<li>Visualise temporal variations of observed and modelled GPP for both models, covering all available dates.</li>
+</ol>
+</section>
+<section id="the-role-of-k" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="the-role-of-k">The role of k</h3>
+<p>Let’s look at the role of <span class="math inline">\(k\)</span> in a KNN. Answer the following questions:</p>
+<ol type="1">
+<li><p>Based on your understanding of KNN (and without running code), state a hypothesis for how the <span class="math inline">\(R^2\)</span> and the MAE evaluated on the test and on the training set would change for <span class="math inline">\(k\)</span> approaching 1 and for <span class="math inline">\(k\)</span> approaching <span class="math inline">\(N\)</span> (the number of observations in the data). Explain your hypothesis, referring to the bias-variance trade-off.</p></li>
+<li><p>Put your hypothesis to the test! Write code that splits the data into a training and a test set and repeats model fitting and evaluation for different values for <span class="math inline">\(k\)</span>. Visualise results, showing model generalisability as a function of model complexity. Describe how a “region” of overfitting and underfitting can be determined in your visualisation. Write (some of your) code into a function that takes <span class="math inline">\(k\)</span> as an input and and returns the MAE determined on the test set.</p></li>
+<li><p>Is there an “optimal” <span class="math inline">\(k\)</span> in terms of model generalisability? Edit your code to determine an optimal <span class="math inline">\(k\)</span>.</p></li>
+</ol>
+<p>Add code and text for addressing this exercise to the file <code>./vignettes/re_ml_01.Rmd</code> and give the notebook a suitable structure for easy navigation with a table of content (<code>toc</code>) by modifying its YAML header:</p>
+<blockquote class="blockquote">
+<p><strong>Important:</strong> to find an optimal <span class="math inline">\(k\)</span>, you will have to use daily data and not half-hourly data! Hint: Do not produce various of the “Training - Test” Figures shown above to find an optimal <span class="math inline">\(k\)</span>. Find a suitable plot that shows the optimal <span class="math inline">\(k\)</span> (maybe you can find one in this or another Chapter…).</p>
+</blockquote>
+<div class="sourceCode" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="ex">---</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="ex">title:</span> <span class="st">"Report Exercise Chapter 10"</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="ex">author:</span> <span class="st">"Ziggy Stardust"</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="ex">output:</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>  <span class="ex">html_document:</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>    <span class="ex">toc:</span> true</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="ex">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="deliverables-for-the-report" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="deliverables-for-the-report">Deliverables for the report</h3>
+<p>Present your solutions in a file called <code>re_ml01.Rmd</code>, save it in your <code>vignettes</code> folder alongside the HTML version, and make sure that your code is reproducible (make sure your .rmd is knittable, that all data is available, that paths to that data work, etc.).</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./regression_classification.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Regression and classification</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./supervised_ml_II.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Supervised machine learning II</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
