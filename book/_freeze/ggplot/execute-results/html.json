@@ -1,0 +1,17 @@
+{
+  "hash": "8ed1a7a5d037e11d62f349b6d7212984",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"ggplot demo\"\neditor: visual\nengine: knitr\n---\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(ggplot2)\n\nggplot(data = mtcars, mapping = aes(x = mpg, y = hp)) + \n  geom_point()\n```\n\n::: {.cell-output-display}\n![](ggplot_files/figure-html/unnamed-chunk-1-1.png){width=672}\n:::\n:::\n\n\n<!-- <html> -->\n\n<!-- ```{=html} -->\n<!-- <script type=\"module\"> -->\n\n<!-- import { WebR } from 'https://webr.r-wasm.org/latest/webr.mjs';  -->\n<!-- globalThis.webR = new WebR({SW_URL: \"https://bluegreen-labs.github.io/R_book_template/\"});  -->\n<!-- await globalThis.webR.init();  -->\n<!-- globalThis.webRCodeShelter = await new globalThis.webR.Shelter(); -->\n<!-- await globalThis.webR.installPackages(['ggplot2']) -->\n\n<!-- </script> -->\n<!-- ``` -->\n<!-- </html> -->\n\n<!-- ::: callout-warning -->\n<!-- Installing and loading ggplot2 on webR takes a little while. -->\n<!-- ::: -->\n\n<!-- ### Basic plotting -->\n\n<!-- -   Load the package and some data -->\n\n<!-- ```{webr} -->\n<!-- library(ggplot2) -->\n<!-- ``` -->\n\n<!-- -   create a plot -->\n\n<!-- ```{webr} -->\n<!-- ggplot(data = mtcars, mapping = aes(x = mpg, y = hp)) + -->\n<!--   geom_point() -->\n<!-- ``` -->\n\n<!-- ::: callout-note -->\n<!-- ## Exercise -->\n\n<!-- Make a scatter plot with `hp` on the x axis and `wt` on the y axis. Label the x axis \"Horse Power\" and the y axis \"Weight\". Make one subplot for each value in `gear`. -->\n\n<!-- ```{webr} -->\n<!-- # Add you code here -->\n<!-- ``` -->\n\n<!-- Your result should look like the plot below -->\n<!-- ::: -->\n\n<!-- ::: {.callout-tip collapse=\"true\"} -->\n<!-- ## Expected Result -->\n\n<!-- ```{r} -->\n<!-- #| echo: false -->\n<!-- library(ggplot2) -->\n<!-- ggplot(mtcars, aes(x = hp, y = wt)) + -->\n<!--   geom_point() + -->\n<!--   labs(x = \"Horse Power\", y = \"Weight\") + -->\n<!--   facet_wrap(~gear) -->\n<!-- ``` -->\n<!-- ::: -->\n",
+    "supporting": [
+      "ggplot_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
