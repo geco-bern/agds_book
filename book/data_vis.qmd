@@ -12,6 +12,15 @@ You will learn among others the:
 - grammar of graphics, i.e., using the {ggplot2} library
 - the proper use of colours in visualization
 
+## Setup
+In this Chapter, we will need the following libraries
+```{r results=TRUE, message=FALSE, warning=FALSE}
+library(ggplot2)
+library(readr)
+library(lubridate)
+library(dplyr)
+```
+
 ## Tutorial
 
 Visualizations often take the center stage of publications and are often the main vehicles for transporting information in scientific publications and (ever more often) in the media. Visualizations communicate data and its patterns in visual form. Visualizing data is also an integral part of the exploratory data analysis cycle. Visually understanding the data guides its transformation and the identification of suitable models and analysis methods.

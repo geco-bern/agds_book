@@ -26,8 +26,6 @@ book:
     - supervised_ml_II.qmd
     - randomforest.qmd
     - interpretable-ml.qmd
-    - basicr.qmd
-    - ggplot.qmd
     - references.qmd
   favicon: "figures/favicon.ico"
   twitter-card: true

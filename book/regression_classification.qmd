@@ -15,6 +15,13 @@ After completing this tutorial, you will be able to:
 
 Contents of this Chapter are inspired and partly adopted by the excellent book by [Boehmke and Greenwell](https://bradleyboehmke.github.io/HOML/).
 
+## Setup
+In this Chapter, we will need the following libraries
+```{r results=TRUE, message=FALSE, warning=FALSE}
+library(ggplot2)
+library(dplyr)
+```
+
 ## Tutorial
 
 ### Types of models

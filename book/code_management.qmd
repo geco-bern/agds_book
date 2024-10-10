@@ -13,6 +13,8 @@ You will learn how to:
 -   Collaborate with others
 -   Ensure reproducibility of your project by openly sharing your work and progress.
 
+
+
 ## Tutorial
 
 Code management is key for managing any data science project, especially when collaborating. Proper code management limits mistakes, such as code loss, and increases efficiency by structuring projects.

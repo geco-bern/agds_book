@@ -8,6 +8,17 @@ In the Chapter \@ref(supervisedmli), you learned how the data are pre-processed,
 
 In this chapter, you will learn more about the process of model training, the concept of the *loss*, and how we can chose the right level of model complexity for optimal model generalisability as part of the model training step. This completes your set of skills for your first implementations a supervised machine learning workflow.
 
+## Setup
+In this Chapter, we will need the following libraries
+```{r results=TRUE, message=FALSE, warning=FALSE}
+library(dplyr)
+library(ggplot2)
+library(readr)
+library(tidyr)
+library(caret)
+library(recipes)
+```
+
 ## Tutorial
 
 ### Data and the modelling challenge

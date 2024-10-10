@@ -14,6 +14,7 @@ In this chapter you will learn how to:
 -   use dynamic reporting
 -   ensure data and code retention
 
+
 ## Tutorial
 
 The scientific method relies on repeated testing of a hypothesis. When dealing with data and formal analysis, one can reduce this problem to the question: could an independent scientist attain the same results given the described methodology, data and code?
