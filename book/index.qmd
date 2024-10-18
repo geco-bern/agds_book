@@ -27,17 +27,17 @@ knitr::include_graphics("./figures/data_science_workflow_keywords.png")
 
 This chapter starts by providing the context for this course: Why Applied Geodata Science? Why now?
 
-Chapters \@ref(gettingstarted) and \@ref(programmingprimers) serve as primers to get readers with a diverse background and varying data science experience up to speed with the basics for programming in R, which we rely on in later chapters.
+Chapters @sec-gettingstarted and @sec-programmingprimers serve as primers to get readers with a diverse background and varying data science experience up to speed with the basics for programming in R, which we rely on in later chapters.
 
-Chapter \@ref(datawrangling) introduces efficient handling and cleaning of large tabular data with the R *tidyverse* "programming dialect". The focus is on non-geospatial data. Closely related to transforming data and its multiple axes of variation is data visualisation, covered in Chapter \@ref(datavis).
+Chapter @sec-datawrangling introduces efficient handling and cleaning of large tabular data with the R *tidyverse* "programming dialect". The focus is on non-geospatial data. Closely related to transforming data and its multiple axes of variation is data visualisation, covered in Chapter @sec-datavis.
 
-Chapters \@ref(datavariety), \@ref(codemgmt), and \@ref(openscience) introduce essential tools for the daily work with diverse data, for collaborative code development, and for an Open Science practice.
+Chapters @sec-datavariety, @sec-codemgmt, and @sec-openscience introduce essential tools for the daily work with diverse data, for collaborative code development, and for an Open Science practice.
 
-With Chapters \@ref(regressionclassification), Chapter \@ref(supervisedmli), Chapter \@ref(supervisedmlii), and Chapter \@ref(randomforest), we will get into modelling and identifying patterns in the data.
+With Chapters @sec-regressionclassification, Chapter @sec-supervisedmli, Chapter @sec-supervisedmlii, and Chapter @sec-randomforest, we will get into modelling and identifying patterns in the data.
 
-Chapters \@ref(gettingstarted)-\@ref(randomforest) serve as lecture notes for *Applied Geodata Science I* and as learning material for students and scientists in any data-intensive research domain. These chapters are not explicitly dealing with geospatial data and modelling. Modelling with geospatial and temporal data is the subject of the course *Applied Geodata Science II* and will be introduced with a focus on typical applications and modelling tasks in Geography and Environmental Sciences. Respective materials are not currently contained in this book but will be added here later.
+Chapters @sec-gettingstarted up to chapter @sec-randomforest serve as lecture notes for *Applied Geodata Science I* and as learning material for students and scientists in any data-intensive research domain. These chapters are not explicitly dealing with geospatial data and modelling. Modelling with geospatial and temporal data is the subject of the course *Applied Geodata Science II* and will be introduced with a focus on typical applications and modelling tasks in Geography and Environmental Sciences. Respective materials are not currently contained in this book but will be added here later.
 
-All tutorials use the R programming language, and a full list of the packages used in this course are provided in Appendix \@ref(references).
+All tutorials use the R programming language, and a full list of the packages used in this course are provided in Appendix @sec-references.
 
 
 ## Links {-}

@@ -1,22 +1,11 @@
 # Introduction
 
-This is a book created from markdown and executable code.
-
-See @knuth84 for additional discussion of literate programming.
-
-```{r}
-1 + 1
-```
-
-The sheer volume of data that is becoming available today bears a huge potential for answering long-standing questions in all fields of environmental and geo-sciences. This gives rise to a new set of tools that can be used and a new set of challenges when applying them.
-
 ## What is Applied Geodata Science?
 
-Data science is interdisciplinary by nature. It sits at the intersection between domain expertise, Statistics and Mathematics knowledge, and coding skills. Data science generates new insights for applications in different fields by combining these three realms (Fig. \@ref(fig:datasciencevenn)). Combining only two of the three realms falls short of what data science is [(Conway, 2013)](http://drewconway.com/zia/2013/3/26/the-data-science-venn-diagram).
+Data science is interdisciplinary by nature. It sits at the intersection between domain expertise, Statistics and Mathematics knowledge, and coding skills. Data science generates new insights for applications in different fields by combining these three realms (Fig. @fig-datasciencevenn). Combining only two of the three realms falls short of what data science is [(Conway, 2013)](http://drewconway.com/zia/2013/3/26/the-data-science-venn-diagram).
 
-```{r label="datasciencevenn", echo=FALSE, out.width="50%", fig.cap="The Venn diagram of data science. Adapted from [Conway, 2013](http://drewconway.com/zia/2013/3/26/the-data-science-venn-diagram)."}
-knitr::include_graphics("./figures/data_science_venn_mine.png")
-```
+![The Venn diagram of data science. Adapted from [Conway, 2013](http://drewconway.com/zia/2013/3/26/the-data-science-venn-diagram).](./figures/data_science_venn_mine.png){#fig-datasciencevenn}
+
 
 Dealing with data requires coding (but not a degree in computer science). Coding skills are essential for file and data manipulation and for thinking algorithmically. 
 
@@ -30,17 +19,16 @@ This course is also supposed to teach you how to stay out of the “danger zone�
 
 ## The data science workflow 
 
-The red thread of this course is the *data science workflow* (Fig. \@ref(fig:datascienceworkflowslim)). Applied (geo-) data science projects typically start with research questions and hypotheses, and some data at hand, and (ideally) end with an answer to the research questions and the communication of results in textual, visual, and reproducible forms. What lies in between is not a linear process, but a cycle. One has to "understand" the data in order to identify appropriate analyses for answering the research questions. Before we've visualized the data, we don't know how to transform it. And before we've modeled it, we don't know the most appropriate visualization. In practice, we approach answers to our research questions gradually, through repeated cycles of *exploratory data analysis* - repeated cycles of transforming the data, visualizing it, and modelling relationships. More often than not, the exploratory data analysis generates insights about missing pieces in the data puzzle that we're trying to solve. In such cases, the data collection and modelling task may have to be re-defined (dashed line in Fig. \@ref(fig:datascienceworkflowslim)), and the exploratory data analysis cycle re-initiated.
+The red thread of this course is the *data science workflow* (Fig. @fig-datascienceworkflowslim). Applied (geo-) data science projects typically start with research questions and hypotheses, and some data at hand, and (ideally) end with an answer to the research questions and the communication of results in textual, visual, and reproducible forms. What lies in between is not a linear process, but a cycle. One has to "understand" the data in order to identify appropriate analyses for answering the research questions. Before we've visualized the data, we don't know how to transform it. And before we've modeled it, we don't know the most appropriate visualization. In practice, we approach answers to our research questions gradually, through repeated cycles of *exploratory data analysis* - repeated cycles of transforming the data, visualizing it, and modelling relationships. More often than not, the exploratory data analysis generates insights about missing pieces in the data puzzle that we're trying to solve. In such cases, the data collection and modelling task may have to be re-defined (dashed line in Fig. @fig-datascienceworkflowslim), and the exploratory data analysis cycle re-initiated.
 
-```{r label="datascienceworkflowslim", echo=FALSE, fig.cap="The data science workflow. Figure adapted from: [Wickham and Grolemund *R for Data Science*](https://r4ds.had.co.nz/index.html)"}
-knitr::include_graphics("./figures/data_science_workflow_simpl.png")
-```
+![The data science workflow. Figure adapted from: [Wickham and Grolemund *R for Data Science*](https://r4ds.had.co.nz/index.html)](./figures/data_science_workflow_simpl.png){#fig-datascienceworkflowslim}
 
-As we work our way through repeated cycles of exploratory data analysis, we take decisions based on our data analysis, modelling, and visualizations. And we write code. The final conclusions we draw, the answers to research questions we find, and the results we communicate rest on the combination of all steps of our data processing, analysis, and visualization. Simply put, it rests on the reproducibility (and legibility) of our code (encapsulated by 'Program' in Fig. \@ref(fig:datascienceworkflowslim)). 
+
+As we work our way through repeated cycles of exploratory data analysis, we take decisions based on our data analysis, modelling, and visualizations. And we write code. The final conclusions we draw, the answers to research questions we find, and the results we communicate rest on the combination of all steps of our data processing, analysis, and visualization. Simply put, it rests on the reproducibility (and legibility) of our code (encapsulated by 'Program' in Fig. @fig-datascienceworkflowslim). 
 
 ## Why now?
 
-Three general developments set the stage for this course. First, Geography and Environmental Sciences (as many other realms of today's world) have entered a **data-rich era** (Chapters \@ref(datavariety)). Second, **machine learning** algorithms have revolutionized the way we can extract information from large volumes of data (this Chapter and Chapters \@ref(supervisedmlii) - \@ref(randomforest)). Third, **Open Science** principles (Chapter \@ref(openscience)) - essential for inclusive research, boundless progress, and for diffusing science to society - are becoming a prerequisite for getting research funded and published. The skill set required to make use of the potentials of a data-rich world is diverse and is often not taught as part of the curriculum in the natural sciences (as of year 2023). This course fills this open space.
+Three general developments set the stage for this course. First, Geography and Environmental Sciences (as many other realms of today's world) have entered a **data-rich era** (Chapters @sec-datavariety). Second, **machine learning** algorithms have revolutionized the way we can extract information from large volumes of data (this Chapter and Chapters @sec-supervisedmlii - @sec-randomforest). Third, **Open Science** principles (Chapter @sec-openscience) - essential for inclusive research, boundless progress, and for diffusing science to society - are becoming a prerequisite for getting research funded and published. The skill set required to make use of the potentials of a data-rich world is diverse and is often not taught as part of the curriculum in the natural sciences (as of year 2023). This course fills this open space.
 
 ## A new modelling paradigm  
 
@@ -52,13 +40,13 @@ A further distinction within mechanistic models can be made between *dynamic mod
 
 Often, mechanistic and *empirical models* (or, here used as synonym, *statistical models*) are distinguished. Empirical models can be viewed as somewhere closer towards the less explicit end of the spectrum described above. In mechanistic models, the mathematical descriptions of relationships are informed by theory or by independently determined relationships (e.g., laboratory measurements of metabolic rates of an enzyme). In contrast, empirical models rely on no, or only a very limited amount of *a priori* knowledge that is built into the model formulation. However, it should be noted that mechanistic models often also rely on empirical or statistical descriptions for individual components (e.g., the parametrisation of convection in a climate model), and statistical models may, in some cases, also be viewed as a representation of mechanisms that reflects our theoretical understanding. For example, depending on whether a relationship between two variables is linear or saturating *by nature*, we would chose a different structure of an empirical model. An specific example is the light use efficiency model ([Monteith, 1972](http://www.jstor.org/stable/2401901)) that linearly relates vegetation productivity to the amount of absorbed solar radiation. It simply has the form of a bivariate linear regression model. Vice-versa, traditional statistical models also rely on assumptions regarding the data generating process(es) and the resulting distribution of the data.
 
-*Supervised machine learning* models can be regarded as empirical models that are even more  "assumption free" than traditional statistical models. In contrast to mechanistic models where rules and hypotheses are explicitly and mathematically encoded, and in contrast to statistical models where assumptions of the data distribution are made for specifying the model, machine learning approaches modelling from the flip side: from the data to the insight [(Breiman, 2001)](https://projecteuclid.org/journals/statistical-science/volume-16/issue-3/Statistical-Modeling--The-Two-Cultures-with-comments-and-a/10.1214/ss/1009213726.full). Rules are not encoded by a human, but discovered by the machine. Machine learning models learn from *patterns in the data* for making new predictions, rather than relying on theory and *a priori* knowledge of the system. In that sense, machine learning follows a new modelling paradigm. The *learning* aspect in machine learning refers to the automatic search process and the guidance of the model fitting by some feedback signal (loss function) that are employed in machine learning algorithms (see also Chapter \@ref(supervisedmlii)).
+*Supervised machine learning* models can be regarded as empirical models that are even more  "assumption free" than traditional statistical models. In contrast to mechanistic models where rules and hypotheses are explicitly and mathematically encoded, and in contrast to statistical models where assumptions of the data distribution are made for specifying the model, machine learning approaches modelling from the flip side: from the data to the insight [(Breiman, 2001)](https://projecteuclid.org/journals/statistical-science/volume-16/issue-3/Statistical-Modeling--The-Two-Cultures-with-comments-and-a/10.1214/ss/1009213726.full). Rules are not encoded by a human, but discovered by the machine. Machine learning models learn from *patterns in the data* for making new predictions, rather than relying on theory and *a priori* knowledge of the system. In that sense, machine learning follows a new modelling paradigm. The *learning* aspect in machine learning refers to the automatic search process and the guidance of the model fitting by some feedback signal (loss function) that are employed in machine learning algorithms (see also Chapter @sec-supervisedmlii).
 
 The aspect of "patterns in the data" is key here. Often, these patterns are fuzzy. Rule-based algorithms have a limited capacity for dealing with such problems. *Symbolic artificial intelligence* is based on rules and underlies, for example, a computer playing chess [(Chollet & Allaire, 2018)](https://www.manning.com/books/deep-learning-with-r). However, where rules cannot be encoded from the outset, symbolic artificial intelligence has reached its limits. A breakthrough in learning from fuzzy patterns in the data has been enabled by *deep learning*. Through multiple layers of abstraction of the data, deep learning models identify underlying, abstract, relationships and use them for prediction. Deep learning has been extremely successful in solving problems, e.g., in image classification, speech recognition, or language translation.
 
 However, the abstraction comes at the cost of interpretability. Deep learning models and machine learning models in general are used with an emphasis on *prediction* and have seen particularly wide adoption in fields where a false prediction has acceptable consequences (An inappropriate book recommendation based on your previous purchases is not grave.) ([Knüsel et al., 2019](https://doi.org/10.1038/s41558-019-0404-1)). The model itself remains a black box and its utility for hypothesis testing is limited. This challenge has spurred the field of *interpretable machine learning*, where solutions are sought for uncovering the black box and probe the model for its trustworthiness.
 
-Chapters \@ref(regressionclassification)-\@ref(randomforest) lead into the world of machine learning and introduce the essential steps of the modelling workflow without delving into deep learning. Together with its preceeding chapters, this completes the toolbox required for making the first data scientific steps for applications in Geography and Environmental Sciences. This may be only just the beginning...
+Chapters @sec-regressionclassification up to @sec-randomforest lead into the world of machine learning and introduce the essential steps of the modelling workflow without delving into deep learning. Together with its preceeding chapters, this completes the toolbox required for making the first data scientific steps for applications in Geography and Environmental Sciences. This may be only just the beginning...
 
 ## Reading and link collection 
 
@@ -77,7 +65,7 @@ Chapters \@ref(regressionclassification)-\@ref(randomforest) lead into the world
 
 - Hadley Wickham and Garrett Grolemund: "R for Data Science", https://r4ds.had.co.nz/
 
-    - A comprehensive resource for data analysis (and visualisation) using R *tidyverse*. Covers contents of Chapters \@ref(gettingstarted), \@ref(programmingprimers), and \@ref(datawrangling) - but in more depth.
+    - A comprehensive resource for data analysis (and visualisation) using R *tidyverse*. Covers contents of Chapters @sec-gettingstarted, @sec-programmingprimers, and @sec-datawrangling - but in more depth.
     
 - Max Kuhn and Kjell Johnson: "Feature Engineering and Selection: A Practical Approach for Predictive Models", http://www.feat.engineering/    
     
@@ -87,7 +75,7 @@ Chapters \@ref(regressionclassification)-\@ref(randomforest) lead into the world
 
 - Claus O. Wilke: "Fundamentals of Data Visualization", https://clauswilke.com/dataviz/
 
-    - A comprehensive resource for data visualisation - not specific to any programming language, but specific about the *grammar of graphics*. Covers concepts of Chapter \@ref(datavis) - but in more depth. The go-to resource for the *implementation* of data visualisation using the {ggplot2} R library is Wickham and Grolemund (see above).
+    - A comprehensive resource for data visualisation - not specific to any programming language, but specific about the *grammar of graphics*. Covers concepts of Chapter @sec-datavis - but in more depth. The go-to resource for the *implementation* of data visualisation using the {ggplot2} R library is Wickham and Grolemund (see above).
     
 - Crameri, F., Shephard, G.E. & Heron, P.J. The misuse of colour in science communication. *Nature Communications* 11, 5444 (2020). https://doi.org/10.1038/s41467-020-19160-7
 
@@ -101,7 +89,7 @@ Chapters \@ref(regressionclassification)-\@ref(randomforest) lead into the world
 
 - Bradley Boehmke and Brandon Greenwell: "Hands-On Machine Learning with R", https://bradleyboehmke.github.io/HOML/
 
-    - A great entry point for machine learning in R. It demonstrates concepts and a range of algorithms of varying complexity - from linear regression to Random Forest - with examples in R. This book served as an inspiration and starting point for the (in some ways reduced) contents of this course, covered in Chapters \@ref(regressionclassification)-\@ref(randomforest).
+    - A great entry point for machine learning in R. It demonstrates concepts and a range of algorithms of varying complexity - from linear regression to Random Forest - with examples in R. This book served as an inspiration and starting point for the (in some ways reduced) contents of this course, covered in Chapters @sec-regressionclassification - @sec-randomforest.
     
 - Pichler, M., & Hartig, F. (2023). Machine learning and deep learning—A review for ecologists. *Methods in Ecology and Evolution*, 00, 1– 23. https://doi.org/10.1111/2041-210X.14061
 

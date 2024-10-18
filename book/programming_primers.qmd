@@ -1,4 +1,4 @@
-# Programming primers {#programmingprimers}
+# Programming primers {#sec-programmingprimers}
 
 **Chapter lead author: Pepa Aran**
 
@@ -175,11 +175,11 @@ To visually separate parts of a script, use commented lines (e.g., `#----`). The
 
 Avoid reading entire workspace environments (e.g., `load(old_environment.RData)`), deleting environments `rm(list=ls())`, loading hidden dependencies (e.g., `.Rprofile`), or changing the working directory (`setwd("~/other_dir/"`) as part of a script.
 
-Note that information about the author of the script, its creation date, and modifications, etc. should not be added as commented text in the file. In Chapter \@ref(codemgmt), we will learn about the code versioning control system *git*, which keeps track of all this as meta information associated with files.
+Note that information about the author of the script, its creation date, and modifications, etc. should not be added as commented text in the file. In @sec-codemgmt, we will learn about the code versioning control system *git*, which keeps track of all this as meta information associated with files.
 
 A good and comprehensive best practices guide is given by the [tidyverse style guide](https://style.tidyverse.org/).
 
-### Where to find help {#findinghelp}
+### Where to find help {#sec-findinghelp}
 
 The material covered in this course will give you a solid basis for your future projects. Even more so, it provides you with code examples that you can adapt to your own purposes. Naturally, you will face problems we did not cover in the course and you will learn more as you go. Different approaches to getting help can be taken for different types of problems and questions.
 
@@ -216,7 +216,7 @@ Worked examples are implementations of certain workflows that may serve as a tem
 vignette("caret", package = "caret")
 ```
 
-... to get information about how to use the {caret} package in an easily digestible format. (You will learn more about caret in Chapters \@ref(supervisedmli) and \@ref(supervisedmlii)). Several blogs serve similar purposes and are a great entry point to learn about new topics. Examples are the [Posit Blog](https://posit.co/blog/) (Posit is the company developing and maintaining RStudio and several R packages), [R-bloggers](https://www.r-bloggers.com/), [R-Ladies](https://www.rladies.org/blog/), etc.
+... to get information about how to use the {caret} package in an easily digestible format. (You will learn more about caret in @sec-supervisedmli and @sec-supervisedmlii). Several blogs serve similar purposes and are a great entry point to learn about new topics. Examples are the [Posit Blog](https://posit.co/blog/) (Posit is the company developing and maintaining RStudio and several R packages), [R-bloggers](https://www.r-bloggers.com/), [R-Ladies](https://www.rladies.org/blog/), etc.
 
 #### Asking for help
 

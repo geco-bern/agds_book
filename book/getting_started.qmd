@@ -1,4 +1,4 @@
-# Getting started {#gettingstarted}
+# Getting started {#sec-gettingstarted}
 
 **Chapter lead author: Pepa Arán**
 
@@ -10,12 +10,12 @@ This chapter provides a start at the very beginning of your journey in Applied G
 -   Know basic R objects and classes.
 -   Understand how R interacts with files in your computer.
 
-Second, the tutorial of this chapter prepares you for your work on the remainder of this course by setting up all the necessary infrastructure. Also experienced R users should follow respective tutorial sections: Sec. \@ref(rmarkdown), \@ref(wspmgmt), and \@ref(setup)). You will:
+Second, the tutorial of this chapter prepares you for your work on the remainder of this course by setting up all the necessary infrastructure. Also experienced R users should follow respective tutorial sections:  @sec-rmarkdown, @sec-wspmgmt, and @sec-setup). You will:
 
 -   Organize your workspace for efficient data science projects.
 -   Have installed *git* and all R packages used throughout the book.
 
-Completing these points are essential before we go deeper into project management topics in Chapters \@ref(openscience) and \@ref(codemgmt). Chapter \@ref(programmingprimers) will focus on how to code.
+Completing these points are essential before we go deeper into project management topics in Chapters @sec-openscience and @sec-codemgmt. Chapter @sec-programmingprimers will focus on how to code.
 
 ## Tutorial
 
@@ -327,7 +327,7 @@ For example, the data frame `df` has 4 rows and 3 columns:
 dim(df)
 ```
 
-There are many more things you can do with data frames. Since they are central to analyzing data with R, we have dedicated all of Chapter \@ref(datawrangling) to teach you how to work with data frames in a tidy way with the [{tidyverse}](https://www.tidyverse.org/) collection of packages.
+There are many more things you can do with data frames. Since they are central to analyzing data with R, we have dedicated all of Chapter @sec-datawrangling to teach you how to work with data frames in a tidy way with the [{tidyverse}](https://www.tidyverse.org/) collection of packages.
 
 #### Functions
 
@@ -337,7 +337,7 @@ R *functions* can be applied to an object (or several objects) and return anothe
 mean(df$age)
 ```
 
-Functions are also R objects and have class `"function"`. Writing your own functions is an essential part of good programming and will be introduced in Chapter \@ref(programmingprimers).
+Functions are also R objects and have class `"function"`. Writing your own functions is an essential part of good programming and will be introduced in Chapter @sec-programmingprimers.
 
 #### Missing values
 
@@ -380,7 +380,7 @@ save(df, df_small, file = "./data/data_frames.RData")
 
 To tell the function where the data is located, pass the data's *path* as an argument. You can either use an *absolute path*, starting from `C:/` on a Windows computer or `~/` on a Mac or Linux. Or, alternatively, you can provide a *relative path*, where `./` points to the present working directory (like above) and `../` is one level up, or `../../` is two levels up, etc. We recommend that you work with R projects and use relative paths, because the working directory is set to the root directory of the R project and relative paths will also work on another person's computer, helping with reproducibility.
 
-In the example above, we provided a relative path, starting at the current working directory (`./`). The file `data_frames.RData` sits in a sub-directory of the current working directory, called `data/`. What is the current working directory? Unfortunately, the answer is "it depends...". You'll learn more about this in Section \@ref(rprojects).
+In the example above, we provided a relative path, starting at the current working directory (`./`). The file `data_frames.RData` sits in a sub-directory of the current working directory, called `data/`. What is the current working directory? Unfortunately, the answer is "it depends...". You'll learn more about this in Section @sec-rprojects.
 
 `.RData` files are read into your environment using the `load()` function. This function loads the objects with the name that they were saved with.
 
@@ -395,7 +395,7 @@ saveRDS(df_small, file = "./data/df_small.rds")
 df_small_2 <- readRDS("./data/df_small.rds")
 ```
 
-`save()` and `saveRDS()` create *binary* files that are fast to write and read, but only intelligible to R (and not to the human eye or another program). Such files are commonly identified by the suffix `.rds`. It is recommended to name the `.rds` files according to the single object they contain. When publishing and sharing data, follow Open Science principles (Chapter \@ref(openscience)) and avoid file formats that are not readable across different platforms and programming languages. We will learn more about human-readable tabular data files like CSV in Chapter \@ref(datawrangling) and other open source binary file formats in Chapter \@ref(datavariety).
+`save()` and `saveRDS()` create *binary* files that are fast to write and read, but only intelligible to R (and not to the human eye or another program). Such files are commonly identified by the suffix `.rds`. It is recommended to name the `.rds` files according to the single object they contain. When publishing and sharing data, follow Open Science principles (Chapter @sec-openscience) and avoid file formats that are not readable across different platforms and programming languages. We will learn more about human-readable tabular data files like CSV in Chapter @sec-datawrangling and other open source binary file formats in Chapter @sec-datavariety.
 
 ### R environment
 
@@ -455,15 +455,15 @@ To run a script, you can either use the **Source** button in the source editor o
 
 Note that, to be able to run the code above, the file `my_r_script.R` must be in your current working directory. You must always specify the path to the file, also when sourcing code.
 
-### R Markdown {#rmarkdown}
+### R Markdown {#sec-rmarkdown}
 
 [R Markdown](https://rmarkdown.rstudio.com/) files are an enhanced version of scripts. They combine formatted text and executable code chunks. They can either be compiled (*knitted*) into an HTML or PDF output, where code chunks are executed upon compilation and visualization outputs are directly placed into the output, or they can be run like a script entirely or each code chunk separately. Rmarkdown is ideal for **reporting**, i.e., writing your final document presenting your analysis results. When opened in RStudio, RMarkdown files appear in the Editor like this:
 
-```{r label="rmarkdown", echo=FALSE, out.width="75%", fig.cap="R Markdown document opened in the source panel.", fig.align='center'}
-knitr::include_graphics("./figures/rmarkdown_editor.png") 
-```
+![R Markdown document opened in the source panel.](./figures/rmarkdown_editor.png){#fig-rmarkdown}
 
-As shown in Fig. \@ref(fig:rmarkdown), an RMarkdown file consists of a header that specifies the document properties, such as how it should be rendered (as an html page, a docx file or a pdf).
+
+
+As shown in @fig-rmarkdown, an RMarkdown file consists of a header that specifies the document properties, such as how it should be rendered (as an html page, a docx file or a pdf).
 
 ```bash
 ---
@@ -477,7 +477,7 @@ Below the header follow the contents as either text or code *chunks*. Text is fo
 
 Code chunks that contain executable R code are opened by a line ` ```{r} `. 
 
-The document can be rendered by calling `rmarkdown::render()` on the command line or hitting the **Knit** button in the RStudio IDE. Depending on your settings a html file, pdf or docx file will be generated in your current directory (and or displayed in the IDE viewer). The RMarkdown source file shown in Fig. \@ref(fig:rmarkdown) is rendered to:
+The document can be rendered by calling `rmarkdown::render()` on the command line or hitting the **Knit** button in the RStudio IDE. Depending on your settings a html file, pdf or docx file will be generated in your current directory (and or displayed in the IDE viewer). The RMarkdown source file shown in @fig-rmarkdown is rendered to:
 
 ```{r label="rmarkdownrender", echo=FALSE, fig.cap="Rendered HTML output.", out.width="75%", fig.align='center'}
 knitr::include_graphics("./figures/rmarkdown_render.png")
@@ -490,15 +490,15 @@ To create a new RMarkdown file, select from the drop-down menu in the top-left c
 knitr::include_graphics("./figures/newrmarkdown.png")
 ```
 
-### Workspace management {#wspmgmt}
+### Workspace management {#sec-wspmgmt}
 
 Workspace management is crucial for efficient data science projects. Two aspects are essential for workspace management: The structure of directories and the types of files they contain; and code management and version control. To address these two points, we will briefly introduce you to *R projects* and *git*.
 
-#### R projects {#rprojects}
+#### R projects {#sec-rprojects}
 
 Think of all files that are linked to a certain data science workflow as belonging together into one project. A project is therefore a directory that contains the code and the files it produces. Different types of files go in different sub-directories with descriptive names. To keep an order and make your code useful also for others, always keep files of the same type in sub-directories that are always named the same way across projects. When creating a new project, you will find the same overall structure. A common structure is:
 
-- Keep `.R` files that implement a user-defined function (see Chapter \@ref(programmingprimers)) in a sub-directory `./R/`, and `.R` files that implement a workflow in a sub-directory `./analysis/`. Workflow implementations with a view to communication should be implemented in RMarkdown files.
+- Keep `.R` files that implement a user-defined function (see Chapter @sec-programmingprimers) in a sub-directory `./R/`, and `.R` files that implement a workflow in a sub-directory `./analysis/`. Workflow implementations with a view to communication should be implemented in RMarkdown files.
 - RMarkdown files are commonly kept in a sub-directory `./vignettes/` or in the main (top-level) project directory.
 - Keep figures produced by your code in a sub-directory `./figures/`
 - Keep data files produced by your code in a sub-directory `./data/`
@@ -525,18 +525,18 @@ knitr::include_graphics("./figures/RStudio_RProject_screenshot.png")
 
 When starting a new project, named `project_name`, a file `project_name.Rproj` is created in the top-level project directory. It stores information about your the session (settings, open files, etc.), automatically enables useful features in RStudio for easy package, website, or book building, lets you manage code version control (see next sub-section), and optionally (not recommended) stores the environment of your current session. It is not recommended to save and restore entire environments. Instead read and write objects from and into files to guarantee control, transparency, and reproducibility. When you want to continue working on an existing R project, you can start a new session by clicking on your `project_name.Rproj` file. This restores
 
-In Chapters \@ref(openscience) and \@ref(codemgmt), we will learn more about efficient code management.
+In @sec-openscience and @sec-codemgmt, we will learn more about efficient code management.
 
 #### git
 
-*git* is a version control system that keeps track of all changes on your code, who made it, and when. It allows you to go back to previous changes, and lets you control when to iterate from one state of the code to the next. The basic unit of *git* is a git repository - all the code contained in a project directory. That's why *R projects* work well with *git*. *git* can also keep track of changes in data, so long as the data is small and in text format (see \@ref(datavariety)). 
+*git* is a version control system that keeps track of all changes on your code, who made it, and when. It allows you to go back to previous changes, and lets you control when to iterate from one state of the code to the next. The basic unit of *git* is a git repository - all the code contained in a project directory. That's why *R projects* work well with *git*. *git* can also keep track of changes in data, so long as the data is small and in text format (see @sec-datavariety). 
 
 *git* also lets you sync your local copy of a *git repository* with git service in the cloud, for example [GitHub](https://github.com/). This allows you to manage the same repository across computers and collaborate with multiple partners on the same repository.
 
-We will learn more about *git* in Chapter \@ref(codemgmt). For now, follow instructions in Section \@ref(setup) to set yourself up with installing *git* and other required stuff on your computer and with a GitHub account. You will use this later in this course (and maybe throughout your career).
+We will learn more about *git* in Chapter @sec-codemgmt. For now, follow instructions in Section @sec-setup to set yourself up with installing *git* and other required stuff on your computer and with a GitHub account. You will use this later in this course (and maybe throughout your career).
 
 
-### Setup {#setup}
+### Setup {#sec-setup}
 
 #### Packages
 
@@ -559,7 +559,7 @@ If the installation failed, there should be an error message "Installation of pa
 
 #### Other libraries and applications
 
-Some R packages depend on one another (for example, all depend on {base} R), but they can also depend on software external to the R ecosystem. For Chapter \@ref{datavariety}, we will need the {ncdf4} package to work with [*netCDF*](https://www.unidata.ucar.edu/software/netcdf/) files in R. NetCDF (network Common Data Form) is a file format for storing multidimensional scientific data (variables) such as temperature, humidity, pressure, wind speed, and direction. The package {ncdf4} depends on software that is not available as an R package, the `netCDF` command-line tools, which you need to install additionally on your computer.
+Some R packages depend on one another (for example, all depend on {base} R), but they can also depend on software external to the R ecosystem. For @sec-datavariety, we will need the {ncdf4} package to work with [*netCDF*](https://www.unidata.ucar.edu/software/netcdf/) files in R. NetCDF (network Common Data Form) is a file format for storing multidimensional scientific data (variables) such as temperature, humidity, pressure, wind speed, and direction. The package {ncdf4} depends on software that is not available as an R package, the `netCDF` command-line tools, which you need to install additionally on your computer.
 
 To install the `netCDF` command-line tools, follow these instructions:
 
@@ -629,7 +629,7 @@ knitr::include_graphics("./figures/copy_public_key.png")
     -   Go back to your browser and open your GitHub account. At the top right, open your profile's menu and choose **Settings > SSH and GPG Keys**. Then select **Add new SSH key**. Give your SSH connection a name, for example "My laptop" and paste the *public key* that you copied from RStudio. If you have problems, check out [these instructions](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) to add a new SSH key to your GitHub account. 
     -   Finally, you can test your SSH connection following [these instructions](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/testing-your-ssh-connection). Note that, at the top of these websites, there's an option to choose your OS because the steps vary depending on the type of computer your work with.
 
-#### Preparation for your report {#setupreport}
+#### Preparation for your report {#sec-setupreport}
 
 Your performance assessment for Applied Geodata Science will be in the form of a report. You will approach the writing of this report as if you were working on a clean, structured and reproducible data science project. This section is meant to guide you through the preparation of your report workspace, such that it's in the form that you will submit it. Following the next steps, you will set up a git repository containing an R project and an R Markdown file. 
 
@@ -649,7 +649,7 @@ knitr::include_graphics("./figures/copy_ssh_repo.png")
 knitr::include_graphics("./figures/clone_repo_ssh.png")
 ```
 - With this, you're set up. If your R project `agds_report_yourname` is open, you should see a **Git** panel in RStudio (next to **Environment**) and also be able to use Git in the **Terminal** panel in RStudio. As mentioned above, we will start working with these tools in a few weeks and they will be a crucial part of the course.
-- You'll see a detailed explanation of the *git* workflows in Chapter \@ref(codemgmt). For now, add your solutions to each report exercise into a separate RMarkdown file, placed in a subdirectory named `./vignettes/`. The first Report Exercise will be the one for Chapter \@ref(datawrangling) where you will be asked to implement your solutions in a file called `re_tidy.Rmd`. At that stage, your repository should look like this:
+- You'll see a detailed explanation of the *git* workflows in Chapter @sec-codemgmt. For now, add your solutions to each report exercise into a separate RMarkdown file, placed in a subdirectory named `./vignettes/`. The first Report Exercise will be the one for Chapter @sec-datawrangling where you will be asked to implement your solutions in a file called `re_tidy.Rmd`. At that stage, your repository should look like this:
 
 ```{r label="reportmarkdown", echo=FALSE, fig.cap="At first, the R Markdown for your report will look something like this.", out.width="75%", fig.align='center'}
 knitr::include_graphics("./figures/Rmd_report.png")

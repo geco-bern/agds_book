@@ -1,4 +1,4 @@
-# Data wrangling {#datawrangling}
+# Data wrangling {#sec-datawrangling}
 
 **Chapter lead author: Benjamin Stocker**
 
@@ -31,7 +31,7 @@ Exploratory data analysis - the transformation, visualization, and modelling of 
 
 We refer to data *wrangling* here to encompass the steps for preparing the data set *prior* to modelling - including, the combination of variables from different data sources, the removal of bad data, and the aggregation of data to the desired resolution or granularity (e.g., averaging over all time steps in a day, or over all replicates in a sample).
 
-In contrast, *pre-processing* refers to the additional steps that are either required by the the specific machine learning algorithm used with the data (e.g., centering and scaling for K-Nearest Neighbors or Neural Networks), the gap-filling of variables, or the transformation of variables guided by the resulting improvement of the predictive power of the machine learning model. Pre-processing is part of the modelling workflow and includes all steps that apply transformations that use parameters derived from the data. We will introduce and discuss data pre-processing in Chapter \@ref(supervisedmli).
+In contrast, *pre-processing* refers to the additional steps that are either required by the the specific machine learning algorithm used with the data (e.g., centering and scaling for K-Nearest Neighbors or Neural Networks), the gap-filling of variables, or the transformation of variables guided by the resulting improvement of the predictive power of the machine learning model. Pre-processing is part of the modelling workflow and includes all steps that apply transformations that use parameters derived from the data. We will introduce and discuss data pre-processing in @sec-supervisedmli.
 
 ### Example data
 
@@ -66,7 +66,7 @@ From this design principles, even the most convoluted code and implementation of
 
 ### Reading tabular data
 
-Tabular data are organised in rows and columns. R data frames are tabular data. As introduced in Chapter \@ref(gettingstarted), each column can be regarded as a vector of a certain type. Each row contains the same number of columns and each column contains the same type of values (for example numeric, or characters). Each row can be regarded as a separate instance or data record - for example a record of simultaneously taken measurements of different variables, along with some attributes and meta information (e.g., the date). In Chapter \@ref(datavariety), you will be introduced to other types of data.
+Tabular data are organised in rows and columns. R data frames are tabular data. As introduced in @sec-gettingstarted, each column can be regarded as a vector of a certain type. Each row contains the same number of columns and each column contains the same type of values (for example numeric, or characters). Each row can be regarded as a separate instance or data record - for example a record of simultaneously taken measurements of different variables, along with some attributes and meta information (e.g., the date). In @sec-datavariety, you will be introduced to other types of data.
 
 The most common format for tabular data are CSV (comma-separated-values), typically indicated by the file name suffix `.csv`. CSV is a text-based file format, readable across platforms and does not rely on proprietary software (as opposed to, for example, `.xlsx`). The first row in a CSV file typically specifies the name of the variable provided in the respective column.
 
@@ -210,7 +210,7 @@ plot(
   )
 ```
 
-> Note: `plot()` is the very basic of plotting data. In Chapter \@ref(datavis), you will get introduced to additional methods for visualising data. The argument `type = "l"` indicates that we want a line plot, rather than points.
+> Note: `plot()` is the very basic of plotting data. In @sec-datavis, you will get introduced to additional methods for visualising data. The argument `type = "l"` indicates that we want a line plot, rather than points.
 
 Over the course of an entire year, shortwave incoming radiation varies with the seasons, peaking in summer:
 
@@ -284,7 +284,7 @@ co2_concentration_monthly |>
   pivot_longer(cols = 2:13, names_to = "month", values_to = "co2")
 ```
 
-This corresponds to the format of `co2_concentration` and is tidy. A long format of data frames is required to visualise data using the plotting functions of the {ggplot2} package which will be introduced in Chapter \@ref(datavis).
+This corresponds to the format of `co2_concentration` and is tidy. A long format of data frames is required to visualise data using the plotting functions of the {ggplot2} package which will be introduced in @sec-datavis.
 
 Either way, for certain applications, it may be advantageous to work with a wide format. We can convert from a long to a wide format by:
 
@@ -356,7 +356,7 @@ half_hourly_fluxes |>
   nest()
 ```
 
-Here, the data frame has one row per date and therefore the same number of rows as the data frame `daily_fluxes`, but the data itself is not reduced by a summarising function. Instead, the data are kept at the half-hourly level, but it's nested inside the new column `data`, which now contains a list of half-hourly data frames for each day. This is just a brief perspective of what nesting is about. More is explained in Section \@ref(extramaterialwrangling). More comprehensive tutorials on nesting and functional programming are provided in [Altman, Behrman and Wickham (2021)](https://dcl-prog.stanford.edu/) or in [Wickham and Grolemund (2017), Chapter 21](https://r4ds.had.co.nz/iteration.html).
+Here, the data frame has one row per date and therefore the same number of rows as the data frame `daily_fluxes`, but the data itself is not reduced by a summarising function. Instead, the data are kept at the half-hourly level, but it's nested inside the new column `data`, which now contains a list of half-hourly data frames for each day. This is just a brief perspective of what nesting is about. More is explained in Section @sec-extramaterialwrangling. More comprehensive tutorials on nesting and functional programming are provided in [Altman, Behrman and Wickham (2021)](https://dcl-prog.stanford.edu/) or in [Wickham and Grolemund (2017), Chapter 21](https://r4ds.had.co.nz/iteration.html).
 
 ### Data cleaning
 
@@ -384,11 +384,11 @@ unique(half_hourly_fluxes$NEE_VUT_REF_QC)
 
 <!-- -   Can you think of more such examples? (-\> Exercises)  -->
 
-String manipulations are usually required for cleaning data. The Section \@ref(#strings) below demonstrates some simple examples.
+String manipulations are usually required for cleaning data. The @sec-strings below demonstrates some simple examples.
 
-Note that a majority of machine learning algorithms and other statistical model types require all data to be numeric. Methods exist to convert categorical data into numeric data, as we will learn later. We re-visit data cleaning in the form of data *pre-processing* as part of the modelling workflow in Chapter \@ref(supervisedmli).
+Note that a majority of machine learning algorithms and other statistical model types require all data to be numeric. Methods exist to convert categorical data into numeric data, as we will learn later. We re-visit data cleaning in the form of data *pre-processing* as part of the modelling workflow in @sec-supervisedmli.
 
-#### Bad data {#baddata}
+#### Bad data {#sec-baddata}
 
 Data may be "bad" for different reasons, including sensor error, human error, a data point representing a different population, or unsuitable measurement conditions. In this sense, data are "bad" if they don't represent what they are assumed by the user to represent. Its presence in analyses and modelling may undermine the model skill or even lead to spurious results. A goal of data cleaning typically is to remove bad data. But how to detect them? And how safe is it to remove them?
 
@@ -396,9 +396,9 @@ A diversity of processes may generate bad data and it is often not possible to f
 
 Ideally, information about the quality of the data are provided as part of the dataset. Also other meta-information (e.g., sensor type, human recording the data, environmental conditions during the data collection) may be valuable for data cleaning purposes. In our example dataset, the column with suffices `_QC` provide such information (see 'Example data' section above) and an example for their use in data cleaning is given further below.
 
-Bad data may come in the form of *outliers*, which are commonly defined based on their value with respect to the *distribution* of all values of the same variable in a dataset. Hence, their identification most commonly relies on quantifying their distance from the center of the variable's empirical distribution. The default `boxplot()` plotting function in R (which we will learn about more in Chapter \@ref(datavis)) shows the median (bold line in the center), the upper and lower quartiles (corresponding to the 25% and the 75% quantiles, often referred to as $Q_1$ and $Q_3$ , given by the upper and lower edge of the box plot) and the range of $( Q_1 - 1.5 (Q_3 - Q_1), Q_3 + 1.5 (Q_3 - Q_1))$. Any point outside this range is plotted by a circle and labeled an "outlier". However, this definition is very restrictive and may lead to a false labeling of outliers, in particular if they are drawn from a distribution with a fat tail or from asymmetrical distributions.
+Bad data may come in the form of *outliers*, which are commonly defined based on their value with respect to the *distribution* of all values of the same variable in a dataset. Hence, their identification most commonly relies on quantifying their distance from the center of the variable's empirical distribution. The default `boxplot()` plotting function in R (which we will learn about more in @sec-datavis) shows the median (bold line in the center), the upper and lower quartiles (corresponding to the 25% and the 75% quantiles, often referred to as $Q_1$ and $Q_3$ , given by the upper and lower edge of the box plot) and the range of $( Q_1 - 1.5 (Q_3 - Q_1), Q_3 + 1.5 (Q_3 - Q_1))$. Any point outside this range is plotted by a circle and labeled an "outlier". However, this definition is very restrictive and may lead to a false labeling of outliers, in particular if they are drawn from a distribution with a fat tail or from asymmetrical distributions.
 
-Outliers may also be identified via multivariate distributions. We will re-visit such methods later, in Chapter \@ref(regressionclassification). For certain applications, outliers or *anomalies* may be the target of the investigation, not the noise in the data. This has spurred the field of [*anomaly detection*](https://en.wikipedia.org/wiki/Anomaly_detection) which relies on machine learning algorithms for determining whether a value is anomalous, given a set of covariates.
+Outliers may also be identified via multivariate distributions. We will re-visit such methods later, in @sec-regressionclassification. For certain applications, outliers or *anomalies* may be the target of the investigation, not the noise in the data. This has spurred the field of [*anomaly detection*](https://en.wikipedia.org/wiki/Anomaly_detection) which relies on machine learning algorithms for determining whether a value is anomalous, given a set of covariates.
 
 Sensor error or algorithm error may generate spurious values, identified, for example when a continuous variable attains the numerically identical value with a spuriously high frequency.
 
@@ -419,7 +419,7 @@ The question about when data are "bad" and whether to remove it is often critica
 
 Data may be missing for several reasons. Some yield random patterns of missing data, others not. In the latter case, we can speak of *informative missingness* ([Kuhn and Johnson, 2019](http://www.feat.engineering/)) and its information can be used for modelling. For categorical data, we may replace such data with `"none"` (instead of `NA`). Some machine learning algorithms (mainly tree-based methods, e.g., Random Forest) can handle missing values. However, when comparing the performance of alternative ML algorithms, they should be tested with the same data and removing missing data should be done beforehand.
 
-Most machine learning algorithms require missing values to be removed. That is, if any of the cells in one row has a missing value, the entire cell gets removed. This generally leads to a loss of information contained in the remaining variables. Methods exist to *impute* missing values in order to avoid this information loss. However, the gain of data imputation has to be traded off against effects of associating the available variables with the imputed (knowingly wrong) values, and effects of *data leakage* have to be considered. Data imputation as part of the modelling process will be dealt with in Chapter \@ref(supervisedmli).
+Most machine learning algorithms require missing values to be removed. That is, if any of the cells in one row has a missing value, the entire cell gets removed. This generally leads to a loss of information contained in the remaining variables. Methods exist to *impute* missing values in order to avoid this information loss. However, the gain of data imputation has to be traded off against effects of associating the available variables with the imputed (knowingly wrong) values, and effects of *data leakage* have to be considered. Data imputation as part of the modelling process will be dealt with in @sec-supervisedmli.
 
 In our example dataset, some values of `SWC_F_MDS_*` are given as `-9999`.
 
@@ -450,7 +450,7 @@ visdat::vis_miss(
   )
 ```
 
-For many applications, we want to filter the data so that the values of particular variables satisfy certain conditions. The {dplyr} function used for such tasks is `filter()`. As argument, it takes the expressions that specify the criterion for filtering using logical operators (`>, >=, <, ==, !-, ...`, see Chapter \@ref(gettingstarted)). Multiple filtering criteria can be combined with logical (boolean) operators:
+For many applications, we want to filter the data so that the values of particular variables satisfy certain conditions. The {dplyr} function used for such tasks is `filter()`. As argument, it takes the expressions that specify the criterion for filtering using logical operators (`>, >=, <, ==, !-, ...`, see @sec-gettingstarted). Multiple filtering criteria can be combined with logical (boolean) operators:
 
 -   `&`: logical AND
 -   `|`: logical OR
@@ -494,7 +494,7 @@ After having applied some data reduction and cleaning steps above, let's save th
 write_csv(half_hourly_fluxes, file = "data/FLX_CH-Lae_FLUXNET2015_FULLSET_HH_2004-2006_CLEAN.csv")
 ```
 
-> Note: Making a file publicly available as a `.rds` or `.RData` file (explained in Chapter \@ref(gettingstarted)) violates the open science principles (introduced in Chapter \@ref(openscience)). These two formats make it very easy to save R objects related to your analysis project, but are not adequate to save *data*. Therefore, whenever possible, save your data in a format that is readable across platforms without requiring proprietary software. Hence use `write_csv()` from {readr} whenever possible. We will encounter other non-proprietary formats that let you save and share more complex data structures in Chapter \@ref(datavariety).
+> Note: Making a file publicly available as a `.rds` or `.RData` file (explained in @sec-gettingstarted) violates the open science principles (introduced in @sec-openscience). These two formats make it very easy to save R objects related to your analysis project, but are not adequate to save *data*. Therefore, whenever possible, save your data in a format that is readable across platforms without requiring proprietary software. Hence use `write_csv()` from {readr} whenever possible. We will encounter other non-proprietary formats that let you save and share more complex data structures in @sec-datavariety.
 
 ### Combining relational data
 
@@ -537,7 +537,7 @@ Note that here, we first re-shuffled (permuted) the rows of `df6` for demonstrat
 
 Other variants of `*_join()` are available as described [here](https://r4ds.had.co.nz/relational-data.html).
 
-## Extra material {#extramaterialwrangling}
+## Extra material {#sec-extramaterialwrangling}
 
 ### Functional programming I
 
@@ -630,7 +630,7 @@ visdat::vis_miss(
   )
 ```
 
-### Strings {#strings}
+### Strings {#sec-strings}
 
 The column `siteid` currently contains strings specifying the full paths of the files that were read in earlier. The next task is to extract the site name from these strings. The file names follow a clear pattern (this also highlights why naming files wisely can often make life a lot simpler).
 
@@ -658,7 +658,7 @@ daily_fluxes_allsites
 
 ### Functional programming II
 
-Functions can be applied to a list of objects of any type. Therefore, `purrr::map()` is a powerful approach to "iterating" over multiple instances of the same object type and can be used for all sorts of tasks. In the following, list elements are data frames of daily data and the function `lm()` fits a linear regression model of GPP versus shortwave radiation to each sites' data. We'll learn more about fitting statistical models in R in Chapter \@ref(regressionclassification).
+Functions can be applied to a list of objects of any type. Therefore, `purrr::map()` is a powerful approach to "iterating" over multiple instances of the same object type and can be used for all sorts of tasks. In the following, list elements are data frames of daily data and the function `lm()` fits a linear regression model of GPP versus shortwave radiation to each sites' data. We'll learn more about fitting statistical models in R in Chapter @sec-regressionclassification.
 
 ```{r}
 list_linmod <- purrr::map(list_df, ~lm(GPP_NT_VUT_REF ~ SW_IN_F, data = .))
@@ -776,7 +776,7 @@ write_rds(
 
 ## Exercises {#exerciseswrangling}
 
-> *Hint*: For all exercises remember the resources we provided on finding help in section \@ref(findinghelp).
+> *Hint*: For all exercises remember the resources we provided on finding help in section @sec-findinghelp.
 
 ### Star wars {.unnumbered}
 
@@ -810,7 +810,7 @@ Interpret your findings: Are the proportions evenly spread across hours in a day
 
 Perform an aggregation of the half-hourly GPP data (variable `GPP_NT_VUT_REF`) to daily means of the unmodified data read from file `FLX_CH-Lae_FLUXNET2015_FULLSET_HH_2004-2006.csv`, and from cleaned data where only measured (not gap-filled) data is kept. This yields two data frames with daily GPP data. Calculate the overall mean GPP for the two data frames (across all days in the data frame). Are the overall mean GPP values equal? If not, why?
 
-## Report Exercise {#retidy}
+## Report Exercise {#sec-retidy}
 
 ### Analyzing changes in soil organic matter during elevated CO$_2$ experiments {.unnumbered}
 
@@ -844,11 +844,11 @@ In this exercise, you will investigate the data published by Groeningen et al. (
 
 ### Deliverables for the report {.unnumbered}
 
-A key learning of this course is that you know how to create reproducible workflows and we pay a lot of attention on this during the assessment. You will learn more about the specific aspects to do so in Chapters \@ref(openscience) and \@ref(codemgmt). So, if the following instructions for submitting this report exercise may sound cryptic, hang tight! It will make more sense as you work through this course.
+A key learning of this course is that you know how to create reproducible workflows and we pay a lot of attention on this during the assessment. You will learn more about the specific aspects to do so in @sec-openscience and @sec-codemgmt. So, if the following instructions for submitting this report exercise may sound cryptic, hang tight! It will make more sense as you work through this course.
 
-You have to submit all report exercises via your GitHub repository that you created in \@ref(setupreport). For now, save this report exercise as a RMarkdown file with the name `re_tidy.Rmd` and place that file in a sub-directory called `vignettes` (a directory is simply a folder), which is located in your project directory (in full notation that means save your RMarkdown as `./vignettes/re_tidy.Rmd`). Additionally, produce a HTML version of your solution by knitting your RMarkdown file (see the `Knit` command in the panel below the files tabs in RStudio). Save this HTML file in the same `vignettes` directory (`./vignettes/re_tidy.html`). For your cleaned dataset, pick a sensible name and put it into a sub-direcory called `./data`. As with all other report exercises, make sure that your work is reproducible, for example, by letting another student download your repository from GitHub and knit your RMarkdown files on their computer.
+You have to submit all report exercises via your GitHub repository that you created in @sec-setupreport. For now, save this report exercise as a RMarkdown file with the name `re_tidy.Rmd` and place that file in a sub-directory called `vignettes` (a directory is simply a folder), which is located in your project directory (in full notation that means save your RMarkdown as `./vignettes/re_tidy.Rmd`). Additionally, produce a HTML version of your solution by knitting your RMarkdown file (see the `Knit` command in the panel below the files tabs in RStudio). Save this HTML file in the same `vignettes` directory (`./vignettes/re_tidy.html`). For your cleaned dataset, pick a sensible name and put it into a sub-direcory called `./data`. As with all other report exercises, make sure that your work is reproducible, for example, by letting another student download your repository from GitHub and knit your RMarkdown files on their computer.
 
-> **Important**: Structure your RMarkdown so that you first load necessary libraries, load your data and then write down your solution. **Remember to access files with relative paths and not with hard-coded paths**. So, access your file via `here::here('data/tidy_data.csv`), where `here` starts at the position of your `.Rproj` file. **Never** write hard-coded paths that looks like this: `"~/Desktop/Studium/.../tidy_data.csv"` or `"C:/Users/.../tidy_data.csv"` (see Chapter \@ref(wspmgmt)).
+> **Important**: Structure your RMarkdown so that you first load necessary libraries, load your data and then write down your solution. **Remember to access files with relative paths and not with hard-coded paths**. So, access your file via `here::here('data/tidy_data.csv`), where `here` starts at the position of your `.Rproj` file. **Never** write hard-coded paths that looks like this: `"~/Desktop/Studium/.../tidy_data.csv"` or `"C:/Users/.../tidy_data.csv"` (see @sec-wspmgmt).
 
 > Tip: Your results do not have to match the results from the paper. It is important that you make your code reproducible, aggregate the data as instructed, and interpret your results.
     

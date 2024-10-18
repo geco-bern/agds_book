@@ -1,10 +1,10 @@
-# Interpretable Machine Learning {#interpretableml}
+# Interpretable Machine Learning {#sec-interpretableml}
 
 A great advantage of machine learning models is that they can capture non-linear relationships and interactions between predictors, and that they are effective at making use of large data volumes for learning even faint but relevant patterns thanks to their flexibility (high variance). However, their flexibility, and thus complexity, comes with the trade-off that models are hard to interpret. They are essentially black-box models - we know what goes in and we know what comes out and we can make sure that predictions are reliable (as described in previous chapters). However, we don't understand what the model learned. In contrast, a linear regression model can be easily interpreted by looking at the fitted coefficients and their statistics. 
 
 This motivates *interpretable machine learning*. There are two types of model interpretation methods: model-specific and model-agnostic interpretation. A simple example for a model-specific interpretation method is to compare the *t*-values of the fitted coefficients in a least squares linear regression model. Here, we will focus on the model-agnostic machine learning model interpretation and cover two types of model interpretations: quantifying variable importance, and determining partial dependencies (functional relationships between the target variable and a single predictor, while all other predictors are held constant).
 
-We re-use the Random Forest model object which we created in Chapter \@ref(randomforest). As a reminder, we predicted GPP from different environmental variables such as temperature, short-wave radiation, vapor pressure deficit, and others.
+We re-use the Random Forest model object which we created in @sec-randomforest. As a reminder, we predicted GPP from different environmental variables such as temperature, short-wave radiation, vapor pressure deficit, and others.
 
 ```{r, message=FALSE}
 # The Random Forest model requires the following models to be loaded:
