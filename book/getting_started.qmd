@@ -15,7 +15,7 @@ Second, the tutorial of this chapter prepares you for your work on the remainder
 -   Organize your workspace for efficient data science projects.
 -   Have installed *git* and all R packages used throughout the book.
 
-Completing these points are essential before we go deeper into project management topics in Chapters @sec-openscience and @sec-codemgmt. Chapter @sec-programmingprimers will focus on how to code.
+Completing these points are essential before we go deeper into project management topics in @sec-openscience and @sec-codemgmt. @sec-programmingprimers will focus on how to code.
 
 ## Tutorial
 
@@ -498,7 +498,7 @@ Workspace management is crucial for efficient data science projects. Two aspects
 
 Think of all files that are linked to a certain data science workflow as belonging together into one project. A project is therefore a directory that contains the code and the files it produces. Different types of files go in different sub-directories with descriptive names. To keep an order and make your code useful also for others, always keep files of the same type in sub-directories that are always named the same way across projects. When creating a new project, you will find the same overall structure. A common structure is:
 
-- Keep `.R` files that implement a user-defined function (see Chapter @sec-programmingprimers) in a sub-directory `./R/`, and `.R` files that implement a workflow in a sub-directory `./analysis/`. Workflow implementations with a view to communication should be implemented in RMarkdown files.
+- Keep `.R` files that implement a user-defined function (see @sec-programmingprimers) in a sub-directory `./R/`, and `.R` files that implement a workflow in a sub-directory `./analysis/`. Workflow implementations with a view to communication should be implemented in RMarkdown files.
 - RMarkdown files are commonly kept in a sub-directory `./vignettes/` or in the main (top-level) project directory.
 - Keep figures produced by your code in a sub-directory `./figures/`
 - Keep data files produced by your code in a sub-directory `./data/`
@@ -533,7 +533,7 @@ In @sec-openscience and @sec-codemgmt, we will learn more about efficient code m
 
 *git* also lets you sync your local copy of a *git repository* with git service in the cloud, for example [GitHub](https://github.com/). This allows you to manage the same repository across computers and collaborate with multiple partners on the same repository.
 
-We will learn more about *git* in Chapter @sec-codemgmt. For now, follow instructions in Section @sec-setup to set yourself up with installing *git* and other required stuff on your computer and with a GitHub account. You will use this later in this course (and maybe throughout your career).
+We will learn more about *git* in @sec-codemgmt. For now, follow instructions in Section @sec-setup to set yourself up with installing *git* and other required stuff on your computer and with a GitHub account. You will use this later in this course (and maybe throughout your career).
 
 
 ### Setup {#sec-setup}
@@ -649,7 +649,7 @@ knitr::include_graphics("./figures/copy_ssh_repo.png")
 knitr::include_graphics("./figures/clone_repo_ssh.png")
 ```
 - With this, you're set up. If your R project `agds_report_yourname` is open, you should see a **Git** panel in RStudio (next to **Environment**) and also be able to use Git in the **Terminal** panel in RStudio. As mentioned above, we will start working with these tools in a few weeks and they will be a crucial part of the course.
-- You'll see a detailed explanation of the *git* workflows in Chapter @sec-codemgmt. For now, add your solutions to each report exercise into a separate RMarkdown file, placed in a subdirectory named `./vignettes/`. The first Report Exercise will be the one for Chapter @sec-datawrangling where you will be asked to implement your solutions in a file called `re_tidy.Rmd`. At that stage, your repository should look like this:
+- You'll see a detailed explanation of the *git* workflows in @sec-codemgmt. For now, add your solutions to each report exercise into a separate RMarkdown file, placed in a subdirectory named `./vignettes/`. The first Report Exercise will be the one for @sec-datawrangling where you will be asked to implement your solutions in a file called `re_tidy.Rmd`. At that stage, your repository should look like this:
 
 ```{r label="reportmarkdown", echo=FALSE, fig.cap="At first, the R Markdown for your report will look something like this.", out.width="75%", fig.align='center'}
 knitr::include_graphics("./figures/Rmd_report.png")

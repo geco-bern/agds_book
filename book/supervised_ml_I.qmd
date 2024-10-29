@@ -4,7 +4,7 @@
 
 ## Learning objectives
 
-Machine learning may appear magical. The ability of machine learning algorithms to detect patterns and make predictions is fascinating. However, several challenges have to be met in the process of formulating, training, and evaluating the models. In this and the next chapter (@sec-supervisedmlii), we will discuss some basics of supervised machine learning and how to achieve best predictive results.
+Machine learning may appear magical. The ability of machine learning algorithms to detect patterns and make predictions is fascinating. However, several challenges have to be met in the process of formulating, training, and evaluating the models. In this and the next (@sec-supervisedmlii), we will discuss some basics of supervised machine learning and how to achieve best predictive results.
 
 Basic steps of the implementation of supervised machine learning are introduced, including data splitting, pre-processing, model formulation, and the implementation of these steps using the {caret} and {recipes} R packages. A focus is put on learning the concept of the bias-variance trade-off and overfitting.
 

@@ -8,7 +8,7 @@ In this chapter you will learn how to manipluate and transform data, a curcial p
 
 You will learn how to:
 
--   read and transform tabulated data
+-   read and transform tabulated datas
 -   understand the 'tidy' data concept
 -   select variables
 -   Aggregate data
@@ -658,7 +658,7 @@ daily_fluxes_allsites
 
 ### Functional programming II
 
-Functions can be applied to a list of objects of any type. Therefore, `purrr::map()` is a powerful approach to "iterating" over multiple instances of the same object type and can be used for all sorts of tasks. In the following, list elements are data frames of daily data and the function `lm()` fits a linear regression model of GPP versus shortwave radiation to each sites' data. We'll learn more about fitting statistical models in R in Chapter @sec-regressionclassification.
+Functions can be applied to a list of objects of any type. Therefore, `purrr::map()` is a powerful approach to "iterating" over multiple instances of the same object type and can be used for all sorts of tasks. In the following, list elements are data frames of daily data and the function `lm()` fits a linear regression model of GPP versus shortwave radiation to each sites' data. We'll learn more about fitting statistical models in R in @sec-regressionclassification.
 
 ```{r}
 list_linmod <- purrr::map(list_df, ~lm(GPP_NT_VUT_REF ~ SW_IN_F, data = .))
