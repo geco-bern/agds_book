@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Applied Geodata Science - 4&nbsp; Data wrangling</title>
+<title>4&nbsp; Data wrangling – Applied Geodata Science</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -84,7 +84,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -93,29 +99,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<meta name="twitter:title" content="Applied Geodata Science - 4&nbsp; Data wrangling">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta name="twitter:title" content="4&nbsp; Data wrangling – Applied Geodata Science">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="data_wrangling_files/figure-html/unnamed-chunk-13-1.png">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 </head>
 
 <body class="nav-sidebar floating nav-fixed">
 
-
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
     <img src="./images/logo.png" alt="" class="navbar-logo">
     </a>
@@ -124,30 +156,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" rel="" target="" aria-current="page">
- <span class="menu-text">Home</span></a>
+    <a class="nav-link active" href="./index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
   </li>  
 </ul>
+          </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools tools-wide">
-    <a href="https://github.com/stineb/agds_book/" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/stineb/agds_book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
-      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
-      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="quarto-navigation-tool-dropdown-0">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
           <li>
             <a class="dropdown-item quarto-navbar-tools-item" href="https://twitter.com/intent/tweet?url=|url|">
-              <i class="bi bi-bi-twitter pe-1"></i>
+              <i class="bi bi-twitter pe-1"></i>
             Twitter
             </a>
           </li>
           <li>
             <a class="dropdown-item quarto-navbar-tools-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
-              <i class="bi bi-bi-facebook pe-1"></i>
+              <i class="bi bi-facebook pe-1"></i>
             Facebook
             </a>
           </li>
@@ -155,32 +188,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </div>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
-          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data_wrangling.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data wrangling</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
-        <i class="bi bi-search"></i>
-      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data_wrangling.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data wrangling</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
     </div>
   </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
-        <div class="mt-2 flex-shrink-0 align-items-center">
-        <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
-        </div>
-        </div>
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
@@ -269,6 +293,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./appendix.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Appendix</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -276,7 +306,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -300,10 +330,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#writing-data-to-csv" id="toc-writing-data-to-csv" class="nav-link" data-scroll-target="#writing-data-to-csv"><span class="header-section-number">4.3.11</span> Writing data to CSV</a></li>
   <li><a href="#combining-relational-data" id="toc-combining-relational-data" class="nav-link" data-scroll-target="#combining-relational-data"><span class="header-section-number">4.3.12</span> Combining relational data</a></li>
   </ul></li>
-  <li><a href="#extramaterialwrangling" id="toc-extramaterialwrangling" class="nav-link" data-scroll-target="#extramaterialwrangling"><span class="header-section-number">4.4</span> Extra material</a>
+  <li><a href="#sec-extramaterialwrangling" id="toc-sec-extramaterialwrangling" class="nav-link" data-scroll-target="#sec-extramaterialwrangling"><span class="header-section-number">4.4</span> Extra material</a>
   <ul class="collapse">
   <li><a href="#functional-programming-i" id="toc-functional-programming-i" class="nav-link" data-scroll-target="#functional-programming-i"><span class="header-section-number">4.4.1</span> Functional programming I</a></li>
-  <li><a href="#strings" id="toc-strings" class="nav-link" data-scroll-target="#strings"><span class="header-section-number">4.4.2</span> Strings</a></li>
+  <li><a href="#sec-strings" id="toc-sec-strings" class="nav-link" data-scroll-target="#sec-strings"><span class="header-section-number">4.4.2</span> Strings</a></li>
   <li><a href="#functional-programming-ii" id="toc-functional-programming-ii" class="nav-link" data-scroll-target="#functional-programming-ii"><span class="header-section-number">4.4.3</span> Functional programming II</a></li>
   </ul></li>
   <li><a href="#exerciseswrangling" id="toc-exerciseswrangling" class="nav-link" data-scroll-target="#exerciseswrangling"><span class="header-section-number">4.5</span> Exercises</a>
@@ -312,7 +342,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#aggregating" id="toc-aggregating" class="nav-link" data-scroll-target="#aggregating">Aggregating</a></li>
   <li><a href="#patterns-in-data-quality" id="toc-patterns-in-data-quality" class="nav-link" data-scroll-target="#patterns-in-data-quality">Patterns in data quality</a></li>
   </ul></li>
-  <li><a href="#retidy" id="toc-retidy" class="nav-link" data-scroll-target="#retidy"><span class="header-section-number">4.6</span> Report Exercise</a>
+  <li><a href="#sec-retidy" id="toc-sec-retidy" class="nav-link" data-scroll-target="#sec-retidy"><span class="header-section-number">4.6</span> Report Exercise</a>
   <ul class="collapse">
   <li><a href="#analyzing-changes-in-soil-organic-matter-during-elevated-co_2-experiments" id="toc-analyzing-changes-in-soil-organic-matter-during-elevated-co_2-experiments" class="nav-link" data-scroll-target="#analyzing-changes-in-soil-organic-matter-during-elevated-co_2-experiments">Analyzing changes in soil organic matter during elevated CO<span class="math inline">\(_2\)</span> experiments</a></li>
   <li><a href="#deliverables-for-the-report" id="toc-deliverables-for-the-report" class="nav-link" data-scroll-target="#deliverables-for-the-report">Deliverables for the report</a></li>
@@ -325,7 +355,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="datawrangling" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data wrangling</span></span></h1>
+<h1 class="title"><span id="sec-datawrangling" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data wrangling</span></span></h1>
 </div>
 
 
@@ -338,7 +368,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
+
 </header>
+
 
 <p><strong>Chapter lead author: Benjamin Stocker</strong></p>
 <section id="learning-objectives" class="level2" data-number="4.1">
@@ -346,7 +378,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In this chapter you will learn how to manipluate and transform data, a curcial part of the data science workflow.</p>
 <p>You will learn how to:</p>
 <ul>
-<li>read and transform tabulated data</li>
+<li>read and transform tabulated datas</li>
 <li>understand the ‘tidy’ data concept</li>
 <li>select variables</li>
 <li>Aggregate data</li>
@@ -369,7 +401,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="4.3" class="anchored" data-anchor-id="tutorial"><span class="header-section-number">4.3</span> Tutorial</h2>
 <p>Exploratory data analysis - the transformation, visualization, and modelling of data - is the central part of any (geo-) data science workflow and typically takes up a majority of the time we spend on a research project. The transformation of data often turns out to be particularly (and often surprisingly) time-demanding. Therefore, it is key to master typical steps of data transformation, and to implement them in a transparent fashion and efficiently - both in terms of robustness against coding errors (“bugs”) and in terms of code execution speed.</p>
 <p>We refer to data <em>wrangling</em> here to encompass the steps for preparing the data set <em>prior</em> to modelling - including, the combination of variables from different data sources, the removal of bad data, and the aggregation of data to the desired resolution or granularity (e.g., averaging over all time steps in a day, or over all replicates in a sample).</p>
-<p>In contrast, <em>pre-processing</em> refers to the additional steps that are either required by the the specific machine learning algorithm used with the data (e.g., centering and scaling for K-Nearest Neighbors or Neural Networks), the gap-filling of variables, or the transformation of variables guided by the resulting improvement of the predictive power of the machine learning model. Pre-processing is part of the modelling workflow and includes all steps that apply transformations that use parameters derived from the data. We will introduce and discuss data pre-processing in Chapter @ref(supervisedmli).</p>
+<p>In contrast, <em>pre-processing</em> refers to the additional steps that are either required by the the specific machine learning algorithm used with the data (e.g., centering and scaling for K-Nearest Neighbors or Neural Networks), the gap-filling of variables, or the transformation of variables guided by the resulting improvement of the predictive power of the machine learning model. Pre-processing is part of the modelling workflow and includes all steps that apply transformations that use parameters derived from the data. We will introduce and discuss data pre-processing in <a href="supervised_ml_I.html" class="quarto-xref"><span>Chapter 10</span></a>.</p>
 <section id="example-data" class="level3" data-number="4.3.1">
 <h3 data-number="4.3.1" class="anchored" data-anchor-id="example-data"><span class="header-section-number">4.3.1</span> Example data</h3>
 <p>The example data used in this chapter are parallel time series of (gaseous) CO<span class="math inline">\(_2\)</span> and water vapor exchange fluxes between the vegetation and the atmosphere, along with various meteorological variables measured in parallel. Quasi-continuous measurements of temporally changing gas exchange fluxes are obtained with the eddy covariance technique which relies on the parallel quantification of vertical wind speeds and gas concentrations.</p>
@@ -399,7 +431,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="reading-tabular-data" class="level3" data-number="4.3.3">
 <h3 data-number="4.3.3" class="anchored" data-anchor-id="reading-tabular-data"><span class="header-section-number">4.3.3</span> Reading tabular data</h3>
-<p>Tabular data are organised in rows and columns. R data frames are tabular data. As introduced in Chapter @ref(gettingstarted), each column can be regarded as a vector of a certain type. Each row contains the same number of columns and each column contains the same type of values (for example numeric, or characters). Each row can be regarded as a separate instance or data record - for example a record of simultaneously taken measurements of different variables, along with some attributes and meta information (e.g., the date). In Chapter @ref(datavariety), you will be introduced to other types of data.</p>
+<p>Tabular data are organised in rows and columns. R data frames are tabular data. As introduced in <a href="getting_started.html" class="quarto-xref"><span>Chapter 2</span></a>, each column can be regarded as a vector of a certain type. Each row contains the same number of columns and each column contains the same type of values (for example numeric, or characters). Each row can be regarded as a separate instance or data record - for example a record of simultaneously taken measurements of different variables, along with some attributes and meta information (e.g., the date). In <a href="data_variety.html" class="quarto-xref"><span>Chapter 6</span></a>, you will be introduced to other types of data.</p>
 <p>The most common format for tabular data are CSV (comma-separated-values), typically indicated by the file name suffix <code>.csv</code>. CSV is a text-based file format, readable across platforms and does not rely on proprietary software (as opposed to, for example, <code>.xlsx</code>). The first row in a CSV file typically specifies the name of the variable provided in the respective column.</p>
 <p>Let’s get started with working with our example data set and read it into R, as the variable <code>half_hourly_fluxes</code>. Note that the naming of variables can be important for keeping code legible. Chose intuitively understandable names that describe what the object represents (as done here).</p>
 <p>To import the data into the R environment, we use the function <code>read_csv()</code> from the {readr} package (part of tidyverse). In other R code, you will also encounter the base R <code>read.csv()</code> function. However, <code>read_csv()</code> is much faster and reads data into a tidyverse-data frame (a <em>tibble</em>) which has some useful additional characteristics, on top of a common R data frame. For example, <em>tibbles</em> generate a nicely readable output when printing the object as is done below.</p>
@@ -559,11 +591,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"l"</span></span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="data_wrangling_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="data_wrangling_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <blockquote class="blockquote">
-<p>Note: <code>plot()</code> is the very basic of plotting data. In Chapter @ref(datavis), you will get introduced to additional methods for visualising data. The argument <code>type = "l"</code> indicates that we want a line plot, rather than points.</p>
+<p>Note: <code>plot()</code> is the very basic of plotting data. In <a href="data_vis.html" class="quarto-xref"><span>Chapter 5</span></a>, you will get introduced to additional methods for visualising data. The argument <code>type = "l"</code> indicates that we want a line plot, rather than points.</p>
 </blockquote>
 <p>Over the course of an entire year, shortwave incoming radiation varies with the seasons, peaking in summer:</p>
 <div class="cell">
@@ -573,7 +609,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"l"</span></span>
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="data_wrangling_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="data_wrangling_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>All data frames have two dimensions, rows and columns. Our data frame is organised along half-hourly time steps in rows. As described above, these time steps belong to different days, months, and years, although these “axes of variation” are not reflected by the structure of the data frame object itself and we do not have columns that indicate the day, month or year of each half-hourly time step. This would be redundant information since the date-time objects of columns <code>TIMESTAMP_*</code> contain this information. However, for certain applications, it may be useful to separate information regarding these axes of variation more explicitly. For example by:</p>
@@ -663,7 +703,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="./figures/tidy_data.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Rules for tidy data. Figure from <a href="https://r4ds.had.co.nz/tidy-data.html">Wickham and Grolemund (2017)</a></figcaption>
+<figcaption>Rules for tidy data. Figure from <a href="https://r4ds.had.co.nz/tidy-data.html">Wickham and Grolemund (2017)</a></figcaption>
 </figure>
 </div>
 </div>
@@ -689,7 +729,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 # ℹ 26 more rows</code></pre>
 </div>
 </div>
-<p>This corresponds to the format of <code>co2_concentration</code> and is tidy. A long format of data frames is required to visualise data using the plotting functions of the {ggplot2} package which will be introduced in Chapter @ref(datavis).</p>
+<p>This corresponds to the format of <code>co2_concentration</code> and is tidy. A long format of data frames is required to visualise data using the plotting functions of the {ggplot2} package which will be introduced in <a href="data_vis.html" class="quarto-xref"><span>Chapter 5</span></a>.</p>
 <p>Either way, for certain applications, it may be advantageous to work with a wide format. We can convert from a long to a wide format by:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>co2_concentration <span class="sc">|&gt;</span> </span>
@@ -729,7 +769,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(daily_fluxes[<span class="dv">1</span><span class="sc">:</span><span class="dv">365</span>,]<span class="sc">$</span>date, daily_fluxes[<span class="dv">1</span><span class="sc">:</span><span class="dv">365</span>,]<span class="sc">$</span>SW_IN_F, <span class="at">type =</span> <span class="st">"l"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="data_wrangling_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="data_wrangling_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>We can also apply multiple aggregation functions to different variables simultaneously. In the example below, we aggregate half-hourly data to daily data by…</p>
@@ -796,7 +840,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 # ℹ 1,086 more rows</code></pre>
 </div>
 </div>
-<p>Here, the data frame has one row per date and therefore the same number of rows as the data frame <code>daily_fluxes</code>, but the data itself is not reduced by a summarising function. Instead, the data are kept at the half-hourly level, but it’s nested inside the new column <code>data</code>, which now contains a list of half-hourly data frames for each day. This is just a brief perspective of what nesting is about. More is explained in Section @ref(extramaterialwrangling). More comprehensive tutorials on nesting and functional programming are provided in <a href="https://dcl-prog.stanford.edu/">Altman, Behrman and Wickham (2021)</a> or in <a href="https://r4ds.had.co.nz/iteration.html">Wickham and Grolemund (2017), Chapter 21</a>.</p>
+<p>Here, the data frame has one row per date and therefore the same number of rows as the data frame <code>daily_fluxes</code>, but the data itself is not reduced by a summarising function. Instead, the data are kept at the half-hourly level, but it’s nested inside the new column <code>data</code>, which now contains a list of half-hourly data frames for each day. This is just a brief perspective of what nesting is about. More is explained in Section <a href="#sec-extramaterialwrangling" class="quarto-xref"><span>Section 4.4</span></a>. More comprehensive tutorials on nesting and functional programming are provided in <a href="https://dcl-prog.stanford.edu/">Altman, Behrman and Wickham (2021)</a> or in <a href="https://r4ds.had.co.nz/iteration.html">Wickham and Grolemund (2017), Chapter 21</a>.</p>
 </section>
 <section id="data-cleaning" class="level3" data-number="4.3.10">
 <h3 data-number="4.3.10" class="anchored" data-anchor-id="data-cleaning"><span class="header-section-number">4.3.10</span> Data cleaning</h3>
@@ -824,16 +868,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>An entry like <code>&gt;10 m</code> is not a friend of a data scientist. Here, we have three pieces of information: <code>&gt;</code> as in “greater than”, <code>10</code>, and <code>m</code> indicating the units. A machine-readable format would be obtained by creating separate columns for each piece of information. The <code>&gt;</code> should be avoided already at the stage of recording the data. Here, we may have to find a solution for encoding it in a machine readable manner (see <a href="#exerciseswrangling">Exercises</a>).</li>
 </ul>
 <!-- -   Can you think of more such examples? (-\> Exercises)  -->
-<p>String manipulations are usually required for cleaning data. The Section @ref(#strings) below demonstrates some simple examples.</p>
-<p>Note that a majority of machine learning algorithms and other statistical model types require all data to be numeric. Methods exist to convert categorical data into numeric data, as we will learn later. We re-visit data cleaning in the form of data <em>pre-processing</em> as part of the modelling workflow in Chapter @ref(supervisedmli).</p>
+<p>String manipulations are usually required for cleaning data. The <a href="#sec-strings" class="quarto-xref"><span>Section 4.4.2</span></a> below demonstrates some simple examples.</p>
+<p>Note that a majority of machine learning algorithms and other statistical model types require all data to be numeric. Methods exist to convert categorical data into numeric data, as we will learn later. We re-visit data cleaning in the form of data <em>pre-processing</em> as part of the modelling workflow in <a href="supervised_ml_I.html" class="quarto-xref"><span>Chapter 10</span></a>.</p>
 </section>
-<section id="baddata" class="level4" data-number="4.3.10.2">
-<h4 data-number="4.3.10.2" class="anchored" data-anchor-id="baddata"><span class="header-section-number">4.3.10.2</span> Bad data</h4>
+<section id="sec-baddata" class="level4" data-number="4.3.10.2">
+<h4 data-number="4.3.10.2" class="anchored" data-anchor-id="sec-baddata"><span class="header-section-number">4.3.10.2</span> Bad data</h4>
 <p>Data may be “bad” for different reasons, including sensor error, human error, a data point representing a different population, or unsuitable measurement conditions. In this sense, data are “bad” if they don’t represent what they are assumed by the user to represent. Its presence in analyses and modelling may undermine the model skill or even lead to spurious results. A goal of data cleaning typically is to remove bad data. But how to detect them? And how safe is it to remove them?</p>
 <p>A diversity of processes may generate bad data and it is often not possible to formulate rules and criteria for their identification <em>a priori</em>. Therefore, an understanding of the data and the data generation processes is important for the identification and treatment of bad data. Often, such an understanding is gained by repeated exploratory data analysis cycles, involving the visualization, transformation, and analysis of the data.</p>
 <p>Ideally, information about the quality of the data are provided as part of the dataset. Also other meta-information (e.g., sensor type, human recording the data, environmental conditions during the data collection) may be valuable for data cleaning purposes. In our example dataset, the column with suffices <code>_QC</code> provide such information (see ‘Example data’ section above) and an example for their use in data cleaning is given further below.</p>
-<p>Bad data may come in the form of <em>outliers</em>, which are commonly defined based on their value with respect to the <em>distribution</em> of all values of the same variable in a dataset. Hence, their identification most commonly relies on quantifying their distance from the center of the variable’s empirical distribution. The default <code>boxplot()</code> plotting function in R (which we will learn about more in Chapter @ref(datavis)) shows the median (bold line in the center), the upper and lower quartiles (corresponding to the 25% and the 75% quantiles, often referred to as <span class="math inline">\(Q_1\)</span> and <span class="math inline">\(Q_3\)</span> , given by the upper and lower edge of the box plot) and the range of <span class="math inline">\(( Q_1 - 1.5 (Q_3 - Q_1), Q_3 + 1.5 (Q_3 - Q_1))\)</span>. Any point outside this range is plotted by a circle and labeled an “outlier”. However, this definition is very restrictive and may lead to a false labeling of outliers, in particular if they are drawn from a distribution with a fat tail or from asymmetrical distributions.</p>
-<p>Outliers may also be identified via multivariate distributions. We will re-visit such methods later, in Chapter @ref(regressionclassification). For certain applications, outliers or <em>anomalies</em> may be the target of the investigation, not the noise in the data. This has spurred the field of <a href="https://en.wikipedia.org/wiki/Anomaly_detection"><em>anomaly detection</em></a> which relies on machine learning algorithms for determining whether a value is anomalous, given a set of covariates.</p>
+<p>Bad data may come in the form of <em>outliers</em>, which are commonly defined based on their value with respect to the <em>distribution</em> of all values of the same variable in a dataset. Hence, their identification most commonly relies on quantifying their distance from the center of the variable’s empirical distribution. The default <code>boxplot()</code> plotting function in R (which we will learn about more in <a href="data_vis.html" class="quarto-xref"><span>Chapter 5</span></a>) shows the median (bold line in the center), the upper and lower quartiles (corresponding to the 25% and the 75% quantiles, often referred to as <span class="math inline">\(Q_1\)</span> and <span class="math inline">\(Q_3\)</span> , given by the upper and lower edge of the box plot) and the range of <span class="math inline">\(( Q_1 - 1.5 (Q_3 - Q_1), Q_3 + 1.5 (Q_3 - Q_1))\)</span>. Any point outside this range is plotted by a circle and labeled an “outlier”. However, this definition is very restrictive and may lead to a false labeling of outliers, in particular if they are drawn from a distribution with a fat tail or from asymmetrical distributions.</p>
+<p>Outliers may also be identified via multivariate distributions. We will re-visit such methods later, in <a href="regression_classification.html" class="quarto-xref"><span>Chapter 9</span></a>. For certain applications, outliers or <em>anomalies</em> may be the target of the investigation, not the noise in the data. This has spurred the field of <a href="https://en.wikipedia.org/wiki/Anomaly_detection"><em>anomaly detection</em></a> which relies on machine learning algorithms for determining whether a value is anomalous, given a set of covariates.</p>
 <p>Sensor error or algorithm error may generate spurious values, identified, for example when a continuous variable attains the numerically identical value with a spuriously high frequency.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>half_hourly_fluxes<span class="sc">$</span>GPP_NT_VUT_REF <span class="sc">|&gt;</span> </span>
@@ -853,7 +897,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h4 data-number="4.3.10.3" class="anchored" data-anchor-id="handling-missing-data"><span class="header-section-number">4.3.10.3</span> Handling missing data</h4>
 <p>The question about when data are “bad” and whether to remove it is often critical. Such decisions are important to keep track of and should be reported as transparently as possible in publications. In reality, where the data generation process may start in the field with actual human beings writing notes in a lab book, and where the human collecting the data is often not the same as the human analyzing the data or writing the paper, it’s often more difficult to keep track of such decisions. As a general principle, it is advisable to design data records such that decisions made during the data collection process remain transparent throughout all stages of the workflow and that sufficient information be collected to enable later revisions of particularly critical decisions. In practice, this means that the removal of data and entire rows should be avoided and implemented only at the very last step if necessary (e.g., when passing the data into a model fitting function). Instead, information about whether data are bad should be kept in a separate, categorical, variable (a <em>quality control</em> variable, like <code>*_QC</code> variables in our example data <code>half_hourly_fluxes</code>).</p>
 <p>Data may be missing for several reasons. Some yield random patterns of missing data, others not. In the latter case, we can speak of <em>informative missingness</em> (<a href="http://www.feat.engineering/">Kuhn and Johnson, 2019</a>) and its information can be used for modelling. For categorical data, we may replace such data with <code>"none"</code> (instead of <code>NA</code>). Some machine learning algorithms (mainly tree-based methods, e.g., Random Forest) can handle missing values. However, when comparing the performance of alternative ML algorithms, they should be tested with the same data and removing missing data should be done beforehand.</p>
-<p>Most machine learning algorithms require missing values to be removed. That is, if any of the cells in one row has a missing value, the entire cell gets removed. This generally leads to a loss of information contained in the remaining variables. Methods exist to <em>impute</em> missing values in order to avoid this information loss. However, the gain of data imputation has to be traded off against effects of associating the available variables with the imputed (knowingly wrong) values, and effects of <em>data leakage</em> have to be considered. Data imputation as part of the modelling process will be dealt with in Chapter @ref(supervisedmli).</p>
+<p>Most machine learning algorithms require missing values to be removed. That is, if any of the cells in one row has a missing value, the entire cell gets removed. This generally leads to a loss of information contained in the remaining variables. Methods exist to <em>impute</em> missing values in order to avoid this information loss. However, the gain of data imputation has to be traded off against effects of associating the available variables with the imputed (knowingly wrong) values, and effects of <em>data leakage</em> have to be considered. Data imputation as part of the modelling process will be dealt with in <a href="supervised_ml_I.html" class="quarto-xref"><span>Chapter 10</span></a>.</p>
 <p>In our example dataset, some values of <code>SWC_F_MDS_*</code> are given as <code>-9999</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>half_hourly_fluxes <span class="sc">|&gt;</span> </span>
@@ -903,10 +947,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">warn_large_data =</span> <span class="cn">FALSE</span></span>
 <span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="data_wrangling_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="data_wrangling_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
 </div>
-<p>For many applications, we want to filter the data so that the values of particular variables satisfy certain conditions. The {dplyr} function used for such tasks is <code>filter()</code>. As argument, it takes the expressions that specify the criterion for filtering using logical operators (<code>&gt;, &gt;=, &lt;, ==, !-, ...</code>, see Chapter @ref(gettingstarted)). Multiple filtering criteria can be combined with logical (boolean) operators:</p>
+</div>
+<p>For many applications, we want to filter the data so that the values of particular variables satisfy certain conditions. The {dplyr} function used for such tasks is <code>filter()</code>. As argument, it takes the expressions that specify the criterion for filtering using logical operators (<code>&gt;, &gt;=, &lt;, ==, !-, ...</code>, see <a href="getting_started.html" class="quarto-xref"><span>Chapter 2</span></a>). Multiple filtering criteria can be combined with logical (boolean) operators:</p>
 <ul>
 <li><code>&amp;</code>: logical AND</li>
 <li><code>|</code>: logical OR</li>
@@ -942,7 +990,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(half_hourly_fluxes, <span class="at">file =</span> <span class="st">"data/FLX_CH-Lae_FLUXNET2015_FULLSET_HH_2004-2006_CLEAN.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <blockquote class="blockquote">
-<p>Note: Making a file publicly available as a <code>.rds</code> or <code>.RData</code> file (explained in Chapter @ref(gettingstarted)) violates the open science principles (introduced in Chapter @ref(openscience)). These two formats make it very easy to save R objects related to your analysis project, but are not adequate to save <em>data</em>. Therefore, whenever possible, save your data in a format that is readable across platforms without requiring proprietary software. Hence use <code>write_csv()</code> from {readr} whenever possible. We will encounter other non-proprietary formats that let you save and share more complex data structures in Chapter @ref(datavariety).</p>
+<p>Note: Making a file publicly available as a <code>.rds</code> or <code>.RData</code> file (explained in <a href="getting_started.html" class="quarto-xref"><span>Chapter 2</span></a>) violates the open science principles (introduced in <a href="open_science.html" class="quarto-xref"><span>Chapter 7</span></a>). These two formats make it very easy to save R objects related to your analysis project, but are not adequate to save <em>data</em>. Therefore, whenever possible, save your data in a format that is readable across platforms without requiring proprietary software. Hence use <code>write_csv()</code> from {readr} whenever possible. We will encounter other non-proprietary formats that let you save and share more complex data structures in <a href="data_variety.html" class="quarto-xref"><span>Chapter 6</span></a>.</p>
 </blockquote>
 </section>
 <section id="combining-relational-data" class="level3" data-number="4.3.12">
@@ -1082,8 +1130,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Other variants of <code>*_join()</code> are available as described <a href="https://r4ds.had.co.nz/relational-data.html">here</a>.</p>
 </section>
 </section>
-<section id="extramaterialwrangling" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="extramaterialwrangling"><span class="header-section-number">4.4</span> Extra material</h2>
+<section id="sec-extramaterialwrangling" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="sec-extramaterialwrangling"><span class="header-section-number">4.4</span> Extra material</h2>
 <section id="functional-programming-i" class="level3" data-number="4.4.1">
 <h3 data-number="4.4.1" class="anchored" data-anchor-id="functional-programming-i"><span class="header-section-number">4.4.1</span> Functional programming I</h3>
 <p>Above, we read a CSV table into R and applied several data transformation steps. In practice, we often have to apply the same data transformation steps repeatedly over a set of similar objects. This <em>extra material</em> section outlines an example workflow for demonstrating how to efficiently work with lists of similar objects - in particular, lists of data frames.</p>
@@ -1185,12 +1233,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb80-9"><a href="#cb80-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">warn_large_data =</span> <span class="cn">FALSE</span></span>
 <span id="cb80-10"><a href="#cb80-10" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="data_wrangling_files/figure-html/unnamed-chunk-47-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="data_wrangling_files/figure-html/unnamed-chunk-47-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
-<section id="strings" class="level3" data-number="4.4.2">
-<h3 data-number="4.4.2" class="anchored" data-anchor-id="strings"><span class="header-section-number">4.4.2</span> Strings</h3>
+<section id="sec-strings" class="level3" data-number="4.4.2">
+<h3 data-number="4.4.2" class="anchored" data-anchor-id="sec-strings"><span class="header-section-number">4.4.2</span> Strings</h3>
 <p>The column <code>siteid</code> currently contains strings specifying the full paths of the files that were read in earlier. The next task is to extract the site name from these strings. The file names follow a clear pattern (this also highlights why naming files wisely can often make life a lot simpler).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>daily_fluxes_allsites<span class="sc">$</span>siteid <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1243,7 +1295,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="functional-programming-ii" class="level3" data-number="4.4.3">
 <h3 data-number="4.4.3" class="anchored" data-anchor-id="functional-programming-ii"><span class="header-section-number">4.4.3</span> Functional programming II</h3>
-<p>Functions can be applied to a list of objects of any type. Therefore, <code>purrr::map()</code> is a powerful approach to “iterating” over multiple instances of the same object type and can be used for all sorts of tasks. In the following, list elements are data frames of daily data and the function <code>lm()</code> fits a linear regression model of GPP versus shortwave radiation to each sites’ data. We’ll learn more about fitting statistical models in R in Chapter @ref(regressionclassification).</p>
+<p>Functions can be applied to a list of objects of any type. Therefore, <code>purrr::map()</code> is a powerful approach to “iterating” over multiple instances of the same object type and can be used for all sorts of tasks. In the following, list elements are data frames of daily data and the function <code>lm()</code> fits a linear regression model of GPP versus shortwave radiation to each sites’ data. We’ll learn more about fitting statistical models in R in <a href="regression_classification.html" class="quarto-xref"><span>Chapter 9</span></a>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>list_linmod <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">map</span>(list_df, <span class="sc">~</span><span class="fu">lm</span>(GPP_NT_VUT_REF <span class="sc">~</span> SW_IN_F, <span class="at">data =</span> .))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1392,7 +1444,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="exerciseswrangling" class="level2" data-number="4.5">
 <h2 data-number="4.5" class="anchored" data-anchor-id="exerciseswrangling"><span class="header-section-number">4.5</span> Exercises</h2>
 <blockquote class="blockquote">
-<p><em>Hint</em>: For all exercises remember the resources we provided on finding help in section @ref(findinghelp).</p>
+<p><em>Hint</em>: For all exercises remember the resources we provided on finding help in section <a href="programming_primers.html#sec-findinghelp" class="quarto-xref"><span>Section 3.2.3</span></a>.</p>
 </blockquote>
 <section id="star-wars" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="star-wars">Star wars</h3>
@@ -1428,8 +1480,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Perform an aggregation of the half-hourly GPP data (variable <code>GPP_NT_VUT_REF</code>) to daily means of the unmodified data read from file <code>FLX_CH-Lae_FLUXNET2015_FULLSET_HH_2004-2006.csv</code>, and from cleaned data where only measured (not gap-filled) data is kept. This yields two data frames with daily GPP data. Calculate the overall mean GPP for the two data frames (across all days in the data frame). Are the overall mean GPP values equal? If not, why?</p>
 </section>
 </section>
-<section id="retidy" class="level2" data-number="4.6">
-<h2 data-number="4.6" class="anchored" data-anchor-id="retidy"><span class="header-section-number">4.6</span> Report Exercise</h2>
+<section id="sec-retidy" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="sec-retidy"><span class="header-section-number">4.6</span> Report Exercise</h2>
 <section id="analyzing-changes-in-soil-organic-matter-during-elevated-co_2-experiments" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="analyzing-changes-in-soil-organic-matter-during-elevated-co_2-experiments">Analyzing changes in soil organic matter during elevated CO<span class="math inline">\(_2\)</span> experiments</h3>
 <p>Open Science requires that data underlying published research articles is made available upon publication of the article. A separate aspect is the format of the shared data. Is it provided in an open-access data format? How easy is it to use the data for your own analyses? In this exercise, you will encounter data that was made freely available, but not in an open access format. Although it is “nice-looking” data, you will encounter that it is not tidy.</p>
@@ -1458,10 +1510,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="deliverables-for-the-report" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="deliverables-for-the-report">Deliverables for the report</h3>
-<p>A key learning of this course is that you know how to create reproducible workflows and we pay a lot of attention on this during the assessment. You will learn more about the specific aspects to do so in Chapters @ref(openscience) and @ref(codemgmt). So, if the following instructions for submitting this report exercise may sound cryptic, hang tight! It will make more sense as you work through this course.</p>
-<p>You have to submit all report exercises via your GitHub repository that you created in @ref(setupreport). For now, save this report exercise as a RMarkdown file with the name <code>re_tidy.Rmd</code> and place that file in a sub-directory called <code>vignettes</code> (a directory is simply a folder), which is located in your project directory (in full notation that means save your RMarkdown as <code>./vignettes/re_tidy.Rmd</code>). Additionally, produce a HTML version of your solution by knitting your RMarkdown file (see the <code>Knit</code> command in the panel below the files tabs in RStudio). Save this HTML file in the same <code>vignettes</code> directory (<code>./vignettes/re_tidy.html</code>). For your cleaned dataset, pick a sensible name and put it into a sub-direcory called <code>./data</code>. As with all other report exercises, make sure that your work is reproducible, for example, by letting another student download your repository from GitHub and knit your RMarkdown files on their computer.</p>
+<p>A key learning of this course is that you know how to create reproducible workflows and we pay a lot of attention on this during the assessment. You will learn more about the specific aspects to do so in <a href="open_science.html" class="quarto-xref"><span>Chapter 7</span></a> and <a href="code_management.html" class="quarto-xref"><span>Chapter 8</span></a>. So, if the following instructions for submitting this report exercise may sound cryptic, hang tight! It will make more sense as you work through this course.</p>
+<p>You have to submit all report exercises via your GitHub repository that you created in <a href="getting_started.html#sec-setupreport" class="quarto-xref"><span>Section 2.2.8.4</span></a>. For now, save this report exercise as a RMarkdown file with the name <code>re_tidy.Rmd</code> and place that file in a sub-directory called <code>vignettes</code> (a directory is simply a folder), which is located in your project directory (in full notation that means save your RMarkdown as <code>./vignettes/re_tidy.Rmd</code>). Additionally, produce a HTML version of your solution by knitting your RMarkdown file (see the <code>Knit</code> command in the panel below the files tabs in RStudio). Save this HTML file in the same <code>vignettes</code> directory (<code>./vignettes/re_tidy.html</code>). For your cleaned dataset, pick a sensible name and put it into a sub-direcory called <code>./data</code>. As with all other report exercises, make sure that your work is reproducible, for example, by letting another student download your repository from GitHub and knit your RMarkdown files on their computer.</p>
 <blockquote class="blockquote">
-<p><strong>Important</strong>: Structure your RMarkdown so that you first load necessary libraries, load your data and then write down your solution. <strong>Remember to access files with relative paths and not with hard-coded paths</strong>. So, access your file via <code>here::here('data/tidy_data.csv</code>), where <code>here</code> starts at the position of your <code>.Rproj</code> file. <strong>Never</strong> write hard-coded paths that looks like this: <code>"~/Desktop/Studium/.../tidy_data.csv"</code> or <code>"C:/Users/.../tidy_data.csv"</code> (see Chapter @ref(wspmgmt)).</p>
+<p><strong>Important</strong>: Structure your RMarkdown so that you first load necessary libraries, load your data and then write down your solution. <strong>Remember to access files with relative paths and not with hard-coded paths</strong>. So, access your file via <code>here::here('data/tidy_data.csv</code>), where <code>here</code> starts at the position of your <code>.Rproj</code> file. <strong>Never</strong> write hard-coded paths that looks like this: <code>"~/Desktop/Studium/.../tidy_data.csv"</code> or <code>"C:/Users/.../tidy_data.csv"</code> (see <a href="getting_started.html#sec-wspmgmt" class="quarto-xref"><span>Section 2.2.7</span></a>).</p>
 </blockquote>
 <blockquote class="blockquote">
 <p>Tip: Your results do not have to match the results from the paper. It is important that you make your code reproducible, aggregate the data as instructed, and interpret your results.</p>
@@ -1516,6 +1568,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       } else {
         el.classList.add('notransition');
       }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
     }
   }
   const toggleColorMode = (alternate) => {
@@ -1584,13 +1663,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1625,18 +1706,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1668,11 +1738,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1682,8 +1791,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1695,7 +1813,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1739,6 +1980,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1764,6 +2006,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1825,17 +2093,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./programming_primers.html" class="pagination-link">
+      <a href="./programming_primers.html" class="pagination-link" aria-label="Programming primers">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Programming primers</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./data_vis.html" class="pagination-link">
+      <a href="./data_vis.html" class="pagination-link" aria-label="Data visualisation">
         <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data visualisation</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
+
 
 
 

@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Applied Geodata Science - 2&nbsp; Getting started</title>
+<title>2&nbsp; Getting started – Applied Geodata Science</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -84,7 +84,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -93,29 +99,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<meta name="twitter:title" content="Applied Geodata Science - 2&nbsp; Getting started">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta name="twitter:title" content="2&nbsp; Getting started – Applied Geodata Science">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="./figures/RStudio_interface_screenshot.png">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 </head>
 
 <body class="nav-sidebar floating nav-fixed">
 
-
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
     <img src="./images/logo.png" alt="" class="navbar-logo">
     </a>
@@ -124,30 +156,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" rel="" target="" aria-current="page">
- <span class="menu-text">Home</span></a>
+    <a class="nav-link active" href="./index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
   </li>  
 </ul>
+          </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools tools-wide">
-    <a href="https://github.com/stineb/agds_book/" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/stineb/agds_book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
-      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
-      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="quarto-navigation-tool-dropdown-0">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
           <li>
             <a class="dropdown-item quarto-navbar-tools-item" href="https://twitter.com/intent/tweet?url=|url|">
-              <i class="bi bi-bi-twitter pe-1"></i>
+              <i class="bi bi-twitter pe-1"></i>
             Twitter
             </a>
           </li>
           <li>
             <a class="dropdown-item quarto-navbar-tools-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
-              <i class="bi bi-bi-facebook pe-1"></i>
+              <i class="bi bi-facebook pe-1"></i>
             Facebook
             </a>
           </li>
@@ -155,32 +188,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </div>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
-          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./getting_started.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting started</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
-        <i class="bi bi-search"></i>
-      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./getting_started.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting started</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
     </div>
   </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
-        <div class="mt-2 flex-shrink-0 align-items-center">
-        <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
-        </div>
-        </div>
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
@@ -269,6 +293,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./appendix.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Appendix</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -276,7 +306,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -291,9 +321,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#r-environment" id="toc-r-environment" class="nav-link" data-scroll-target="#r-environment"><span class="header-section-number">2.2.3</span> R environment</a></li>
   <li><a href="#libraries" id="toc-libraries" class="nav-link" data-scroll-target="#libraries"><span class="header-section-number">2.2.4</span> Libraries</a></li>
   <li><a href="#r-scripts" id="toc-r-scripts" class="nav-link" data-scroll-target="#r-scripts"><span class="header-section-number">2.2.5</span> R scripts</a></li>
-  <li><a href="#rmarkdown" id="toc-rmarkdown" class="nav-link" data-scroll-target="#rmarkdown"><span class="header-section-number">2.2.6</span> R Markdown</a></li>
-  <li><a href="#wspmgmt" id="toc-wspmgmt" class="nav-link" data-scroll-target="#wspmgmt"><span class="header-section-number">2.2.7</span> Workspace management</a></li>
-  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup"><span class="header-section-number">2.2.8</span> Setup</a></li>
+  <li><a href="#sec-rmarkdown" id="toc-sec-rmarkdown" class="nav-link" data-scroll-target="#sec-rmarkdown"><span class="header-section-number">2.2.6</span> R Markdown</a></li>
+  <li><a href="#sec-wspmgmt" id="toc-sec-wspmgmt" class="nav-link" data-scroll-target="#sec-wspmgmt"><span class="header-section-number">2.2.7</span> Workspace management</a></li>
+  <li><a href="#sec-setup" id="toc-sec-setup" class="nav-link" data-scroll-target="#sec-setup"><span class="header-section-number">2.2.8</span> Setup</a></li>
   </ul></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">2.3</span> Exercises</a>
   <ul class="collapse">
@@ -313,7 +343,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="gettingstarted" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting started</span></span></h1>
+<h1 class="title"><span id="sec-gettingstarted" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting started</span></span></h1>
 </div>
 
 
@@ -326,7 +356,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
+
 </header>
+
 
 <p><strong>Chapter lead author: Pepa Arán</strong></p>
 <section id="learning-objectives" class="level2" data-number="2.1">
@@ -337,12 +369,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Know basic R objects and classes.</li>
 <li>Understand how R interacts with files in your computer.</li>
 </ul>
-<p>Second, the tutorial of this chapter prepares you for your work on the remainder of this course by setting up all the necessary infrastructure. Also experienced R users should follow respective tutorial sections: Sec. @ref(rmarkdown), @ref(wspmgmt), and @ref(setup)). You will:</p>
+<p>Second, the tutorial of this chapter prepares you for your work on the remainder of this course by setting up all the necessary infrastructure. Also experienced R users should follow respective tutorial sections: <a href="#sec-rmarkdown" class="quarto-xref"><span>Section 2.2.6</span></a>, <a href="#sec-wspmgmt" class="quarto-xref"><span>Section 2.2.7</span></a>, and <a href="#sec-setup" class="quarto-xref"><span>Section 2.2.8</span></a>). You will:</p>
 <ul>
 <li>Organize your workspace for efficient data science projects.</li>
 <li>Have installed <em>git</em> and all R packages used throughout the book.</li>
 </ul>
-<p>Completing these points are essential before we go deeper into project management topics in Chapters @ref(openscience) and @ref(codemgmt). Chapter @ref(programmingprimers) will focus on how to code.</p>
+<p>Completing these points are essential before we go deeper into project management topics in <a href="open_science.html" class="quarto-xref"><span>Chapter 7</span></a> and <a href="code_management.html" class="quarto-xref"><span>Chapter 8</span></a>. <a href="programming_primers.html" class="quarto-xref"><span>Chapter 3</span></a> will focus on how to code.</p>
 </section>
 <section id="tutorial" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="tutorial"><span class="header-section-number">2.2</span> Tutorial</h2>
@@ -365,7 +397,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="./figures/RStudio_interface_screenshot.png" class="img-fluid figure-img" style="width:75.0%"></p>
-<figcaption class="figure-caption">RStudio interface.</figcaption>
+<figcaption>RStudio interface.</figcaption>
 </figure>
 </div>
 </div>
@@ -738,7 +770,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1] 4 3</code></pre>
 </div>
 </div>
-<p>There are many more things you can do with data frames. Since they are central to analyzing data with R, we have dedicated all of Chapter @ref(datawrangling) to teach you how to work with data frames in a tidy way with the <a href="https://www.tidyverse.org/">{tidyverse}</a> collection of packages.</p>
+<p>There are many more things you can do with data frames. Since they are central to analyzing data with R, we have dedicated all of Chapter <a href="data_wrangling.html" class="quarto-xref"><span>Chapter 4</span></a> to teach you how to work with data frames in a tidy way with the <a href="https://www.tidyverse.org/">{tidyverse}</a> collection of packages.</p>
 </section>
 <section id="functions" class="level4" data-number="2.2.2.6">
 <h4 data-number="2.2.2.6" class="anchored" data-anchor-id="functions"><span class="header-section-number">2.2.2.6</span> Functions</h4>
@@ -749,7 +781,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1] 35.25</code></pre>
 </div>
 </div>
-<p>Functions are also R objects and have class <code>"function"</code>. Writing your own functions is an essential part of good programming and will be introduced in Chapter @ref(programmingprimers).</p>
+<p>Functions are also R objects and have class <code>"function"</code>. Writing your own functions is an essential part of good programming and will be introduced in Chapter <a href="programming_primers.html" class="quarto-xref"><span>Chapter 3</span></a>.</p>
 </section>
 <section id="missing-values" class="level4" data-number="2.2.2.7">
 <h4 data-number="2.2.2.7" class="anchored" data-anchor-id="missing-values"><span class="header-section-number">2.2.2.7</span> Missing values</h4>
@@ -792,7 +824,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(df, df_small, <span class="at">file =</span> <span class="st">"./data/data_frames.RData"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To tell the function where the data is located, pass the data’s <em>path</em> as an argument. You can either use an <em>absolute path</em>, starting from <code>C:/</code> on a Windows computer or <code>~/</code> on a Mac or Linux. Or, alternatively, you can provide a <em>relative path</em>, where <code>./</code> points to the present working directory (like above) and <code>../</code> is one level up, or <code>../../</code> is two levels up, etc. We recommend that you work with R projects and use relative paths, because the working directory is set to the root directory of the R project and relative paths will also work on another person’s computer, helping with reproducibility.</p>
-<p>In the example above, we provided a relative path, starting at the current working directory (<code>./</code>). The file <code>data_frames.RData</code> sits in a sub-directory of the current working directory, called <code>data/</code>. What is the current working directory? Unfortunately, the answer is “it depends…”. You’ll learn more about this in Section @ref(rprojects).</p>
+<p>In the example above, we provided a relative path, starting at the current working directory (<code>./</code>). The file <code>data_frames.RData</code> sits in a sub-directory of the current working directory, called <code>data/</code>. What is the current working directory? Unfortunately, the answer is “it depends…”. You’ll learn more about this in Section <a href="#sec-rprojects" class="quarto-xref"><span>Section 2.2.7.1</span></a>.</p>
 <p><code>.RData</code> files are read into your environment using the <code>load()</code> function. This function loads the objects with the name that they were saved with.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"./data/data_frames.RData"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -802,7 +834,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(df_small, <span class="at">file =</span> <span class="st">"./data/df_small.rds"</span>)</span>
 <span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>df_small_2 <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"./data/df_small.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><code>save()</code> and <code>saveRDS()</code> create <em>binary</em> files that are fast to write and read, but only intelligible to R (and not to the human eye or another program). Such files are commonly identified by the suffix <code>.rds</code>. It is recommended to name the <code>.rds</code> files according to the single object they contain. When publishing and sharing data, follow Open Science principles (Chapter @ref(openscience)) and avoid file formats that are not readable across different platforms and programming languages. We will learn more about human-readable tabular data files like CSV in Chapter @ref(datawrangling) and other open source binary file formats in Chapter @ref(datavariety).</p>
+<p><code>save()</code> and <code>saveRDS()</code> create <em>binary</em> files that are fast to write and read, but only intelligible to R (and not to the human eye or another program). Such files are commonly identified by the suffix <code>.rds</code>. It is recommended to name the <code>.rds</code> files according to the single object they contain. When publishing and sharing data, follow Open Science principles (Chapter <a href="open_science.html" class="quarto-xref"><span>Chapter 7</span></a>) and avoid file formats that are not readable across different platforms and programming languages. We will learn more about human-readable tabular data files like CSV in Chapter <a href="data_wrangling.html" class="quarto-xref"><span>Chapter 4</span></a> and other open source binary file formats in Chapter <a href="data_variety.html" class="quarto-xref"><span>Chapter 6</span></a>.</p>
 </section>
 </section>
 <section id="r-environment" class="level3" data-number="2.2.3">
@@ -836,9 +868,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">search</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] ".GlobalEnv"        "package:stats"     "package:graphics" 
-[4] "package:grDevices" "package:utils"     "package:datasets" 
-[7] "package:methods"   "Autoloads"         "package:base"     </code></pre>
+<pre><code> [1] ".GlobalEnv"        "package:stats"     "package:graphics" 
+ [4] "package:grDevices" "package:datasets"  "renv:shims"       
+ [7] "package:utils"     "package:methods"   "Autoloads"        
+[10] "package:base"     </code></pre>
 </div>
 </div>
 <p>This information can also be found on the <strong>Packages</strong> panel in RStudio. The loaded packages are shown with a tick mark.</p>
@@ -852,20 +885,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>&gt; source("my_r_script.R")</code></pre>
 <p>Note that, to be able to run the code above, the file <code>my_r_script.R</code> must be in your current working directory. You must always specify the path to the file, also when sourcing code.</p>
 </section>
-<section id="rmarkdown" class="level3" data-number="2.2.6">
-<h3 data-number="2.2.6" class="anchored" data-anchor-id="rmarkdown"><span class="header-section-number">2.2.6</span> R Markdown</h3>
+<section id="sec-rmarkdown" class="level3" data-number="2.2.6">
+<h3 data-number="2.2.6" class="anchored" data-anchor-id="sec-rmarkdown"><span class="header-section-number">2.2.6</span> R Markdown</h3>
 <p><a href="https://rmarkdown.rstudio.com/">R Markdown</a> files are an enhanced version of scripts. They combine formatted text and executable code chunks. They can either be compiled (<em>knitted</em>) into an HTML or PDF output, where code chunks are executed upon compilation and visualization outputs are directly placed into the output, or they can be run like a script entirely or each code chunk separately. Rmarkdown is ideal for <strong>reporting</strong>, i.e., writing your final document presenting your analysis results. When opened in RStudio, RMarkdown files appear in the Editor like this:</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./figures/rmarkdown_editor.png" class="img-fluid figure-img" style="width:75.0%"></p>
-<figcaption class="figure-caption">R Markdown document opened in the source panel.</figcaption>
+<div id="fig-rmarkdown" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rmarkdown-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./figures/rmarkdown_editor.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rmarkdown-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.1: R Markdown document opened in the source panel.
+</figcaption>
 </figure>
 </div>
-</div>
-</div>
-<p>As shown in Fig. @ref(fig:rmarkdown), an RMarkdown file consists of a header that specifies the document properties, such as how it should be rendered (as an html page, a docx file or a pdf).</p>
+<p>As shown in <a href="#fig-rmarkdown" class="quarto-xref">Figure&nbsp;<span>2.1</span></a>, an RMarkdown file consists of a header that specifies the document properties, such as how it should be rendered (as an html page, a docx file or a pdf).</p>
 <div class="sourceCode" id="cb97"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="ex">---</span></span>
 <span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a><span class="ex">title:</span> <span class="st">"Simple global map"</span></span>
 <span id="cb97-3"><a href="#cb97-3" aria-hidden="true" tabindex="-1"></a><span class="ex">author:</span> Alex Humboldt</span>
@@ -873,13 +906,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb97-5"><a href="#cb97-5" aria-hidden="true" tabindex="-1"></a><span class="ex">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Below the header follow the contents as either text or code <em>chunks</em>. Text is formatted using the <a href="https://www.markdownguide.org/">Markdown syntax</a>. Nice brief guides are provided <a href="https://commonmark.org/help/">here</a> or <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">here</a>. For example, a top-level section title is specified by <code>#</code> and a title of a section one level lower by <code>##</code>.</p>
 <p>Code chunks that contain executable R code are opened by a line <code>```{r}</code>.</p>
-<p>The document can be rendered by calling <code>rmarkdown::render()</code> on the command line or hitting the <strong>Knit</strong> button in the RStudio IDE. Depending on your settings a html file, pdf or docx file will be generated in your current directory (and or displayed in the IDE viewer). The RMarkdown source file shown in Fig. @ref(fig:rmarkdown) is rendered to:</p>
+<p>The document can be rendered by calling <code>rmarkdown::render()</code> on the command line or hitting the <strong>Knit</strong> button in the RStudio IDE. Depending on your settings a html file, pdf or docx file will be generated in your current directory (and or displayed in the IDE viewer). The RMarkdown source file shown in <a href="#fig-rmarkdown" class="quarto-xref">Figure&nbsp;<span>2.1</span></a> is rendered to:</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="./figures/rmarkdown_render.png" class="img-fluid figure-img" style="width:75.0%"></p>
-<figcaption class="figure-caption">Rendered HTML output.</figcaption>
+<figcaption>Rendered HTML output.</figcaption>
 </figure>
 </div>
 </div>
@@ -891,20 +924,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="./figures/newrmarkdown.png" class="img-fluid figure-img" style="width:25.0%"></p>
-<figcaption class="figure-caption">Create a new RMarkdown file</figcaption>
+<figcaption>Create a new RMarkdown file</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="wspmgmt" class="level3" data-number="2.2.7">
-<h3 data-number="2.2.7" class="anchored" data-anchor-id="wspmgmt"><span class="header-section-number">2.2.7</span> Workspace management</h3>
+<section id="sec-wspmgmt" class="level3" data-number="2.2.7">
+<h3 data-number="2.2.7" class="anchored" data-anchor-id="sec-wspmgmt"><span class="header-section-number">2.2.7</span> Workspace management</h3>
 <p>Workspace management is crucial for efficient data science projects. Two aspects are essential for workspace management: The structure of directories and the types of files they contain; and code management and version control. To address these two points, we will briefly introduce you to <em>R projects</em> and <em>git</em>.</p>
-<section id="rprojects" class="level4" data-number="2.2.7.1">
-<h4 data-number="2.2.7.1" class="anchored" data-anchor-id="rprojects"><span class="header-section-number">2.2.7.1</span> R projects</h4>
+<section id="sec-rprojects" class="level4" data-number="2.2.7.1">
+<h4 data-number="2.2.7.1" class="anchored" data-anchor-id="sec-rprojects"><span class="header-section-number">2.2.7.1</span> R projects</h4>
 <p>Think of all files that are linked to a certain data science workflow as belonging together into one project. A project is therefore a directory that contains the code and the files it produces. Different types of files go in different sub-directories with descriptive names. To keep an order and make your code useful also for others, always keep files of the same type in sub-directories that are always named the same way across projects. When creating a new project, you will find the same overall structure. A common structure is:</p>
 <ul>
-<li>Keep <code>.R</code> files that implement a user-defined function (see Chapter @ref(programmingprimers)) in a sub-directory <code>./R/</code>, and <code>.R</code> files that implement a workflow in a sub-directory <code>./analysis/</code>. Workflow implementations with a view to communication should be implemented in RMarkdown files.</li>
+<li>Keep <code>.R</code> files that implement a user-defined function (see <a href="programming_primers.html" class="quarto-xref"><span>Chapter 3</span></a>) in a sub-directory <code>./R/</code>, and <code>.R</code> files that implement a workflow in a sub-directory <code>./analysis/</code>. Workflow implementations with a view to communication should be implemented in RMarkdown files.</li>
 <li>RMarkdown files are commonly kept in a sub-directory <code>./vignettes/</code> or in the main (top-level) project directory.</li>
 <li>Keep figures produced by your code in a sub-directory <code>./figures/</code></li>
 <li>Keep data files produced by your code in a sub-directory <code>./data/</code></li>
@@ -925,23 +958,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="./figures/RStudio_RProject_screenshot.png" class="img-fluid figure-img" style="width:30.0%"></p>
-<figcaption class="figure-caption">R project menu.</figcaption>
+<figcaption>R project menu.</figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>When starting a new project, named <code>project_name</code>, a file <code>project_name.Rproj</code> is created in the top-level project directory. It stores information about your the session (settings, open files, etc.), automatically enables useful features in RStudio for easy package, website, or book building, lets you manage code version control (see next sub-section), and optionally (not recommended) stores the environment of your current session. It is not recommended to save and restore entire environments. Instead read and write objects from and into files to guarantee control, transparency, and reproducibility. When you want to continue working on an existing R project, you can start a new session by clicking on your <code>project_name.Rproj</code> file. This restores</p>
-<p>In Chapters @ref(openscience) and @ref(codemgmt), we will learn more about efficient code management.</p>
+<p>In <a href="open_science.html" class="quarto-xref"><span>Chapter 7</span></a> and <a href="code_management.html" class="quarto-xref"><span>Chapter 8</span></a>, we will learn more about efficient code management.</p>
 </section>
 <section id="git" class="level4" data-number="2.2.7.2">
 <h4 data-number="2.2.7.2" class="anchored" data-anchor-id="git"><span class="header-section-number">2.2.7.2</span> git</h4>
-<p><em>git</em> is a version control system that keeps track of all changes on your code, who made it, and when. It allows you to go back to previous changes, and lets you control when to iterate from one state of the code to the next. The basic unit of <em>git</em> is a git repository - all the code contained in a project directory. That’s why <em>R projects</em> work well with <em>git</em>. <em>git</em> can also keep track of changes in data, so long as the data is small and in text format (see @ref(datavariety)).</p>
+<p><em>git</em> is a version control system that keeps track of all changes on your code, who made it, and when. It allows you to go back to previous changes, and lets you control when to iterate from one state of the code to the next. The basic unit of <em>git</em> is a git repository - all the code contained in a project directory. That’s why <em>R projects</em> work well with <em>git</em>. <em>git</em> can also keep track of changes in data, so long as the data is small and in text format (see <a href="data_variety.html" class="quarto-xref"><span>Chapter 6</span></a>).</p>
 <p><em>git</em> also lets you sync your local copy of a <em>git repository</em> with git service in the cloud, for example <a href="https://github.com/">GitHub</a>. This allows you to manage the same repository across computers and collaborate with multiple partners on the same repository.</p>
-<p>We will learn more about <em>git</em> in Chapter @ref(codemgmt). For now, follow instructions in Section @ref(setup) to set yourself up with installing <em>git</em> and other required stuff on your computer and with a GitHub account. You will use this later in this course (and maybe throughout your career).</p>
+<p>We will learn more about <em>git</em> in <a href="code_management.html" class="quarto-xref"><span>Chapter 8</span></a>. For now, follow instructions in Section <a href="#sec-setup" class="quarto-xref"><span>Section 2.2.8</span></a> to set yourself up with installing <em>git</em> and other required stuff on your computer and with a GitHub account. You will use this later in this course (and maybe throughout your career).</p>
 </section>
 </section>
-<section id="setup" class="level3" data-number="2.2.8">
-<h3 data-number="2.2.8" class="anchored" data-anchor-id="setup"><span class="header-section-number">2.2.8</span> Setup</h3>
+<section id="sec-setup" class="level3" data-number="2.2.8">
+<h3 data-number="2.2.8" class="anchored" data-anchor-id="sec-setup"><span class="header-section-number">2.2.8</span> Setup</h3>
 <section id="packages" class="level4" data-number="2.2.8.1">
 <h4 data-number="2.2.8.1" class="anchored" data-anchor-id="packages"><span class="header-section-number">2.2.8.1</span> Packages</h4>
 <p>You either have installed R and RStudio at the start of this chapter or you had them in your computer already. If you belong to the second group, make sure that you update both R and RStudio to get the latest versions. Working with the latest version of R, RStudio and packages helps to avoid errors due to dependency conflicts. Now, let’s install all the required packages for this course and load them.</p>
@@ -961,7 +994,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="other-libraries-and-applications" class="level4" data-number="2.2.8.2">
 <h4 data-number="2.2.8.2" class="anchored" data-anchor-id="other-libraries-and-applications"><span class="header-section-number">2.2.8.2</span> Other libraries and applications</h4>
-<p>Some R packages depend on one another (for example, all depend on {base} R), but they can also depend on software external to the R ecosystem. For Chapter @ref{datavariety}, we will need the {ncdf4} package to work with <a href="https://www.unidata.ucar.edu/software/netcdf/"><em>netCDF</em></a> files in R. NetCDF (network Common Data Form) is a file format for storing multidimensional scientific data (variables) such as temperature, humidity, pressure, wind speed, and direction. The package {ncdf4} depends on software that is not available as an R package, the <code>netCDF</code> command-line tools, which you need to install additionally on your computer.</p>
+<p>Some R packages depend on one another (for example, all depend on {base} R), but they can also depend on software external to the R ecosystem. For <a href="data_variety.html" class="quarto-xref"><span>Chapter 6</span></a>, we will need the {ncdf4} package to work with <a href="https://www.unidata.ucar.edu/software/netcdf/"><em>netCDF</em></a> files in R. NetCDF (network Common Data Form) is a file format for storing multidimensional scientific data (variables) such as temperature, humidity, pressure, wind speed, and direction. The package {ncdf4} depends on software that is not available as an R package, the <code>netCDF</code> command-line tools, which you need to install additionally on your computer.</p>
 <p>To install the <code>netCDF</code> command-line tools, follow these instructions:</p>
 <ul>
 <li>For MacOS users, via <em>homebrew</em>:
@@ -1044,7 +1077,7 @@ time        : 2022-01-01 12:00:00 UTC </code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="./figures/git_in_rstudio.png" class="img-fluid figure-img" style="width:75.0%"></p>
-<figcaption class="figure-caption">Set up Git for RStudio.</figcaption>
+<figcaption>Set up Git for RStudio.</figcaption>
 </figure>
 </div>
 </div>
@@ -1060,7 +1093,7 @@ time        : 2022-01-01 12:00:00 UTC </code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="./figures/create_ssh_key.png" class="img-fluid figure-img" style="width:75.0%"></p>
-<figcaption class="figure-caption">Create an SSH key from RStudio.</figcaption>
+<figcaption>Create an SSH key from RStudio.</figcaption>
 </figure>
 </div>
 </div>
@@ -1071,7 +1104,7 @@ time        : 2022-01-01 12:00:00 UTC </code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="./figures/copy_public_key.png" class="img-fluid figure-img" style="width:75.0%"></p>
-<figcaption class="figure-caption">Copy the public key for the SSH connection</figcaption>
+<figcaption>Copy the public key for the SSH connection</figcaption>
 </figure>
 </div>
 </div>
@@ -1079,8 +1112,8 @@ time        : 2022-01-01 12:00:00 UTC </code></pre>
 <pre><code>-   Go back to your browser and open your GitHub account. At the top right, open your profile's menu and choose **Settings &gt; SSH and GPG Keys**. Then select **Add new SSH key**. Give your SSH connection a name, for example "My laptop" and paste the *public key* that you copied from RStudio. If you have problems, check out [these instructions](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) to add a new SSH key to your GitHub account. 
 -   Finally, you can test your SSH connection following [these instructions](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/testing-your-ssh-connection). Note that, at the top of these websites, there's an option to choose your OS because the steps vary depending on the type of computer your work with.</code></pre>
 </section>
-<section id="setupreport" class="level4" data-number="2.2.8.4">
-<h4 data-number="2.2.8.4" class="anchored" data-anchor-id="setupreport"><span class="header-section-number">2.2.8.4</span> Preparation for your report</h4>
+<section id="sec-setupreport" class="level4" data-number="2.2.8.4">
+<h4 data-number="2.2.8.4" class="anchored" data-anchor-id="sec-setupreport"><span class="header-section-number">2.2.8.4</span> Preparation for your report</h4>
 <p>Your performance assessment for Applied Geodata Science will be in the form of a report. You will approach the writing of this report as if you were working on a clean, structured and reproducible data science project. This section is meant to guide you through the preparation of your report workspace, such that it’s in the form that you will submit it. Following the next steps, you will set up a git repository containing an R project and an R Markdown file.</p>
 <ul>
 <li>Log into GitHub in your browser and create a <strong>new repository</strong>. Name it <em>agds_report_yourname</em>, give it a short description and set it to be public, so we can read it for the evaluation. Include a README file (it’s a sort of menu which you’ll edit later), a <code>.gitignore</code> template for R (select in the drop-down menu) and a Creative Commons license (for code sharing rights, etc).</li>
@@ -1090,7 +1123,7 @@ time        : 2022-01-01 12:00:00 UTC </code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="./figures/create_git_repository.png" class="img-fluid figure-img" style="width:75.0%"></p>
-<figcaption class="figure-caption">Create a Git repository for your report.</figcaption>
+<figcaption>Create a Git repository for your report.</figcaption>
 </figure>
 </div>
 </div>
@@ -1103,7 +1136,7 @@ time        : 2022-01-01 12:00:00 UTC </code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="./figures/copy_ssh_repo.png" class="img-fluid figure-img" style="width:75.0%"></p>
-<figcaption class="figure-caption">Copy the SSH url to clone your reporitory.</figcaption>
+<figcaption>Copy the SSH url to clone your reporitory.</figcaption>
 </figure>
 </div>
 </div>
@@ -1116,21 +1149,21 @@ time        : 2022-01-01 12:00:00 UTC </code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="./figures/clone_repo_ssh.png" class="img-fluid figure-img" style="width:75.0%"></p>
-<figcaption class="figure-caption">Clone your repository and create an R project.</figcaption>
+<figcaption>Clone your repository and create an R project.</figcaption>
 </figure>
 </div>
 </div>
 </div>
 <ul>
 <li>With this, you’re set up. If your R project <code>agds_report_yourname</code> is open, you should see a <strong>Git</strong> panel in RStudio (next to <strong>Environment</strong>) and also be able to use Git in the <strong>Terminal</strong> panel in RStudio. As mentioned above, we will start working with these tools in a few weeks and they will be a crucial part of the course.</li>
-<li>You’ll see a detailed explanation of the <em>git</em> workflows in Chapter @ref(codemgmt). For now, add your solutions to each report exercise into a separate RMarkdown file, placed in a subdirectory named <code>./vignettes/</code>. The first Report Exercise will be the one for Chapter @ref(datawrangling) where you will be asked to implement your solutions in a file called <code>re_tidy.Rmd</code>. At that stage, your repository should look like this:</li>
+<li>You’ll see a detailed explanation of the <em>git</em> workflows in <a href="code_management.html" class="quarto-xref"><span>Chapter 8</span></a>. For now, add your solutions to each report exercise into a separate RMarkdown file, placed in a subdirectory named <code>./vignettes/</code>. The first Report Exercise will be the one for <a href="data_wrangling.html" class="quarto-xref"><span>Chapter 4</span></a> where you will be asked to implement your solutions in a file called <code>re_tidy.Rmd</code>. At that stage, your repository should look like this:</li>
 </ul>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="./figures/Rmd_report.png" class="img-fluid figure-img" style="width:75.0%"></p>
-<figcaption class="figure-caption">At first, the R Markdown for your report will look something like this.</figcaption>
+<figcaption>At first, the R Markdown for your report will look something like this.</figcaption>
 </figure>
 </div>
 </div>
@@ -1252,6 +1285,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
   }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
   const toggleColorMode = (alternate) => {
     // Switch the stylesheets
     const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
@@ -1318,13 +1378,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1359,18 +1421,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1402,11 +1453,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1416,8 +1506,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1429,7 +1528,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1473,6 +1695,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1498,6 +1721,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1559,17 +1808,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./intro.html" class="pagination-link">
+      <a href="./intro.html" class="pagination-link" aria-label="Introduction">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./programming_primers.html" class="pagination-link">
+      <a href="./programming_primers.html" class="pagination-link" aria-label="Programming primers">
         <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Programming primers</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
+
 
 
 
