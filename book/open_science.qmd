@@ -1,8 +1,8 @@
-# Open science practices {#openscience}
+# Open science practices {#sec-openscience}
 
 **Chapter lead author: Koen Hufkens**
 
-## Learning objectives
+## Learning objectives {#sec-learning-objectives-6}
 
 In this chapter, you will learn the reasons for practicing open science and some of the basic methodological techniques that we can use to facilitate an open science workflow.
 
@@ -37,11 +37,11 @@ The basics of open science coding and data practices rely on a number of simple 
 
 Reproducible science relies on a number of key components. Data and code management and the tracking of required meta-data is the first step in an open science workflow. 
 
-In Chapter \@ref(gettingstarted), you learned how to setup an R project. An R project gathers all components of your analysis in a single directory. Although current computers make it easy to "find" your files and are largely file location-agnostic, this is not the case in many research environments. Projects grow quickly, and often, the number of files will flood a single directory. Therefore, files need a precise and structured location. This structure allows you to determine both the function and order of a workflow without reading any code.
+In @sec-gettingstarted, you learned how to setup an R project. An R project gathers all components of your analysis in a single directory. Although current computers make it easy to "find" your files and are largely file location-agnostic, this is not the case in many research environments. Projects grow quickly, and often, the number of files will flood a single directory. Therefore, files need a precise and structured location. This structure allows you to determine both the function and order of a workflow without reading any code.
 
-It is good practice to have a consistent project structure within and between projects. This allows you to find most project components regardless of when you return to a particular project. Structuring a project in one folder also makes projects portable. All parts reside in one location making it easy to create a *git* project from this location (see Chapter \@ref(codemgmt)), or just copy the project to a new drive.
+It is good practice to have a consistent project structure within and between projects. This allows you to find most project components regardless of when you return to a particular project. Structuring a project in one folder also makes projects portable. All parts reside in one location making it easy to create a *git* project from this location (see @sec-codemgmt), or just copy the project to a new drive.
 
-An example data structure for raw data processing is given below and we provide an [R project template](https://github.com/geco-bern/R_proj_template) to work from and adjust through our [lab GitHub profile](https://github.com/geco-bern). A full description on using the template is provided in Chapter \@ref(codemgmt).
+An example data structure for raw data processing is given below and we provide an [R project template](https://github.com/geco-bern/R_proj_template) to work from and adjust through our [lab GitHub profile](https://github.com/geco-bern). A full description on using the template is provided in @sec-codemgmt.
 
 ``` bash
 data-raw/
@@ -115,7 +115,7 @@ When you move your project to a new system, or share a project on github with co
 renv::restore()
 ```
 
-> NOTE: As mentioned in the {renv} documentation: "For development and collaboration, the `.Rprofile`, `renv.lock` and `renv/activate.R` files should be committed to your version control system. But the `renv/library` directory should normally be ignored. Note that `renv::init()` will attempt to write the requisite ignore statements to the project `.gitignore`." We refer to \@ref(learning-objectives-6) for details on github and its use.
+> NOTE: As mentioned in the {renv} documentation: "For development and collaboration, the `.Rprofile`, `renv.lock` and `renv/activate.R` files should be committed to your version control system. But the `renv/library` directory should normally be ignored. Note that `renv::init()` will attempt to write the requisite ignore statements to the project `.gitignore`." We refer to @sec-learning-objectives-6 for details on github and its use.
 
 ### Capturing a system state
 
@@ -125,7 +125,7 @@ The [{rocker} package](https://rocker-project.org/) provides access to some of t
 
 ### Readable reporting using Rmarkdown
 
-Within Rstudio, you can use Rmarkdown dynamic documents to combine both text and code. Rmarkdown is ideal for *reporting*, i.e., writing your final document and presenting your analysis results. A Rmarkdown document consists of a header that specifies document properties (whether it should be rendered as an html page, a docx file or a pdf), and the actual content. You have encountered RMarkdown already in Chapter \@ref(rmarkdown).
+Within Rstudio, you can use Rmarkdown dynamic documents to combine both text and code. Rmarkdown is ideal for *reporting*, i.e., writing your final document and presenting your analysis results. A Rmarkdown document consists of a header that specifies document properties (whether it should be rendered as an html page, a docx file or a pdf), and the actual content. You have encountered RMarkdown already in @sec-rmarkdown.
 
 ### Project structure
 
@@ -162,7 +162,7 @@ If your R markdown file contains more code than it does text, it should be consi
 
 Coding practices and documenting all moving parts in a coding workflow is only one practical aspect of open science. An additional component is long-term data and code retention and versioning.
 
-In Chapter \@ref(codemgmt), you will learn more about *git* for code management and collaboration. Several online make use of *git* for providing web-based collaboration functionalities and remote storage of your repositories. Examples are [GitHub](https://github.com), [GitLab](https://gitlab.com), [Codeberg](https://codeberg.org), or [Bitbucket](https://bitbucket.org/). However, their remote storage service should only be considered an aid for collaboration, and not a place to store code into perpetuity. Furthermore, these services mostly have a limit to how much data can be stored in a repository (mostly \~2 GB). For small projects, data can be included in the repository itself. For larger projects and for making larger datasets accessible, this won't be possible.
+In @sec-codemgmt, you will learn more about *git* for code management and collaboration. Several online make use of *git* for providing web-based collaboration functionalities and remote storage of your repositories. Examples are [GitHub](https://github.com), [GitLab](https://gitlab.com), [Codeberg](https://codeberg.org), or [Bitbucket](https://bitbucket.org/). However, their remote storage service should only be considered an aid for collaboration, and not a place to store code into perpetuity. Furthermore, these services mostly have a limit to how much data can be stored in a repository (mostly \~2 GB). For small projects, data can be included in the repository itself. For larger projects and for making larger datasets accessible, this won't be possible.
 
 To ensure long-term storage of code and data, outside of commercial for profit services (e.g., Dropbox, Google Drive etc), it is best to rely on public permanent repositories, such as [Zenodo](https://zenodo.org/). Zenodo is an effort by the European commission, but accessible to all, to facilitate archiving of science projects of all nature (code and data) up to 50 GB. In addition, Zenodo provides a citable digital object identifier or DOI. This allows data and code, even if not formally published in a journal, to be cited. Other noteworthy open science storage options include [Dryad](https://datadryad.org/stash) and the [Center for Open Science](https://osf.io/). 
 
@@ -210,11 +210,11 @@ What are the basic steps to create a reproducible workflow from a file managemen
 
 The project should be a reproducible workflow:
 
--   Download and plot a MODIS land cover map for Belgium using skills you learned in Chapter \@ref(datavariety).
+-   Download and plot a MODIS land cover map for Belgium using skills you learned in @sec-datavariety.
 
--   Write a function to count the occurrences of land cover classes in the map as a formal function using skills you learned in Chapter \@ref(datawrangling).
+-   Write a function to count the occurrences of land cover classes in the map as a formal function using skills you learned in @sec-datawrangling.
 
--   Create a plot of the land cover map, see Chapter \@ref(datavis).
+-   Create a plot of the land cover map, see @sec-datavis.
 
 -   Write a dynamic report describing your answers to the above questions regarding how to structure a reproducible workflow.
 

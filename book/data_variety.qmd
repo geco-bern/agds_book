@@ -1,4 +1,4 @@
-# Data variety {#datavariety}
+# Data variety {#sec-datavariety}
 
 **Chapter lead author: Koen Hufkens**
 
@@ -125,7 +125,7 @@ Large volumes of data are available as `CSV` files or similar. Understanding how
 
 Its counterpart is a function to write human-readable data to file, called - you guessed it - `write.table()`. Again, parameters are required for maximum control over how things are written to file, by default though data are separated by a single empty space " ", not a comma.
 
-> Note: In Chapter \@ref(datawrangling), we used the {readr} (tidyverse) function `read_csv()`. It serves the same purpose as `read.csv()`, but is faster and reads data into a tidyverse-data frame (a *tibble*) which has some useful additional characteristics, on top of a common R data frame. For particularly large data, you may consider even better solutions for fast reading, see [here](https://cran.rstudio.com/web/packages/vroom/vignettes/benchmarks.html).
+> Note: In @sec-datawrangling, we used the {readr} (tidyverse) function `read_csv()`. It serves the same purpose as `read.csv()`, but is faster and reads data into a tidyverse-data frame (a *tibble*) which has some useful additional characteristics, on top of a common R data frame. For particularly large data, you may consider even better solutions for fast reading, see [here](https://cran.rstudio.com/web/packages/vroom/vignettes/benchmarks.html).
 
 Below, you find and example in which a file is written to a temporary location, and read in again using the above mentioned functions.
 

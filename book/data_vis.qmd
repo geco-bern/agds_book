@@ -1,4 +1,4 @@
-# Data visualisation {#datavis}
+# Data visualisation {#sec-datavis}
 
 **Chapter lead author: Benjamin Stocker**
 
@@ -31,9 +31,9 @@ This tutorial is inspired by the comprehensive and online available textbook Fun
 
 ### The grammar of graphics
 
-In Chapter \@ref(datawrangling), we learned about axes of variation in the data. For example, time is an axis of variation in our example data `half_hourly_fluxes`, or site identity and the date are axes of variation in our example data `daily_fluxes`. We have also learned that we can aggregate over axes of variation, and that we can often separate an axis of variation into a hierarchy of subordinate axes of variation (e.g., years, months, days, and a half-hourly time axis).
+In @sec-datawrangling, we learned about axes of variation in the data. For example, time is an axis of variation in our example data `half_hourly_fluxes`, or site identity and the date are axes of variation in our example data `daily_fluxes`. We have also learned that we can aggregate over axes of variation, and that we can often separate an axis of variation into a hierarchy of subordinate axes of variation (e.g., years, months, days, and a half-hourly time axis).
 
-In this chapter, we will be working mainly with the same half-hourly time series data of ecosystem-atmosphere fluxes and parallel measurements of meteorological variables - as in Chapters \@ref(gettingstarted) and \@ref(datawrangling). For time series data, the entry point of the exploratory data analysis cycle may be a visualization of some variable of interest (here `GPP_NT_VUT_REF`) against time:
+In this chapter, we will be working mainly with the same half-hourly time series data of ecosystem-atmosphere fluxes and parallel measurements of meteorological variables - as in @sec-gettingstarted and @sec-datawrangling. For time series data, the entry point of the exploratory data analysis cycle may be a visualization of some variable of interest (here `GPP_NT_VUT_REF`) against time:
 
 ```{r results=FALSE, messages=FALSE, warning=FALSE}
 half_hourly_fluxes <- readr::read_csv("data/FLX_CH-Lae_FLUXNET2015_FULLSET_HH_2004-2006_CLEAN.csv")
@@ -61,7 +61,7 @@ The argument provided by the `aes()` statement specifies the aesthetics (`x`, an
 
 The data visualisation above is a dense plot and we cannot distinguish patterns because variations in GPP happen at time scales that are too narrow for displaying three years of half-hourly data in one plot. GPP varies throughout a day just as much as it varies throughout a season. To see this, we can focus on a narrower time span (selecting rows by index using `dplyr::slice()` in the code below). Visual clarity is also facilitated by an appropriate labeling (title and axes labels using `labs()`) and by a reduction of displayed elements to a minimum (therefore, the changing of the formatting theme by `theme_classic()`):
 
-```{r, label="laegerndemo", fig.align='center', fig.cap="An example time series created with {ggplot2}."}
+```{r, label="fig-laegerndemo", fig.align='center', fig.cap="An example time series created with {ggplot2}."}
 # prepare plot data
 plot_data <- half_hourly_fluxes |> 
   dplyr::slice(24000:25000)
@@ -84,20 +84,20 @@ Find a complete reference to {ggplot2} [here](https://ggplot2.tidyverse.org/). T
 
 ### Every data has its representation
 
-In the above example, we mapped two continuous variables (`TIMESTAMP_START` and `GPP_NT_VUT_REF`) onto the aesthetics `x`, and `y` to visualize time series data. A line plot is an appropriate choice for such data as points are ordered along the time axis and can be connected by a line. Different "geometries" are suitable for visualizing different aspects of the data, and different variable types are suited to mapping onto different aesthetics. Common, available aesthetics are shown in Fig. \@ref(fig:common-aesthetics) and can be allocated to variable types:
+In the above example, we mapped two continuous variables (`TIMESTAMP_START` and `GPP_NT_VUT_REF`) onto the aesthetics `x`, and `y` to visualize time series data. A line plot is an appropriate choice for such data as points are ordered along the time axis and can be connected by a line. Different "geometries" are suitable for visualizing different aspects of the data, and different variable types are suited to mapping onto different aesthetics. Common, available aesthetics are shown in @fig-common-aesthetics and can be allocated to variable types:
 
 -   Continuous variables: position, size, color (a color gradient), line width, etc.
 -   Categorical variables: shape, color (a discrete set of colors), line type, etc.
 
-```{r common-aesthetics, echo=FALSE, fig.cap="Common aesthetics to display different variable types. Figure from [Wilke](https://clauswilke.com/dataviz/aesthetic_mapping_files/figure-html/common-aesthetics-1.png).", fig.align='center'}
-knitr::include_graphics("./figures/common-aesthetics-1.png")
-```
+
+![Common aesthetics to display different variable types. Figure from [Wilke](https://clauswilke.com/dataviz/aesthetic_mapping_files/figure-html/common-aesthetics-1.png).](./figures/common-aesthetics-1.png){#fig-common-aesthetics}
+
 
 Not only the different aesthetics, but also the type of *geometry* (the layers of the visualization added to a plot by `+ geom_*()`) goes with certain types of variables and aspects of the data (but not with others). The sub-sections below provide a brief categorization of data visualization types. A more comprehensive overview is given by [GGPlot2 Essentials for Great Data Visualization in R by Alboukadel Kassambara](http://www.sthda.com/english/wiki/be-awesome-in-ggplot2-a-practical-guide-to-be-highly-effective-r-software-and-data-visualization#geom_bar-bar-plot).
 
 #### One value per category
 
-Probably the simplest case of data visualization is where a single value is shown across a categorical variable. This calls for a bar plot (`geom_bar()`). In the example below, we plot the mean GPP for each month. The "custom plot" shown below is a demonstration for what you can do by combining different elements with {ggplot2}. Try to understand the command for creating the object `plot_2`. Both examples are based on the data frame `daily_fluxes` which we created in Chapter \@ref(datawrangling).
+Probably the simplest case of data visualization is where a single value is shown across a categorical variable. This calls for a bar plot (`geom_bar()`). In the example below, we plot the mean GPP for each month. The "custom plot" shown below is a demonstration for what you can do by combining different elements with {ggplot2}. Try to understand the command for creating the object `plot_2`. Both examples are based on the data frame `daily_fluxes` which we created in @sec-datawrangling.
 
 ```{r results=FALSE, messages=FALSE, warning=FALSE}
 # read in demo daily data
@@ -195,7 +195,7 @@ Note that the red line plotted by `geom_density()` on top of the density histogr
 
 #### Distributions within categories
 
-To visualize distributions of a single continuous variable within categories, perhaps the most common visualization type is the *box plot*. As described in Chapter \@ref(datawrangling), it shows the median (bold line in the center), the upper and lower quartiles, corresponding to the 25% and the 75% quantiles, often referred to as $Q_1$ and $Q_3$ , and given by the upper and lower edge of the box plot. The lines extending from the box edges visualize the range of $( Q_1 - 1.5 (Q_3 - Q_1)$ to $Q_3 + 1.5 (Q_3 - Q_1)$. Any point outside this range is plotted by a point.
+To visualize distributions of a single continuous variable within categories, perhaps the most common visualization type is the *box plot*. As described in  @sec-datawrangling, it shows the median (bold line in the center), the upper and lower quartiles, corresponding to the 25% and the 75% quantiles, often referred to as $Q_1$ and $Q_3$ , and given by the upper and lower edge of the box plot. The lines extending from the box edges visualize the range of $( Q_1 - 1.5 (Q_3 - Q_1)$ to $Q_3 + 1.5 (Q_3 - Q_1)$. Any point outside this range is plotted by a point.
 
 The box plot is rather reductionist in showing the data (the vector of all values is reduced to the median, $Q_1$ , $Q_3$, and outlying points) and may yield a distorted picture of the data distribution and does not reflect information about the data volume. For this reason, several journals are now requiring individual data points or at least the number of data points to be shown in addition to each box. Below, points are added by `geom_jitter()` , where points are "jittered", that is, randomly spread out along the x-axis. Violin plots are a hybrid of a density plot and a box plot. The shape of their edge is given by the density distribution of the points they represent.
 
@@ -242,11 +242,11 @@ cowplot::plot_grid(plot_1, plot_2, plot_3, ncol = 3)
 
 Scatter plots visualize how two variables co-vary. The position of each point in a scatter plot is given by the simultaneously recorded value of two variables, provided in two columns along the same row in a data frame, and mapped onto two dimensions in a cartesian coordinate system. We can also say that two variables are *regressed* against each other.
 
-In the figure below, we start with a simple scatter plot (a), regressing GPP against shortwave radiation. A visualization is supposed to tell a story with data. The positive and largely linear relationship between shortwave radiation and GPP is expected from theory and our process understanding of the dominant controls on photosynthesis - it's mainly solar (shortwave) radiation (However, strictly speaking, this is supposed to emerge only at longer time scales, not in half-hourly data). The linear regression line, added by `geom_smooth(method = "lm")` in (a), indicates that relationship. You will learn more about linear regression in Chapter \@ref(regressionclassification).
+In the figure below, we start with a simple scatter plot (a), regressing GPP against shortwave radiation. A visualization is supposed to tell a story with data. The positive and largely linear relationship between shortwave radiation and GPP is expected from theory and our process understanding of the dominant controls on photosynthesis - it's mainly solar (shortwave) radiation (However, strictly speaking, this is supposed to emerge only at longer time scales, not in half-hourly data). The linear regression line, added by `geom_smooth(method = "lm")` in (a), indicates that relationship. You will learn more about linear regression in @sec-regressionclassification.
 
 Are there additional variables that modify the relationship between solar radiation and GPP? To visually investigate this, we can map additional variables in our data set onto additional aesthetics. For example, at night, photosynthesis ceases as shown in (b). Here, the variable `NIGHT` was mapped onto the aesthetic `color` of same geometry (`geom_point()`). By default, `ggplot()` used a *continuous color scale*, as indicated by the color key on the right. It did so although `NIGHT` is a categorical (a binary) variable because in the data frame, `NIGHT` is stored as a numeric value (as can be checked by `class(half_hourly_fluxes$NIGHT)`). To avoid this, and automatically trigger the use of a color scheme that is suitable for categorical variables, we specify `aes(x = SW_IN_F, y = GPP_NT_VUT_REF, color = as.factor(NIGHT))` in (c). In (d), temperature, a continuous variable, is mapped onto a continuous color scheme.
 
-```{r label="regressionplots", fig.cap="Regression plots."}
+```{r label="fig-regressionplots", fig.cap="Regression plots."}
 # prepare plot data
 half_hourly_fluxes_subset <- half_hourly_fluxes |>
   sample_n(1000)
@@ -342,7 +342,7 @@ ggplot(
   scico::scale_color_scico_d(palette = "romaO")
 ```
 
-Note three aspects here. First, the color-mapping is specified within `aes()` in the `ggplot()` function call and then adopted for all subsequent additions of geoms. Hence, also the `geom_smooth()` thus takes the color information, and not by a "hard-coded" specification of `color =` inside the `geom_smooth()` call as done in Fig. \@ref(fig:regressionplots).
+Note three aspects here. First, the color-mapping is specified within `aes()` in the `ggplot()` function call and then adopted for all subsequent additions of geoms. Hence, also the `geom_smooth()` thus takes the color information, and not by a "hard-coded" specification of `color =` inside the `geom_smooth()` call as done in Fig. @fig-regressionplots.
 
 Second, we specified a formula for the linear regression "smooting curve" to force the lines through the origin (`y ~ x + 0`). This is motivated by our a priori understanding of the process generating the data: when solar radiation is zero, photosynthesis (and hence GPP) should be zero.
 
@@ -380,7 +380,7 @@ ggplot(
   theme_classic()
 ```
 
-In the line plot above, we see a spurious-looking part of the time series in the first third of year 2004. Is this bad data that should be removed? Also, in winter of 2005/2005, some daily GPP values appear as high as a typical summer level of GPP. Is this bad data? Remember, that in Chapter \@ref(datawrangling), we aggregated the half-hourly `half_hourly_fluxes` data frame to a daily data frame `daily_fluxes` from which data is visualized above. The aggregation kept a record of the fraction of actually measured (not gap-filled) half-hourly data points per day (`f_measured`). This yields a "data quality axis". Is there a pattern between `f_measured` and the presumably bad data? Discerning such patterns is often only possible with a suitable visualization. What is suitable here?
+In the line plot above, we see a spurious-looking part of the time series in the first third of year 2004. Is this bad data that should be removed? Also, in winter of 2005/2005, some daily GPP values appear as high as a typical summer level of GPP. Is this bad data? Remember, that in @sec-datawrangling, we aggregated the half-hourly `half_hourly_fluxes` data frame to a daily data frame `daily_fluxes` from which data is visualized above. The aggregation kept a record of the fraction of actually measured (not gap-filled) half-hourly data points per day (`f_measured`). This yields a "data quality axis". Is there a pattern between `f_measured` and the presumably bad data? Discerning such patterns is often only possible with a suitable visualization. What is suitable here?
 
 A solution is to "map" `f_measured` to the color axis. When adding such an additional mapping to visualisation dimensions ("aesthetics"), we have to specify it using `aes()`. This only affects the points and the color of points, while the lines and points and their position in x-y space is shared. Hence, we write `aes(x = date, y = GPP_NT_VUT_REF)` in the `ggplot()` function call (indicating that all subsequent additions of `geom_` layers share this x-y mapping); while `aes(color = f_measured)` is specified only in the `geom_point()` layer.
 
@@ -457,7 +457,7 @@ plot_4 <- ggplot(
 cowplot::plot_grid(plot_1, plot_2, plot_3, plot_4, ncol = 2, labels = "auto")
 ```
 
-#### Density along two continuous variables {#regressiondensity}
+#### Density along two continuous variables {#sec-regressiondensity}
 
 Scatter plots can appear "overcrowded" when points are plotted on top of each other and potentially important information is lost in the visualization.
 
@@ -551,13 +551,13 @@ plotme
 ggsave("./figures/plot_gpp.pdf")
 ```
 
-... saves the plot generated by printing `plotme` (created in the code chunk preceeding Fig. \@ref(fig:laegerndemo)) into a PDF located in the appropriate (see also \@ref(rprojects) what's "appropriate") sub-directory. Plots are ideally saved as [*vector graphics*](https://en.wikipedia.org/wiki/Vector_graphics) - the types of graphics that are defined by geometric shapes (polygons, lines, points), not rasters. Vector graphics never look "pixelated". When saving a `ggplot` object as PDF, it's saved as a vector graphic. Other vector graphics formats are `.eps`, or `.svg`. Beware however, when plotting very large numbers points, lines, or polygons, file sizes can get excessively large and render very slowly. In such cases, consider representing the *density* of overlaying points which creates a vector graphics, e.g., of rectangles (raster), hexagons, or other polygons (see Sec. \@ref(regressiondensity)). Alternatively, plots may be saved as a raster image (e.g., PNG with files ending on `.png`, giving the option to manually set the resolution with the argument `dpi`) or a compressed image format (e.g, JPEG). When rendering an RMarkdown file, figures are placed in the output and, unless explicitly triggered with a `ggsave()` call inside an executed code chunk, no separate figure files are created. 
+... saves the plot generated by printing `plotme` (created in the code chunk preceeding @fig-laegerndemo) into a PDF located in the appropriate (see also @sec-rprojects) what's "appropriate") sub-directory. Plots are ideally saved as [*vector graphics*](https://en.wikipedia.org/wiki/Vector_graphics) - the types of graphics that are defined by geometric shapes (polygons, lines, points), not rasters. Vector graphics never look "pixelated". When saving a `ggplot` object as PDF, it's saved as a vector graphic. Other vector graphics formats are `.eps`, or `.svg`. Beware however, when plotting very large numbers points, lines, or polygons, file sizes can get excessively large and render very slowly. In such cases, consider representing the *density* of overlaying points which creates a vector graphics, e.g., of rectangles (raster), hexagons, or other polygons (see @sec-regressiondensity). Alternatively, plots may be saved as a raster image (e.g., PNG with files ending on `.png`, giving the option to manually set the resolution with the argument `dpi`) or a compressed image format (e.g, JPEG). When rendering an RMarkdown file, figures are placed in the output and, unless explicitly triggered with a `ggsave()` call inside an executed code chunk, no separate figure files are created. 
 
 ## Exercises
 
 ### Spurious data {-}
 
-In Section \@ref(baddata), we discovered that certain values of `GPP_NT_VUT_REF` in the half-hourly data `half_hourly_fluxes` (to be read from file `data/FLX_CH-Lae_FLUXNET2015_FULLSET_HH_2004-2006.csv`) are repeated with a spuriously high frequency. Determine all values of `GPP_NT_VUT_REF` that appear more than once in `half_hourly_fluxes` and label them as being "spurious". Visualise the time series of the first year of half-hourly GPP, mapping the information whether the data is spurious or not to the *color* aesthetic.
+In @sec-baddata, we discovered that certain values of `GPP_NT_VUT_REF` in the half-hourly data `half_hourly_fluxes` (to be read from file `data/FLX_CH-Lae_FLUXNET2015_FULLSET_HH_2004-2006.csv`) are repeated with a spuriously high frequency. Determine all values of `GPP_NT_VUT_REF` that appear more than once in `half_hourly_fluxes` and label them as being "spurious". Visualise the time series of the first year of half-hourly GPP, mapping the information whether the data is spurious or not to the *color* aesthetic.
 
 Then aggregate half-hourly to daily data, taking the mean of `GPP_NT_VUT_REF` and recording the proportion of underlying half-hourly data points that are "spurious". Visualise the time series of daily `GPP_NT_VUT_REF` with the color scale indicating the proportion of spurious half-hourly data that was used for determining the respective date's mean GPP.
 
@@ -622,4 +622,4 @@ In the previous exercises and tutorials, you have learned how to wrangle data, f
 
 ### Deliverables for the report {.unnumbered}
 
-Following the same requirements as mentioned in \@ref(retidy), present your solutions in a file called `re_airquality.Rmd`, save it in your `vignettes` folder alongside the HTML version, and make sure that your code is reproducible (make sure your .rmd is knittable, that all data is available, that paths to that data work, etc.).
+Following the same requirements as mentioned in @sec-retidy, present your solutions in a file called `re_airquality.Rmd`, save it in your `vignettes` folder alongside the HTML version, and make sure that your code is reproducible (make sure your .rmd is knittable, that all data is available, that paths to that data work, etc.).
