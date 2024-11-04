@@ -1,4 +1,4 @@
-# Regression and classification {#regressionclassification}
+# Regression and classification {#sec-regressionclassification}
 
 **Chapter lead author: Pepa Aran**
 
@@ -48,7 +48,7 @@ In this section, we will introduce the most basic regression model - linear regr
 
 Let's start with the simplest model: linear regression. You probably have studied linear regression from a statistical perspective. Here, we will take a data-fitting approach.
 
-For example, we can try to explain the relationship between GPP and short wave radiation, like in Chapter \@ref(datavis). The figure below shows a cloud of data points, and a straight line predicting GPP based on observed shortwave radiation values.
+For example, we can try to explain the relationship between GPP and short wave radiation, like in @sec-datavis. The figure below shows a cloud of data points, and a straight line predicting GPP based on observed shortwave radiation values.
 
 ```{r message=FALSE, warning=FALSE}
 # read and format data from Ch 3
@@ -88,7 +88,7 @@ While the regression is a line in two-dimensional space for the univariate case,
 
 **Implementation in R**
 
-To fit a univariate linear regression model in R, we can use the `lm()` function. Already in Chapter \@ref(datawrangling), we created linear models by doing:
+To fit a univariate linear regression model in R, we can use the `lm()` function. Already in @sec-datawrangling, we created linear models by doing:
 
 ```{r message=F}
 # numerical variables only, remove NA
@@ -149,17 +149,17 @@ broom::tidy(linmod1)
 
 An advantage of linear regression is that the coefficients provide information that is straight-forward to interpret. We've seen above, that `GPP_NT_VUT_REF` increases by 0.0255 for a unit increase in `SW_IN_F`. Of course, the units of the coefficients depend on the units of `GPP_NT_VUT_REF` and `SW_IN_F`. This has the advantage that the data does not need to be normalised. That is, a linear regression model with the same predictive skills can be found, irrespective of whether `GPP_NT_VUT_REF` is given in (g C m$^{-2}$s$^{-1}$) or in (t C km$^{-2}$ year$^{-1}$).
 
-Another advantage of linear regression is that it's much less prone to *overfit* than other algorithms. You'll learn more about the concept of *overfitting* in Chapter \@ref(supervisedmli). Not being prone to overfitting can also be a disadvantage: linear regression models are often not flexible enough to be effectively fit to the data. They are also not able to capture non-linearities in the observed relationship and, as we'll see later in this chapter, they often fit the data less well and generate poorer predictions than more complex models.
+Another advantage of linear regression is that it's much less prone to *overfit* than other algorithms. You'll learn more about the concept of *overfitting* in @sec-supervisedmli. Not being prone to overfitting can also be a disadvantage: linear regression models are often not flexible enough to be effectively fit to the data. They are also not able to capture non-linearities in the observed relationship and, as we'll see later in this chapter, they often fit the data less well and generate poorer predictions than more complex models.
 
 A further limitation is that least squares regression requires $n>p$. In words, the number of observations must be greater than the number of predictors. If this is not given, one can resort to stepwise forward regression, where predictors are sequentially added based on which predictor adds the most additional information at each step. We will encounter stepwise regression in the exercises.
 
-When multiple predictors are linearly correlated, then linear regression cannot discern individual effects and individual predictors may appear statistically insignificant when they would be significant if covarying predictors were not included in the model. Such instability can get propagated to predictions. Again, stepwise regression can be used to remedy this problem. However, when one predictor covaries with multiple other predictors, this may not work. For many applications in Geography and Environmental Sciences, we deal with limited numbers of predictors. We can use our own knowledge to examine potentially problematic covariations and make an informed pre-selection rather than throwing all predictors we can possibly think of at our models. Such a pre-selection can be guided by the model performance on a validation data set (more on that in Chapter \@ref(supervisedmlii)).
+When multiple predictors are linearly correlated, then linear regression cannot discern individual effects and individual predictors may appear statistically insignificant when they would be significant if covarying predictors were not included in the model. Such instability can get propagated to predictions. Again, stepwise regression can be used to remedy this problem. However, when one predictor covaries with multiple other predictors, this may not work. For many applications in Geography and Environmental Sciences, we deal with limited numbers of predictors. We can use our own knowledge to examine potentially problematic covariations and make an informed pre-selection rather than throwing all predictors we can possibly think of at our models. Such a pre-selection can be guided by the model performance on a validation data set (more on that in @sec-supervisedmlii).
 
 An alternative strategy is to use *dimension reduction* methods. Principal Component regression reduces the data to capture only the complementary axes along which our data varies and therefore collapses covarying predictors into a single one that represents their common axis of variation. Partial Least Squares regression works similarly but modifies the principal components so that they are maximally correlated to the target variable. You can read more on their implementation in R [here](https://bradleyboehmke.github.io/HOML/linear-regression.html#PCR).
 
 #### Regression on categorical variables
 
-In the [regression within categories](#vis_regr_cat) section of Chapter \@ref(datavis), we saw that when we separate the data into sub-plots, hidden patterns emerge. This information is very relevant for modeling, because it can be included in our regression model. It is crucial to spend enough time exploring the data before you start modeling, because it helps to understand the fit and output of the model, but also to create models that capture the relationships between variables better.
+In the [regression within categories](#vis_regr_cat) section of @sec-datavis, we saw that when we separate the data into sub-plots, hidden patterns emerge. This information is very relevant for modeling, because it can be included in our regression model. It is crucial to spend enough time exploring the data before you start modeling, because it helps to understand the fit and output of the model, but also to create models that capture the relationships between variables better.
 
 So far, we have only used continuous variables as explanatory variables in a linear regression. It is also possible to use categorical variables. To do this in R, such variables cannot be of class `numeric`, otherwise the `lm()` function treats them as continuous variables. For example, although the variable `NIGHT` is categorical with values `0` and `1`, the model `linmod3` treats it as a number. We must make sure that categorical variables have class `character` or, even better, `factor`.
 
@@ -235,11 +235,11 @@ df_cat |>
 
 #### Metrics for regression evaluation
 
-Metrics measure the quality of fit between predicted and observed values. Metrics are essential to model fitting, model selection, and for describing and quantifying patterns in the data. Metrics are also key for guiding the training of machine learning models, as you will learn in Chapter \@ref(supervisedmlii). Different metrics measure different aspects of the model-data agreement. In other words, a single metric never captures all aspects and patterns of the model-data agreement. Therefore, a visual inspection of the model fit is always a good start of the model evaluation.
+Metrics measure the quality of fit between predicted and observed values. Metrics are essential to model fitting, model selection, and for describing and quantifying patterns in the data. Metrics are also key for guiding the training of machine learning models, as you will learn in @sec-supervisedmlii. Different metrics measure different aspects of the model-data agreement. In other words, a single metric never captures all aspects and patterns of the model-data agreement. Therefore, a visual inspection of the model fit is always a good start of the model evaluation.
 
-To get an intuitive understanding of the different abilities of different metrics, compare the scatterplots in Fig. \@ref(fig:correlationplots) and how different aspects of the model-data agreement are measured by different metrics. The observed target values $Y$ are plotted against the predicted values $\hat{Y}$ from a regression model, and the dashed line represents the ideal fit: predictions matching the data perfectly. Definitions of the metrics displayed and other metrics are given below.
+To get an intuitive understanding of the different abilities of different metrics, compare the scatterplots in @fig-correlationplots and how different aspects of the model-data agreement are measured by different metrics. The observed target values $Y$ are plotted against the predicted values $\hat{Y}$ from a regression model, and the dashed line represents the ideal fit: predictions matching the data perfectly. Definitions of the metrics displayed and other metrics are given below.
 
-```{r correlationplots, echo=FALSE, fig.cap="Correlation plots between observed and fitted target values.", fig.height=10, message=FALSE, warning=FALSE}
+```{r fig-correlationplots, echo=FALSE, fig.cap="Correlation plots between observed and fitted target values.", fig.height=10, message=FALSE, warning=FALSE}
 analyse_modobs <- function(df){
   
   # fit linear regression model to get slope
@@ -375,7 +375,7 @@ Common metrics used for evaluating regression fits are:
 
 The mean squared error is defined, as its name suggests, as: $$
 \text{MSE} = \frac{1}{n} \sum_{i=1}^n (Y_i - \hat{Y_i})^2
-$$It measures the magnitude of the errors, and is minimized to fit a linear regression or, as we will see in Chapter \@ref(supervisedmli), during model training when used as a loss function. Note that since it scales with the square of the errors, the MSE is sensitive to large errors in single points, including outliers.
+$$It measures the magnitude of the errors, and is minimized to fit a linear regression or, as we will see in @sec-supervisedmli, during model training when used as a loss function. Note that since it scales with the square of the errors, the MSE is sensitive to large errors in single points, including outliers.
 
 **RMSE**
 
@@ -401,7 +401,7 @@ The linear association between two variables (here $Y$ and $\hat{Y}$) is measure
 r = \frac{\sum_i (Y_i - \bar{Y}) (\hat{Y_i} - \bar{\hat{Y}}) }{\sqrt{ \sum_i(Y_i-\bar{Y})^2 \; (\hat{Y_i}-\bar{\hat{Y}})^2 } }
 $$
 
-The correlation calculated between the target $Y$ and a predictor $X$ can tell us about the predictive power of a regression model (the higher the correlation, the more powerful). We can also compute the correlation between the target $Y$ and the predicted values $\hat{Y}$ by a model (multivariate, or even not linear) to assess the adequacy of the model chosen. See Figure \@ref(fig:correlationplots) as an example. It is noteworthy to mention that correlation is location and scale invariant, hence it will not detect model deviations like the ones in the middle row plots.
+The correlation calculated between the target $Y$ and a predictor $X$ can tell us about the predictive power of a regression model (the higher the correlation, the more powerful). We can also compute the correlation between the target $Y$ and the predicted values $\hat{Y}$ by a model (multivariate, or even not linear) to assess the adequacy of the model chosen. See Figure @fig-correlationplots as an example. It is noteworthy to mention that correlation is location and scale invariant, hence it will not detect model deviations like the ones in the middle row plots.
 
 The squared value of the Pearson's *r* is often reported as "$R^2$" but is not equivalent to the definition of the coefficient of determination given above. However, the square of the Pearson's *r* is closely related to the coefficient of determination $R^2$. For a linear regression, fitted by minimizing the MSE, they are identical (see proof [here](https://statproofbook.github.io/P/slr-rsq)). In subsequent chapters, we will use "$R^2$" to refer to the square of the Pearson's *r* between the observed $Y$ and predicted $\hat{Y}$ values.
 
@@ -449,7 +449,7 @@ coef(lm(y ~ y_fitted, data = df))[2]
 
 In general, the aim of regression modelling is to find a model that best explains the data - but not the random errors in the data. More complex models tend to *overfit* more than simpler models. The implication of overfitting is that the model fits the data used for model fitting well, but doesn't fit well when evaluating the predictions of the same model to new data (data not used for model fitting). In such a case, the model's *generalisability* is poor. We'll learn more about overfitting and generalisability in the context of supervised machine learning in later chapters. Often, simpler models generalise better than more complex model. The challenge is to strike a balance between complexity and generalisability. But how to find the "sweet spot" of this trade-off?
 
-In this context it should be noted that the $R^2$ *always* increases when predictors are added to a model. Therefore, the $R^2$ is not a suitable metric for comparing models that differ with respect to their number of predictors - a factor controlling model complexity. *Cross-validation* can be regarded as the "gold-standard" for measuring model generalisability if the data is plentiful. It will be introduced in the context of supervised machine learning in Chapter \@ref(supervisedmlii). However, when the data size is small, cross validation estimates may not be robust. Without resorting to cross validation, the effect of spuriously improving the evaluation metric by adding uninformative predictors can also be mitigated by penalizing the number of predictors $p$. Different metrics are available:
+In this context it should be noted that the $R^2$ *always* increases when predictors are added to a model. Therefore, the $R^2$ is not a suitable metric for comparing models that differ with respect to their number of predictors - a factor controlling model complexity. *Cross-validation* can be regarded as the "gold-standard" for measuring model generalisability if the data is plentiful. It will be introduced in the context of supervised machine learning in @sec-supervisedmlii. However, when the data size is small, cross validation estimates may not be robust. Without resorting to cross validation, the effect of spuriously improving the evaluation metric by adding uninformative predictors can also be mitigated by penalizing the number of predictors $p$. Different metrics are available:
 
 **Adjusted** $R^2$
 
@@ -518,9 +518,9 @@ First, be systematic with model comparisons. Three key ideas in model selection 
 
 If you're considering different model approaches for the same task, you should first fit the best possible model for each approach, and then compare those optimized models to each other. For example, fit the best linear regression with your available data, the best KNN non-parametric regression model and a random forest. Then compare those three final models and choose the one that answers your research question the best.
 
-One must be careful not to keep training or improving models until they fit the data perfectly, but maintain the models' ability to generalize to newly available data. Chapter \@ref(supervisedmli) introduces the concept of *overfitting*, which is central to data science. Think of model interpretation and generalization when comparing them, not only of performance. Simple models can be more valuable than very complex ones because they tell a better story about the data (e.g., by having few very good predictors rather than thousands of mediocre ones, from which we cannot learn the underlying relationships).
+One must be careful not to keep training or improving models until they fit the data perfectly, but maintain the models' ability to generalize to newly available data.  @sec-supervisedmli introduces the concept of *overfitting*, which is central to data science. Think of model interpretation and generalization when comparing them, not only of performance. Simple models can be more valuable than very complex ones because they tell a better story about the data (e.g., by having few very good predictors rather than thousands of mediocre ones, from which we cannot learn the underlying relationships).
 
-#### Variable selection {#variableselection}
+#### Variable selection {#sec-variableselection}
 
 Let's think of variable selection in the context of linear regression. A brute force approach to variable selection would be: Fit a linear regression for each combination of all available predictors, calculate a metric (e.g., AIC) and choose the best one (lowest AIC). The problem is, if you have, say, eight predictors, you would fit 40320 different regression models. This can be very computationally expensive.
 
@@ -551,7 +551,7 @@ Detecting outliers is important, because they can affect the fit of a model and 
 
 Take a look at the two linear regressions below and how one single point can strongly influence the fit. the added point (red circle around black dot) lies clearly outside the "cloud" of remaining points and doesn't seem to follow the same pattern in the data.
 
-```{r label = "outlier", warning=FALSE, fig.cap="The influence of an outlier on a regression fit."}
+```{r label = "fig-outlier", warning=FALSE, fig.cap="The influence of an outlier on a regression fit."}
 set.seed(2023)
 half_hourly_fluxes_small <- half_hourly_fluxes |>
   sample_n(100) |> # reduce dataset
@@ -582,7 +582,7 @@ plot_4 <- half_hourly_fluxes_small |>
 cowplot::plot_grid(plot_3, plot_4)
 ```
 
-The first step to identifying outliers is usually to look at the data, one variable at a time. Plot a histogram to check the distribution of a variable. The shape of the distribution is very informative for what can be considered an *outlier*. In Chapters \@ref(datawrangling) and \@ref(datavis) it was introduced how to identify values that fall "outside" a distribution using histograms and boxplots. Checking in the histogram if the distribution has fat tails helps to discern whether the values that pop out of a boxplot should be considered outliers or not.
+The first step to identifying outliers is usually to look at the data, one variable at a time. Plot a histogram to check the distribution of a variable. The shape of the distribution is very informative for what can be considered an *outlier*. In @sec-datawrangling and @sec-datavis it was introduced how to identify values that fall "outside" a distribution using histograms and boxplots. Checking in the histogram if the distribution has fat tails helps to discern whether the values that pop out of a boxplot should be considered outliers or not.
 
 ```{r}
 # create an outlier for demonstration purposes
@@ -659,7 +659,7 @@ cowplot::plot_grid(plot_9, plot_10, ncol = 2)
 
 QQ-plots serve to investigate whether the data follows an assumed theoretical distribution. For linear and logistic regression, we would like predictor variables to look as normal, i.e. Gaussian, as possible. You've probably learned some of the reasons for this in the *Quantitative Methods* course (or a similar classical Statistics course), and we will not discuss this further here.
 
-Note however, that neither the histograms, nor the boxplots, or the QQ-plots revealed any evidently suspicious pattern of the added point (shortwave radiation = 1100 W m$^{-2}$ s$^{-1}$, and GPP = -20 $\mu$mol CO$_2$ m$^{-2}$ s$^{-1}$) compared to the *individual* distributions of the two variables. Yet, in Fig. \@ref(fig:outlier), the influence of the outlying point on the fit was clear. Because the suspicious observation is off the multivariate pattern in the remaining data, it becomes very influential. That is, it has a big *leverage*. R provides some useful plots from the fitted regression objects, in particular the "Residuals vs. Leverage" plot:
+Note however, that neither the histograms, nor the boxplots, or the QQ-plots revealed any evidently suspicious pattern of the added point (shortwave radiation = 1100 W m$^{-2}$ s$^{-1}$, and GPP = -20 $\mu$mol CO$_2$ m$^{-2}$ s$^{-1}$) compared to the *individual* distributions of the two variables. Yet, in @fig-outlier, the influence of the outlying point on the fit was clear. Because the suspicious observation is off the multivariate pattern in the remaining data, it becomes very influential. That is, it has a big *leverage*. R provides some useful plots from the fitted regression objects, in particular the "Residuals vs. Leverage" plot:
 
 ```{r}
 # Fit regression with outlier
@@ -721,7 +721,7 @@ $$ This predicted value can be understood as the probability of belonging to cla
 
 A logistic regression model results in a linear classification rule. This means that the $p$-dimensional space will be divided in two by a hyperplane, and the points falling in each side of the hyperplane will be classified as 1 or 0. In the example above with carbon uptake as predictor, the classification boundary would be a point dividing the real line. If we include a second predictor, we would obtain a line dividing the 2-dimensional plane in two.
 
-Furthermore, to fit a logistic regression model means to calculate the maximum likelihood estimator of $\beta$ with an iterative algorithm. We will learn more about iterative model fitting, i.e. parameter optimization, in the context of supervised machine learning (Chapter \@ref(supervisedmlii)).
+Furthermore, to fit a logistic regression model means to calculate the maximum likelihood estimator of $\beta$ with an iterative algorithm. We will learn more about iterative model fitting, i.e. parameter optimization, in the context of supervised machine learning (@sec-supervisedmlii).
 
 **Implementation in R**
 
@@ -780,7 +780,7 @@ Furthermore, logistic regression allows for an interesting interpretation of its
 
 It is easy to extend a logistic regression model to more than two classes by fitting models iteratively. For example, first you classify class 1 against classes 2 and 3; then another logistic regression classifies class 2 against 3.
 
-Nevertheless, logistic regression relies on statistical assumptions to fit the parameters and interpret the fitted parameters. Whenever these assumptions are not met, one must be careful with the conclusions drawn. Other machine learning methods, that will be covered in Chapters \@ref(supervisedmli) and \@ref(supervisedmlii), can also be used for classification tasks. These offer more flexibility than logistic regression, are not necessarily linear, and don't need to satisfy strict statistical assumptions.
+Nevertheless, logistic regression relies on statistical assumptions to fit the parameters and interpret the fitted parameters. Whenever these assumptions are not met, one must be careful with the conclusions drawn. Other machine learning methods, that will be covered in @sec-supervisedmli and @sec-supervisedmlii, can also be used for classification tasks. These offer more flexibility than logistic regression, are not necessarily linear, and don't need to satisfy strict statistical assumptions.
 
 #### Metrics for classification
 
@@ -877,21 +877,21 @@ There are no exercises with provided solutions for this Chapter.
 
 ## Report Exercise
 
-Although there are a lot of helpful packages and user-friendly functions available, you will often have to write your own data analysis routine. This requires good understanding of statistical knowledge, algorithmic thinking and problem-solving skills. While writing your code, you will face many questions and bugs that you need to solve. And knowing where and how to ask for help properly are crucial parts of this process (see \@ref(findinghelp) for more on getting help).
+Although there are a lot of helpful packages and user-friendly functions available, you will often have to write your own data analysis routine. This requires good understanding of statistical knowledge, algorithmic thinking and problem-solving skills. While writing your code, you will face many questions and bugs that you need to solve. And knowing where and how to ask for help properly are crucial parts of this process (see @sec-findinghelp for more on getting help).
 
-In this Report Exercise, stepwise forward regression is to be performed for the task of modelling GPP as a function of predictors available in the dataset of half-hourly ecosystem fluxes. To learn the skills mentioned above, you will (attempt to) write your own stepwise forward regression from scratch based on the algorithm description of stepwise forward regression in Section \@ref(variableselection). The data of half-hourly fluxes can be downloaded from [here](https://raw.githubusercontent.com/geco-bern/agds/main/data/df_for_stepwise_regression.csv).
+In this Report Exercise, stepwise forward regression is to be performed for the task of modelling GPP as a function of predictors available in the dataset of half-hourly ecosystem fluxes. To learn the skills mentioned above, you will (attempt to) write your own stepwise forward regression from scratch based on the algorithm description of stepwise forward regression in @sec-variableselection. The data of half-hourly fluxes can be downloaded from [here](https://raw.githubusercontent.com/geco-bern/agds/main/data/df_for_stepwise_regression.csv).
 
 ### Deliverables for the report {.unnumbered}
 
 The complete workflow of reading the data, performing the stepwise forward regression, visualising and discussing the results should be implemented in an RMarkdown notebook file and added as file `./vignettes/re_stepwise.Rmd` to your *git* repository. You will then point us to the URL of your repository. We will fork your repository and reproduce the workflow implemented in your notebook. The following aspects should be covered in your notebook:
 
-1. An evaluation of all bivariate models (single predictor), implementing just steps 1-3 of the algorithm described in \@ref(variableselection). This should be complemented by a visualisation and a brief discussion of the results.
+1. An evaluation of all bivariate models (single predictor), implementing just steps 1-3 of the algorithm described in @sec-variableselection. This should be complemented by a visualisation and a brief discussion of the results.
 
 2. An implementation of stepwise forward regression, and a visualisation and discussion of its results. If you face unsurmountable challenges and/or errors you didn't manage to resolve, your notebook may implement a minimum reproducible example of your code that produces the error or of your *attempted* implementation of stepwise forward regression.
 
 ### Guide for your implementation {.unnumbered}
 
-- Remember the structure of the loops implemented for the Exercise *Nested loops* in Chapter \@ref(programmingprimers).
+- Remember the structure of the loops implemented for the Exercise *Nested loops* in @sec-programmingprimers.
 - It may be helpful to write a "pseudo-code" that defines the structure of loops and conditionals and defines the points at which certain evaluations and function calls are performed, but cannot be actually run.
 - [This Stackoverflow post](https://stackoverflow.com/questions/4951442/formula-with-dynamic-number-of-variables) may be helpful for dynamically creating formulas, given a character vector or variable names, 
 - When discussing results, consider why a certain variable was not chosen in the final model. How do non-included variables relate to variables that are included? How do the model metrics change when adding variables? Can you explain their patterns with your statistical knowledge?

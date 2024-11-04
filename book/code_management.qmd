@@ -1,4 +1,4 @@
-# Code management {#codemgmt}
+# Code management {#sec-codemgmt}
 
 **Chapter lead author: Koen Hufkens**
 
@@ -35,9 +35,9 @@ knitr::include_graphics("https://eliocamp.github.io/reproducibility-with-r/mater
 
 In this chapter, you will learn how to use *git* and GitHub to manage your project and collaborate on code.
 
-> NOTE: Coding style, and documentation practices of the code itself have been covered previously in Chapter \@ref(programmingprimers). Although the tutorial below focuses on GitHub, the jargon and operations are transferable to other platforms such as [GitLab](https://gitlab.com) and [Codeberg](https://codeberg.org).
+> NOTE: Coding style, and documentation practices of the code itself have been covered previously in @sec-programmingprimers. Although the tutorial below focuses on GitHub, the jargon and operations are transferable to other platforms such as [GitLab](https://gitlab.com) and [Codeberg](https://codeberg.org).
 
-### Git and local version control {#gitworkflow}
+### Git and local version control {#sec-gitworkflow}
 
 *Git* allows for the tracking of changes in code (or any file) within a git project. A *git* project is defined by the topmost directory in which a *git* project is created. For example, the following project is not tracked for changes using git.
 
@@ -54,7 +54,7 @@ usethis::use_git()
 
 This will create a *git* repository in your project. It will also create a `.gitignore` file which specifies which files NOT to track (even if asked to). In addition it will make an first commit.
 
-#### git add
+#### git add {sec-gitt-add}
 
 Before we can track anything, we need to tell *git* which files to track. In *git*-speak, we *stage* the files. We therefore have to `add` them to an index of tracked files. You can either do this on the command line using:
 
@@ -135,13 +135,13 @@ Next, we'll setup an R project which is associated with the repository. Use: Fil
 knitr::include_graphics("./figures/git_project_wizard.png")
 ```
 
-In the "repository URL", paste the URL of your new GitHub repository. In the example above, this would be `https://github.com/khufkens/YOUR_PROJECT.git`. Select a location where to store the project, select the "Open in new session" option and click "Create Project". A window will pop up, asking for your GitHub username and a password. This password is *not* your GitHub login password but the PAT described above. After entering your credential, RStudio creates a `\*.Proj` file as well as a `.gitignore` file (Section \@ref(git-add)). You can add both files as you would otherwise (see Section \@ref(git-add)), and these files are tracked locally.
+In the "repository URL", paste the URL of your new GitHub repository. In the example above, this would be `https://github.com/khufkens/YOUR_PROJECT.git`. Select a location where to store the project, select the "Open in new session" option and click "Create Project". A window will pop up, asking for your GitHub username and a password. This password is *not* your GitHub login password but the PAT described above. After entering your credential, RStudio creates a `\*.Proj` file as well as a `.gitignore` file (@sec-git-add). You can add both files as you would otherwise (see @sec-git-add, and these files are tracked locally.
 
 #### git push
 
 Once a remote git service has been configured, you can push your local *git* repository to this remote repository, i.e. syncing both. You can use both the push buttons in the RStudio panel for this or the command linen using `git push`. At the end of a day or a session, it is always advised to `push` your changes to your remote repository to store any changes.
 
-```{r label="remotegithubworkflow", echo=FALSE, fig.cap="Remote git workflow - by Paola Corrales and Elio Campitelli"}
+```{r label="fig-remotegithubworkflow", echo=FALSE, fig.cap="Remote git workflow - by Paola Corrales and Elio Campitelli"}
 knitr::include_graphics("https://eliocamp.github.io/reproducibility-with-r/materials/day2/02-git/images/pull-request.png")
 ```
 
@@ -198,7 +198,7 @@ knitr::include_graphics("./figures/git_pull_request.png")
 
 ### Location based code management - github templates
 
-Both code (and data) management require you to be conscientious about where you store your code (and data). Structuring your projects using the same template will allow you to understand where all pieces of an an analysis are stored. This has been mentioned in Chapter \@ref(openscience).
+Both code (and data) management require you to be conscientious about where you store your code (and data). Structuring your projects using the same template will allow you to understand where all pieces of an an analysis are stored. This has been mentioned in @sec-openscience.
 
 In our [R project template](https://github.com/geco-bern/R_proj_template), we provide a project structure for both data and code which removes the mental overhead of structuring data projects. This project structure sorts code, data and reporting in a consistent way.
 
