@@ -1,3 +1,3 @@
-# R book template
+# AGDS Book Website
 
-A quarto project template to use for courses and other documentation produced by the GECO group. Based on the BlueGreen Labs template by Koen Hufkens.
+This repository contains the markdown files used to generate the website for the AGDS book: https://geco-bern.github.io/agds_book/
