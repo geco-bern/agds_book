@@ -937,6 +937,7 @@ status <- httr::GET(
 # to visualize the data
 # we need to load the {terra}
 # library
+library(terra)
 sand <- terra::rast(file.path(tempdir(), "T_SAND.nc"))
 terra::plot(sand)
 ```
@@ -966,7 +967,7 @@ status <- httr::GET(
   url = url,
   query = query,
   httr::write_disk(
-    path = file.path(tempdir(), "T_SAND.nc"),
+    path = file.path(tempdir(), "T_SILT.nc"),
     overwrite = TRUE
   )
 )
@@ -974,7 +975,7 @@ status <- httr::GET(
 # to visualize the data
 # we need to load the {terra}
 # library
-sand <- terra::rast(file.path(tempdir(), "T_SAND.nc"))
+sand <- terra::rast(file.path(tempdir(), "T_SILT.nc"))
 terra::plot(sand)
 ```
 
