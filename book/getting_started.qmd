@@ -582,13 +582,13 @@ To install the `netCDF` command-line tools, follow these instructions:
      
 You can check if the installation was successful by running the following code in the RStudio console:
 ```{r}
-terra::rast("https://raw.githubusercontent.com/geco-bern/agds/main/data/demo_data.nc")
+terra::rast("https://raw.githubusercontent.com/geco-bern/agds_book/refs/heads/main/book/data/demo_data.nc")
 ```
 
 Or, to be independent of R and the {terra} package, you can test it by running the following code in your bash terminal (on Mac or Linux):
 ```sh
 # download file demo_data.nc
-curl --output demo_data.nc https://raw.githubusercontent.com/geco-bern/agds/main/data/demo_data.nc
+curl --output demo_data.nc https://raw.githubusercontent.com/geco-bern/agds_book/refs/heads/main/book/data/demo_data.nc
 
 # show header of file
 ncdump -h demo_data.nc

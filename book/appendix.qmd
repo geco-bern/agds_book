@@ -758,20 +758,20 @@ While **not leaving your R session**, download and open the files at the followi
 ```{r}
 # read in the first demo
 demo_01 <- read.table(
-  "https://raw.githubusercontent.com/geco-bern/agds/main/data/demo_1.csv",
+  "https://raw.githubusercontent.com/geco-bern/agds_book/refs/heads/main/book/data/demo_1.csv",
   sep = ",",
   header = TRUE
   )
 
 # read in second demo
 demo_02 <- read.table(
-  "https://raw.githubusercontent.com/geco-bern/agds/main/data/demo_2.csv",
+  "https://raw.githubusercontent.com/geco-bern/agds_book/refs/heads/main/book/data/demo_2.csv",
   sep = " ",
   header = TRUE
   )
 
 demo_03 <- read.table(
-  "https://raw.githubusercontent.com/geco-bern/agds/main/data/demo_3.csv",
+  "https://raw.githubusercontent.com/geco-bern/agds_book/refs/heads/main/book/data/demo_3.csv",
   sep = ";",
   comment.char = "|",
   header = TRUE,
@@ -830,7 +830,7 @@ jsonlite::write_json(demo_all_new, path = "./my_json_file.json")
 Download and open the following file:
 
 ``` bash
-https://raw.githubusercontent.com/geco-bern/agds/main/data/demo_data.nc
+https://raw.githubusercontent.com/geco-bern/agds_book/refs/heads/main/book/data/demo_data.nc
 ```
 
 1.  What file format are we dealing with?
@@ -848,7 +848,7 @@ In R:
 # read unknown netcdf file using the {terra} library
 library(terra)
 unknown_netcdf <- terra::rast(
-  "https://raw.githubusercontent.com/geco-bern/agds/main/data/demo_data.nc"
+  "https://raw.githubusercontent.com/geco-bern/agds_book/refs/heads/main/book/data/demo_data.nc"
   )
 
 # print the meta-data by calling the variable
@@ -876,13 +876,13 @@ terra::writeRaster(
   )
 ```
 
-5.  Download and open the following file:  `https://raw.githubusercontent.com/geco-bern/agds/main/data/demo_data.tif`. Does this data seem familiar, and how can you tell? What are your conclusions?
+5.  Download and open the following file:  `https://raw.githubusercontent.com/geco-bern/agds_book/refs/heads/main/book/data/demo_data.tif`. Does this data seem familiar, and how can you tell? What are your conclusions?
 
 ```{r eval=FALSE}
 # read unknown tif file using the {terra} library
 library(terra)
 unknown_tif <- terra::rast(
-  "https://raw.githubusercontent.com/geco-bern/agds/main/data/demo_data.tif"
+  "https://raw.githubusercontent.com/geco-bern/agds_book/refs/heads/main/book/data/demo_data.tif"
   )
 
 # print the meta-data by calling the variable

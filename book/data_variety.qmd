@@ -443,9 +443,9 @@ status <- httr::POST(
 While **not leaving your R session**, download and open the files at the following locations:
 
 ``` bash
-https://raw.githubusercontent.com/geco-bern/agds/main/data/demo_1.csv
-https://raw.githubusercontent.com/geco-bern/agds/main/data/demo_2.csv
-https://raw.githubusercontent.com/geco-bern/agds/main/data/demo_3.csv
+https://raw.githubusercontent.com/geco-bern/agds_book/refs/heads/main/book/data/demo_1.csv
+https://raw.githubusercontent.com/geco-bern/agds_book/refs/heads/main/book/data/demo_2.csv
+https://raw.githubusercontent.com/geco-bern/agds_book/refs/heads/main/book/data/demo_3.csv
 ```
 
 Once loaded into your R environment, combine and save all data as a **temporary** `CSV` file. Read in the new temporary `CSV` file, and save it as a `JSON` file in your current working directory.
@@ -456,14 +456,14 @@ Once loaded into your R environment, combine and save all data as a **temporary*
 Download and open the following file:
 
 ``` r
-https://raw.githubusercontent.com/geco-bern/agds/main/data/demo_data.nc
+https://raw.githubusercontent.com/geco-bern/agds_book/refs/heads/main/book/data/demo_data.nc
 ```
 
 1.  What file format are we dealing with?
 2.  What library would you use to read this kind of data?
 3.  What does this file contain?
 4.  Write this file to disk in a different geospatial format you desire (use the R documentation of the library used to read the file and the chapter information).
-5.  Download and open the following file:  `https://raw.githubusercontent.com/geco-bern/agds/main/data/demo_data.tif`. Does this data seem familiar, and how can you tell? What are your conclusions?
+5.  Download and open the following file:  `https://raw.githubusercontent.com/geco-bern/agds_book/refs/heads/main/book/data/demo_data.tif`. Does this data seem familiar, and how can you tell? What are your conclusions?
 
 ### API use {-}
 

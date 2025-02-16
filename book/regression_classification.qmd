@@ -72,7 +72,7 @@ plot_1 +
                color = "blue", lwd = 1.2, alpha = 0.8)
 ```
 
-> To reproduce this code chunk, you can download the file `FLX_CH-Lae_FLUXNET2015_FULLSET_HH_2004-2006_CLEAN` from [here](https://raw.githubusercontent.com/geco-bern/agds/main/data/FLX_CH-Lae_FLUXNET2015_FULLSET_HH_2004-2006_CLEAN.csv) and read it from the local path where the file is stored on your machine. All data files used in this tutorials are stored [here](https://github.com/geco-bern/agds/tree/main/data).
+> To reproduce this code chunk, you can download the file `FLX_CH-Lae_FLUXNET2015_FULLSET_HH_2004-2006_CLEAN` from [here](https://raw.githubusercontent.com/geco-bern/agds_book/refs/heads/main/book/data/FLX_CH-Lae_FLUXNET2015_FULLSET_HH_2004-2006_CLEAN.csv) and read it from the local path where the file is stored on your machine. All data files used in this tutorials are stored [here](https://github.com/geco-bern/agds/tree/main/data).
 
 We want to find the best straight line that approximates a cloud of data points. For this, we assume a linear relationship between a single explanatory variable $X$ and our target $Y$: $$
 Y_i \sim \beta_0 + \beta_1 X_i, \;\;\; i = 1, 2, ...n \;,
@@ -876,7 +876,7 @@ There are no exercises with provided solutions for this Chapter.
 
 Although there are a lot of helpful packages and user-friendly functions available, you will often have to write your own data analysis routine. This requires good understanding of statistical knowledge, algorithmic thinking and problem-solving skills. While writing your code, you will face many questions and bugs that you need to solve. And knowing where and how to ask for help properly are crucial parts of this process (see @sec-findinghelp for more on getting help).
 
-In this Report Exercise, stepwise forward regression is to be performed for the task of modelling GPP as a function of predictors available in the dataset of half-hourly ecosystem fluxes. To learn the skills mentioned above, you will (attempt to) write your own stepwise forward regression from scratch based on the algorithm description of stepwise forward regression in @sec-variableselection. The data of half-hourly fluxes can be downloaded from [here](https://raw.githubusercontent.com/geco-bern/agds/main/data/df_for_stepwise_regression.csv).
+In this Report Exercise, stepwise forward regression is to be performed for the task of modelling GPP as a function of predictors available in the dataset of half-hourly ecosystem fluxes. To learn the skills mentioned above, you will (attempt to) write your own stepwise forward regression from scratch based on the algorithm description of stepwise forward regression in @sec-variableselection. The data of half-hourly fluxes can be downloaded from [here](https://raw.githubusercontent.com/geco-bern/agds_book/refs/heads/main/book/data/df_for_stepwise_regression.csv).
 
 ### Deliverables for the report {.unnumbered}
 
