@@ -681,9 +681,7 @@ Finally, it's very important that, before you remove a value because it may be a
 
 Classification models predict a categorical target variable. Note that predictors of a classification model may still be, and often are, continuous. We will introduce a classification problem with a binary target, since it's straightforward to generalize to categorical variables with more than two classes. As an example, we use the `CO2` dataset from the [{datasets} package](https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/zCO2.html), which contains data from an experiment on the cold tolerance of the grass species *Echinochloa crus-galli*. 
 
-```{r label="grass", echo=FALSE, fig.cap="*Echinochloa crus-galli*, image from [swbiodiversity.org](https://swbiodiversity.org/seinet/taxa/index.php?taxon=2915)", out.width="60%", fig.align='center'}
-knitr::include_graphics("https://swbiodiversity.org/imglib/h_seinet/seinet/genfield/palexander/set003/Echinochloa_c-g_19Aug06_1595.jpg")
-```
+![*Echinochloa crus-galli*, image from [swbiodiversity.org](https://swbiodiversity.org/seinet/taxa/index.php?taxon=2915)](https://swbiodiversity.org/imglib/h_seinet/seinet/genfield/palexander/set003/Echinochloa_c-g_19Aug06_1595.jpg){#fig-grass width=60% fig.align='center'}
 
 We will try to classify the origin of each plant (categorical variable `Type` with values `Quebec` or `Mississippi`) depending on the carbon dioxide uptake rate of the plant (continuous variable `uptake` measured in $\mu$mol m$^{-2}$s$^{-1}$). More information on the dataset can be obtained by typing `?datasets::CO2` in the console.
 
@@ -811,9 +809,8 @@ A challenge is posed by *imbalanced* classes. For a dataset where $90\%$ of the 
 
 -   **Receiver operating characteristic (ROC) curve**: To evaluate the performance of a binary classification model, it's common to plot the *ROC curve*, where the TPR is plotted against the FPR, for varying values of the threshold $\tau$ used in the classification rule. When we decrease the threshold, we get more positive values (more observations are classified as 1), increasing both the true positive and false positive rate. The following image describes clearly how to interpret a ROC curve plot:
 
-```{r roccurve, echo = FALSE, fig.cap = "ROC curves and how they compare, from [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Roc_curve.svg).", out.width="60%", fig.align='center'}
-knitr::include_graphics("figures/Roc_curve.png")
-```
+![ROC curves and how they compare, from [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Roc_curve.svg).](./figures/Roc_curve.png){#fig-roccurve width=60% fig.align='center'}
+
 
 -   **AUC**: The "area under the curve" is defined as the area betwee the ROC curve and the x-axis. For a random classifier we would have AUC = 0.5 and for the perfect classifier, AUC = 1. The aim is to increase the AUC. Nevertheless, a visual inspection of the ROC curve can say even more.
 

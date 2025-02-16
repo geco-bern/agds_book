@@ -36,9 +36,7 @@ To use R and RStudio, you will first need to download and install them on your c
 
 RStudio provides a user-friendly interface for writing, running, and debugging R code. When you open RStudio, you will see the following:
 
-```{r label="rstudio", echo=FALSE, fig.cap="RStudio interface.", out.width="75%", fig.align='center'}
-knitr::include_graphics("./figures/RStudio_interface_screenshot.png")
-```
+![RStudio interface.](./figures/RStudio_interface_screenshot.png){#fig-rstudio width=75% fig.align='center'}
 
 The interface is divided into four main panels:
 
@@ -479,16 +477,13 @@ Code chunks that contain executable R code are opened by a line ` ```{r} `.
 
 The document can be rendered by calling `rmarkdown::render()` on the command line or hitting the **Knit** button in the RStudio IDE. Depending on your settings a html file, pdf or docx file will be generated in your current directory (and or displayed in the IDE viewer). The RMarkdown source file shown in @fig-rmarkdown is rendered to:
 
-```{r label="rmarkdownrender", echo=FALSE, fig.cap="Rendered HTML output.", out.width="75%", fig.align='center'}
-knitr::include_graphics("./figures/rmarkdown_render.png")
-```
+![Rendered HTML output.](./figures/rmarkdown_render.png){#fig-rmarkdownrender width=75% fig.align='center'}
 
 Note that the code chunk produced a figure as an output which was placed directly in the rendered html. This demonstrates the usefulness of RMarkdown as *notebooks* to document entire workflows and make their outputs reproducible. 
 
 To create a new RMarkdown file, select from the drop-down menu in the top-left corner of RStudio as shown below:
-```{r label="newrmarkdown", echo=FALSE, fig.cap="Create a new RMarkdown file", out.width="25%", fig.align='center'}
-knitr::include_graphics("./figures/newrmarkdown.png")
-```
+
+![Create a new RMarkdown file.](./figures/newrmarkdown.png){#fig-newrmarkdown width=25% fig.align='center'}
 
 ### Workspace management {#sec-wspmgmt}
 
@@ -519,9 +514,7 @@ Note that when a path is specified, e.g,. in a script or RMarkdown file that sit
 
 R sessions in RStudio that are connected to such project directories are *R projects*. To create a new R project, go to the **File** menu and select **New Project...**. This will open the *New Project* dialog, where you can choose where to save your project and what type of project to create. The current project that you are working on is shown on the upper right corner of the RStudio interface. Here you can also switch between existing projects or create a new one.
 
-```{r label="projectmenu", echo=FALSE, fig.cap="R project menu.", out.width="30%", fig.align='center'}
-knitr::include_graphics("./figures/RStudio_RProject_screenshot.png")
-```
+![R project menu.](./figures/RStudio_RProject_screenshot.png){#fig-projectmenu width=30% fig.align='center'}
 
 When starting a new project, named `project_name`, a file `project_name.Rproj` is created in the top-level project directory. It stores information about your the session (settings, open files, etc.), automatically enables useful features in RStudio for easy package, website, or book building, lets you manage code version control (see next sub-section), and optionally (not recommended) stores the environment of your current session. It is not recommended to save and restore entire environments. Instead read and write objects from and into files to guarantee control, transparency, and reproducibility. When you want to continue working on an existing R project, you can start a new session by clicking on your `project_name.Rproj` file. This restores
 
@@ -611,21 +604,13 @@ In this section, you will install *git*, create a GitHub account and connect it 
     -    If it says "(Not Found)", try the following:
          -    For Windows, it's probably `C:\\Program Files\\Git\\bin\\git.exe`.
          -    For MacOS and Linux, you can type `which git` in the Terminal and it will show the installation location.
-         -    If you get an error after trying this, ask the teaching assistance.
-         
-```{r label="gitrstudio", echo=FALSE, fig.cap="Set up Git for RStudio.", out.width="75%", fig.align='center'}
-knitr::include_graphics("./figures/git_in_rstudio.png")
-```
-
+         -    If you get an error after trying this, ask the teaching assistance.\
+    ![Set up Git for RStudio.](./figures/git_in_rstudio.png){#fig-gitrstudio width=75% fig.align='center'}
 -   Connect your GitHub account with Git locally, using SSH keys (which are cryptographic authentication credentials). You can do this from RStudio following the steps:
-    -   Go to **Tools \> Global Options \> Git/SVN** and select **Create SSH Key...**. Create an SSH key with the default options (you can ignore the passphrase and click "Create"). This will create a new SSH in your default `~/.ssh` folder. 
-```{r label="createsshkey", echo=FALSE, fig.cap="Create an SSH key from RStudio.", out.width="75%", fig.align='center'}
-knitr::include_graphics("./figures/create_ssh_key.png")
-```
+    -   Go to **Tools \> Global Options \> Git/SVN** and select **Create SSH Key...**. Create an SSH key with the default options (you can ignore the passphrase and click "Create"). This will create a new SSH in your default `~/.ssh` folder. \
+    ![Create an SSH key from RStudio:](./figures/create_ssh_key.png){#fig-createsshkey width=75% fig.align='center'}
     -   Next, click on **View public key** (above your new SSH key) and copy the public key (all the text). 
-```{r label="viewpublickey", echo=FALSE, fig.cap="Copy the public key for the SSH connection", out.width="75%", fig.align='center'}
-knitr::include_graphics("./figures/copy_public_key.png")
-```
+    ![Copy the public key for the SSH connection.](./figures/copy_public_key.png){#fig-viewpublickey width=75% fig.align='center'}
     -   Go back to your browser and open your GitHub account. At the top right, open your profile's menu and choose **Settings > SSH and GPG Keys**. Then select **Add new SSH key**. Give your SSH connection a name, for example "My laptop" and paste the *public key* that you copied from RStudio. If you have problems, check out [these instructions](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) to add a new SSH key to your GitHub account. 
     -   Finally, you can test your SSH connection following [these instructions](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/testing-your-ssh-connection). Note that, at the top of these websites, there's an option to choose your OS because the steps vary depending on the type of computer your work with.
 
@@ -633,27 +618,15 @@ knitr::include_graphics("./figures/copy_public_key.png")
 
 Your performance assessment for Applied Geodata Science will be in the form of a report. You will approach the writing of this report as if you were working on a clean, structured and reproducible data science project. This section is meant to guide you through the preparation of your report workspace, such that it's in the form that you will submit it. Following the next steps, you will set up a git repository containing an R project and an R Markdown file. 
 
-- Log into GitHub in your browser and create a **new repository**. Name it *agds_report_yourname*, give it a short description and set it to be public, so we can read it for the evaluation. Include a README file (it's a sort of menu which you'll edit later), a `.gitignore` template for R (select in the drop-down menu) and a Creative Commons license (for code sharing rights, etc).
-
-```{r label="reportrepository", echo=FALSE, fig.cap="Create a Git repository for your report.", out.width="75%", fig.align='center'}
-knitr::include_graphics("./figures/create_git_repository.png")
-```
-- Now that you have a GitHub repository, open it and you should see a green button saying **Code**. Go to **SSH** and copy that url. You will use it to *clone* the repository.
-
-```{r label="copysshrepo", echo=FALSE, fig.cap="Copy the SSH url to clone your reporitory.", out.width="75%", fig.align='center'}
-knitr::include_graphics("./figures/copy_ssh_repo.png")
-```
-- Open RStudio. Create a new R project (opening the **New Project** dialog) from a GitHub repository. Paste the repository's url, give it a name (by default the same as the repository) and select in which folder you want to keep it locally (for example the base directory `~`). This will clone all the files from GitHub onto the project directory (i.e. folder) in your computer.
-
-```{r label="clonerepo", echo=FALSE, fig.cap="Clone your repository and create an R project.", out.width="75%", fig.align='center'}
-knitr::include_graphics("./figures/clone_repo_ssh.png")
-```
+- Log into GitHub in your browser and create a **new repository**. Name it *agds_report_yourname*, give it a short description and set it to be public, so we can read it for the evaluation. Include a README file (it's a sort of menu which you'll edit later), a `.gitignore` template for R (select in the drop-down menu) and a Creative Commons license (for code sharing rights, etc). \
+  ![Create a Git repository for your report.](./figures/create_git_repository.png){#fig-reportrepository width=75% fig.align='center'}
+- Now that you have a GitHub repository, open it and you should see a green button saying **Code**. Go to **SSH** and copy that url. You will use it to *clone* the repository. \
+  ![Copy the SSH url to clone your reporitory.](./figures/copy_ssh_repo.png){#fig-copysshrepo width=75% fig.align='center'}
+- Open RStudio. Create a new R project (opening the **New Project** dialog) from a GitHub repository. Paste the repository's url, give it a name (by default the same as the repository) and select in which folder you want to keep it locally (for example the base directory `~`). This will clone all the files from GitHub onto the project directory (i.e. folder) in your computer. \
+  ![Clone your repository and create an R project.](./figures/clone_repo_ssh.png){#fig-clonerepo width=75% fig.align='center'}
 - With this, you're set up. If your R project `agds_report_yourname` is open, you should see a **Git** panel in RStudio (next to **Environment**) and also be able to use Git in the **Terminal** panel in RStudio. As mentioned above, we will start working with these tools in a few weeks and they will be a crucial part of the course.
-- You'll see a detailed explanation of the *git* workflows in @sec-codemgmt. For now, add your solutions to each report exercise into a separate RMarkdown file, placed in a subdirectory named `./vignettes/`. The first Report Exercise will be the one for @sec-datawrangling where you will be asked to implement your solutions in a file called `re_tidy.Rmd`. At that stage, your repository should look like this:
-
-```{r label="reportmarkdown", echo=FALSE, fig.cap="At first, the R Markdown for your report will look something like this.", out.width="75%", fig.align='center'}
-knitr::include_graphics("./figures/Rmd_report.png")
-```
+- You'll see a detailed explanation of the *git* workflows in @sec-codemgmt. For now, add your solutions to each report exercise into a separate RMarkdown file, placed in a subdirectory named `./vignettes/`. The first Report Exercise will be the one for @sec-datawrangling where you will be asked to implement your solutions in a file called `re_tidy.Rmd`. At that stage, your repository should look like this: \
+  ![At first, the R Markdown for your report will look something like this.](./figures/Rmd_report.png){#fig-reportmarkdown width=75% fig.align='center'}
 
 In total you should have two R projects related to this course: a local project containing solutions to general exercises (for yourself, created in the exercises below) and the report project + git repository (that you just created and will share with us at the end of the course). Your report project should not include the solutions to general exercises.
 

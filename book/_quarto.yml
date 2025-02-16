@@ -28,7 +28,7 @@ book:
     - interpretable-ml.qmd
     - appendix.qmd
     - references.qmd
-  favicon: "figures/favicon.ico"
+  favicon: "./figures/favicon.ico"
   twitter-card: true
   search: true
   repo-url: https://github.com/stineb/agds_book/

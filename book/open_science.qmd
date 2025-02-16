@@ -28,9 +28,7 @@ Open and reproducible science is a movement to make scientific research (output)
 
 It is important to acknowledge that there is a spectrum of reproducible data and code workflows which depends on the state or source of the data and the output of the code (or analysis). Within the context of this course, we focus primarily on the practical aspects for reproducible science, i.e., ensuring that given the same data and code, the results will be similar.
 
-```{r label="repromatrix", echo=FALSE, fig.cap="The reproducibility matrix by The Turing Way"}
-knitr::include_graphics("https://the-turing-way.netlify.app/_images/reproducible-matrix.jpg")
-```
+![The reproducibility matrix by The Turing Way.](https://the-turing-way.netlify.app/_images/reproducible-matrix.jpg){#fig-repromatrix width=60% fig.align='center'}
 
 The basics of open science coding and data practices rely on a number of simple concepts. The sections below describe a selection of the most important ones. Sticking to these principles and tools will increase the reproducibility of your work greatly.
 
@@ -76,9 +74,7 @@ The code-chunk above is a visualisation of a folder (aka. directory) structure o
 
 To sidestep some of the manual management in R you can use a dedicated pipeline tool like the {targets} package in R. The package learns how your pipeline fits together, skips tasks that are already up-to-date, and runs only the necessary computation. {targets} can also visualize the progress of your workflow.
 
-```{r label="targets", echo=FALSE, fig.cap="A targets visualized workflow by rOpenSci"}
-knitr::include_graphics("https://books.ropensci.org/targets/man/figures/tar_watch.png")
-```
+![A targets visualized workflow by rOpenSci.](https://books.ropensci.org/targets/man/figures/tar_watch.png){#fig-targets width=60% fig.align='center'}
 
 Due to the added complexity of the {targets} package, we won't include extensive examples of such a workflow but refer to the excellent documentation of the package for simple examples [here](https://books.ropensci.org/targets/walkthrough.html).
 
