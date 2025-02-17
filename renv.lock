@@ -879,6 +879,12 @@
         "openssl"
       ]
     },
+    "hwsdr": {
+      "Package": "hwsdr",
+      "Version": "1.1",
+      "Source": "Repository",
+      "Requirements": []
+    },
     "ids": {
       "Package": "ids",
       "Version": "1.0.1",
