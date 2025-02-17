@@ -30,8 +30,8 @@ jobs:
           r-version: '4.3.2'
 
       - name: Install spatial dependencies
-        run: sudo apt-get install libgdal-dev libproj-dev libgeos-dev libudunits2-dev netcdf-bin
-      
+        run: sudo apt-get install libgdal-dev gdal-bin libgeos-dev libproj-dev libsqlite3-dev libssl-dev libudunits2-dev netcdf-bin
+
       - name: Install dependencies
         run: |
           install.packages("renv")
