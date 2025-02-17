@@ -923,23 +923,22 @@ query <- list(
   "accept" = "netcdf4"
 )
 
-# download data using the
-# API endpoint and query data
-status <- httr::GET(
-  url = url,
-  query = query,
-  httr::write_disk(
-    path = file.path(tempdir(), "T_SAND.nc"),
-    overwrite = TRUE
-  )
-)
-
-# to visualize the data
-# we need to load the {terra}
-# library
-# sand <- terra::rast(file.path(tempdir(), "T_SAND.nc"))
-# terra::plot(sand)
-readLines(file.path(tempdir(), "T_SAND.nc"), warn = FALSE) == "Format netcdf4 is not supported for Grid data request" # TODO: fix this
+###TODO: fix this on CI: # download data using the
+###TODO: fix this on CI: # API endpoint and query data
+###TODO: fix this on CI: status <- httr::GET(
+###TODO: fix this on CI:   url = url,
+###TODO: fix this on CI:   query = query,
+###TODO: fix this on CI:   httr::write_disk(
+###TODO: fix this on CI:     path = file.path(tempdir(), "T_SAND.nc"),
+###TODO: fix this on CI:     overwrite = TRUE
+###TODO: fix this on CI:   )
+###TODO: fix this on CI: )
+###TODO: fix this on CI: 
+###TODO: fix this on CI: # to visualize the data
+###TODO: fix this on CI: # we need to load the {terra}
+###TODO: fix this on CI: # library
+###TODO: fix this on CI: sand <- terra::rast(file.path(tempdir(), "T_SAND.nc"))
+###TODO: fix this on CI: terra::plot(sand)
 ```
 
 2. Consulting the original data pages or the package help files one can determine that the parameter "T_SAND" needs to be replaced by "T_SILT" in both the URL and the query.
@@ -961,23 +960,22 @@ query <- list(
   "accept" = "netcdf4"
 )
 
-# download data using the
-# API endpoint and query data
-status <- httr::GET(
-  url = url,
-  query = query,
-  httr::write_disk(
-    path = file.path(tempdir(), "T_SILT.nc"),
-    overwrite = TRUE
-  )
-)
-
-# to visualize the data
-# we need to load the {terra}
-# library
-# sand <- terra::rast(file.path(tempdir(), "T_SILT.nc"))
-# terra::plot(sand)
-readLines(file.path(tempdir(), "T_SAND.nc"), warn = FALSE) == "Format netcdf4 is not supported for Grid data request" # TODO: fix this
+###TODO: fix this on CI: # download data using the
+###TODO: fix this on CI: # API endpoint and query data
+###TODO: fix this on CI: status <- httr::GET(
+###TODO: fix this on CI:   url = url,
+###TODO: fix this on CI:   query = query,
+###TODO: fix this on CI:   httr::write_disk(
+###TODO: fix this on CI:     path = file.path(tempdir(), "T_SILT.nc"),
+###TODO: fix this on CI:     overwrite = TRUE
+###TODO: fix this on CI:   )
+###TODO: fix this on CI: )
+###TODO: fix this on CI: 
+###TODO: fix this on CI: # to visualize the data
+###TODO: fix this on CI: # we need to load the {terra}
+###TODO: fix this on CI: # library
+###TODO: fix this on CI: silt <- terra::rast(file.path(tempdir(), "T_SILT.nc"))
+###TODO: fix this on CI: terra::plot(silt)
 ```
 
 #### Dedicated libraries
@@ -987,18 +985,17 @@ readLines(file.path(tempdir(), "T_SAND.nc"), warn = FALSE) == "Format netcdf4 is
 ```{r}
 # Download a soil fraction map
 # of sand for a given bounding box
-hwsdr::ws_subset(
-  location = c(45.5, 5.9, 48, 10.7),
-  param = "T_SAND",
-  path = tempdir()
-)
-
-# to visualize the data
-# we need to load the {terra}
-# library
-# sand <- terra::rast(file.path(tempdir(), "T_SAND.nc"))
-# terra::plot(sand)
-# readLines(file.path(tempdir(), "T_SAND.nc"), warn = FALSE) == "Format netcdf4 is not supported for Grid data request" # TODO: fix this
+###TODO: fix this on CI: hwsdr::ws_subset(
+###TODO: fix this on CI:   location = c(45.5, 5.9, 48, 10.7),
+###TODO: fix this on CI:   param = "T_SAND",
+###TODO: fix this on CI:   path = tempdir()
+###TODO: fix this on CI: )
+###TODO: fix this on CI: 
+###TODO: fix this on CI: # to visualize the data
+###TODO: fix this on CI: # we need to load the {terra}
+###TODO: fix this on CI: # library
+###TODO: fix this on CI: sand <- terra::rast(file.path(tempdir(), "T_SAND.nc"))
+###TODO: fix this on CI: terra::plot(sand)
 ```
 
 2. You can easily list all {MODISTools} products using:
