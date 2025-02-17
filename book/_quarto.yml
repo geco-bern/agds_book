@@ -12,22 +12,22 @@ book:
   date: "2023/11/07"
   page-navigation: true
   chapters:
-    - index.qmd
-    - intro.qmd
-    - getting_started.qmd
-    - programming_primers.qmd
-    - data_wrangling.qmd
-    - data_vis.qmd
-    - data_variety.qmd
-    - open_science.qmd
-    - code_management.qmd
-    - regression_classification.qmd
-    - supervised_ml_I.qmd
-    - supervised_ml_II.qmd
-    - randomforest.qmd
-    - interpretable-ml.qmd
-    # - appendix.qmd
-    - references.qmd
+    # - index.qmd
+    # - intro.qmd
+    # - getting_started.qmd
+    # - programming_primers.qmd
+    # - data_wrangling.qmd
+    # - data_vis.qmd
+    # - data_variety.qmd
+    # - open_science.qmd
+    # - code_management.qmd
+    # - regression_classification.qmd
+    # - supervised_ml_I.qmd
+    # - supervised_ml_II.qmd
+    # - randomforest.qmd
+    # - interpretable-ml.qmd
+    - appendix.qmd
+    # - references.qmd
   favicon: "figures/favicon.ico"
   twitter-card: true
   search: true

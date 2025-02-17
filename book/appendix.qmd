@@ -937,8 +937,9 @@ status <- httr::GET(
 # to visualize the data
 # we need to load the {terra}
 # library
-sand <- terra::rast(file.path(tempdir(), "T_SAND.nc"))
-terra::plot(sand)
+# sand <- terra::rast(file.path(tempdir(), "T_SAND.nc"))
+# terra::plot(sand)
+readLines(file.path(tempdir(), "T_SAND.nc"), warn = FALSE) == "Format netcdf4 is not supported for Grid data request" # TODO: fix this
 ```
 
 2. Consulting the original data pages or the package help files one can determine that the parameter "T_SAND" needs to be replaced by "T_SILT" in both the URL and the query.
@@ -966,7 +967,7 @@ status <- httr::GET(
   url = url,
   query = query,
   httr::write_disk(
-    path = file.path(tempdir(), "T_SAND.nc"),
+    path = file.path(tempdir(), "T_SILT.nc"),
     overwrite = TRUE
   )
 )
@@ -974,8 +975,9 @@ status <- httr::GET(
 # to visualize the data
 # we need to load the {terra}
 # library
-sand <- terra::rast(file.path(tempdir(), "T_SAND.nc"))
-terra::plot(sand)
+# sand <- terra::rast(file.path(tempdir(), "T_SILT.nc"))
+# terra::plot(sand)
+readLines(file.path(tempdir(), "T_SAND.nc"), warn = FALSE) == "Format netcdf4 is not supported for Grid data request" # TODO: fix this
 ```
 
 #### Dedicated libraries
@@ -994,8 +996,9 @@ hwsdr::ws_subset(
 # to visualize the data
 # we need to load the {terra}
 # library
-sand <- terra::rast(file.path(tempdir(), "T_SAND.nc"))
-terra::plot(sand)
+# sand <- terra::rast(file.path(tempdir(), "T_SAND.nc"))
+# terra::plot(sand)
+# readLines(file.path(tempdir(), "T_SAND.nc"), warn = FALSE) == "Format netcdf4 is not supported for Grid data request" # TODO: fix this
 ```
 
 2. You can easily list all {MODISTools} products using:
