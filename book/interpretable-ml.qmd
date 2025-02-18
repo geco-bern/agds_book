@@ -77,9 +77,8 @@ For a selected predictor (x)
 3. Plot the averaged predictions against x1, x2, ..., xj
 ```
 
-```{r echo=FALSE, fig.cap="Visualisation of Partial Dependence Plot algorithm from [Boehmke & Greenwell (2019)](https://bradleyboehmke.github.io/HOML/index.html#acknowledgments). Here, `Gr_Liv_Area` is the variable of interest $x$."}
-knitr::include_graphics("figures/pdp-illustration.png")
-```
+![Visualisation of Partial Dependence Plot algorithm from [Boehmke & Greenwell (2019)](https://bradleyboehmke.github.io/HOML/index.html#acknowledgments). Here, `Gr_Liv_Area` is the variable of interest $x$.](./figures/pdp-illustration.png){#fig-partialdependence width=100% fig.align='center'}
+
 
 This algorithm is implemented by the {pdp} package:
 

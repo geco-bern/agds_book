@@ -79,7 +79,7 @@ half_hourly_fluxes <- readr::read_csv("./data/FLX_CH-Lae_FLUXNET2015_FULLSET_HH_
 half_hourly_fluxes
 ```
 
-> To reproduce this code chunk, you can download the file `FLX_CH-Lae_FLUXNET2015_FULLSET_HH_2004-2006.csv` from [here](https://raw.githubusercontent.com/geco-bern/agds/main/data/FLX_CH-Lae_FLUXNET2015_FULLSET_HH_2004-2006.csv) and read it from the local path where the file is stored on your machine. All data files used in this tutorials are stored [here](https://github.com/geco-bern/agds/tree/main/data).
+> To reproduce this code chunk, you can download the file `FLX_CH-Lae_FLUXNET2015_FULLSET_HH_2004-2006.csv` from [here](https://raw.githubusercontent.com/geco-bern/agds_book/refs/heads/main/book/data/FLX_CH-Lae_FLUXNET2015_FULLSET_HH_2004-2006.csv) and read it from the local path where the file is stored on your machine. All data files used in this tutorials are stored [here](https://github.com/geco-bern/agds/tree/main/data).
 
 Since the file is properly formatted, with variable names given in the first line of the file, the function `read_csv()` identifies them correctly as column names and interprets values in each column as values of a consistent type (as numeric `<dbl>`). The file is also automatically machine-readable because it has no merged cells and only one value per cell.
 
@@ -273,9 +273,7 @@ There are advantages for interoperability and ease of use when data frames come 
 -   Each observation has its own row.
 -   Each value has its own cell.
 
-```{r label="tidy", echo=FALSE, fig.cap="Rules for tidy data. Figure from [Wickham and Grolemund (2017)](https://r4ds.had.co.nz/tidy-data.html)", out.width="100%", fig.align='center'}
-knitr::include_graphics("./figures/tidy_data.png")
-```
+![Rules for tidy data. Figure from [Wickham and Grolemund (2017)](https://r4ds.had.co.nz/tidy-data.html).](./figures/tidy_data.png){#fig-tidy width=100% fig.align='center'}
 
 The {tidyr} package provides powerful functions to make data tidy. In the examples above, `co2_concentration_monthly` and and `co2_concentration_yearly` are not tidy. In `co2_concentration_monthly`, the same variable (CO2 concentration) appears in multiple columns. Organising columns by months leads to a "wide" table format. We can convert it to a "long" format by:
 

@@ -4,7 +4,7 @@
 
 Data science is interdisciplinary by nature. It sits at the intersection between domain expertise, Statistics and Mathematics knowledge, and coding skills. Data science generates new insights for applications in different fields by combining these three realms (Fig. @fig-datasciencevenn). Combining only two of the three realms falls short of what data science is [(Conway, 2013)](http://drewconway.com/zia/2013/3/26/the-data-science-venn-diagram).
 
-![The Venn diagram of data science. Adapted from [Conway, 2013](http://drewconway.com/zia/2013/3/26/the-data-science-venn-diagram).](./figures/data_science_venn_mine.png){#fig-datasciencevenn}
+![The Venn diagram of data science. Adapted from [Conway, 2013](http://drewconway.com/zia/2013/3/26/the-data-science-venn-diagram).](./figures/data_science_venn_mine.png){#fig-datasciencevenn width=60% fig.align='center'}
 
 
 Dealing with data requires coding (but not a degree in computer science). Coding skills are essential for file and data manipulation and for thinking algorithmically. 
@@ -21,7 +21,7 @@ This course is also supposed to teach you how to stay out of the â€œdanger zoneâ
 
 The red thread of this course is the *data science workflow* (Fig. @fig-datascienceworkflowslim). Applied (geo-) data science projects typically start with research questions and hypotheses, and some data at hand, and (ideally) end with an answer to the research questions and the communication of results in textual, visual, and reproducible forms. What lies in between is not a linear process, but a cycle. One has to "understand" the data in order to identify appropriate analyses for answering the research questions. Before we've visualized the data, we don't know how to transform it. And before we've modeled it, we don't know the most appropriate visualization. In practice, we approach answers to our research questions gradually, through repeated cycles of *exploratory data analysis* - repeated cycles of transforming the data, visualizing it, and modelling relationships. More often than not, the exploratory data analysis generates insights about missing pieces in the data puzzle that we're trying to solve. In such cases, the data collection and modelling task may have to be re-defined (dashed line in Fig. @fig-datascienceworkflowslim), and the exploratory data analysis cycle re-initiated.
 
-![The data science workflow. Figure adapted from: [Wickham and Grolemund *R for Data Science*](https://r4ds.had.co.nz/index.html)](./figures/data_science_workflow_simpl.png){#fig-datascienceworkflowslim}
+![The data science workflow. Figure adapted from: [Wickham and Grolemund *R for Data Science*](https://r4ds.had.co.nz/index.html)](./figures/data_science_workflow_simpl.png){#fig-datascienceworkflowslim width=100% fig.align='center'}
 
 
 As we work our way through repeated cycles of exploratory data analysis, we take decisions based on our data analysis, modelling, and visualizations. And we write code. The final conclusions we draw, the answers to research questions we find, and the results we communicate rest on the combination of all steps of our data processing, analysis, and visualization. Simply put, it rests on the reproducibility (and legibility) of our code (encapsulated by 'Program' in Fig. @fig-datascienceworkflowslim). 

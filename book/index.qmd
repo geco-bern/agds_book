@@ -3,9 +3,7 @@
  
 ::: {.floatting}
 
-```{r label="agds_logo", echo=FALSE, out.width="40%", fig.align='center', out.extra='style="float:right; padding:20px"'}
-knitr::include_graphics("./figures/agds_logo.png")
-```
+![agds_logo](./figures/agds_logo.png){width=40% fig.align='center' style="float:right padding:20px"} <!-- #fig-agds_logo  -->
 
 ## About this book {.unnumbered}
 
@@ -19,11 +17,10 @@ We also use this book as a reference and on-boarding resource for group members 
 
 ### Contents
 
-This book covers all steps along the data science workflow (see Fig. @fig-datascienceworkflow) and introduces methods and tools to learn the most from data, to effectively communicate insights, and to make your workflow reproducible. By following this course, you will be well equipped for joining the Open Science movement.
+This book covers all steps along the data science workflow (see @fig-datascienceworkflow) and introduces methods and tools to learn the most from data, to effectively communicate insights, and to make your workflow reproducible. By following this course, you will be well equipped for joining the Open Science movement.
 
-```{r label="fig-datascienceworkflow", echo=FALSE, fig.cap="The data science workflow and keywords of contents covered in Applied Geodata Science I. Figure adapted from: [Wickham and Grolemund *R for Data Science*](https://r4ds.had.co.nz/index.html)"}
-knitr::include_graphics("./figures/data_science_workflow_keywords.png")
-```
+![The data science workflow and keywords of contents covered in Applied Geodata Science I. Figure adapted from: [Wickham and Grolemund *R for Data Science*](https://r4ds.had.co.nz/index.html)](./figures/data_science_workflow_keywords.png){#fig-datascienceworkflow width=100% fig.align='center'}
+
 
 This chapter starts by providing the context for this course: Why Applied Geodata Science? Why now?
 
@@ -54,7 +51,7 @@ Images and other materials used here were made available under non-restrictive l
 
 ## How to cite this book {-}
 
-Benjamin Stocker, Koen Hufkens, Pepa Arán, & Pascal Schneider. (2023). Applied Geodata Science (v1.0). Zenodo. [![DOI](https://zenodo.org/badge/569245031.svg)](https://zenodo.org/badge/latestdoi/569245031)
+Benjamin Stocker, Koen Hufkens, Pepa Arán, & Pascal Schneider. (2023). Applied Geodata Science (v1.0). Zenodo. [![DOI](./figures/zenodo.7740560.svg)](https://zenodo.org/badge/latestdoi/569245031)
 
 <br>
 
