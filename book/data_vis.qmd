@@ -40,7 +40,7 @@ half_hourly_fluxes <- readr::read_csv("data/FLX_CH-Lae_FLUXNET2015_FULLSET_HH_20
 plot(half_hourly_fluxes$TIMESTAMP_START, half_hourly_fluxes$GPP_NT_VUT_REF, type = "l")
 ```
 
-> To reproduce this code chunk, you can download the file `FLX_CH-Lae_FLUXNET2015_FULLSET_HH_2004-2006_CLEAN` from [here](https://raw.githubusercontent.com/geco-bern/agds/main/data/FLX_CH-Lae_FLUXNET2015_FULLSET_HH_2004-2006_CLEAN.csv) and read it from the local path where the file is stored on your machine. All data files used in this tutorials are stored [here](https://github.com/geco-bern/agds/tree/main/data).
+> To reproduce this code chunk, you can download the file `FLX_CH-Lae_FLUXNET2015_FULLSET_HH_2004-2006_CLEAN` from [here](https://raw.githubusercontent.com/geco-bern/agds_book/refs/heads/main/book/data/FLX_CH-Lae_FLUXNET2015_FULLSET_HH_2004-2006_CLEAN.csv) and read it from the local path where the file is stored on your machine. All data files used in this tutorials are stored [here](https://github.com/geco-bern/agds/tree/main/data).
 
 You may notice the spurious-looking values on the left, in the first third of year 2004. This demonstrates the role of visualisation in understanding the data and its quality. We'll revisit this point later in this Chapter.
 
