@@ -1210,6 +1210,11 @@
         "scales"
       ]
     },
+    "sessioninfo": {
+      "Package": "sessioninfo",
+      "Version": "1.2.3",
+      "Repository": "CRAN"
+    },
     "sf": {
       "Package": "sf",
       "Version": "1.0-19",
