@@ -400,21 +400,21 @@ query <- list(
 
 # download data using the
 # API endpoint and query data
-###TODO: fix this on CI: status <- httr::GET(
-###TODO: fix this on CI:   url = url,
-###TODO: fix this on CI:   query = query,
-###TODO: fix this on CI:   httr::write_disk(
-###TODO: fix this on CI:     path = file.path(tempdir(), "T_SAND.nc"),
-###TODO: fix this on CI:     overwrite = TRUE
-###TODO: fix this on CI:   )
-###TODO: fix this on CI: )
-###TODO: fix this on CI: 
-###TODO: fix this on CI: # to visualize the data
-###TODO: fix this on CI: # we need to load the {terra}
-###TODO: fix this on CI: # library
-###TODO: fix this on CI: library("terra")
-###TODO: fix this on CI: sand <- terra::rast(file.path(tempdir(), "T_SAND.nc"))
-###TODO: fix this on CI: terra::plot(sand)
+status <- httr::GET(
+  url = url,
+  query = query,
+  httr::write_disk(
+    path = file.path(tempdir(), "T_SAND.nc"),
+    overwrite = TRUE
+  )
+)
+
+# to visualize the data
+# we need to load the {terra}
+# library
+library("terra")
+sand <- terra::rast(file.path(tempdir(), "T_SAND.nc"))
+terra::plot(sand)
 ```
 
 ##### Authentication {.unnumbered}
