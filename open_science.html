@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.41">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -66,18 +66,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <link href="./code_management.html" rel="next">
 <link href="./data_variety.html" rel="prev">
-<link href="./figures/favicon.ico" rel="icon">
+<link href="././figures/favicon.ico" rel="icon">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-48ffa3e5b9d089919c6712c39e5b00f2.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-71390cc8b9bae10139428574d3aab2c6.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-f2e526a75abc17d413c930221ffb7d38.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-ed7e8abda2d2788c0893c9caeea0eb1f.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -347,15 +347,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Although digitization has opened up new research possibilities, its potential for facilitating, accelerating, and advancing science are often not fully made use of. Historically, research and its output in the form of data and code has been confined to academic journals, data and code has often not been made available, and data were not shared or behind pay-walls. This limits the impact of science also in the public domain. (In many ways, this is still the case today, in year 2023 as we write). Digitization has made research output better visible and accessible, but practical obstacles and weak standards often prevent it from uptake, re-use, and further development by the wider community.</p>
 <p>Open and reproducible science is a movement to make scientific research (output) widely accessible to the larger public, increase research transparency and enabling robust and verifiable science. Open science aims to be as open as possible about the whole scientific process, and as closed as desirable (e.g.&nbsp;privacy or security reasons).</p>
 <p>It is important to acknowledge that there is a spectrum of reproducible data and code workflows which depends on the state or source of the data and the output of the code (or analysis). Within the context of this course, we focus primarily on the practical aspects for reproducible science, i.e., ensuring that given the same data and code, the results will be similar.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://the-turing-way.netlify.app/_images/reproducible-matrix.jpg" class="img-fluid figure-img"></p>
-<figcaption>The reproducibility matrix by The Turing Way</figcaption>
+<div id="fig-repromatrix" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig.align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-repromatrix-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://the-turing-way.netlify.app/_images/reproducible-matrix.jpg" class="img-fluid figure-img" style="width:60.0%" data-fig.align="center">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-repromatrix-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.1: The reproducibility matrix by The Turing Way.
+</figcaption>
 </figure>
-</div>
-</div>
 </div>
 <p>The basics of open science coding and data practices rely on a number of simple concepts. The sections below describe a selection of the most important ones. Sticking to these principles and tools will increase the reproducibility of your work greatly.</p>
 <section id="project-structure" class="level3" data-number="7.2.1">
@@ -385,15 +385,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="automating-and-visualizing-workflows-with-targets" class="level4" data-number="7.2.2.1">
 <h4 data-number="7.2.2.1" class="anchored" data-anchor-id="automating-and-visualizing-workflows-with-targets"><span class="header-section-number">7.2.2.1</span> Automating and visualizing workflows with targets</h4>
 <p>To sidestep some of the manual management in R you can use a dedicated pipeline tool like the {targets} package in R. The package learns how your pipeline fits together, skips tasks that are already up-to-date, and runs only the necessary computation. {targets} can also visualize the progress of your workflow.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://books.ropensci.org/targets/man/figures/tar_watch.png" class="img-fluid figure-img"></p>
-<figcaption>A targets visualized workflow by rOpenSci</figcaption>
+<div id="fig-targets" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig.align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-targets-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://books.ropensci.org/targets/man/figures/tar_watch.png" class="img-fluid figure-img" style="width:60.0%" data-fig.align="center">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-targets-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.2: A targets visualized workflow by rOpenSci.
+</figcaption>
 </figure>
-</div>
-</div>
 </div>
 <p>Due to the added complexity of the {targets} package, we won’t include extensive examples of such a workflow but refer to the excellent documentation of the package for simple examples <a href="https://books.ropensci.org/targets/walkthrough.html">here</a>.</p>
 </section>
@@ -794,8 +794,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -906,7 +904,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

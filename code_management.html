@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.41">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -66,18 +66,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <link href="./regression_classification.html" rel="next">
 <link href="./open_science.html" rel="prev">
-<link href="./figures/favicon.ico" rel="icon">
+<link href="././figures/favicon.ico" rel="icon">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-48ffa3e5b9d089919c6712c39e5b00f2.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-71390cc8b9bae10139428574d3aab2c6.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-f2e526a75abc17d413c930221ffb7d38.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-ed7e8abda2d2788c0893c9caeea0eb1f.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -109,7 +109,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <meta name="twitter:title" content="8&nbsp; Code management – Applied Geodata Science">
 <meta name="twitter:description" content="">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="./figures/git_unstaged_files.png">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-sidebar floating nav-fixed">
@@ -342,26 +343,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Code management is key for managing any data science project, especially when collaborating. Proper code management limits mistakes, such as code loss, and increases efficiency by structuring projects.</p>
 <p>In this chapter, we will discuss the management of code in both the location sense, where things are kept, and tracking temporal changes over time using a version control system.</p>
 <p>Current version control of code is dominated by the software tool <em>git</em>. However, version control has a long history and can be found not only in code development practices. For example, whenever you use track changes in a text document, you apply a form of version control. That is, you track changes in your text over time and selectively accept changes. In this respect, <em>git</em>, as a tool for version control of code, does not differ much from track changes of a text document. In contrast to track changes in a text document, with <em>git</em> the user has manual control over <em>staging</em> and <em>committing</em> edits on a file.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://eliocamp.github.io/reproducibility-with-r/materials/day2/02-git/images/file_cycle2.png" class="img-fluid figure-img"></p>
-<figcaption>The git workflow- by Paola Corrales and Elio Campitelli</figcaption>
+<div id="fig-gitworkflow" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig.align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-gitworkflow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://eliocamp.github.io/reproducibility-with-r/materials/day2/02-git/images/file_cycle2.png" class="img-fluid figure-img" style="width:100.0%" data-fig.align="center">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-gitworkflow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.1: The git workflow- by Paola Corrales and Elio Campitelli
+</figcaption>
 </figure>
-</div>
-</div>
 </div>
 <p><em>Git</em> allows for the collaboration of multiple contributors on the same code and manages the integration of contributions into the repository. Built upon <em>git</em> are cloud-based platforms such as <a href="https://github.com">GitHub</a>, <a href="https://gitlab.com">GitLab</a>, <a href="https://codeberg.org">Codeberg</a>, or <a href="https://bitbucket.org/">Bitbucket</a> which make these collaborative decisions and operations even easier.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://eliocamp.github.io/reproducibility-with-r/materials/day2/02-git/images/local_remote.png" class="img-fluid figure-img"></p>
-<figcaption>The github remote workflow- by Paola Corrales and Elio Campitelli</figcaption>
+<div id="fig-githubworkflow" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig.align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-githubworkflow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://eliocamp.github.io/reproducibility-with-r/materials/day2/02-git/images/local_remote.png" class="img-fluid figure-img" style="width:100.0%" data-fig.align="center">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-githubworkflow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.2: The github remote workflow- by Paola Corrales and Elio Campitelli
+</figcaption>
 </figure>
-</div>
-</div>
 </div>
 <p>In this chapter, you will learn how to use <em>git</em> and GitHub to manage your project and collaborate on code.</p>
 <blockquote class="blockquote">
@@ -377,56 +378,56 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_git</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This will create a <em>git</em> repository in your project. It will also create a <code>.gitignore</code> file which specifies which files NOT to track (even if asked to). In addition it will make an first commit.</p>
-<section id="git-add-sec-gitt-add" class="level4" data-number="8.2.1.1">
-<h4 data-number="8.2.1.1" class="anchored" data-anchor-id="git-add-sec-gitt-add"><span class="header-section-number">8.2.1.1</span> git add {sec-gitt-add}</h4>
+<section id="sec-git-add" class="level4" data-number="8.2.1.1">
+<h4 data-number="8.2.1.1" class="anchored" data-anchor-id="sec-git-add"><span class="header-section-number">8.2.1.1</span> git add</h4>
 <p>Before we can track anything, we need to tell <em>git</em> which files to track. In <em>git</em>-speak, we <em>stage</em> the files. We therefore have to <code>add</code> them to an index of tracked files. You can either do this on the command line using:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add your_file.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Or using the RStudio <strong>Git</strong> panel. In this panel, you will see all un-tracked files or directories highlighted with a yellow question mark.</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./figures/git_unstaged_files.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<figcaption>Unstaged files in a git enabled R project.</figcaption>
+<div id="fig-unstagedfiles" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig.align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-unstagedfiles-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./figures/git_unstaged_files.png" class="img-fluid figure-img" style="width:80.0%" data-fig.align="center">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unstagedfiles-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.3: Unstaged files in a git enabled R project.
+</figcaption>
 </figure>
-</div>
-</div>
 </div>
 <p>You select the file tick boxes to the left to stage all files for inclusion into the <em>git</em> repository. Once staged, the next step will be to finally commit these staged files to be included in <em>git</em> tracking.</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./figures/git_staged_files.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<figcaption>Staged files in a git enabled R project.</figcaption>
+<div id="fig-stagedfiles" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig.align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-stagedfiles-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./figures/git_staged_files.png" class="img-fluid figure-img" style="width:80.0%" data-fig.align="center">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-stagedfiles-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.4: Staged files in a git enabled R project.
+</figcaption>
 </figure>
-</div>
-</div>
 </div>
 </section>
 <section id="git-commit" class="level4" data-number="8.2.1.2">
 <h4 data-number="8.2.1.2" class="anchored" data-anchor-id="git-commit"><span class="header-section-number">8.2.1.2</span> git commit</h4>
 <p>To store any changes to the files which were staged we need to <code>commit</code> these changes. We therefore hit the commit button. A new window will pop up.</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./figures/git_commit_message.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<figcaption>Entering a commit message.</figcaption>
+<div id="fig-commitmessage" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig.align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-commitmessage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./figures/git_commit_message.png" class="img-fluid figure-img" style="width:80.0%" data-fig.align="center">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-commitmessage-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.5: Entering a commit message.
+</figcaption>
 </figure>
-</div>
-</div>
 </div>
 <p>Each commit needs a brief message describing what you have included in the staged files, or the commit message, as shown in the panel on the right. You need to provide this small message before pressing the commit button once more. This will let <em>git</em> track the changes to these files. A message will be shown if the commit is successful.</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./figures/git_commit_completed.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<figcaption>A completed commit.</figcaption>
+<div id="fig-commitcompleted" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig.align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-commitcompleted-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./figures/git_commit_completed.png" class="img-fluid figure-img" style="width:80.0%" data-fig.align="center">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-commitcompleted-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.6: A completed commit.
+</figcaption>
 </figure>
-</div>
-</div>
 </div>
 <p>With this, you will track all files locally. Any new changes to a file will need to be committed to the <em>git</em> repository once more. So, unlike cloud services such as Dropbox, your files are not automatically tracked. Instead, this is a manual step. As with normal documents, you are advised to save (commit) your changes to your project frequently. And remember, if you create a new file, you will need to <code>add</code> it before you can <code>commit</code> it.</p>
 <p>You can <code>commit</code> changes of staged files using the command line as well using the following command.</p>
@@ -443,70 +444,66 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">user.email =</span> <span class="st">"jane@example.org"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>For security reasons, the use of your GitHub password is not allowed in remote actions. You therefore need to generate a personal access token (PAT) which can be restricted in time and functionality. To proceed, first generate a GitHub PAT using <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token#creating-a-personal-access-token-classic">these instructions</a>.</p>
 <p>To create a new project on GitHub, hit the “+” sign top left on the GitHub main page (once logged in), and select the “new repository” from the dropdown menu.</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./figures/git_new_project.png" class="img-fluid figure-img" style="width:30.0%"></p>
-<figcaption>Create a new github repository</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>A new interface will open up in which you should not use any template, but specify your own project name and brief description. Make sure your project is public, and all other settings are kept as is before you hit the “Create repository” button.</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./figures/git_new_project_settings.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<figcaption>Set the github project name</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>Note the URL that is generated for your project. You will need it when creating a new RStudio project linked to GitHub.</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./figures/git_project_link.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<figcaption>A repository link you need during the R project wizard</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>Next, we’ll setup an R project which is associated with the repository. Use: File &gt; New Project &gt; Version Control &gt; Git.</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./figures/git_project_wizard.png" class="img-fluid figure-img" style="width:40.0%"></p>
-<figcaption>Linking the github project to a new git enabled R project</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>In the “repository URL”, paste the URL of your new GitHub repository. In the example above, this would be <code>https://github.com/khufkens/YOUR_PROJECT.git</code>. Select a location where to store the project, select the “Open in new session” option and click “Create Project”. A window will pop up, asking for your GitHub username and a password. This password is <em>not</em> your GitHub login password but the PAT described above. After entering your credential, RStudio creates a <code>\*.Proj</code> file as well as a <code>.gitignore</code> file (<span class="quarto-unresolved-ref">?sec-git-add</span>). You can add both files as you would otherwise (see <span class="quarto-unresolved-ref">?sec-git-add</span>, and these files are tracked locally.</p>
-<section id="git-push" class="level4" data-number="8.2.2.1">
-<h4 data-number="8.2.2.1" class="anchored" data-anchor-id="git-push"><span class="header-section-number">8.2.2.1</span> git push</h4>
-<p>Once a remote git service has been configured, you can push your local <em>git</em> repository to this remote repository, i.e.&nbsp;syncing both. You can use both the push buttons in the RStudio panel for this or the command linen using <code>git push</code>. At the end of a day or a session, it is always advised to <code>push</code> your changes to your remote repository to store any changes.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div id="fig-remotegithubworkflow" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-newgithubrepo" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig.align="center">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-remotegithubworkflow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="https://eliocamp.github.io/reproducibility-with-r/materials/day2/02-git/images/pull-request.png" class="img-fluid figure-img">
+<div aria-describedby="fig-newgithubrepo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./figures/git_new_project.png" class="img-fluid figure-img" style="width:30.0%" data-fig.align="center">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-remotegithubworkflow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8.1: Remote git workflow - by Paola Corrales and Elio Campitelli
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-newgithubrepo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.7: Create a new github repository.
 </figcaption>
 </figure>
 </div>
+<p>A new interface will open up in which you should not use any template, but specify your own project name and brief description. Make sure your project is public, and all other settings are kept as is before you hit the “Create repository” button.</p>
+<div id="fig-newgithubsettings" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig.align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-newgithubsettings-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./figures/git_new_project_settings.png" class="img-fluid figure-img" style="width:60.0%" data-fig.align="center">
 </div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-newgithubsettings-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.8: Set the github project name.
+</figcaption>
+</figure>
 </div>
+<p>Note the URL that is generated for your project. You will need it when creating a new RStudio project linked to GitHub.</p>
+<div id="fig-githubsetup" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig.align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-githubsetup-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./figures/git_project_link.png" class="img-fluid figure-img" style="width:80.0%" data-fig.align="center">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-githubsetup-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.9: A repository link you need during the R project wizard.
+</figcaption>
+</figure>
+</div>
+<p>Next, we’ll setup an R project which is associated with the repository. Use: File &gt; New Project &gt; Version Control &gt; Git.</p>
+<div id="fig-projectwizard" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig.align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-projectwizard-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./figures/git_project_wizard.png" class="img-fluid figure-img" style="width:40.0%" data-fig.align="center">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-projectwizard-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.10: Linking the github project to a new git enabled R project.
+</figcaption>
+</figure>
+</div>
+<p>In the “repository URL”, paste the URL of your new GitHub repository. In the example above, this would be <code>https://github.com/khufkens/YOUR_PROJECT.git</code>. Select a location where to store the project, select the “Open in new session” option and click “Create Project”. A window will pop up, asking for your GitHub username and a password. This password is <em>not</em> your GitHub login password but the PAT described above. After entering your credential, RStudio creates a <code>\*.Proj</code> file as well as a <code>.gitignore</code> file. You can add both files as you would otherwise (see <a href="#sec-git-add" class="quarto-xref"><span>Section 8.2.1.1</span></a>, and these files are tracked locally.</p>
+<section id="git-push" class="level4" data-number="8.2.2.1">
+<h4 data-number="8.2.2.1" class="anchored" data-anchor-id="git-push"><span class="header-section-number">8.2.2.1</span> git push</h4>
+<p>Once a remote git service has been configured, you can push your local <em>git</em> repository to this remote repository, i.e.&nbsp;syncing both. You can use both the push buttons in the RStudio panel for this or the command line using <code>git push</code>. At the end of a day or a session, it is always advised to <code>push</code> your changes to your remote repository to store any changes.</p>
 <blockquote class="blockquote">
 <p>NOTE: Syncing between GitHub and your local repository is a manual task. If not performed the repository, it will not be synced. To retain all your changes, sync both repositories often!</p>
 </blockquote>
+<div id="fig-remotegithubworkflow" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig.align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-remotegithubworkflow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://eliocamp.github.io/reproducibility-with-r/materials/day2/02-git/images/pull-request.png" class="img-fluid figure-img" style="width:100.0%" data-fig.align="center">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-remotegithubworkflow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.11: Remote git workflow - by Paola Corrales and Elio Campitelli
+</figcaption>
+</figure>
+</div>
 </section>
 <section id="git-pull-and-merge-conflicts" class="level4" data-number="8.2.2.2">
 <h4 data-number="8.2.2.2" class="anchored" data-anchor-id="git-pull-and-merge-conflicts"><span class="header-section-number">8.2.2.2</span> git pull and merge conflicts</h4>
@@ -528,41 +525,41 @@ Figure&nbsp;8.1: Remote git workflow - by Paola Corrales and Elio Campitelli
 <section id="git-fork-and-pull-request" class="level4" data-number="8.2.2.4">
 <h4 data-number="8.2.2.4" class="anchored" data-anchor-id="git-fork-and-pull-request"><span class="header-section-number">8.2.2.4</span> git fork and pull request</h4>
 <p>You can also create a copy of any public GitHub project from into your own GitHub account by creating a <em>fork</em>. You can create a fork of a project by clicking the <strong>fork</strong> button top right on any public GitHub project page. The number of forks of a project is displayed next to the button. In case of the {rpmodel} package there are currently 24 forks of the project.</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./figures/git_fork.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<figcaption>Creating a fork of an existing project (rpmodel)</figcaption>
+<div id="fig-creatingforks" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig.align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-creatingforks-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./figures/git_fork.png" class="img-fluid figure-img" style="width:80.0%" data-fig.align="center">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-creatingforks-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.12: Creating a fork of an existing project (rpmodel)
+</figcaption>
 </figure>
-</div>
-</div>
 </div>
 <p>You can give the forked project a new name and description if so desired.</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./figures/git_fork_settings.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<figcaption>Github fork settings</figcaption>
+<div id="fig-forksettings" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig.align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-forksettings-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./figures/git_fork_settings.png" class="img-fluid figure-img" style="width:60.0%" data-fig.align="center">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-forksettings-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.13: Github fork settings
+</figcaption>
 </figure>
-</div>
-</div>
 </div>
 <p>A fork allows you to experiment with the code stored in the original project without affecting the original repository. However, the relation to the original project is maintained. If you want to contribute changes to the original project you can do so with a <strong>pull request</strong>.</p>
 <blockquote class="blockquote">
 <p>NOTE: To make changes to a forked project, you will first have to <code>clone</code> it to your local system. See workflow above.</p>
 </blockquote>
 <p>In a forked project, go to the <strong>Pull requests</strong> tab and click the green <strong>New pull request</strong> button. You will then have to provide a description of the changes you made. This information will be forwarded to the original owner of the project, who can accept these changes and accept the pull request and “pull” in the changes.</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="./figures/git_pull_request.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<figcaption>Creating a new github pull request</figcaption>
+<div id="fig-pullrequest" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig.align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pullrequest-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./figures/git_pull_request.png" class="img-fluid figure-img" style="width:60.0%" data-fig.align="center">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pullrequest-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.14: Creating a new github pull request
+</figcaption>
 </figure>
-</div>
-</div>
 </div>
 </section>
 </section>
@@ -572,37 +569,37 @@ Figure&nbsp;8.1: Remote git workflow - by Paola Corrales and Elio Campitelli
 <p>In our <a href="https://github.com/geco-bern/R_proj_template">R project template</a>, we provide a project structure for both data and code which removes the mental overhead of structuring data projects. This project structure sorts code, data and reporting in a consistent way.</p>
 <p>You can use the template in combination with a GitHub-based version control approach to manage your projects. Simply create a new project from this template and clone the project to your local computer. Any changes to the project can be tracked by the workflows described above.</p>
 <p>To use the template, create a new repository on GitHub, as you otherwise would using the big green button. If you are in the project on GitHub, you can hit the green button top right (<strong>Use this template</strong>).</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="figures/r_proj_template.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<figcaption>Use a github project as a template</figcaption>
+<div id="fig-projecttemplate" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig.align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-projecttemplate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./figures/r_proj_template.png" class="img-fluid figure-img" style="width:80.0%" data-fig.align="center">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-projecttemplate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.15: Use a github project as a template
+</figcaption>
 </figure>
-</div>
-</div>
 </div>
 <p>Otherwise, you can select the repository from the template dropdown menu, select <code>geco-bern/R-project-template</code>.</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="figures/create_from_template.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<figcaption>Using a new template based repository</figcaption>
+<div id="fig-newtemplaterepository" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig.align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-newtemplaterepository-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./figures/create_from_template.png" class="img-fluid figure-img" style="width:60.0%" data-fig.align="center">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-newtemplaterepository-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.16: Using a new template based repository
+</figcaption>
 </figure>
-</div>
-</div>
 </div>
 <p>Proceed as usual by naming your repository. However, be careful to select the correct owner of the project if you have multiple identities. Rename the default <code>.Proj</code> file.</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://github.com/bluegreen-labs/environmental_data_science_101/raw/main/images/new_repo_2.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<figcaption>Assigning a new template based repository</figcaption>
+<div id="fig-newtemplaterepositoryname" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig.align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-newtemplaterepositoryname-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://github.com/bluegreen-labs/environmental_data_science_101/raw/main/images/new_repo_2.png" class="img-fluid figure-img" style="width:60.0%" data-fig.align="center">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-newtemplaterepositoryname-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.17: Assigning a new template based repository
+</figcaption>
 </figure>
-</div>
-</div>
 </div>
 <p>You can now clone the project to your local computer and continue to populate it with code and data.</p>
 </section>
@@ -875,8 +872,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -987,7 +982,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.41">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -66,18 +66,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <link href="./randomforest.html" rel="next">
 <link href="./supervised_ml_I.html" rel="prev">
-<link href="./figures/favicon.ico" rel="icon">
+<link href="././figures/favicon.ico" rel="icon">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-48ffa3e5b9d089919c6712c39e5b00f2.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-71390cc8b9bae10139428574d3aab2c6.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-f2e526a75abc17d413c930221ffb7d38.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-ed7e8abda2d2788c0893c9caeea0eb1f.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -138,7 +138,8 @@ window.Quarto = {
 
 <meta name="twitter:title" content="11&nbsp; Supervised machine learning II – Applied Geodata Science">
 <meta name="twitter:description" content="">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="./figures/loss_plane.png">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-sidebar floating nav-fixed">
@@ -426,22 +427,22 @@ window.Quarto = {
 <span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>  recipes<span class="sc">::</span><span class="fu">step_scale</span>(recipes<span class="sc">::</span><span class="fu">all_numeric</span>(), <span class="sc">-</span>recipes<span class="sc">::</span><span class="fu">all_outcomes</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <blockquote class="blockquote">
-<p>To reproduce this code chunk, you can download the file <code>FLX_CH-Dav_FLUXNET2015_FULLSET_DD_1997-2014_1-3.csv</code> from <a href="https://raw.githubusercontent.com/geco-bern/agds/main/data/FLX_CH-Dav_FLUXNET2015_FULLSET_DD_1997-2014_1-3.csv">here</a> and read it from the local path where the file is stored on your machine. All data files used in this tutorials are stored <a href="https://github.com/geco-bern/agds/tree/main/data">here</a>.</p>
+<p>To reproduce this code chunk, you can download the file <code>FLX_CH-Dav_FLUXNET2015_FULLSET_DD_1997-2014_1-3.csv</code> from <a href="https://raw.githubusercontent.com/geco-bern/agds_book/refs/heads/main/book/data/FLX_CH-Dav_FLUXNET2015_FULLSET_DD_1997-2014_1-3.csv">here</a> and read it from the local path where the file is stored on your machine. All data files used in this tutorials are stored <a href="https://github.com/geco-bern/agds/tree/main/data">here</a>.</p>
 </blockquote>
 </section>
 <section id="training" class="level3" data-number="11.3.2">
 <h3 data-number="11.3.2" class="anchored" data-anchor-id="training"><span class="header-section-number">11.3.2</span> Loss function</h3>
 <p>Model training in supervised machine learning is guided by the match (or mismatch) between the predicted and observed target variable(s), that is, between <span class="math inline">\(\hat{Y}\)</span> and <span class="math inline">\(Y\)</span>. The <em>loss</em> function quantifies this mismatch (<span class="math inline">\(L(\hat{Y}, Y)\)</span>), and the algorithm (“optimiser” in Fig. 10.1 of <a href="supervised_ml_I.html" class="quarto-xref"><span>Chapter 10</span></a>) takes care of progressively reducing the loss during model training.</p>
 <p>Let’s say the machine learning model contains two parameters and predictions can be considered a function of the two (<span class="math inline">\(\hat{Y}(w_1, w_2)\)</span>). <span class="math inline">\(Y\)</span> is actually constant. Thus, the loss function is effectively a function <span class="math inline">\(L(w_1, w_2)\)</span>. Therefore, we can consider the model training as a search of the parameter space to find the minimum of the loss. The parameter space spanned by all possible combinations of <span class="math inline">\((w_1, w_2)\)</span>. Common loss functions are the root mean square error (RMSE), or the mean square error (MSE), or the mean absolute error (MAE). Loss minimization is a general feature of ML model training.</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="figures/loss_plane.png" class="img-fluid figure-img"></p>
-<figcaption>Visualization of a loss function.</figcaption>
+<div id="fig-lossfunction" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig.align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-lossfunction-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./figures/loss_plane.png" class="img-fluid figure-img" style="width:100.0%" data-fig.align="center">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-lossfunction-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.1: Visualization of a loss function.
+</figcaption>
 </figure>
-</div>
-</div>
 </div>
 <p>Model training is implemented in R for different machine learning algorithms in different packages. Some algorithms are even implemented by multiple packages. As described in <a href="supervised_ml_I.html" class="quarto-xref"><span>Chapter 10</span></a>) the {caret} package provides “wrappers” that handle a large selection of different machine learning model implementations in different packages with a unified interface (see <a href="https://topepo.github.io/caret/available-models.html">here</a> for an overview of available models). The {caret} function <code>train()</code> is the center piece also in terms of specifying the loss function as the argument <code>metric</code>. It defaults to the RMSE for regression models and the accuracy for classification.</p>
 </section>
@@ -472,15 +473,15 @@ window.Quarto = {
 <p>Whether or not a resampling is applied, depends on the data volume and computational costs of the model training which increase linearly with the number of resamples. For models that take days-weeks to train, resampling is not a realistic option. However, for many machine learning applications in Geography and Environmental Sciences, models are much less costly and resampling is viable and desirable approach to model training.</p>
 <p>The most important methods of resampling are <strong>bootstrapping</strong> (not explained here, but see <a href="https://bradleyboehmke.github.io/HOML/process.html">Boehmke and Greenwell (2020)</a>) and <strong>k-fold cross validation</strong>. An advantage of bootstrapping is that it provides an estimation of the distribution of the training error (without the need for data distribution assumptions because it’s non parametric), which informs not only the magnitude of the training error but also the variance of this estimate. Nevertheless, this statistical approach can become very computationally intensive because it needs many resamples with replacement and model runs. Hence cross validation lends itself more to model training.</p>
 <p>In <em>k-fold cross validation</em>, the training data is split into <em>k</em> equally sized subsets (<em>folds</em>). (Don’t confuse this k with the k in KNN.) Then, there will be <em>k</em> iterations, where each fold is used for validation once (while the remaining folds are used for training). An extreme case is <em>leave-one-out cross validation</em>, where <em>k</em> corresponds to the number of data points.</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="figures/cv.png" class="img-fluid figure-img"></p>
-<figcaption>K-fold cross validation. From Boehmke and Greenwell (2020).</figcaption>
+<div id="fig-kfoldcv" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig.align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-kfoldcv-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./figures/cv.png" class="img-fluid figure-img" style="width:100.0%" data-fig.align="center">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-kfoldcv-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.2: K-fold cross validation. From Boehmke and Greenwell (2020).
+</figcaption>
 </figure>
-</div>
-</div>
 </div>
 <p>To do a k-fold cross validation during model training in R, we don’t have to implement the loops around folds ourselves. The resampling procedure can be specified in the {caret} function <code>train()</code> with the argument <code>trControl</code>. The object that this argument takes is the output of a function call to <code>trainControl()</code>. This can be implemented in two steps. For example, to do a 10-fold cross-validation, we can write:</p>
 <!-- >>> CHECK FOR REDUCING COMPUTATIONAL COST TO RENDER BOOK ONLINE <<< -->
@@ -570,20 +571,16 @@ The final value used for the model was k = 25.</code></pre>
 </section>
 <section id="validation-versus-testing-data" class="level3" data-number="11.3.5">
 <h3 data-number="11.3.5" class="anchored" data-anchor-id="validation-versus-testing-data"><span class="header-section-number">11.3.5</span> Validation versus testing data</h3>
-<p>A source of confusion can be the distinction of validation and testing data. They are different things. The validation data is used during model training. The model fitting and the selection of the optimal hyperparameters is based on comparing predictions with the validation data. Hence, evaluations of true out-of-sample predictions should be done with a portion of the data that has never been used during the model training process (see <a href="#fig-trainvaltest" class="quarto-xref">Figure&nbsp;<span>11.1</span></a>).</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div id="fig-trainvaltest" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<p>A source of confusion can be the distinction of validation and testing data. They are different things. The validation data is used during model training. The model fitting and the selection of the optimal hyperparameters is based on comparing predictions with the validation data. Hence, evaluations of true out-of-sample predictions should be done with a portion of the data that has never been used during the model training process (see <a href="#fig-trainvaltest" class="quarto-xref">Figure&nbsp;<span>11.3</span></a>).</p>
+<div id="fig-trainvaltest" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig.align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-trainvaltest-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="./figures/training_validation_testing.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%">
+<img src="./figures/training_validation_testing.png" class="img-fluid figure-img" style="width:80.0%" data-fig.align="center">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-trainvaltest-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;11.1: Figure adopted form <a href="https://developers.google.com/machine-learning/crash-course/validation/video-lecture">Google Machine Learning Crash Course</a>.
+Figure&nbsp;11.3: Figure adopted form <a href="https://developers.google.com/machine-learning/crash-course/validation/video-lecture">Google Machine Learning Crash Course</a>.
 </figcaption>
 </figure>
-</div>
-</div>
 </div>
 </section>
 <section id="modeling-with-structured-data" class="level3" data-number="11.3.6">
@@ -924,8 +921,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -1036,7 +1031,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

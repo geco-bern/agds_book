@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.41">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -66,18 +66,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="./">
 <link href="./supervised_ml_I.html" rel="next">
 <link href="./code_management.html" rel="prev">
-<link href="./figures/favicon.ico" rel="icon">
+<link href="././figures/favicon.ico" rel="icon">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-48ffa3e5b9d089919c6712c39e5b00f2.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-71390cc8b9bae10139428574d3aab2c6.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-f2e526a75abc17d413c930221ffb7d38.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-ed7e8abda2d2788c0893c9caeea0eb1f.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -138,7 +138,8 @@ window.Quarto = {
 
 <meta name="twitter:title" content="9&nbsp; Regression and classification – Applied Geodata Science">
 <meta name="twitter:description" content="">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="regression_classification_files/figure-html/unnamed-chunk-2-1.png">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-sidebar floating nav-fixed">
@@ -455,7 +456,7 @@ window.Quarto = {
 </div>
 </div>
 <blockquote class="blockquote">
-<p>To reproduce this code chunk, you can download the file <code>FLX_CH-Lae_FLUXNET2015_FULLSET_HH_2004-2006_CLEAN</code> from <a href="https://raw.githubusercontent.com/geco-bern/agds/main/data/FLX_CH-Lae_FLUXNET2015_FULLSET_HH_2004-2006_CLEAN.csv">here</a> and read it from the local path where the file is stored on your machine. All data files used in this tutorials are stored <a href="https://github.com/geco-bern/agds/tree/main/data">here</a>.</p>
+<p>To reproduce this code chunk, you can download the file <code>FLX_CH-Lae_FLUXNET2015_FULLSET_HH_2004-2006_CLEAN</code> from <a href="https://raw.githubusercontent.com/geco-bern/agds_book/refs/heads/main/book/data/FLX_CH-Lae_FLUXNET2015_FULLSET_HH_2004-2006_CLEAN.csv">here</a> and read it from the local path where the file is stored on your machine. All data files used in this tutorials are stored <a href="https://github.com/geco-bern/agds/tree/main/data">here</a>.</p>
 </blockquote>
 <p>We want to find the best straight line that approximates a cloud of data points. For this, we assume a linear relationship between a single explanatory variable <span class="math inline">\(X\)</span> and our target <span class="math inline">\(Y\)</span>: <span class="math display">\[
 Y_i \sim \beta_0 + \beta_1 X_i, \;\;\; i = 1, 2, ...n \;,
@@ -1083,15 +1084,15 @@ Figure&nbsp;9.2: The influence of an outlier on a regression fit.
 <section id="classification" class="level3" data-number="9.4.1">
 <h3 data-number="9.4.1" class="anchored" data-anchor-id="classification"><span class="header-section-number">9.4.1</span> Classification</h3>
 <p>Classification models predict a categorical target variable. Note that predictors of a classification model may still be, and often are, continuous. We will introduce a classification problem with a binary target, since it’s straightforward to generalize to categorical variables with more than two classes. As an example, we use the <code>CO2</code> dataset from the <a href="https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/zCO2.html">{datasets} package</a>, which contains data from an experiment on the cold tolerance of the grass species <em>Echinochloa crus-galli</em>.</p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://swbiodiversity.org/imglib/h_seinet/seinet/genfield/palexander/set003/Echinochloa_c-g_19Aug06_1595.jpg" class="img-fluid figure-img" style="width:60.0%"></p>
-<figcaption><em>Echinochloa crus-galli</em>, image from <a href="https://swbiodiversity.org/seinet/taxa/index.php?taxon=2915">swbiodiversity.org</a></figcaption>
+<div id="fig-grass" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig.align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-grass-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://swbiodiversity.org/imglib/h_seinet/seinet/genfield/palexander/set003/Echinochloa_c-g_19Aug06_1595.jpg" class="img-fluid figure-img" style="width:60.0%" data-fig.align="center">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-grass-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.3: <em>Echinochloa crus-galli</em>, image from <a href="https://swbiodiversity.org/seinet/taxa/index.php?taxon=2915">swbiodiversity.org</a>
+</figcaption>
 </figure>
-</div>
-</div>
 </div>
 <p>We will try to classify the origin of each plant (categorical variable <code>Type</code> with values <code>Quebec</code> or <code>Mississippi</code>) depending on the carbon dioxide uptake rate of the plant (continuous variable <code>uptake</code> measured in <span class="math inline">\(\mu\)</span>mol m<span class="math inline">\(^{-2}\)</span>s<span class="math inline">\(^{-1}\)</span>). More information on the dataset can be obtained by typing <code>?datasets::CO2</code> in the console.</p>
 <div class="cell">
@@ -1267,15 +1268,15 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <li><p>The <strong>false positive rate</strong> (FPR) is defined by <span class="math display">\[\text{FPR} = \frac{\text{FP}}{\text{FP}+\text{TN}}.\]</span> and is related to another metric called <strong>specificity</strong> by <span class="math inline">\(\text{FPR} = 1 - \text{specificity}\)</span>.</p></li>
 <li><p><strong>Receiver operating characteristic (ROC) curve</strong>: To evaluate the performance of a binary classification model, it’s common to plot the <em>ROC curve</em>, where the TPR is plotted against the FPR, for varying values of the threshold <span class="math inline">\(\tau\)</span> used in the classification rule. When we decrease the threshold, we get more positive values (more observations are classified as 1), increasing both the true positive and false positive rate. The following image describes clearly how to interpret a ROC curve plot:</p></li>
 </ul>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="figures/Roc_curve.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<figcaption>ROC curves and how they compare, from <a href="https://commons.wikimedia.org/wiki/File:Roc_curve.svg">Wikimedia Commons</a>.</figcaption>
+<div id="fig-roccurve" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig.align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-roccurve-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./figures/Roc_curve.png" class="img-fluid figure-img" style="width:60.0%" data-fig.align="center">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-roccurve-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9.4: ROC curves and how they compare, from <a href="https://commons.wikimedia.org/wiki/File:Roc_curve.svg">Wikimedia Commons</a>.
+</figcaption>
 </figure>
-</div>
-</div>
 </div>
 <ul>
 <li><p><strong>AUC</strong>: The “area under the curve” is defined as the area betwee the ROC curve and the x-axis. For a random classifier we would have AUC = 0.5 and for the perfect classifier, AUC = 1. The aim is to increase the AUC. Nevertheless, a visual inspection of the ROC curve can say even more.</p></li>
@@ -1361,7 +1362,7 @@ Prediction    Quebec Mississippi
 <section id="report-exercise" class="level2" data-number="9.6">
 <h2 data-number="9.6" class="anchored" data-anchor-id="report-exercise"><span class="header-section-number">9.6</span> Report Exercise</h2>
 <p>Although there are a lot of helpful packages and user-friendly functions available, you will often have to write your own data analysis routine. This requires good understanding of statistical knowledge, algorithmic thinking and problem-solving skills. While writing your code, you will face many questions and bugs that you need to solve. And knowing where and how to ask for help properly are crucial parts of this process (see <a href="programming_primers.html#sec-findinghelp" class="quarto-xref"><span>Section 3.2.3</span></a> for more on getting help).</p>
-<p>In this Report Exercise, stepwise forward regression is to be performed for the task of modelling GPP as a function of predictors available in the dataset of half-hourly ecosystem fluxes. To learn the skills mentioned above, you will (attempt to) write your own stepwise forward regression from scratch based on the algorithm description of stepwise forward regression in <a href="#sec-variableselection" class="quarto-xref"><span>Section 9.3.3.1</span></a>. The data of half-hourly fluxes can be downloaded from <a href="https://raw.githubusercontent.com/geco-bern/agds/main/data/df_for_stepwise_regression.csv">here</a>.</p>
+<p>In this Report Exercise, stepwise forward regression is to be performed for the task of modelling GPP as a function of predictors available in the dataset of half-hourly ecosystem fluxes. To learn the skills mentioned above, you will (attempt to) write your own stepwise forward regression from scratch based on the algorithm description of stepwise forward regression in <a href="#sec-variableselection" class="quarto-xref"><span>Section 9.3.3.1</span></a>. The data of half-hourly fluxes can be downloaded from <a href="https://raw.githubusercontent.com/geco-bern/agds_book/refs/heads/main/book/data/df_for_stepwise_regression.csv">here</a>.</p>
 <section id="deliverables-for-the-report" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="deliverables-for-the-report">Deliverables for the report</h3>
 <p>The complete workflow of reading the data, performing the stepwise forward regression, visualising and discussing the results should be implemented in an RMarkdown notebook file and added as file <code>./vignettes/re_stepwise.Rmd</code> to your <em>git</em> repository. You will then point us to the URL of your repository. We will fork your repository and reproduce the workflow implemented in your notebook. The following aspects should be covered in your notebook:</p>
@@ -1614,8 +1615,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -1726,7 +1725,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

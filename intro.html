@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.41">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -32,18 +32,18 @@ ul.task-list li input[type="checkbox"] {
 <meta name="quarto:offset" content="./">
 <link href="./getting_started.html" rel="next">
 <link href="./index.html" rel="prev">
-<link href="./figures/favicon.ico" rel="icon">
+<link href="././figures/favicon.ico" rel="icon">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-48ffa3e5b9d089919c6712c39e5b00f2.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-71390cc8b9bae10139428574d3aab2c6.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-f2e526a75abc17d413c930221ffb7d38.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-ed7e8abda2d2788c0893c9caeea0eb1f.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -75,7 +75,8 @@ ul.task-list li input[type="checkbox"] {
 
 <meta name="twitter:title" content="1&nbsp; Introduction – Applied Geodata Science">
 <meta name="twitter:description" content="">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="./figures/data_science_venn_mine.png">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-sidebar floating nav-fixed">
@@ -283,10 +284,10 @@ ul.task-list li input[type="checkbox"] {
 <section id="what-is-applied-geodata-science" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="what-is-applied-geodata-science"><span class="header-section-number">1.1</span> What is Applied Geodata Science?</h2>
 <p>Data science is interdisciplinary by nature. It sits at the intersection between domain expertise, Statistics and Mathematics knowledge, and coding skills. Data science generates new insights for applications in different fields by combining these three realms (Fig. <a href="#fig-datasciencevenn" class="quarto-xref">Figure&nbsp;<span>1.1</span></a>). Combining only two of the three realms falls short of what data science is <a href="http://drewconway.com/zia/2013/3/26/the-data-science-venn-diagram">(Conway, 2013)</a>.</p>
-<div id="fig-datasciencevenn" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-datasciencevenn" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig.align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-datasciencevenn-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="./figures/data_science_venn_mine.png" class="img-fluid figure-img">
+<img src="./figures/data_science_venn_mine.png" class="img-fluid figure-img" style="width:60.0%" data-fig.align="center">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-datasciencevenn-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1.1: The Venn diagram of data science. Adapted from <a href="http://drewconway.com/zia/2013/3/26/the-data-science-venn-diagram">Conway, 2013</a>.
@@ -302,10 +303,10 @@ Figure&nbsp;1.1: The Venn diagram of data science. Adapted from <a href="http://
 <section id="the-data-science-workflow" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="the-data-science-workflow"><span class="header-section-number">1.2</span> The data science workflow</h2>
 <p>The red thread of this course is the <em>data science workflow</em> (Fig. <a href="#fig-datascienceworkflowslim" class="quarto-xref">Figure&nbsp;<span>1.2</span></a>). Applied (geo-) data science projects typically start with research questions and hypotheses, and some data at hand, and (ideally) end with an answer to the research questions and the communication of results in textual, visual, and reproducible forms. What lies in between is not a linear process, but a cycle. One has to “understand” the data in order to identify appropriate analyses for answering the research questions. Before we’ve visualized the data, we don’t know how to transform it. And before we’ve modeled it, we don’t know the most appropriate visualization. In practice, we approach answers to our research questions gradually, through repeated cycles of <em>exploratory data analysis</em> - repeated cycles of transforming the data, visualizing it, and modelling relationships. More often than not, the exploratory data analysis generates insights about missing pieces in the data puzzle that we’re trying to solve. In such cases, the data collection and modelling task may have to be re-defined (dashed line in Fig. <a href="#fig-datascienceworkflowslim" class="quarto-xref">Figure&nbsp;<span>1.2</span></a>), and the exploratory data analysis cycle re-initiated.</p>
-<div id="fig-datascienceworkflowslim" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-datascienceworkflowslim" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig.align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-datascienceworkflowslim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="./figures/data_science_workflow_simpl.png" class="img-fluid figure-img">
+<img src="./figures/data_science_workflow_simpl.png" class="img-fluid figure-img" style="width:100.0%" data-fig.align="center">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-datascienceworkflowslim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1.2: The data science workflow. Figure adapted from: <a href="https://r4ds.had.co.nz/index.html">Wickham and Grolemund <em>R for Data Science</em></a>
@@ -614,8 +615,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -726,7 +725,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
