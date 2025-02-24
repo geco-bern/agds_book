@@ -83,6 +83,7 @@ For a selected predictor (x)
 This algorithm is implemented by the {pdp} package:
 
 ```{r}
+# XXX This takes very long
 # The predictor variables are saved in our model's recipe
 preds <- 
   rf_mod$recipe$var_info |> 
