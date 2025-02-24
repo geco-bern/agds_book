@@ -641,14 +641,7 @@
       "Package": "hwsdr",
       "Version": "1.1",
       "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "c5ab01bfcc79843ac3a729d283762d61",
-      "Requirements": [
-        "dplyr",
-        "httr",
-        "sf",
-        "terra"
-      ]
+      "Requirements": []
     },
     "ipred": {
       "Package": "ipred",
