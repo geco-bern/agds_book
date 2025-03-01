@@ -31,7 +31,7 @@ book:
   favicon: "./figures/favicon.ico"
   twitter-card: true
   search: true
-  repo-url: https://github.com/stineb/agds_book/
+  repo-url: https://github.com/geco-bern/agds_book/
   sharing: [twitter, facebook]
   navbar:
     title: " "

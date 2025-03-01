@@ -39,13 +39,13 @@ All tutorials use the R programming language, and a full list of the packages us
 
 ## Links {-}
 
-[Browse the source code](https://github.com/stineb/agds_book)
+[Browse the source code](https://github.com/geco-bern/agds_book)
 
-[Report an issue](https://github.com/stineb/agds_book/issues)
+[Report an issue](https://github.com/geco-bern/agds_book/issues)
 
 ## License {-}
 
-Images and other materials used here were made available under non-restrictive licenses. Original sources are attributed. Content without attribution is our own and shared under the license below. If there are any errors or any content you find concerning with regard to licensing or other, please [contact us](https://geco-group.org/contact/) or [report an issue](https://github.com/stineb/agds_book/issues). Any feedback, positive or negative, is welcome.
+Images and other materials used here were made available under non-restrictive licenses. Original sources are attributed. Content without attribution is our own and shared under the license below. If there are any errors or any content you find concerning with regard to licensing or other, please [contact us](https://geco-group.org/contact/) or [report an issue](https://github.com/geco-bern/agds_book/issues). Any feedback, positive or negative, is welcome.
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" alt="Creative Commons License" style="border-width:0"/></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
 
