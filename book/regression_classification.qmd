@@ -76,19 +76,19 @@ plot_1 +
 
 We want to find the best straight line that approximates a cloud of data points. For this, we assume a linear relationship between a single explanatory variable $X$ and our target $Y$: $$
 Y_i \sim \beta_0 + \beta_1 X_i, \;\;\; i = 1, 2, ...n \;,
-$$ where $Y_i$ is the i-th observation of the target variable, and $X_i$ is the i-th value of the (single) predictor variable. $n$ is the number of observations we have and $\beta_0$ and $\beta_1$ are constant coefficients (model parameters). We call $\beta_0$ the intercept and $\beta_1$ the slope of the regression line. Generally, $\hat{Y}$ denotes the model prediction.
+$$ where $Y_i$ is the i-th observation of the target variable, and $X_i$ is the i-th value of the (single) predictor variable. $n$ is the number of observations we have and $\beta_0$ and $\beta_1$ are constant coefficients (model parameters). We call $\beta_0$ the intercept and $\beta_1$ the slope of the regression line. Generally, $\hat{Y}$ (called "Y-hat") denotes the model prediction.
 
 Fitting a linear regression is finding the values for $\beta_0$ and $\beta_1$ such that, on average over all points, the distance between the line at $X_i$, that is $\beta_0 + \beta_1 X_i$ (blue segment in the plot above), and the observed value $Y_i$, is as small as possible. Mathematically, this is minimizing the sum of the square errors, that is: $$ 
 \min_{\beta_0, \beta_1} \sum_i (Y_i - \beta_0 - \beta_1 X_i)^2 .
 $$ This linear model can be used to make predictions on new data, which are obtained by $\hat{Y}_\text{new} = \beta_0 + \beta_1 X_\text{new}$. When the new data comes from the same distribution as the data used to fit the regression line, this should be a good prediction.
 
-It's not hard to imagine that the univariate linear regression can be generalized to a multivariate linear regression, where we assume that the target variable is a linear combination of $p$ predictor variables: $$Y \sim \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \; ... \; + \beta_p X_p \;.$$ Note that here, $X_1, \dots, X_p$ and $Y$ are vectors of length corresponding to the number of observations in our data set ($n$ - as above). Analogously, calibrating the $p+1$ coefficients $\beta_0, \beta_1, \beta_2, ..., \beta_p$ is to minimize the sum of square errors $\min_{\beta} \sum_i (Y_i - \hat{Y}_i)^2$.
+It's not hard to imagine that the simple linear regression can be generalized to a multiple linear regression, where we assume that the target variable is a linear combination of $p$ predictor variables: $$Y \sim \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \; ... \; + \beta_p X_p \;.$$ Note that here, $X_1, \dots, X_p$ and $Y$ are vectors of length corresponding to the number of observations in our data set ($n$ - as above). Analogously, calibrating the $p+1$ coefficients $\beta_0, \beta_1, \beta_2, ..., \beta_p$ is to minimize the sum of square errors $\min_{\beta} \sum_i (Y_i - \hat{Y}_i)^2$.
 
-While the regression is a line in two-dimensional space for the univariate case, it is a plane in three-dimensional space for bi-variate regression, and hyperplanes in higher dimensions.
+While the regression is a line in two-dimensional space for the simple linear regression case, it is a plane in three-dimensional space and hyperplanes in higher dimensions for multiple linear regression cases.
 
 **Implementation in R**
 
-To fit a univariate linear regression model in R, we can use the `lm()` function. Already in @sec-datawrangling, we created linear models by doing:
+To fit a simple linear regression model in R, we can use the `lm()` function. Already in @sec-datawrangling, we created linear models by doing:
 
 ```{r message=F}
 # numerical variables only, remove NA
@@ -96,14 +96,14 @@ df <- half_hourly_fluxes |>
   dplyr::select(-starts_with("TIMESTAMP")) |>
   tidyr::drop_na()
 
-# fit univariate linear regression
+# fit simple linear regression
 linmod1 <- lm(GPP_NT_VUT_REF ~ SW_IN_F, data = df)
 ```
 
-Here, `GPP_NT_VUT_REF` is $Y$, and `SW_IN_F` is $X$. The *formula* notation `GPP_NT_VUT_REF ~ SW_IN_F` is common in R and can be used for a most functions in different packages. The (single) variable to the left of the `~` is the target variable ($Y$). The variable to its right is the predictor. Of course, we can include multiple predictors for a multivariate regression, for example as:
+Here, `GPP_NT_VUT_REF` is $Y$, and `SW_IN_F` is $X$. The *formula* notation `GPP_NT_VUT_REF ~ SW_IN_F` is common in R and can be used for a most functions in different packages. The (single) variable to the left of the `~` is the target variable ($Y$). The variable to its right is the predictor. Of course, we can include multiple predictors for a multiple linear regression, for example as:
 
 ```{r}
-# fit multivariate linear regression
+# fit multiple linear regression
 linmod2 <- lm(GPP_NT_VUT_REF ~ SW_IN_F + VPD_F + TA_F, data = df)
 ```
 
@@ -536,10 +536,10 @@ Instead of the AIC, you may also use the BIC for model comparison. Note that alg
 
 This stepwise approach can also be done backwards, starting with a full model (all available variables) and removing one at a time. Or even with a back-and-forth approach, where you look at both including a new or removing an existing variable at each step (optimizing AIC). Furthermore, this algorithm can be applied to fitting a polynomial regression whereby the aim si to increase the *degree* of the polynomials - step by step. For a model with categorical variables, interaction terms should only be considered after having the involved variables as "intercept only".
 
-**Multicollinearity** exists when there is a correlation between multiple predictors in a multivariate regression model. This is problematic because it makes the estimated coefficients corresponding to the correlated variables unstable. Since correlated variables contain similar information, it doesn't matter whether we include one or the other in the model or even if we include both of them. The performance metrics will be similar. Hence, it becomes difficult to conclude which variables actually influence the target.
+**Multicollinearity** exists when there is a correlation between multiple predictors in a multiple linear regression model. This is problematic because it makes the estimated coefficients corresponding to the correlated variables unstable. Since correlated variables contain similar information, it doesn't matter whether we include one or the other in the model or even if we include both of them. The performance metrics will be similar. Hence, it becomes difficult to conclude which variables actually influence the target.
 
 The **variance inflation factor (VIF)** is a score from economics that measures the amount of multicollinearity in regression based on how the estimated variance of a coefficient is inflated due to its correlation with another predictor. It's calculated as $$\text{VIF}_j = \frac{1}{1 - R^2_j},$$ where $R^2_j$ is the coefficient of determination for regressing the $j^{th}$ predictor on the $p-1$ remaining predictors. More specifically, $$R^2_j = 1 - \frac{\sum_i (X_{j, i} - \hat{X}_{j, i})^2}{\sum_i (X_{j, i} - \bar{X}_j)^2},$$
-where $\hat{X}_{j, i}$ is the fitted value corresponding to the regression $X_j \sim X_1 + ... X_{j-1} + X_{j+1} + ... + X_p$ for the $i^{th}$ observation. A VIF$_j$ is computed for each of the $p$ predictors in the multivariate regression model we are evaluating, and their values interpreted to detect multicollinearity. Meaning: if $\text{VIF}_j = 1$ variables are not correlated; if $1 < \text{VIF}_j < 5$ there is moderate collinearity between $X_j$ and the rest of predictors; and if $\text{VIF}_j \geq 5$ they are highly correlated. Because variable $X_{j}$ can be almost fully explained by all the other predictors (high $R^2_j$), this variable is redundant in our final model.
+where $\hat{X}_{j, i}$ is the fitted value corresponding to the regression $X_j \sim X_1 + ... X_{j-1} + X_{j+1} + ... + X_p$ for the $i^{th}$ observation. A VIF$_j$ is computed for each of the $p$ predictors in the multiple linear regression model we are evaluating, and their values interpreted to detect multicollinearity. Meaning: if $\text{VIF}_j = 1$ variables are not correlated; if $1 < \text{VIF}_j < 5$ there is moderate collinearity between $X_j$ and the rest of predictors; and if $\text{VIF}_j \geq 5$ they are highly correlated. Because variable $X_{j}$ can be almost fully explained by all the other predictors (high $R^2_j$), this variable is redundant in our final model.
 
 To remedy collinearity, you may choose to use only one or two of those correlated variables. Another option would be to use *Principal Component Analysis* (PCA), which you may read more about [here](https://www.r-bloggers.com/2021/05/principal-component-analysis-pca-in-r/). What PCA does is to map the space of predictors into another space of smaller dimension, leading to a smaller set of predictor variables $\{Z_1, ... , Z_q\}$, each of them being a linear combination of all the initial available predictors, that is $Z_1 = \alpha^1_0 + \alpha^1_1 X_1 + ... + \alpha^1_p X_p$, etc. If you have collinearity, those highly correlated variables would be summarized into one single new variable, called *principal component*.
 
@@ -882,7 +882,7 @@ In this Report Exercise, stepwise forward regression is to be performed for the 
 
 The complete workflow of reading the data, performing the stepwise forward regression, visualising and discussing the results should be implemented in an RMarkdown notebook file and added as file `./vignettes/re_stepwise.Rmd` to your *git* repository. You will then point us to the URL of your repository. We will fork your repository and reproduce the workflow implemented in your notebook. The following aspects should be covered in your notebook:
 
-1. An evaluation of all bivariate models (single predictor), implementing just steps 1-3 of the algorithm described in @sec-variableselection. This should be complemented by a visualisation and a brief discussion of the results.
+1. An evaluation of all simple linear regression models (single predictor), implementing just steps 1-3 of the algorithm described in @sec-variableselection. This should be complemented by a visualisation and a brief discussion of the results.
 
 2. An implementation of stepwise forward regression, and a visualisation and discussion of its results. If you face unsurmountable challenges and/or errors you didn't manage to resolve, your notebook may implement a minimum reproducible example of your code that produces the error or of your *attempted* implementation of stepwise forward regression.
 
