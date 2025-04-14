@@ -224,7 +224,7 @@ df_cat |>
   filter(MONTH == 8) |>
   ggplot(aes(x = SW_IN_F, y = GPP_NT_VUT_REF)) +
   geom_point(alpha = 0.4) +
-  geom_smooth(formula = y ~ x, method = "lm", aes(color = "lm"), se = FALSE) +
+  geom_smooth(formula = y ~ x, method = "lm", aes(color = "linear"), se = FALSE) +
   geom_smooth(formula = y ~ poly(x, 2), method = "lm", 
               aes(color = "poly2"), se = FALSE) +
   geom_smooth(formula = y ~ poly(x, 3), method = "lm",
@@ -534,7 +534,7 @@ Instead, take a hierarchical, or "greedy", approach, starting with an empty mode
 
 Instead of the AIC, you may also use the BIC for model comparison. Note that algorithm doesn't consider all possible combinations of predictors and it is possible that the globally optimal model is thus not found. The function `stats::step()` implements the stepwise algorithm in R.
 
-This stepwise approach can also be done backwards, starting with a full model (all available variables) and removing one at a time. Or even with a back-and-forth approach, where you look at both including a new or removing an existing variable at each step (optimizing AIC). Furthermore, this algorithm can be applied to fitting a polynomial regression whereby the aim si to increase the *degree* of the polynomials - step by step. For a model with categorical variables, interaction terms should only be considered after having the involved variables as "intercept only".
+This stepwise approach can also be done backwards, starting with a full model (all available variables) and removing one at a time. Or even with a back-and-forth approach, where you look at both including a new or removing an existing variable at each step (optimizing AIC). Furthermore, this algorithm can be applied to fitting a polynomial regression whereby the aim is to increase the *degree* of the polynomials - step by step. For a model with categorical variables, interaction terms should only be considered after having involved the categorical variables as "intercept only".
 
 **Multicollinearity** exists when there is a correlation between multiple predictors in a multiple linear regression model. This is problematic because it makes the estimated coefficients corresponding to the correlated variables unstable. Since correlated variables contain similar information, it doesn't matter whether we include one or the other in the model or even if we include both of them. The performance metrics will be similar. Hence, it becomes difficult to conclude which variables actually influence the target.
 
@@ -543,7 +543,7 @@ where $\hat{X}_{j, i}$ is the fitted value corresponding to the regression $X_j 
 
 To remedy collinearity, you may choose to use only one or two of those correlated variables. Another option would be to use *Principal Component Analysis* (PCA), which you may read more about [here](https://www.r-bloggers.com/2021/05/principal-component-analysis-pca-in-r/). What PCA does is to map the space of predictors into another space of smaller dimension, leading to a smaller set of predictor variables $\{Z_1, ... , Z_q\}$, each of them being a linear combination of all the initial available predictors, that is $Z_1 = \alpha^1_0 + \alpha^1_1 X_1 + ... + \alpha^1_p X_p$, etc. If you have collinearity, those highly correlated variables would be summarized into one single new variable, called *principal component*.
 
-When we work with high-dimensional data (that is, we have more variables than observations) there are better techniques to do variable selection than stepwise regression. Since the predictors space is so large, we could fit a line that passes through all the observations (a perfect fit), but does the model generalize? We don't know. For example, Lasso and Ridge regression incorporate variable selection in the fitting process (you can check [this post](https://www.r-bloggers.com/2020/06/understanding-lasso-and-ridge-regression/) if you're curious).
+When we work with high-dimensional data (that is, we have more predictor variables than observations) there are better techniques to do variable selection than stepwise regression. Since the predictors space is so large, we could fit a line that passes through all the observations (a perfect fit), but does the model generalize? We don't know. For example, Lasso and Ridge regression incorporate variable selection in the fitting process (you can check [this post](https://www.r-bloggers.com/2020/06/understanding-lasso-and-ridge-regression/) if you're curious).
 
 ### Outlier detection
 
@@ -702,22 +702,22 @@ At first sight, it's easy to see that the carbon uptake is lower for the *Missis
 
 A classification problem is a bit more difficult to write mathematically than a regression problem. Before, the mathematical representation of `GPP_NT_VUT_REF ~ SW_IN_F` was `GPP_NT_VUT_REF`$\;=\; \beta_0 + \beta_1$`SW_IN_F`. With the classification model `Type ~ uptake`, we cannot just write `Type`$\;=\; \beta_0 + \beta_1$`uptake` because `Type` is not a number. Hence, the categorical variable must be encoded, in this case 0 represents `Quebec` and 1 represents `Mississippi`.
 
-The next issue is that a linear model makes continuous predictions in the entire real numbers space $(-\inf, \inf)$, but we want the predictions to be either 0 or 1. We can transform these values to be in the interval $[0,1]$ with a *link* function. For a binary response, it's common to use a *logit* link function: $$\text{logit}(z) = \frac{\exp(z)}{1+\exp(z)}.$$
+The next issue is that a linear model makes continuous predictions in the entire real numbers space $(-\inf, \inf)$, but we want the predictions to be either 0 or 1. We can transform these values to be in the interval $[0,1]$ with a *link* function. For a binary response, it's common to use a *logit* link function: $$\text{logit}(y) = \frac{\exp(y)}{1+\exp(y)}.$$
 
 ```{r out.width="75%", fig.align='center'}
 ggplot() +
   geom_function(fun = function(x) exp(x)/(1 + exp(x))) +
   xlim(-5, 5) +
-  labs(y = "logit(x)", x = "x") +
+  labs(y = "logit(y)", x = "y") +
   theme_classic()
 ```
 
 Combining a linear model (with any type of predictors, like for regression) and a logit link function, we arrive at the **logistic regression** model: 
 
-$$f(X, \beta) = \text{logit}(\beta_0 + \beta_1 X_1 + ... + \beta_p X_p) = \frac{\exp(\beta_0 + \beta_1 X_1 + ... + \beta_p X_p)}{1 + \exp(\beta_0 + \beta_1 X_1 + ... + \beta_p X_p)}.
+$$ Y \sim \text{logit}(\beta_0 + \beta_1 X_1 + ... + \beta_p X_p) = \frac{\exp(\beta_0 + \beta_1 X_1 + ... + \beta_p X_p)}{1 + \exp(\beta_0 + \beta_1 X_1 + ... + \beta_p X_p)}.
 $$ This predicted value can be understood as the probability of belonging to class 1 (in our example, `Mississippi`). A classification rule is defined such that an observation $X_{new}$ with a predicted probability of belonging to class 1 higher than a given *threshold* $\tau$ (i.e. $f(X_{new}, \beta) > \tau$) will be classified as 1. If the predicted probability is smaller than the threshold $\tau$, it will be classified as 0.
 
-A logistic regression model results in a linear classification rule. This means that the $p$-dimensional space will be divided in two by a hyperplane, and the points falling in each side of the hyperplane will be classified as 1 or 0. In the example above with carbon uptake as predictor, the classification boundary would be a point dividing the real line. If we include a second predictor, we would obtain a line dividing the 2-dimensional plane in two.
+A logistic regression model results in a linear classification rule. This means that the $p$-dimensional space will be divided in two by a hyperplane, and the points falling in each side of the hyperplane will be classified as 1 or 0. In the example above with carbon uptake as the only predictor, the classification boundary would be a point dividing the real line. If we include a second predictor, we would obtain a line dividing the 2-dimensional plane in two.
 
 Furthermore, to fit a logistic regression model means to calculate the maximum likelihood estimator of $\beta$ with an iterative algorithm. We will learn more about iterative model fitting, i.e. parameter optimization, in the context of supervised machine learning (@sec-supervisedmlii).
 
