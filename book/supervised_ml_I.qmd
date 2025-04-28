@@ -720,7 +720,9 @@ Let's look at the role of $k$ in a KNN. Answer the following questions:
 
 Add code and text for addressing this exercise to the file `./vignettes/re_ml_01.Rmd` and give the notebook a suitable structure for easy navigation with a table of content (`toc`) by modifying its YAML header:
 
-> **Important:** to find an optimal $k$, you will have to use daily data and not half-hourly data! Hint: Do not produce various of the "Training - Test" Figures shown above to find an optimal $k$. Find a suitable plot that shows the optimal $k$ (maybe you can find one in this or another Chapter...).
+> **Important:** to find an optimal $k$, you will have to use daily data and not half-hourly data! \
+> \
+> Hint: Do not produce various of the "Training - Test" Figures shown above to find an optimal $k$. Find a suitable plot that shows the optimal $k$ (maybe you can find one in this or another Chapter...).
 
 ### Deliverables for the report {.unnumbered}
 
