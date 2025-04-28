@@ -8,7 +8,7 @@ Machine learning may appear magical. The ability of machine learning algorithms 
 
 Basic steps of the implementation of supervised machine learning are introduced, including data splitting, pre-processing, model formulation, and the implementation of these steps using the {caret} and {recipes} R packages. A focus is put on learning the concept of the bias-variance trade-off and overfitting.
 
-Contents of this Chapter are inspired and partly adopted by the excellent book [Hands-On Machine Learning in R by Boehmke & Greenwell](https://bradleyboehmke.github.io/HOmachine learning/).
+Contents of this Chapter are inspired and partly adopted by the excellent book [Hands-On Machine Learning in R by Boehmke & Greenwell](https://bradleyboehmke.github.io/HOML/).
 
 ## Setup
 In this Chapter, we will need the following libraries
@@ -45,7 +45,7 @@ Nevertheless, contrasting a bivariate linear regression model with a complex mac
 
 ### Overfitting {#overfitting}
 
-*This example is based on [this example from scikit-learn](https://scikit-learn.org/stable/auto_examples/model_selection/plot_underfitting_overfitting.htmachine learning).*
+*This example is based on [this example from scikit-learn](https://scikit-learn.org/stable/auto_examples/model_selection/plot_underfitting_overfitting.html).*
 
 Let's assume that there is some true underlying relationship between a single predictor $X$ and the target variable $Y$. We don't know this relationship and the observations contain a (normally distributed) error. Based on our training data, we fit three polynomial models that differ with respect to their complexity. We fit a polynomial of degree 1, 4, and 15 to the observations. A polynomial of degree $N$ is given by: $$
 y = \sum_{n=0}^N a_n x^n
@@ -397,7 +397,7 @@ Note, if we are to apply the prepared recipe to *new* data, we'll have to `bake(
 daily_fluxes_baked <- recipes::bake(pp_prep, new_data = daily_fluxes_train)
 
 # confirm that juice and bake return identical objects when given the same data
-all_equal(daily_fluxes_juiced, daily_fluxes_baked)
+all.equal(daily_fluxes_juiced, daily_fluxes_baked)
 ```
 
 The effect is of standardization is illustrated by comparing original and transformed variables:
@@ -428,7 +428,7 @@ cowplot::plot_grid(plot_1, plot_2, nrow = 2)
 
 #### Handling missing data
 
-Several machine learning algorithms require missing values to be removed. That is, if any of the cells in one row has a missing value, the entire cell gets removed. This can lead to severe data loss. In cases where missing values appear predominantly in only a few variables, it may be advantageous to drop the affected variable from the data for modelling. In other cases, it may be advantageous to fill missing values (data *imputation*, see next section). Although such imputed data is "fake", it may be preferred to impute values than to drop entire rows and thus get the benefit of being able to use the information contained in available (real) values of affected rows. Whether or not imputation is preferred should be determined based on the model skill for an an out-of-sample test (more on that later).
+Several machine learning algorithms require missing values to be removed. That is, if any of the cells in one row has a missing value, the entire row gets removed. This can lead to severe data loss. In cases where missing values appear predominantly in only a few variables, it may be advantageous to drop the affected variable from the data for modelling. In other cases, it may be advantageous to fill missing values (data *imputation*, see next section). Although such imputed data is "fake", it may be preferred to impute values than to drop entire rows and thus get the benefit of being able to use the information contained in available (real) values of affected rows. Whether or not imputation is preferred should be determined based on the model skill for an an out-of-sample test (more on that later).
 
 Visualizing missing data is the essential first step in making decisions about dropping rows with missing data versus removing predictors from the model (which would imply too much data removal).
 
@@ -440,18 +440,18 @@ visdat::vis_miss(
   )
 ```
 
-Here, the variable `LW_IN_F` (longwave radiation) if affected by a lot of missing data. Note that we applied a data cleaning step along with the data read-in at the very top of this Chapter. There, we applied a filtering criterion where values are only retained if at least 80% of the underlying half-hourly data is actual measured (and not gap-filled) data. Whether to drop the variable for further modelling should be informed also by our understanding of the data and the processes relevant for the modelling task. Here, the modelling target is GPP and the carbon cycle specialists among the readers may know that longwave radiation is not a known important control on GPP (ecosystem photosynthesis). Therefore, we may consider dropping this variable from the dataset for our modelling task. The remaining variables are affected by less frequent missingness with which we will deal otherwise.
+Here, the variable `LW_IN_F` (longwave radiation) is affected by a lot of missing data. Note that we applied a data cleaning step along with the data read-in at the very top of this Chapter. There, we applied a filtering criterion where values are only retained if at least 80% of the underlying half-hourly data is actual measured (and not gap-filled) data. Whether to drop the variable for further modelling should be informed also by our understanding of the data and the processes relevant for the modelling task. Here, the modelling target is GPP and the carbon cycle specialists among the readers may know that longwave radiation is not a known important control on GPP (ecosystem photosynthesis). Therefore, we may consider dropping this variable from the dataset for our modelling task. The remaining variables are affected by less frequent missingness with which we will deal otherwise.
 
 #### Imputation
 
-Imputation refers to the replacement of missing values with with a "best guess" value ([Boehmke and Greenwell](https://bradleyboehmke.github.io/HOmachine learning/)). Different approaches exist for determining that best guess. The most basic approach is to impute missing values with the mean or median of the available values of the same variable, which can be implemented using `step_impute_*()` from the {recipes} package. For example, to impute the median for all predictors separately:
+Imputation refers to the replacement of missing values with with a "best guess" value ([Boehmke and Greenwell](https://bradleyboehmke.github.io/HOML/)). Different approaches exist for determining that best guess. The most basic approach is to impute missing values with the mean or median of the available values of the same variable, which can be implemented using `step_impute_*()` from the {recipes} package. For example, to impute the median for all predictors separately:
 
 ```{r warning=FALSE, message=FALSE}
 pp |> 
   step_impute_median(all_predictors())
 ```
 
-Imputing by the mean or median is "uninformative". We may use information about the co-variation of multiple variables for imputing missing values. For example, for imputing missing VPD values, we may consider the fact that VPD tends to be high when air temperature is high. Therefore, missing VPD values can be modeled as a function of other co-variates (predictors). Several approaches to modelling missing values are available through the {recipes} package (see [here](https://recipes.tidymodels.org/reference/index.htmachine learning#step-functions-imputation)). For example, we can use KNN with five neighbors as:
+Imputing by the mean or median is "uninformative". We may use information about the co-variation of multiple variables for imputing missing values. For example, for imputing missing VPD values, we may consider the fact that VPD tends to be high when air temperature is high. Therefore, missing VPD values can be modeled as a function of other co-variates (predictors). Several approaches to modelling missing values are available through the {recipes} package (see [here](https://recipes.tidymodels.org/reference/index.html#step-functions-imputation)). For example, we can use KNN with five neighbors as:
 
 ```{r warning=FALSE, message=FALSE}
 pp |> 
@@ -721,19 +721,7 @@ Let's look at the role of $k$ in a KNN. Answer the following questions:
 
 Add code and text for addressing this exercise to the file `./vignettes/re_ml_01.Rmd` and give the notebook a suitable structure for easy navigation with a table of content (`toc`) by modifying its YAML header:
 
-> **Important:** to find an optimal $k$, you will have to use daily data and not half-hourly data!
-> Hint: Do not produce various of the "Training - Test" Figures shown above to find an optimal $k$. Find a suitable plot that shows the optimal $k$ (maybe you can find one in this or another Chapter...).
-
-
-``` bash
----
-title: "Report Exercise Chapter 10"
-author: "Ziggy Stardust"
-output:
-  html_document:
-    toc: true
----
-```
+> **Important:** to find an optimal $k$, you will have to use daily data and not half-hourly data! Hint: Do not produce various of the "Training - Test" Figures shown above to find an optimal $k$. Find a suitable plot that shows the optimal $k$ (maybe you can find one in this or another Chapter...).
 
 ### Deliverables for the report {.unnumbered}
 
