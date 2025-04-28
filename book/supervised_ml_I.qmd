@@ -574,9 +574,8 @@ Let's recap. We have a dataset `daily_fluxes` and we want to predict ecosystem G
 -   We have no variable where zero-variance was detected and we have no categorical variables that have to be transformed by one-hot encoding to be used in KNN. 
 -   We use a data split, whithholding 30% for testing.
 -   Fit two models: a linear regression model and KNN.
--   Take $k=10$ for the KNN model. Other choices are possible and will affect the prediction error on the training and the testing data in different manners. We'll learn more about the optimal choice of $k$ (*hyperparameter tuning*) in the next chapter.
+-   Take $k=8$ for the KNN model. Other choices are possible and will affect the prediction error on the training and the testing data in different manners. We'll learn more about the optimal choice of $k$ (*hyperparameter tuning*) in the next chapter.
 -   Fit models to minimize the root mean square error (RMSE) between predictions and observations. More on the choice of the `metric` argument in `train()` (*loss function*) in the next chapter.
--   For the KNN model, use $k=8$.
 
 These steps are implemented by the code below.
 
