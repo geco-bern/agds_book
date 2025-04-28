@@ -569,9 +569,9 @@ Let's recap. We have a dataset `daily_fluxes` and we want to predict ecosystem G
 -   Missing data: We've seen that the predictor `LW_IN_F` has lots of missing values and - given *a priori* knowledge is not critical for predicting GPP and we'll drop it.
 -   Data cleaning: Data (`daily_fluxes`) was cleaned based on quality control information upon reading the data at the beginning of this Chapter. Before modelling, we're checking the distribution of the target value here again to make sure it is "well-behaved".
 -   Imputation: We drop rows with missing data for model training, instead of imputing them.
--   Some of the predictors are distintively not normally distributed. Let's Box-Cox transform all predictors as a pre-processing step.
+-   Some of the predictors are distinctively not normally distributed. Let's Box-Cox transform all predictors as a pre-processing step.
 -   We have to standardize the data in order to use it for KNN.
--   We have no variable where zero-variance was detected and we have no categorical variables that have to be transformed by one-hot encoding to be used in KNN. 
+-   We have no variable where zero-variance was detected and we have no categorical variables that have to be transformed by one-hot encoding to be used in KNN.
 -   We use a data split, whithholding 30% for testing.
 -   Fit two models: a linear regression model and KNN.
 -   Take $k=8$ for the KNN model. Other choices are possible and will affect the prediction error on the training and the testing data in different manners. We'll learn more about the optimal choice of $k$ (*hyperparameter tuning*) in the next chapter.
