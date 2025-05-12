@@ -70,7 +70,7 @@ pp <- recipes::recipe(GPP_NT_VUT_REF ~ SW_IN_F + VPD_F + TA_F,
   recipes::step_scale(recipes::all_numeric(), -recipes::all_outcomes())
 ```
 
-> To reproduce this code chunk, you can download the file `FLX_CH-Dav_FLUXNET2015_FULLSET_DD_1997-2014_1-3.csv` from [here](https://raw.githubusercontent.com/geco-bern/agds_book/refs/heads/main/book/data/FLX_CH-Dav_FLUXNET2015_FULLSET_DD_1997-2014_1-3.csv) and read it from the local path where the file is stored on your machine. All data files used in this tutorials are stored [here](https://github.com/geco-bern/agds/tree/main/data).
+> To reproduce this code chunk, you can download the file `FLX_CH-Dav_FLUXNET2015_FULLSET_DD_1997-2014_1-3.csv` from [here](https://raw.githubusercontent.com/geco-bern/agds_book/refs/heads/main/book/data/FLX_CH-Dav_FLUXNET2015_FULLSET_DD_1997-2014_1-3.csv) and read it from the local path where the file is stored on your machine. All data files used in this tutorials are stored [here](https://github.com/geco-bern/agds_book/tree/main/book/data).
 
 ### Loss function {#training}
 
@@ -230,7 +230,7 @@ df_mae |>    # see hint
   filter(.estimate == min(.estimate))
 ```
 
-> The object `df_mae` is created above, recording metrics determined on the training and the validation set for differen choices of $k$. The respective code is hidden for the book. Explore the source code [here](https://github.com/geco-bern/agds/blob/3fc03645cf4831ebf29dc0fcce4d032d01fced8a/10-supervised_ml_II.Rmd#L147).
+> The object `df_mae` is created above, recording metrics determined on the training and the validation set for differen choices of $k$. The respective code is hidden for the book. Explore the source code [here](https://github.com/geco-bern/agds_book/blob/d051ea902287a647419a11e7c6eb619a82d4a23b/book/supervised_ml_II.qmd#L156).
 
 The evaluation on the test set suggests that $k=30$ is optimal, while 10-fold cross-validation yielded an optimal $k = 25$. Apparently, cross-validation suggested a model that is slightly more on the variance side along the bias-variance trade-off than the evaluation on the test set did. This (relatively small) mismatch is probably a result of randomness in the data.
 
