@@ -423,20 +423,20 @@ The below code shows how to read in the different demo data sets (CSV files). Yo
 ```{r}
 # read in the first demo
 demo_01 <- read.table(
-  "https://raw.githubusercontent.com/geco-bern/agds/main/data/demo_1.csv",
+  "https://raw.githubusercontent.com/geco-bern/agds_book/refs/heads/main/book/data/demo_1.csv",
   sep = ",",
   header = TRUE
   )
 
 # read in second demo
 demo_02 <- read.table(
-  "https://raw.githubusercontent.com/geco-bern/agds/main/data/demo_2.csv",
+  "https://raw.githubusercontent.com/geco-bern/agds_book/refs/heads/main/book/data/demo_2.csv",
   sep = " ",
   header = TRUE
   )
 
 demo_03 <- read.table(
-  "https://raw.githubusercontent.com/geco-bern/agds/main/data/demo_3.csv",
+  "https://raw.githubusercontent.com/geco-bern/agds_book/refs/heads/main/book/data/demo_3.csv",
   sep = ";",
   comment.char = "|",
   header = TRUE,
@@ -496,7 +496,7 @@ jsonlite::write_json(demo_all_new, path = "./my_json_file.json")
 ```{r eval=FALSE}
 # read unknown netcdf file using the {terra} library
 library(terra)
-unkown_netcdf <- terra::rast("https://raw.githubusercontent.com/geco-bern/agds/main/data/some_data.nc")
+unknown_netcdf <- terra::rast("https://raw.githubusercontent.com/geco-bern/agds_book/refs/heads/main/book/data/demo_data.nc")
 
 # print the meta-data by calling the variable
 unknown_netcdf
@@ -519,7 +519,7 @@ terra::writeRaster(
 ```{r eval=FALSE}
 # read unknown tif file using the {terra} library
 library(terra)
-unkown_tif <- terra::rast("https://raw.githubusercontent.com/geco-bern/agds/main/data/some_data.tif")
+unknown_tif <- terra::rast("https://raw.githubusercontent.com/geco-bern/agds_book/refs/heads/main/book/data/demo_data.tif")
 
 # print the meta-data by calling the variable
 unknown_tif
@@ -531,7 +531,7 @@ terra::plot(unknown_tif)
 terra::plot(unknown_tif - unknown_netcdf)
 
 # or...
-identical(unkown_netcdf, unkown_tif)
+identical(unknown_netcdf, unknown_tif)
 ```
 
 1. Looks similar to the NetCDF data, however one pixel is different as shown by taking the difference between both datasets.

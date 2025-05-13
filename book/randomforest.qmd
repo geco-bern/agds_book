@@ -43,7 +43,7 @@ $$
     \text{SSE} = \sum_i{(c_i-Y_i)^2}
 $$
 
--   For classification problems, the *cross-entropy* or the *Gini index* are typically maximized. Both are measures of the difference between probability distributions (main ideas in [this blogpost](https://towardsdatascience.com/cross-entropy-for-classification-d98e7f974451)).
+-   For classification problems, the *cross-entropy* or the *Gini index* are typically maximized. Both are measures of the difference between probability distributions (main ideas in [this blogpost](https://towardsdatascience.com/entropy-and-gini-index-c04b7452efbe/)).
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, out.width="80%", fig.align='center', fig.cap="A (very) shallow decision tree."}
 # Code adopted from https://koalaverse.github.io/homlr/notebooks/09-decision-trees.nb.html 
