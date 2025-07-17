@@ -214,22 +214,22 @@ This is a team exercise, so team up with someone else in the classroom. You will
 
 -  Person 2 - Fork the GitHub project that Person 1 created in Step 1.
 
--  Person 2 - Create a new file in the forked project
+-  Person 2 - Create a new code file in the forked project and add some code.
 
--  Person 2 - Commit and push these changes to the forked project. Create a **pull request** to the original project of Person 1.
+-  Person 2 - Commit (with a helpful commit message) and push these changes to the forked project. Create a **pull request** (PR) to the original project of Person 1, specifying in a message what it contributes to Person 1's project. Write a clear and polite message, imagining that Person 1 doesn't know you have been working on improving their code.
 
--  Person 1 - Review the pull request from Person 2. Provide some comments, accept the pull request, letting the new code by Person 2 be integrated into the project.
+-  Person 1 - Review the pull request from Person 2. Provide some comments or thank Person 1, accept the pull request, thereby letting the new code by Person 2 be integrated into the project.
 
--  Person 1 - Add a new file to your own project, and update the GitHub project.
+-  Person 1 - Add a new file to your own project and add some code. Update the GitHub project.
 
--  Person 2 - Sync your forked project to integrate the changes made by Person 1 into your own repository.
+-  Person 2 - Sync your forked project to integrate these last changes made by Person 1 into your own repository.
+
+> Important: To complete the exercise, reverse roles between Person 1 and Person 2 and redo the steps with a new repository.
 
 -  *Voluntary:* Can you force a merge conflict, for example by editing the same file at the same time, and resolve?
-
-To complete the exercise, reverse rolls between Person 1 and Person 2.
 
 ### Deliverables for the report {.unnumbered}
 
 This pair-coding exercise is part of your final performance assessment.  We will check each repositories' commit history to see whether this pair-coding exercise was done correctly. So, follow the steps above precisely!
 
-When you submit your report by mail at the end of the course, you have to provide the links to your GitHub account, to your report repositories that holds all other report exercises, and to the two repositories that you created during this pair-coding work exercise (your repository that your friend forked and the repository that you forked from your friend). Alternatively you can also create a `./vignettes/re_paircoding.Rmd` in your report repository, where you provide these links.
+When you submit your report by mail at the end of the course, you have to provide the links: a) to your repository on GitHub that holds all other report exercises, and b) to the two pull requests (one from you, one from your partner) that you created during this pair-coding work exercise. Alternatively you can also create a `./vignettes/re_paircoding.Rmd` in your report repository, where you provide these links.
