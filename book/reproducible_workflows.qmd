@@ -9,48 +9,29 @@ You will learn to:
 
 ## Why reproducible?
 
-Reproducibility has always been a cornerstone of the scientific method. In traditional laboratory science, experiments are documented in detail so that other researchers can repeat the procedure and confirm the results. In modern data science, our “experiments” are often computational: data cleaning pipelines, statistical analyses, and machine learning models. For these, our code becomes the lab notebook. If the code cannot be rerun reliably, the scientific claims it supports are weakened.
+Reproducibility is key for the scientific method. In traditional laboratory science, experiments are documented in detail so that other researchers can repeat the procedure and confirm the results. In data science, our "experiments" are often computational: data cleaning pipelines, statistical analyses, and fitting models. For these, our code becomes the lab notebook. If the code cannot be rerun reliably, the scientific claims it supports are weakened.
 
-This is why reproducible code is central to computational research. Reproducibility means that given the same data and computing environment, someone else can re-run the analysis and arrive at the same outputs. Closely related is reusability, which extends the value of our work by making code adaptable to new datasets, questions, or projects. Together, these practices support the transparency, credibility, and cumulative progress of science.
-
-The open-source handbook The Turing Way
- frames these ideas through the Reproducibility Matrix, which highlights four key dimensions of trust in computational results:
-
-Reproducible: the same team can repeat the analysis with the same data and get the same results.
-
-Replicable: a different team can use the same methods on new data and achieve consistent outcomes.
-
-Robust: results hold under small variations in the workflow, parameters, or environment.
-
-Generalizable: findings extend beyond the original dataset, model, or context.
-
-Thinking in terms of this matrix helps us see that reproducibility is not a binary state but part of a spectrum of scientific rigor. Well-structured, reusable code is one of the practical levers we have as data scientists to move along this spectrum—from fragile, one-off scripts toward robust and generalizable research practices.
+This is why reproducible code is central to computational research. Reproducibility means that given the same data and computing environment, someone else can re-run the analysis and arrive at the same outputs.
 
 ## Why reusable? 
 
-A common barrier to reproducibility is that code is often scattered across folders, dependent on hidden configuration files, or assumes local resources that others cannot access. These habits make our analyses fragile: they may work on our laptop today, but not tomorrow on a colleague’s machine—or even on our own machine six months later.
+Closely related to reproducibility of an analysis is the *reusability* of code. It extends the value of our work by making code adaptable to new datasets, questions, or projects. Together, these practices support the transparency, credibility, and progress of science. A common barrier to reproducibility is that code is often scattered across folders, dependent on hidden configuration files, or assumes local resources that others cannot access. These habits make our analyses fragile: they may work on our laptop today, but not tomorrow on a colleague’s machine—or even on our own machine six months later.
 
-To address this, it is helpful to adopt a project-oriented workflow. In this approach, every analysis lives inside a clearly defined project directory that contains:
+To address this, it is helpful to adopt a *project-oriented workflow*. In this approach, every analysis lives inside a clearly defined project directory that contains:
 
-The data (or instructions for obtaining it).
+- The data (or instructions for obtaining it).
+- The code needed to process, analyze, and visualize.
+- The documentation explaining the workflow.
+- The results generated (figures, tables, reports).
 
-The code needed to process, analyze, and visualize.
+Two guiding principles are the basis for reusable code and project-oriented workflows:
 
-The documentation explaining the workflow.
+- *Self-contained*: the project does not depend on hidden files or settings outside its own directory. Everything needed to rerun the analysis is either included in the project or explicitly documented.
+- *Portable*: the project can be moved (e.g., shared via version control, sent as a zip file, or run on a server) and still work without modification.
 
-The results generated (figures, tables, reports).
-
-Two guiding principles strengthen this approach:
-
-Self-contained: the project does not depend on hidden files or settings outside its own directory. Everything needed to rerun the analysis is either included in the project or explicitly documented.
-
-Portable: the project can be moved (e.g., shared via GitHub, sent as a zip file, or run on a server) and still work without modification.
-
-By keeping projects self-contained and portable, we transform code from a collection of personal notes into a scientific artifact that others can confidently reuse, adapt, and extend. In practice, this means using relative paths rather than absolute ones, documenting package dependencies, and structuring analyses so they can be executed end-to-end with minimal setup.
+By keeping projects self-contained and portable, we transform code from a collection of personal notes into a scientific artifact that others can confidently reuse, adapt, and extend. Reusable code is also the basis for Open Science (@sec-openscience).
 
 ## Practices for reusability
-
-By following a limited set of principles and adopting project-oriented workflows, your code becomes self-contained, portable, and reproducible. By following principles of project-oriented workflows, you reduce errors, enforce good coding habits, and make it easier for others to trust and reuse your work. It also builds the basis for Open Science (@sec-openscience). The key definition of a project-oriented workflow is that code, data, and outputs all live in one directory. Therefore, when moved to another computer (or even to another location on the same computer), code - with its connection to input data and outputs - won't break. It becomes *portable*. 
 
 Below is a list that may serve as a key to making code re-usable.
 
