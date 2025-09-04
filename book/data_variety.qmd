@@ -379,14 +379,21 @@ status <- httr::GET(
 )
 ```
 
-Below, we provide an example of using the `GET` command to download data from the [Regridded Harmonized World Soil Database (v1.2)](https://daac.ornl.gov/cgi-bin/dsviewer.pl?ds_id=1247) as hosted on the Oak Ridge National Laboratory computer infrastructure. In this case we download a subset of a global map of topsoil sand content (`T_SAND`).
+Below, we provide an example of using the `GET` command to download data from layers available at [map.geo.admin.ch](https://map.geo.admin.ch/). In this case we download a subset of a Swiss forest-wide map of vegetation health index VHI ([more details on the product here](https://data.geo.admin.ch/browser/index.html#/collections/ch.swisstopo.swisseo_vhi_v100?.language=en)).
+
 
 ```{r}
 # # set API URL endpoint
-# # for the total sand content
-# url <- "https://thredds.daac.ornl.gov/thredds/ncss/ornldaac/1247/T_SAND.nc4"
-# url <- "https://data.ornldaac.earthdata.nasa.gov/protected/bundle/HWSD_1247.zip"
-# # formulate query to pass to httr
+# url <- "https://data.geo.admin.ch/api/stac/v0.9/collections/ch.swisstopo.swisseo_vhi_v100"
+# url <- "https://api3.geo.admin.ch/rest/services/api/MapServer/{layerBodId}"
+
+# for the vegetation health index VHI
+# url <- "https://data.geo.admin.ch/ch.swisstopo.swisseo_vhi_v100/vhi_20230801.nc"
+# url <- "https://data.geo.admin.ch/ch.swisstopo.swisseo_vhi_v100/1991-12-01t235959/ch.swisstopo.swisseo_vhi_v100_mosaic_1991-12-01t235959_vegetation-30m.tif"
+# url <- "https://data.geo.admin.ch/ch.swisstopo.swisseo_vhi_v100/2025-07-05t235959/ch.swisstopo.swisseo_vhi_v100_mosaic_2025-07-05t235959_vegetation-10m.tif"
+url <- "https://data.geo.admin.ch/ch.swisstopo.swisseo_vhi_v100/2025-07-05t235959/ch.swisstopo.swisseo_vhi_v100_mosaic_2025-07-05t235959_forest-10m.tif"
+
+# # formulate query to pass to httr TODO: NOT NEEDED FOR THE NEW EXAMPLE. Or can we use an API e.g. to crop in space and aggregate in time?
 # query <- list(
 #   "var" = "T_SAND",
 #   "south" = 32,
@@ -397,24 +404,27 @@ Below, we provide an example of using the `GET` command to download data from th
 #   "horizStride" = 1,
 #   "accept" = "netcdf4"
 # )
-# 
-# # download data using the
-# # API endpoint and query data
-# status <- httr::GET(
-#   url = url,
-#   query = query,
-#   httr::write_disk(
-#     path = file.path(tempdir(), "T_SAND.nc"),
-#     overwrite = TRUE
-#   )
-# )
-# 
-# # to visualize the data
-# # we need to load the {terra}
-# # library
-# library("terra")
-# sand <- terra::rast(file.path(tempdir(), "T_SAND.nc"))
-# terra::plot(sand)
+
+# download data using the
+# API endpoint and query data
+status <- httr::GET(
+  url = url,
+  # query = query,
+  httr::write_disk(
+    path = file.path(tempdir(), "vhi_20250705.tif"),
+    overwrite = TRUE
+  )
+)
+
+# to visualize the data
+# we need to load the {terra} library
+library("terra")
+file.exists(file.path(tempdir(), "vhi_20250705.tif"))
+vhi_07_05 <- terra::rast(file.path(tempdir(), "vhi_20250705.tif"))
+# and resample the raster to lower resolution for speed
+# vhi_07_05_coarse <- terra::aggregate(vhi_07_05, fact = 10) # coarsen to 100x100m
+# vhi_07_05_coarse2 <- terra::aggregate(vhi_07_05, fact = 50) # coarsen to 500x500m
+terra::plot(vhi_07_05)
 ```
 
 ##### Authentication {.unnumbered}
