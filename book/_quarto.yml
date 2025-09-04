@@ -14,13 +14,13 @@ book:
   chapters:
     - index.qmd
     - intro.qmd
-    - getting_started.qmd
-    - programming_primers.qmd
+    - primers.qmd
+    - data_variety.qmd
+    - reproducible_workflows.qmd
+    - code_management.qmd
+    - open_science.qmd
     - data_wrangling.qmd
     - data_vis.qmd
-    - data_variety.qmd
-    - open_science.qmd
-    - code_management.qmd
     - regression_classification.qmd
     - supervised_ml_I.qmd
     - supervised_ml_II.qmd
