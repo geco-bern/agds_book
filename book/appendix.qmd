@@ -907,38 +907,38 @@ Looks similar to the NetCDF data, but temperature appears to be given in Celsius
 1. We can get the total sand content using the tutorial using new coodinates outlining Switzerland.
 
 ```{r}
-# # set API URL endpoint
-# # for the total sand content
-# url <- "https://thredds.daac.ornl.gov/thredds/ncss/ornldaac/1247/T_SAND.nc4"
-# 
-# # formulate query to pass to httr
-# query <- list(
-#   "var" = "T_SAND",
-#   "south" = 45.5,
-#   "west" =  5.9,
-#   "east" =  10.7,
-#   "north" = 48,
-#   "disableProjSubset" = "on",
-#   "horizStride" = 1,
-#   "accept" = "netcdf4"
-# )
-# 
-# # download data using the
-# # API endpoint and query data
-# status <- httr::GET(
-#   url = url,
-#   query = query,
-#   httr::write_disk(
-#     path = file.path(tempdir(), "T_SAND.nc"),
-#     overwrite = TRUE
-#   )
-# )
-# 
-# # to visualize the data
-# # we need to load the {terra}
-# # library
-# sand <- terra::rast(file.path(tempdir(), "T_SAND.nc"))
-# terra::plot(sand)
+# set API URL endpoint
+# for the total sand content
+url <- "https://thredds.daac.ornl.gov/thredds/ncss/ornldaac/1247/T_SAND.nc4"
+
+# formulate query to pass to httr
+query <- list(
+  "var" = "T_SAND",
+  "south" = 45.5,
+  "west" =  5.9,
+  "east" =  10.7,
+  "north" = 48,
+  "disableProjSubset" = "on",
+  "horizStride" = 1,
+  "accept" = "netcdf4"
+)
+
+# download data using the
+# API endpoint and query data
+status <- httr::GET(
+  url = url,
+  query = query,
+  httr::write_disk(
+    path = file.path(tempdir(), "T_SAND.nc"),
+    overwrite = TRUE
+  )
+)
+
+# to visualize the data
+# we need to load the {terra}
+# library
+sand <- terra::rast(file.path(tempdir(), "T_SAND.nc"))
+terra::plot(sand)
 ```
 
 2. Consulting the original data pages or the package help files one can determine that the parameter "T_SAND" needs to be replaced by "T_SILT" in both the URL and the query.
@@ -946,36 +946,36 @@ Looks similar to the NetCDF data, but temperature appears to be given in Celsius
 ```{r}
 # set API URL endpoint
 # for the total sand content
-# url <- "https://thredds.daac.ornl.gov/thredds/ncss/ornldaac/1247/T_SILT.nc4"
-# 
-# # formulate query to pass to httr
-# query <- list(
-#   "var" = "T_SILT",
-#   "south" = 45.5,
-#   "west" =  5.9,
-#   "east" =  10.7,
-#   "north" = 48,
-#   "disableProjSubset" = "on",
-#   "horizStride" = 1,
-#   "accept" = "netcdf4"
-# )
-# 
-# # download data using the
-# # API endpoint and query data
-# status <- httr::GET(
-#   url = url,
-#   query = query,
-#   httr::write_disk(
-#     path = file.path(tempdir(), "T_SILT.nc"),
-#     overwrite = TRUE
-#   )
-# )
-# 
-# # to visualize the data
-# # we need to load the {terra}
-# # library
-# silt <- terra::rast(file.path(tempdir(), "T_SILT.nc"))
-# terra::plot(silt)
+url <- "https://thredds.daac.ornl.gov/thredds/ncss/ornldaac/1247/T_SILT.nc4"
+
+# formulate query to pass to httr
+query <- list(
+  "var" = "T_SILT",
+  "south" = 45.5,
+  "west" =  5.9,
+  "east" =  10.7,
+  "north" = 48,
+  "disableProjSubset" = "on",
+  "horizStride" = 1,
+  "accept" = "netcdf4"
+)
+
+# download data using the
+# API endpoint and query data
+status <- httr::GET(
+  url = url,
+  query = query,
+  httr::write_disk(
+    path = file.path(tempdir(), "T_SILT.nc"),
+    overwrite = TRUE
+  )
+)
+
+# to visualize the data
+# we need to load the {terra}
+# library
+silt <- terra::rast(file.path(tempdir(), "T_SILT.nc"))
+terra::plot(silt)
 ```
 
 #### Dedicated libraries
@@ -983,19 +983,19 @@ Looks similar to the NetCDF data, but temperature appears to be given in Celsius
 2. Using the {hwsdr} package this simplifies to:
 
 ```{r}
-# # Download a soil fraction map
-# # of sand for a given bounding box
-# hwsdr::ws_subset(
-#   location = c(45.5, 5.9, 48, 10.7),
-#   param = "T_SAND",
-#   path = tempdir()
-# )
-# 
-# # to visualize the data
-# # we need to load the {terra}
-# # library
-# sand <- terra::rast(file.path(tempdir(), "T_SAND.nc"))
-# terra::plot(sand)
+# Download a soil fraction map
+# of sand for a given bounding box
+hwsdr::ws_subset(
+  location = c(45.5, 5.9, 48, 10.7),
+  param = "T_SAND",
+  path = tempdir()
+)
+
+# to visualize the data
+# we need to load the {terra}
+# library
+sand <- terra::rast(file.path(tempdir(), "T_SAND.nc"))
+terra::plot(sand)
 ```
 
 2. You can easily list all {MODISTools} products using:
