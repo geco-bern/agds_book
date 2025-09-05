@@ -241,7 +241,9 @@ X^2^
 ```
 :::
 
+#### Commenting
 
+Use comments to describe in human-readable text what the code does. Comments are all that appears to the right of a `#` and are code parts that are not interpreted by R and not executed. Adding comments in the code greatly helps you and others to read your code, understand what it does, modify it, and resolve errors (bugs).
 
 #### Executable documentation
 
@@ -273,7 +275,6 @@ To create a new RMarkdown file, select from the drop-down menu in the top-left c
 
 ![Create a new RMarkdown file.](./figures/newrmarkdown.png){#fig-newrmarkdown width=25% fig.align='center'}
 
-
 ### Keep raw data immutable
 
 All analyses start with one or more datasets that are obtained from external sources or compiled by the researcher. Such *original* data may be contained in the project, and is typically stored in the `data-raw/` folder. These files must never be overwritten. Instead, generate derived data files and save them in `data/`. This preserves provenance of the data and makes it possible to restart analyses from scratch. Document the source of all original data by info added in the `README` file.
@@ -294,14 +295,21 @@ All analyses start with one or more datasets that are obtained from external sou
   read_csv(here("data", "file.csv"))
   ```
 
-The function `here()` generates the path of your project's top-level directory, to which all paths can be specified in a relative sense:
+As an example, consider the following. RMarkdown files commonly reside in a sub-directory `./vignettes/` and are rendered relative to the file path where it is located. This means that to access data which resides in `data/` using code in `./vignettes/your_dynamic_document.Rmd`, we would have to write:
+```{r eval = FALSE}
+data <- read_csv('../data/some_data.csv')
+```
+
+Note the `../` to go one level up. However, when the same code is executed from another level of the project's directory structure, this code won't work anymore.
+
+To allow for more flexibility in file locations within your project folder, you may use the [{here} package](https://here.r-lib.org/) package. I gathers the absolute path of the R project and allows for a specification of paths inside scripts and functions that always start from the top project directory, irrespective of where the script that implements the reading-code is located.
+
 ```{r}
 library(here)
 here()
 file.exists(here("data", "df.csv"))   # use here("data", "df.csv") instead of here("data/df.csv") to make it portable also to non-UNIX-based systems.
 ```
   
-
 Should any file to which a path of your project points not be contained in the project itself, an absolute path to an external file may be unavoidable. In such cases, clarify in the `README` where such absolute paths must be modified. Here, we used the function `here()` from the R package *here*. This creates a path, relative to the project's parent directory and enables full portability of the code within your project. In other words, it doesn't matter whether you run that line of code from within different subdirectories.
 
 ### Style your code
@@ -353,10 +361,6 @@ mean <- function(x) sum(x)/length(x) # mean() itself is already a function
 T <- FALSE # T is an abbreviation of TRUE
 c <- 10 # c() is used to create a vector (example <- c(1, 2, 3))
 ```
-
-#### Commenting
-
-Use comments to describe in human-readable text what the code does. Comments are all that appears to the right of a `#` and are code parts that are not interpreted by R and not executed. Adding comments in the code greatly helps you and others to read your code, understand what it does, modify it, and resolve errors (bugs).
 
 #### Organising scripts
 
@@ -413,4 +417,10 @@ df <- readr::read_csv(here("data", "df.csv"))
 df |> 
   dplyr::filter(age > 18)
 ```
+
+## Exercises
+
+### Workspace {-}
+
+Create a new *R project* and create sub-directories in a meaningful way (as described in this Chapter). Create an RMarkdown file in your new project which implements your solutions to above exercises. Give the file a title, implement some structure in the document, and write some text explaining what your code does.
 

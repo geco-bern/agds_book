@@ -607,11 +607,11 @@ use_pkgs <- c(
   "broom", "skimr", "cowplot", "scico", "hwsdr", "usethis",
   "renv", "rsample", "modelr", "rmarkdown", "rpart",
   "rpart.plot", "ranger", "sessioninfo", "ncdf4", "styler",
-  "here"
+  "here", "ecmwfr", "geodata", "pdp", "vip", "viridis"
 )
 
 new_pkgs <- use_pkgs[!(use_pkgs %in% installed.packages()[, "Package"])]
-if (length(new_pkgs) > 0) install.packages(new_pkgs, repos = "http://cran.us.r-project.org")
+if (length(new_pkgs) > 0) install.packages(new_pkgs)
 invisible(lapply(use_pkgs, require, character.only = TRUE))
 ```
 
@@ -660,3 +660,57 @@ curl --output demo_data.nc https://raw.githubusercontent.com/geco-bern/agds_book
 # show header of file
 ncdump -h demo_data.nc
 ```
+
+## Exercises
+
+### Dimensions of a circle {-}
+
+- Given the radius of a circle `r`, write a few lines of code that calculates its area and its circumference. Run your code with different values assigned to `r`. 
+- Print the solution as text.
+
+> *Hint*: Enter `pi` in your console.
+
+> *Hint*: Entering `print("agds")` in your console returns `"agds"`. Combining (concatenating) multiple strings into a single one can be done using `paste()`.
+
+### Sequence of numbers {-}
+
+Generate a sequence of numbers from 0 and $\pi$ as a vector with length 5.
+
+> *Hint*: Consult the manual of the function `seq()` by entering `?seq` in your terminal.
+
+### Gauss sum {-}
+
+Rumors have it that young Carl Friedrich Gauss was asked in primary school to calculate the sum of all natural numbers between 1 and 100. He did it in his head in no time. We're very likely not as intelligent as young Gauss. But we have R. What's the solution?
+
+Gauss calculated the sum with a trick. The sum of 100 and 1 is 101. The sum of 99 and 2 is 101. You do this 50 times, and you get $50 \times 101$. Demonstrate Gauss' trick with vectors in R.
+
+### Magic trick algorithm {-}
+
+Define a variable named `x` that contains an integer value and perform the following operations in sequence:
+
+- Redefine `x` by adding 1.
+- Double the resulting number, over-writing `x`.
+- Add 4 to `x` and save the result as `x`.
+- Redefine `x` as half of the previous value of `x`.
+- Subtract the originally chosen arbitrary number from `x`.
+
+Print `x`. Restart the algorithm defined above by choosing a new arbitrary natural number.
+
+### Vectors {-}
+
+Print the object `datasets::rivers` and consult the manual of this object.
+
+- What is the class of the object? 
+- What is the length of the object?
+- Calculate the mean, median, minimum, maximum, and the 33%-quantile across all values. 
+
+> *Hint*: If you don't know how to solve a problem, help yourself on the internet.
+
+### Data frames {-}
+
+Print the object `datasets::quakes` and consult the manual of this object.
+
+- Determine the dimensions of the data frame using the respective function in R.
+- Extract the vector of values in the data frame that contain information about the Richter Magnitude.
+- Determine the value largest value in the vector of event magnitudes.
+- Determine the geographic position of the epicenter of the largest event.

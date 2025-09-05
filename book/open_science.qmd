@@ -32,128 +32,118 @@ It is important to acknowledge that there is a spectrum of reproducible data and
 
 The basics of open science coding and data practices rely on a number of simple concepts. The sections below describe a selection of the most important ones. Sticking to these principles and tools will increase the reproducibility of your work greatly.
 
-### Project structure
+<!-- ### Project structure -->
 
-Reproducible science relies on a number of key components. Data and code management and the tracking of required meta-data is the first step in an open science workflow. 
+<!-- Reproducible science relies on a number of key components. Data and code management and the tracking of required meta-data is the first step in an open science workflow.  -->
 
-In @sec-gettingstarted, you learned how to setup an R project. An R project gathers all components of your analysis in a single directory. Although current computers make it easy to "find" your files and are largely file location-agnostic, this is not the case in many research environments. Projects grow quickly, and often, the number of files will flood a single directory. Therefore, files need a precise and structured location. This structure allows you to determine both the function and order of a workflow without reading any code.
+<!-- In @sec-reproducible, you learned how to setup an R project. An R project gathers all components of your analysis in a single directory. Although current computers make it easy to "find" your files and are largely file location-agnostic, this is not the case in many research environments. Projects grow quickly, and often, the number of files will flood a single directory. Therefore, files need a precise and structured location. This structure allows you to determine both the function and order of a workflow without reading any code. -->
 
-It is good practice to have a consistent project structure within and between projects. This allows you to find most project components regardless of when you return to a particular project. Structuring a project in one folder also makes projects portable. All parts reside in one location making it easy to create a *git* project from this location (see @sec-codemgmt), or just copy the project to a new drive.
+<!-- It is good practice to have a consistent project structure within and between projects. This allows you to find most project components regardless of when you return to a particular project. Structuring a project in one folder also makes projects portable. All parts reside in one location making it easy to create a *git* project from this location (see @sec-codemgmt), or just copy the project to a new drive. -->
 
-An example data structure for raw data processing is given below and we provide an [R project template](https://github.com/geco-bern/R_proj_template) to work from and adjust through our [lab GitHub profile](https://github.com/geco-bern). A full description on using the template is provided in @sec-codemgmt.
+<!-- An example data structure for raw data processing is given below and we provide an [R project template](https://github.com/geco-bern/R_proj_template) to work from and adjust through our [lab GitHub profile](https://github.com/geco-bern). A full description on using the template is provided in @sec-codemgmt. -->
 
-``` bash
-data-raw/
-├─ raw_data_product/
-├─ 00_download_raw_data.R
-├─ 01_process_raw_data.R
-```
+<!-- ``` bash -->
+<!-- data-raw/ -->
+<!-- ├─ raw_data_product/ -->
+<!-- ├─ 00_download_raw_data.R -->
+<!-- ├─ 01_process_raw_data.R -->
+<!-- ``` -->
 
-### Managing workflows
+<!-- ### Managing workflows -->
 
-Although some code is agnostic to the order of execution, many projects are effectively *workflows*, where the output of one routine is required for the successful execution of the next routine.
+<!-- Although some code is agnostic to the order of execution, many projects are effectively *workflows*, where the output of one routine is required for the successful execution of the next routine. -->
 
-In order to make sure that your future self, or a collaborator, understands the order in which things should be executed, it is best to number scripts accordingly. This is the most basic approach to managing workflows.
+<!-- In order to make sure that your future self, or a collaborator, understands the order in which things should be executed, it is best to number scripts accordingly. This is the most basic approach to managing workflows. -->
 
-In the example below, all statistics code is stored in the `statistics` folder in an overall `analysis` folder (which also includes code for figures). All statistical analyses are numbered to ensure that the output of a first analysis is available to the subsequent one.
+<!-- In the example below, all statistics code is stored in the `statistics` folder in an overall `analysis` folder (which also includes code for figures). All statistical analyses are numbered to ensure that the output of a first analysis is available to the subsequent one. -->
 
-``` bash
-analysis/
-├─ statistics/
-│  ├─ 00_randomforest_model.R
-│  ├─ 01_randomforest_tuning.R
-├─ figures/
-│  ├─ global_model_results_map.R
-│  ├─ complex_process_visualization.R
-```
+<!-- ``` bash -->
+<!-- analysis/ -->
+<!-- ├─ statistics/ -->
+<!-- │  ├─ 00_randomforest_model.R -->
+<!-- │  ├─ 01_randomforest_tuning.R -->
+<!-- ├─ figures/ -->
+<!-- │  ├─ global_model_results_map.R -->
+<!-- │  ├─ complex_process_visualization.R -->
+<!-- ``` -->
 
-The code-chunk above is a visualisation of a folder (aka. directory) structure on your computer. The lines and indents denote folder levels. In this example, you have a folder `analysis` which holds two more folders `statistics` and `figures`, and in both sub-folders, you have different `*.R` files (`*` is a so-called "wild-card" which is a placeholder for any text). Note that different people may use different symbols to visualise folder structures but generally, folder levels are shown with indents, and files are identifiable by their suffixes.
-
-
-#### Automating and visualizing workflows with targets
-
-To sidestep some of the manual management in R you can use a dedicated pipeline tool like the {targets} package in R. The package learns how your pipeline fits together, skips tasks that are already up-to-date, and runs only the necessary computation. {targets} can also visualize the progress of your workflow.
-
-![A targets visualized workflow by rOpenSci.](https://books.ropensci.org/targets/man/figures/tar_watch.png){#fig-targets width=60% fig.align='center'}
-
-Due to the added complexity of the {targets} package, we won't include extensive examples of such a workflow but refer to the excellent documentation of the package for simple examples [here](https://books.ropensci.org/targets/walkthrough.html).
+<!-- The code-chunk above is a visualisation of a folder (aka. directory) structure on your computer. The lines and indents denote folder levels. In this example, you have a folder `analysis` which holds two more folders `statistics` and `figures`, and in both sub-folders, you have different `*.R` files (`*` is a so-called "wild-card" which is a placeholder for any text). Note that different people may use different symbols to visualise folder structures but generally, folder levels are shown with indents, and files are identifiable by their suffixes. -->
 
 
-### Capturing your session state
+<!-- #### Automating and visualizing workflows with targets -->
 
-Often, code depends on various components, packages or libraries. These libraries and all software come in specific versions, which might or might not alter the behaviour of the code and the output it produces.
+<!-- To sidestep some of the manual management in R you can use a dedicated pipeline tool like the {targets} package in R. The package learns how your pipeline fits together, skips tasks that are already up-to-date, and runs only the necessary computation. {targets} can also visualize the progress of your workflow. -->
 
-If you want to ensure full reproducibility, especially across several years, you will need to capture the state of the system and libraries with which you ran the original analysis.
+<!-- ![A targets visualized workflow by rOpenSci.](https://books.ropensci.org/targets/man/figures/tar_watch.png){#fig-targets width=60% fig.align='center'} -->
 
-In R the [{renv} package](https://rstudio.github.io/renv/) serves this purpose and will provide an index of all the packages used in your project as well as their version. For a particular project, it will create a local library of packages with a static version. These static packages will not be updated over time, and therefore ensure consistent results. This makes your analysis isolated, portable, and reproducible. The analogue in Python would be the [virtual environments, or venv program](https://docs.python.org/3/library/venv.html).
+<!-- Due to the added complexity of the {targets} package, we won't include extensive examples of such a workflow but refer to the excellent documentation of the package for simple examples [here](https://books.ropensci.org/targets/walkthrough.html). -->
 
-When setting up your project you can run:
 
-``` r
-# Initiate a {renv} environment
-renv::init()
-```
+<!-- ### Capturing your session state -->
 
-To initiate your static R environment. Whenever you want to save the state of your project (and its packages) you can call:
+<!-- Often, code depends on various components, packages or libraries. These libraries and all software come in specific versions, which might or might not alter the behaviour of the code and the output it produces. -->
 
-``` r
-# Save the current state of the environment / project
-renv::snapshot()
-```
+<!-- If you want to ensure full reproducibility, especially across several years, you will need to capture the state of the system and libraries with which you ran the original analysis. -->
 
-To save any changes made to your environment. All data will be saved in a project description file called a lock file (i.e. `renv.lock`). It is advised to update the state of your project regularly, and in particular before closing a project.
+<!-- In R the [{renv} package](https://rstudio.github.io/renv/) serves this purpose and will provide an index of all the packages used in your project as well as their version. For a particular project, it will create a local library of packages with a static version. These static packages will not be updated over time, and therefore ensure consistent results. This makes your analysis isolated, portable, and reproducible. The analogue in Python would be the [virtual environments, or venv program](https://docs.python.org/3/library/venv.html). -->
 
-When you move your project to a new system, or share a project on github with collaborators, you can revert to the original state of the analysis by calling:
+<!-- When setting up your project you can run: -->
 
-``` r
-# On a new system, or when inheriting a project
-# from a collaborator you can use a lock file
-# to restore the session/project state using
-renv::restore()
-```
+<!-- ``` r -->
+<!-- # Initiate a {renv} environment -->
+<!-- renv::init() -->
+<!-- ``` -->
 
-> NOTE: As mentioned in the {renv} documentation: "For development and collaboration, the `.Rprofile`, `renv.lock` and `renv/activate.R` files should be committed to your version control system. But the `renv/library` directory should normally be ignored. Note that `renv::init()` will attempt to write the requisite ignore statements to the project `.gitignore`." We refer to @sec-learning-objectives-6 for details on github and its use.
+<!-- To initiate your static R environment. Whenever you want to save the state of your project (and its packages) you can call: -->
 
-### Capturing a system state
+<!-- ``` r -->
+<!-- # Save the current state of the environment / project -->
+<!-- renv::snapshot() -->
+<!-- ``` -->
 
-Although R projects and the use of {targets} make your workflow consistent, the package versions used between various systems (e.g., your home computer or the cluster at the university might vary). To address issues with changes in the versions of package, you can use the {renv} package which manages package version (environments) for you. When tasks are even more complex and include components outside of R, you can use [*Docker*](https://www.docker.com/) to provide containerization of an operating system and the included ancillary application.
+<!-- To save any changes made to your environment. All data will be saved in a project description file called a lock file (i.e. `renv.lock`). It is advised to update the state of your project regularly, and in particular before closing a project. -->
 
-The [{rocker} package](https://rocker-project.org/) provides access to some of these features within the context of reproducible R environments. Using these tools, you can therefore emulate the state of a machine, independently of the machine on which the docker file is run. These days, machine learning applications are often deployed as docker sessions to limit the complexity of installing required software components. The application of docker-based installs is outside the scope of the current course, but feel free to explore these resources as they are widespread in data science.
+<!-- When you move your project to a new system, or share a project on github with collaborators, you can revert to the original state of the analysis by calling: -->
 
-### Readable reporting using Rmarkdown
+<!-- ``` r -->
+<!-- # On a new system, or when inheriting a project -->
+<!-- # from a collaborator you can use a lock file -->
+<!-- # to restore the session/project state using -->
+<!-- renv::restore() -->
+<!-- ``` -->
 
-Within Rstudio, you can use Rmarkdown dynamic documents to combine both text and code. Rmarkdown is ideal for *reporting*, i.e., writing your final document and presenting your analysis results. A Rmarkdown document consists of a header that specifies document properties (whether it should be rendered as an html page, a docx file or a pdf), and the actual content. You have encountered RMarkdown already in @sec-rmarkdown.
+<!-- > NOTE: As mentioned in the {renv} documentation: "For development and collaboration, the `.Rprofile`, `renv.lock` and `renv/activate.R` files should be committed to your version control system. But the `renv/library` directory should normally be ignored. Note that `renv::init()` will attempt to write the requisite ignore statements to the project `.gitignore`." We refer to @sec-learning-objectives-6 for details on github and its use. -->
 
-### Project structure
+<!-- ### Capturing a system state -->
 
-In R projects, all files can be referenced relative to the top-most path of the project. When opening `your_project.Rproj` in RStudio, you can load data that is located in a sub-directory of the project directory `./data/` by `read.table("./data/some_data.csv")`. The use of *relative paths* and consistent directory structures across projects, enables that projects can easily be ported across computers and code adopted across projects.
+<!-- Although R projects and the use of {targets} make your workflow consistent, the package versions used between various systems (e.g., your home computer or the cluster at the university might vary). To address issues with changes in the versions of package, you can use the {renv} package which manages package version (environments) for you. When tasks are even more complex and include components outside of R, you can use [*Docker*](https://www.docker.com/) to provide containerization of an operating system and the included ancillary application. -->
 
-``` bash
-project/
-├─ your_project.Rproj
-├─ vignettes/
-│  ├─ your_dynamic_document.Rmd
-├─ data/
-│  ├─ some_data.csv
-```
+<!-- The [{rocker} package](https://rocker-project.org/) provides access to some of these features within the context of reproducible R environments. Using these tools, you can therefore emulate the state of a machine, independently of the machine on which the docker file is run. These days, machine learning applications are often deployed as docker sessions to limit the complexity of installing required software components. The application of docker-based installs is outside the scope of the current course, but feel free to explore these resources as they are widespread in data science. -->
 
-Rmarkdown files commonly reside in a sub-directory `./vignettes/` and are rendered relative to the file path where it is located. This means that to access data which resides in `data/` using code in `./vignettes/your_dynamic_document.Rmd`, we would have to write:
-```{r eval = FALSE}
-data <- read.table('../data/some_data.csv')
-```
+<!-- ### Readable reporting using Rmarkdown -->
 
-Note the `../` to go one level up. To allow for more flexibility in file locations within your project folder, you may use the [{here} package](https://here.r-lib.org/) package. I gathers the absolute path of the R project and allows for a specification of paths inside scripts and functions that always start from the top project directory, irrespective of where the script that implements the reading-code is located. Therefore, we can just write:
-```{r eval = FALSE}
-data <- read.table(here::here('data/some_data.csv'))
-```
+<!-- Within Rstudio, you can use Rmarkdown dynamic documents to combine both text and code. Rmarkdown is ideal for *reporting*, i.e., writing your final document and presenting your analysis results. A Rmarkdown document consists of a header that specifies document properties (whether it should be rendered as an html page, a docx file or a pdf), and the actual content. You have encountered RMarkdown already in @sec-rmarkdown. -->
 
-But why not use absolute paths to begin with? Portability! When I would run your `\*.Rmd` file with an absolute path on my computer, it would not render as the file `some_data.csv` would then be located at: `/my_computer/project/data/some_data.csv`
+<!-- ### Project structure -->
 
-#### Limitations of notebooks
+<!-- In R projects, all files can be referenced relative to the top-most path of the project. When opening `your_project.Rproj` in RStudio, you can load data that is located in a sub-directory of the project directory `./data/` by `read.table("./data/some_data.csv")`. The use of *relative paths* and consistent directory structures across projects, enables that projects can easily be ported across computers and code adopted across projects. -->
 
-The file referencing issue and the common use of Rmarkdown, and notebooks in general, as a one size fits all solution, containing all aspects from data cleaning to reporting, implies some limitations. RMarkdown documents mix two cognitive tasks, writing text content (i.e. reporting) and writing code. Switching between these two modes comes with undue overhead. If you code, you should not be writing prose, and vise versa.
+<!-- ``` bash -->
+<!-- project/ -->
+<!-- ├─ your_project.Rproj -->
+<!-- ├─ vignettes/ -->
+<!-- │  ├─ your_dynamic_document.Rmd -->
+<!-- ├─ data/ -->
+<!-- │  ├─ some_data.csv -->
+<!-- ``` -->
 
-If your R markdown file contains more code than it does text, it should be considered an R script or function (with comments or documentation). Conversely, if your RMarkdown file contains more text than code, it probably is easier to collaborate on a true word processing file (or cloud-based solution). Notebooks, such as RMarkdown, are most suitable for communicating implementations, demonstrating functions, and reporting reproducible results. They can also be used like lab notes. They are less suited for code development. 
+<!-- But why not use absolute paths to begin with? Portability! When I would run your `\*.Rmd` file with an absolute path on my computer, it would not render as the file `some_data.csv` would then be located at: `/my_computer/project/data/some_data.csv` -->
+
+<!-- #### Limitations of notebooks -->
+
+<!-- The file referencing issue and the common use of Rmarkdown, and notebooks in general, as a one size fits all solution, containing all aspects from data cleaning to reporting, implies some limitations. RMarkdown documents mix two cognitive tasks, writing text content (i.e. reporting) and writing code. Switching between these two modes comes with undue overhead. If you code, you should not be writing prose, and vise versa. -->
+
+<!-- If your R markdown file contains more code than it does text, it should be considered an R script or function (with comments or documentation). Conversely, if your RMarkdown file contains more text than code, it probably is easier to collaborate on a true word processing file (or cloud-based solution). Notebooks, such as RMarkdown, are most suitable for communicating implementations, demonstrating functions, and reporting reproducible results. They can also be used like lab notes. They are less suited for code development.  -->
 
 ### Data retention
 

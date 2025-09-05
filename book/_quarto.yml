@@ -17,8 +17,8 @@ book:
     - primers.qmd
     - reproducible_workflows.qmd
     - code_management.qmd
-    - open_science.qmd
-    - data_variety.qmd
+    # - open_science.qmd
+    # - data_variety.qmd
     - data_wrangling.qmd
     - data_vis.qmd
     - regression_classification.qmd

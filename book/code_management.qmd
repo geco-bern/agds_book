@@ -4,16 +4,14 @@
 
 ## Learning objectives
 
-In this chapter you will learn how to manage your code with common version control tools, i.e., *git.*
+In this chapter you will learn how to manage your code with common version control tools, i.e., *Git*.
 
 You will learn how to:
 
--   Create a git project (new or from a template)
+-   Create a Git project (new or from a template)
 -   Track changes in your code project
 -   Collaborate with others
 -   Ensure reproducibility of your project by openly sharing your work and progress.
-
-
 
 ## Tutorial
 
@@ -21,38 +19,38 @@ Code management is key for managing any data science project, especially when co
 
 In this chapter, we will discuss the management of code in both the location sense, where things are kept, and tracking temporal changes over time using a version control system.
 
-Current version control of code is dominated by the software tool *git*. However, version control has a long history and can be found not only in code development practices. For example, whenever you use track changes in a text document, you apply a form of version control. That is, you track changes in your text over time and selectively accept changes. In this respect, *git*, as a tool for version control of code, does not differ much from track changes of a text document. In contrast to track changes in a text document, with *git* the user has manual control over *staging* and *committing* edits on a file.
+Current version control of code is dominated by the software tool *Git*. However, version control has a long history and can be found not only in code development practices. For example, whenever you use track changes in a text document, you apply a form of version control. That is, you track changes in your text over time and selectively accept changes. In this respect, *Git*, as a tool for version control of code, does not differ much from track changes of a text document. In contrast to track changes in a text document, with *Git* the user has manual control over *staging* and *committing* edits on a file.
 
-![The git workflow- by Paola Corrales and Elio Campitelli](https://eliocamp.github.io/reproducibility-with-r/materials/day2/02-git/images/file_cycle2.png){#fig-gitworkflow width=100% fig.align='center'}
+![The Git workflow- by Paola Corrales and Elio Campitelli](https://eliocamp.github.io/reproducibility-with-r/materials/day2/02-git/images/file_cycle2.png){#fig-gitworkflow width=100% fig.align='center'}
 
-*Git* allows for the collaboration of multiple contributors on the same code and manages the integration of contributions into the repository. Built upon *git* are cloud-based platforms such as [GitHub](https://github.com), [GitLab](https://gitlab.com), [Codeberg](https://codeberg.org), or [Bitbucket](https://bitbucket.org/) which make these collaborative decisions and operations even easier.
+*Git* allows for the collaboration of multiple contributors on the same code and manages the integration of contributions into the repository. Built upon *Git* are cloud-based platforms such as [GitHub](https://github.com), [GitLab](https://gitlab.com), [Codeberg](https://codeberg.org), or [Bitbucket](https://bitbucket.org/) which make these collaborative decisions and operations even easier.
 
 ![The github remote workflow- by Paola Corrales and Elio Campitelli](https://eliocamp.github.io/reproducibility-with-r/materials/day2/02-git/images/local_remote.png){#fig-githubworkflow width=100% fig.align='center'}
 
-In this chapter, you will learn how to use *git* and GitHub to manage your project and collaborate on code.
+In this chapter, you will learn how to use *Git* and GitHub to manage your project and collaborate on code.
 
 > NOTE: Coding style, and documentation practices of the code itself have been covered previously in @sec-programmingprimers. Although the tutorial below focuses on GitHub, the jargon and operations are transferable to other platforms such as [GitLab](https://gitlab.com) and [Codeberg](https://codeberg.org).
 
 ### Git and local version control {#sec-gitworkflow}
 
-*Git* allows for the tracking of changes in code (or any file) within a git project. A *git* project is defined by the topmost directory in which a *git* project is created. For example, the following project is not tracked for changes using git.
+*Git* allows for the tracking of changes in code (or any file) within a git project. A *Git* project is defined by the topmost directory in which a *Git* project is created. For example, the following project is not tracked for changes using git.
 
 ``` bash
 project/
 ├─ YOUR_PROJECT.Rproj
 ```
 
-You can start tracking a project by initiating a local *git* repository using the following code in R. We'll use the {usethis} package to make some of the setup a project easier.
+You can start tracking a project by initiating a local *Git* repository using the following code in R. We'll use the {usethis} package to make some of the setup a project easier.
 
 ```{r eval=FALSE}
 usethis::use_git()
 ```
 
-This will create a *git* repository in your project. It will also create a `.gitignore` file which specifies which files NOT to track (even if asked to). In addition it will make an first commit.
+This will create a *Git* repository in your project. It will also create a `.gitignore` file which specifies which files NOT to track (even if asked to). In addition it will make an first commit.
 
 #### git add {#sec-git-add}
 
-Before we can track anything, we need to tell *git* which files to track. In *git*-speak, we *stage* the files. We therefore have to `add` them to an index of tracked files. You can either do this on the command line using:
+Before we can track anything, we need to tell *Git* which files to track. In *Git*-speak, we *stage* the files. We therefore have to `add` them to an index of tracked files. You can either do this on the command line using:
 
 ``` bash
 git add your_file.csv
@@ -62,7 +60,7 @@ Or using the RStudio **Git** panel. In this panel, you will see all un-tracked f
 
 ![Unstaged files in a git enabled R project.](./figures/git_unstaged_files.png){#fig-unstagedfiles width=80% fig.align='center'}
 
-You select the file tick boxes to the left to stage all files for inclusion into the *git* repository. Once staged, the next step will be to finally commit these staged files to be included in *git* tracking.
+You select the file tick boxes to the left to stage all files for inclusion into the *Git* repository. Once staged, the next step will be to finally commit these staged files to be included in *Git* tracking.
 
 ![Staged files in a git enabled R project.](./figures/git_staged_files.png){#fig-stagedfiles width=80% fig.align='center'}
 
@@ -72,11 +70,11 @@ To store any changes to the files which were staged we need to `commit` these ch
 
 ![Entering a commit message.](./figures/git_commit_message.png){#fig-commitmessage width=80% fig.align='center'}
 
-Each commit needs a brief message describing what you have included in the staged files, or the commit message, as shown in the panel on the right. You need to provide this small message before pressing the commit button once more. This will let *git* track the changes to these files. A message will be shown if the commit is successful.
+Each commit needs a brief message describing what you have included in the staged files, or the commit message, as shown in the panel on the right. You need to provide this small message before pressing the commit button once more. This will let *Git* track the changes to these files. A message will be shown if the commit is successful.
 
 ![A completed commit.](./figures/git_commit_completed.png){#fig-commitcompleted width=80% fig.align='center'}
 
-With this, you will track all files locally. Any new changes to a file will need to be committed to the *git* repository once more. So, unlike cloud services such as Dropbox, your files are not automatically tracked. Instead, this is a manual step. As with normal documents, you are advised to save (commit) your changes to your project frequently. And remember, if you create a new file, you will need to `add` it before you can `commit` it.
+With this, you will track all files locally. Any new changes to a file will need to be committed to the *Git* repository once more. So, unlike cloud services such as Dropbox, your files are not automatically tracked. Instead, this is a manual step. As with normal documents, you are advised to save (commit) your changes to your project frequently. And remember, if you create a new file, you will need to `add` it before you can `commit` it.
 
 You can `commit` changes of staged files using the command line as well using the following command.
 
@@ -86,7 +84,7 @@ git commit -m "A message""
 
 ### Remote version control
 
-Keeping files and working with *git* locally limit the extent in which you can collaborate with others. This is where remote cloud-based *git* solutions, such as [GitHub](https://github.com), [GitLab](https://gitlab.com) and [Codeberg](https://codeberg.org), come in. They provide a cloud-based *git* repository which you can associate with your local project (see figure above).
+Keeping files and working with *Git* locally limit the extent in which you can collaborate with others. This is where remote cloud-based *Git* solutions, such as [GitHub](https://github.com), [GitLab](https://gitlab.com) and [Codeberg](https://codeberg.org), come in. They provide a cloud-based *Git* repository which you can associate with your local project (see figure above).
 
 To create a remote project and successfully associate it with an R project, we first have to specify some details, such as the user name and email you used is singing up for [GitHub](https://github.com). To not leave your R session, you can use the {usethis} package for this.
 
@@ -119,7 +117,7 @@ In the "repository URL", paste the URL of your new GitHub repository. In the exa
 
 #### git push
 
-Once a remote git service has been configured, you can push your local *git* repository to this remote repository, i.e. syncing both. You can use both the push buttons in the RStudio panel for this or the command line using `git push`. At the end of a day or a session, it is always advised to `push` your changes to your remote repository to store any changes.
+Once a remote git service has been configured, you can push your local *Git* repository to this remote repository, i.e. syncing both. You can use both the push buttons in the RStudio panel for this or the command line using `git push`. At the end of a day or a session, it is always advised to `push` your changes to your remote repository to store any changes.
 
 > NOTE: Syncing between GitHub and your local repository is a manual task. If not performed the repository, it will not be synced. To retain all your changes, sync both repositories often!
 
@@ -127,7 +125,7 @@ Once a remote git service has been configured, you can push your local *git* rep
 
 #### git pull and merge conflicts
 
-`git pull` compares your local *git* repository with the remote one and integrates the more recent changes if there are any. Note that if you make changes on the same line in file on both sides, i.e., in the remote (e.g., by another person) and in the local repository at the same time, you will generate a *merge conflict*. A merge conflict states that the remote and local changes can't be reconciled without supervised intervention on your part. Changes will be made to your local repository, but the files will include the below syntax for highlighting conflicting differences.
+`git pull` compares your local *Git* repository with the remote one and integrates the more recent changes if there are any. Note that if you make changes on the same line in file on both sides, i.e., in the remote (e.g., by another person) and in the local repository at the same time, you will generate a *merge conflict*. A merge conflict states that the remote and local changes can't be reconciled without supervised intervention on your part. Changes will be made to your local repository, but the files will include the below syntax for highlighting conflicting differences.
 
 ``` bash
     <<<<<<<<<<
@@ -190,11 +188,50 @@ Proceed as usual by naming your repository. However, be careful to select the co
 
 You can now clone the project to your local computer and continue to populate it with code and data.
 
+## Preparations for this course
+
+#### Set up Git in RStudio
+
+In this section, you will install *Git*, create a GitHub account and connect it to RStudio. This should set up your laptop so that you can do version control of your code (with an easy to use interface) and upload changes to an online copy of your R project (on GitHub) directly from RStudio. Follow these instructions:
+
+-   If you don't have one already, create a GitHub account on <https://github.com> and sign in. We encourage you to use a personal email (not your student email) so you can keep using this account for years to come, thus compiling your "code knowledge base".
+-   Next, follow the Git download and installation instructions for your OS outlined [here](https://git-scm.com/downloads).
+-   Once Git is installed, reboot RStudio. Set up RStudio for version control by going to **Tools \> Global Options \> Git/SVN** and tick "Enable version control interface...". The path to your Git installation should be correct automatically.
+    -    If it says "(Not Found)", try the following:
+         -    For Windows, it's probably `C:\\Program Files\\Git\\bin\\git.exe`.
+         -    For MacOS and Linux, you can type `which git` in the Terminal and it will show the installation location.
+         -    If you get an error after trying this, ask the teaching assistance.\
+    ![Set up Git for RStudio.](./figures/git_in_rstudio.png){#fig-gitrstudio width=75% fig.align='center'}
+-   Connect your GitHub account with Git locally, using SSH keys (which are cryptographic authentication credentials). You can do this from RStudio following the steps:
+    -   Go to **Tools \> Global Options \> Git/SVN** and select **Create SSH Key...**. Create an SSH key with the default options (you can ignore the passphrase and click "Create"). This will create a new SSH in your default `~/.ssh` folder. \
+    ![Create an SSH key from RStudio:](./figures/create_ssh_key.png){#fig-createsshkey width=75% fig.align='center'}
+    -   Next, click on **View public key** (above your new SSH key) and copy the public key (all the text). 
+    ![Copy the public key for the SSH connection.](./figures/copy_public_key.png){#fig-viewpublickey width=75% fig.align='center'}
+    -   Go back to your browser and open your GitHub account. At the top right, open your profile's menu and choose **Settings > SSH and GPG Keys**. Then select **Add new SSH key**. Give your SSH connection a name, for example "My laptop" and paste the *public key* that you copied from RStudio. If you have problems, check out [these instructions](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account) to add a new SSH key to your GitHub account. 
+    -   Finally, you can test your SSH connection following [these instructions](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/testing-your-ssh-connection). Note that, at the top of these websites, there's an option to choose your OS because the steps vary depending on the type of computer your work with.
+
+#### Host reports on Github {#sec-setupreport}
+
+Your performance assessment for Applied Geodata Science will be in the form of a report. You will approach the writing of this report as if you were working on a clean, structured and reproducible data science project. This section is meant to guide you through the preparation of your report workspace, such that it's in the form that you will submit it. Following the next steps, you will set up a git repository containing an R project and an R Markdown file. 
+
+- Log into GitHub in your browser and create a **new repository**. Name it *agds_report_yourname*, give it a short description and set it to be public, so we can read it for the evaluation. Include a README file (it's a sort of menu which you'll edit later), a `.gitignore` template for R (select in the drop-down menu) and a Creative Commons license (for code sharing rights, etc). \
+  ![Create a Git repository for your report.](./figures/create_git_repository.png){#fig-reportrepository width=75% fig.align='center'}
+- Now that you have a GitHub repository, open it and you should see a green button saying **Code**. Go to **SSH** and copy that url. You will use it to *clone* the repository. \
+  ![Copy the SSH url to clone your reporitory.](./figures/copy_ssh_repo.png){#fig-copysshrepo width=75% fig.align='center'}
+- Open RStudio. Create a new R project (opening the **New Project** dialog) from a GitHub repository. Paste the repository's url, give it a name (by default the same as the repository) and select in which folder you want to keep it locally (for example the base directory `~`). This will clone all the files from GitHub onto the project directory (i.e. folder) in your computer. \
+  ![Clone your repository and create an R project.](./figures/clone_repo_ssh.png){#fig-clonerepo width=75% fig.align='center'}
+- With this, you're set up. If your R project `agds_report_yourname` is open, you should see a **Git** panel in RStudio (next to **Environment**) and also be able to use Git in the **Terminal** panel in RStudio. As mentioned above, we will start working with these tools in a few weeks and they will be a crucial part of the course.
+- You'll see a detailed explanation of the *Git* workflows in @sec-codemgmt. For now, add your solutions to each report exercise into a separate RMarkdown file, placed in a subdirectory named `./vignettes/`. The first Report Exercise will be the one for @sec-datawrangling where you will be asked to implement your solutions in a file called `re_tidy.Rmd`. At that stage, your repository should look like this: \
+  ![At first, the R Markdown for your report will look something like this.](./figures/Rmd_report.png){#fig-reportmarkdown width=75% fig.align='center'}
+
+In total you should have two R projects related to this course: a local project containing solutions to general exercises (for yourself, created in the exercises below) and the report project + git repository (that you just created and will share with us at the end of the course). Your report project should not include the solutions to general exercises.
+
+
 ## Exercises
 
 ### Location based code management {-}
 
-Create a new R project using the *git* R project template shown above.
+Create a new R project using the *Git* R project template shown above.
 
 -   Make some changes to the README.md
 
@@ -206,7 +243,7 @@ Create a new R project using the *git* R project template shown above.
 
 ### Collaborative Work on Github {-}
 
-This is a team exercise, so team up with someone else in the classroom. You will learn about how to collaborate online using *git* and Github. 
+This is a team exercise, so team up with someone else in the classroom. You will learn about how to collaborate online using *Git* and Github. 
 
 > Important: When creating your repositories, make sure that you set the repository to be public and not private.
 
