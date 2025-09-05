@@ -1,7 +1,5 @@
 # Open science practices {#sec-openscience}
 
-**Chapter lead author: Koen Hufkens**
-
 ## Learning objectives {#sec-learning-objectives-6}
 
 In this chapter, you will learn the reasons for practicing open science and some of the basic methodological techniques that we can use to facilitate an open science workflow.
@@ -16,21 +14,87 @@ In this chapter you will learn how to:
 
 <!-- https://www.nature.com/articles/sdata201618 -->
 
-## Tutorial
+## What is Open Science and why?
 
-The scientific method relies on repeated testing of a hypothesis. When dealing with data and formal analysis, one can reduce this problem to the question: could an independent scientist attain the same results given the described methodology, data and code?
+Open Science is a way of doing research that emphasizes public and free accessibility, reusability, and transparency at every stage of the scientific process. Instead of keeping data, methods, and results behind paywalls or locked on personal computers, Open Science seeks to make them available for others to examine, test, and build upon. In brief:
 
-Although this seems trivial, this issue has vexed the scientific community. These days, many scientific publications are based on complex analyses with often large data sets. More so, methods in publications are often insufficiently detailed to really capture the scope of an analysis. Even from a purely technical point of view, the reproducibility crisis or the inability to reproduce experimental results, is a complex problem. This is further compounded by social aspects and incentives. In recent decades, scientific research has seen a steady increase in speed due to the digitization of many fields and the commodification of science.
+> “Open data and content can be freely used, modified, and shared by anyone for any purpose.” ([opendefinition.org](https://opendefinition.org/))
 
-Although digitization has opened up new research possibilities, its potential for facilitating, accelerating, and advancing science are often not fully made use of. Historically, research and its output in the form of data and code has been confined to academic journals, data and code has often not been made available, and data were not shared or behind pay-walls. This limits the impact of science also in the public domain. (In many ways, this is still the case today, in year 2023 as we write). Digitization has made research output better visible and accessible, but practical obstacles and weak standards often prevent it from uptake, re-use, and further development by the wider community.
+At its core, Open Science is grounded in *reproducibility*: the idea that scientific results should be verifiable by others using the same methods and data. Open science is enabled by *reusability* (as was introduced in @sec-reproducible), ensuring that outputs such as datasets, software, and workflows can be adapted for new purposes, speeding up discovery across disciplines.
 
-Open and reproducible science is a movement to make scientific research (output) widely accessible to the larger public, increase research transparency and enabling robust and verifiable science. Open science aims to be as open as possible about the whole scientific process, and as closed as desirable (e.g. privacy or security reasons).
+Concretely, Open Science includes practices including open data, open source software, open access publishing, and open workflows and methods (see below). Beyond methods, Open Science represents a cultural shift. It challenges the traditional “publish or perish” system, where competition and secrecy often slow progress, and instead encourages collaboration, accountability, and broader participation. Several aspects motivate the cultural shift towards Open Science:
 
-It is important to acknowledge that there is a spectrum of reproducible data and code workflows which depends on the state or source of the data and the output of the code (or analysis). Within the context of this course, we focus primarily on the practical aspects for reproducible science, i.e., ensuring that given the same data and code, the results will be similar.
+- Enables accountability, trust and leads to robust science.
+
+Access to data and code enables tests and acts as a precise documentation of how results were obtained. This also reflects a response to the reproducibility crisis that has affected scientific studies and entire scientific fields. 
+
+- Creates efficient infrastructure.
+ 
+Making data freely accessible through the web enables fully reproducible workflows.
+
+- Enhances impact.
+
+Making your data and code accessible and reusable enhances its uptake by the community. This makes your work valuable and visible -- you create impact.
+
+- Serves the public and transcends discrimination.
+
+Since much research is publicly funded, its outputs should be accessible to the public and anyone, disregarding access to resources and funding.
+
+It is important to acknowledge the granularity of what it takes to do good science -- science that may not just be *reproducible*, but also *replicable*, *robust*, and *generalisable*. These descriptors can be understood as different combinations of the data and/or the analysis being identical between studies (or not). Open access data and sofware are the basis for a study to be reproducible. The analysis (software) may be reusable and can be applied to new data, making findings replicable. The same data may also be analysed differently. If findings are similar, they are robust. If a pattern or a relationship is identified consistently with multiple different combinations of data and analytic approaches, findings are generalisable. Within the context of this course, we focus primarily on the practical aspects for reproducible science, i.e., ensuring that given the same data and code, the results will be (practically) identical.
 
 ![The reproducibility matrix by The Turing Way.](./figures/reproducible-matrix-turing-way.jpg){#fig-repromatrix width=60% fig.align='center'}
 
-The basics of open science coding and data practices rely on a number of simple concepts. The sections below describe a selection of the most important ones. Sticking to these principles and tools will increase the reproducibility of your work greatly.
+### Open data
+
+Open data refers to the practice of making research datasets available so that others can examine, validate, and reuse them. When properly shared, data becomes a resource for the entire research community, enabling new insights and reducing duplication of effort. Yet, in practice, researchers often perceive barriers to making data open. In some cases, researchers must handle sensitive or confidential data, which cannot be openly released without consent and restrictions to openness. Finally, there are strategic considerations—sharing data may feel risky in competitive environments.
+
+Despite these challenges, expectations and the culture around open data are shifting. Many journals and funding agencies now require authors to provide data availability statements in published articles, and some make data deposition in recognized repositories a condition of publication. To guide these practices, the *FAIR* principles  -- that data should be Findable, Accessible, Interoperable, and Reusable -- have become a global standard. FAIR does not mean all data must be open, but it emphasizes that well-documented and properly archived data maximizes its potential for reuse while protecting sensitive information.
+
+### Open source software
+
+Software is often as central to research as data, yet historically it has been less visible in scholarly outputs. Open source software addresses this gap by making code freely accessible for anyone to use, examine, and extend. A typical project might start as a tool written for a specific study, but once shared and adapted for more general applications, it can evolve into a library that supports many projects across a community. Also specialized software, such as a model for simulating a physical system, can become widely useful if written in a non-proprietary coding language and accompanied by sufficient documentation.
+
+The benefits of open source are significant. Publicly available code enables reproducibility by letting others see exactly how analyses were performed. It also reduces dependence on proprietary systems, which may lock research into costly or opaque environments. Over time, well-maintained open source projects can attract contributions from the wider community, enhancing functionality and improving reliability. Version control platforms like *GitHub* make this collaborative development possible by offering tools for *issue tracking*, *pull requests*, and *continuous integration testing*. When paired with clear *licensing*, open source software not only supports transparency but also lays the foundation fair crediting and for cumulative progress.
+
+### Open access publishing
+
+One of the most visible aspects of Open Science is open access publishing, which aims to make research articles freely available to everyone. The motivation is straightforward: since much research is publicly funded, the public should not face paywalls to access it. However, the reality of traditional publishing has created a crisis. Commercial publishers often charge universities and libraries high subscription fees, while researchers -- who generate content, review manuscripts, and edit journals without pay -- receive little in return. The public ends up paying twice: once to fund the research through salaries and grants, and again through subscription costs.
+
+Open access offers alternative models. Some scholarly societies, such as the *European Geosciences Union* and the *American Geophysical Union*, have pioneered non-profit publishing routes where revenues sustain the scientific community rather than shareholders. *Preprint* servers also play an increasingly important role, allowing researchers to freely share findings rapidly before peer review.
+
+Within formal publishing, two main routes to open access exist. *Gold open access* makes articles immediately free to read on the publisher’s site, often supported by article processing charges (APCs) paid by authors or their institutions. *Green open access* relies on authors self-archiving preprints or accepted manuscripts in institutional or subject repositories, where they remain freely available even if the journal version is behind a paywall. Together, these models are reshaping the landscape of scholarly communication toward greater openness.
+
+### Open workflows and methods
+
+Beyond data, software, and publications, Open Science also encompasses the entire research workflow. Open workflows mean that the processes behind a study -- from data collection protocols to analysis scripts -- are documented and shared in ways that others can follow. This makes research more transparent and easier to reuse. For example, maintaining project-oriented workflows where data, code, and documentation are stored systematically helps others (and one’s future self) understand the work. In @sec-reproducible, you learned what it takes to implement reusable, project-oriented workflows. 
+
+Version control systems like Git allow researchers to capture the history of their analysis workflows, while platforms like GitHub provide mechanisms for collaboration, peer review of code, and continuous integration testing to ensure reliability. Coupled with practices like versioning and tagged releases, these tools enable researchers to share stable snapshots of their work that can be cited and archived. Open workflows are also supported by *data management plans*, which assign clear roles and responsibilities, define storage and backup strategies, and address long-term preservation of outputs. More on such practices below in @sec-practices-open-science
+
+In essence, open workflows transform research into a living, transparent process rather than a black box that only produces final results. This shift helps ensure that scientific claims can be checked, methods can be reused, and future work can build more efficiently on what has already been done.
+
+## Practices for Open Science {#sec-practices-open-science}
+
+### Open source software
+
+
+
+
+
+
+
+<!-- ## Tutorial -->
+
+<!-- The scientific method relies on repeated testing of a hypothesis. When dealing with data and formal analysis, one can reduce this problem to the question: could an independent scientist attain the same results given the described methodology, data and code? -->
+
+<!-- Although this seems trivial, this issue has vexed the scientific community. These days, many scientific publications are based on complex analyses with often large data sets. More so, methods in publications are often insufficiently detailed to really capture the scope of an analysis. Even from a purely technical point of view, the reproducibility crisis or the inability to reproduce experimental results, is a complex problem. This is further compounded by social aspects and incentives. In recent decades, scientific research has seen a steady increase in speed due to the digitization of many fields and the commodification of science. -->
+
+<!-- Although digitization has opened up new research possibilities, its potential for facilitating, accelerating, and advancing science are often not fully made use of. Historically, research and its output in the form of data and code has been confined to academic journals, data and code has often not been made available, and data were not shared or behind pay-walls. This limits the impact of science also in the public domain. (In many ways, this is still the case today, in year 2023 as we write). Digitization has made research output better visible and accessible, but practical obstacles and weak standards often prevent it from uptake, re-use, and further development by the wider community. -->
+
+<!-- Open and reproducible science is a movement to make scientific research (output) widely accessible to the larger public, increase research transparency and enabling robust and verifiable science. Open science aims to be as open as possible about the whole scientific process, and as closed as desirable (e.g. privacy or security reasons). -->
+
+
+
+<!-- The basics of open science coding and data practices rely on a number of simple concepts. The sections below describe a selection of the most important ones. Sticking to these principles and tools will increase the reproducibility of your work greatly. -->
 
 <!-- ### Project structure -->
 
@@ -81,44 +145,6 @@ The basics of open science coding and data practices rely on a number of simple 
 
 <!-- ### Capturing your session state -->
 
-<!-- Often, code depends on various components, packages or libraries. These libraries and all software come in specific versions, which might or might not alter the behaviour of the code and the output it produces. -->
-
-<!-- If you want to ensure full reproducibility, especially across several years, you will need to capture the state of the system and libraries with which you ran the original analysis. -->
-
-<!-- In R the [{renv} package](https://rstudio.github.io/renv/) serves this purpose and will provide an index of all the packages used in your project as well as their version. For a particular project, it will create a local library of packages with a static version. These static packages will not be updated over time, and therefore ensure consistent results. This makes your analysis isolated, portable, and reproducible. The analogue in Python would be the [virtual environments, or venv program](https://docs.python.org/3/library/venv.html). -->
-
-<!-- When setting up your project you can run: -->
-
-<!-- ``` r -->
-<!-- # Initiate a {renv} environment -->
-<!-- renv::init() -->
-<!-- ``` -->
-
-<!-- To initiate your static R environment. Whenever you want to save the state of your project (and its packages) you can call: -->
-
-<!-- ``` r -->
-<!-- # Save the current state of the environment / project -->
-<!-- renv::snapshot() -->
-<!-- ``` -->
-
-<!-- To save any changes made to your environment. All data will be saved in a project description file called a lock file (i.e. `renv.lock`). It is advised to update the state of your project regularly, and in particular before closing a project. -->
-
-<!-- When you move your project to a new system, or share a project on github with collaborators, you can revert to the original state of the analysis by calling: -->
-
-<!-- ``` r -->
-<!-- # On a new system, or when inheriting a project -->
-<!-- # from a collaborator you can use a lock file -->
-<!-- # to restore the session/project state using -->
-<!-- renv::restore() -->
-<!-- ``` -->
-
-<!-- > NOTE: As mentioned in the {renv} documentation: "For development and collaboration, the `.Rprofile`, `renv.lock` and `renv/activate.R` files should be committed to your version control system. But the `renv/library` directory should normally be ignored. Note that `renv::init()` will attempt to write the requisite ignore statements to the project `.gitignore`." We refer to @sec-learning-objectives-6 for details on github and its use. -->
-
-<!-- ### Capturing a system state -->
-
-<!-- Although R projects and the use of {targets} make your workflow consistent, the package versions used between various systems (e.g., your home computer or the cluster at the university might vary). To address issues with changes in the versions of package, you can use the {renv} package which manages package version (environments) for you. When tasks are even more complex and include components outside of R, you can use [*Docker*](https://www.docker.com/) to provide containerization of an operating system and the included ancillary application. -->
-
-<!-- The [{rocker} package](https://rocker-project.org/) provides access to some of these features within the context of reproducible R environments. Using these tools, you can therefore emulate the state of a machine, independently of the machine on which the docker file is run. These days, machine learning applications are often deployed as docker sessions to limit the complexity of installing required software components. The application of docker-based installs is outside the scope of the current course, but feel free to explore these resources as they are widespread in data science. -->
 
 <!-- ### Readable reporting using Rmarkdown -->
 

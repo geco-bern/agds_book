@@ -245,6 +245,29 @@ X^2^
 
 Use comments to describe in human-readable text what the code does. Comments are all that appears to the right of a `#` and are code parts that are not interpreted by R and not executed. Adding comments in the code greatly helps you and others to read your code, understand what it does, modify it, and resolve errors (bugs).
 
+Here is a list of rules for good commenting (from [here](https://stackoverflow.blog/2021/12/23/best-practices-for-writing-code-comments/)):
+
+- Comments should not duplicate the code.
+- Good comments do not excuse unclear code.
+- Explain unidiomatic code in comments.
+- Provide links to the original source of copied code.
+- Include links to external references where they will be most helpful.
+- Add comments when fixing bugs.
+- Use comments to mark incomplete implementations.
+
+#### File naming
+
+Good file naming facilitates transparency, findability, and reusability. Hence, file naming matters. The following points should be considered (see also [here](https://book.the-turing-way.org/reproducible-research/rdm/rdm-storage#rr-rdm-storage-conventions)):
+
+- Include the type of a file's content in its name (e.g., `map_`, `df_` for data frame, `mod_` for a model object, etc.)
+- Chose the right suffix for a given file format (e.g., `.csv`, `.nc`, `.txt`, `.md`)
+- If multiple versions of the file should be kept, give the file a date in the format `YYYYMMDD` or give it a version number (e.g., `v1`).
+- Avoid special characters (`()?\!@\*%{[<>`) and spaces.
+- Use underscores (`_`), not dots (except for the dot before the suffix).
+- Avoid uppercase.
+- The file name should reflect the name of the object that was written into that file.
+
+
 #### Executable documentation
 
 Further documentation, e.g., of certain methods of the project, demonstrated on a reduced set of data, may be provided by [RMarkdown](https://rmarkdown.rstudio.com/) files, contained in the subdirectory `vignettes/`. RMarkdown combines Markdown-formatted text with executable code, embedded in the text as *code chunks*. They can either be compiled (*knitted*) into an HTML or PDF output, where code chunks are executed upon compilation and visualization outputs are directly placed into the output, or they can be run like a script entirely or for each code chunk separately. When opened in RStudio, RMarkdown files appear in the Editor like this:
@@ -372,6 +395,48 @@ To visually separate parts of a script, use commented lines (e.g., `#----`). The
 Avoid reading entire workspace environments (e.g., `load(old_environment.RData)`), deleting environments `rm(list=ls())`, loading hidden dependencies (e.g., `.Rprofile`), or changing the working directory (`setwd("~/other_dir/"`) as part of a script.
 
 Note that information about the author of the script, its creation date, and modifications, etc. should not be added as commented text in the file. In @sec-codemgmt, we will learn about the code versioning control system *git*, which keeps track of all this as meta information associated with files.
+
+### Document dependencies
+
+Often, code depends on various components, packages or libraries. These libraries and all software come in specific versions, which might or might not alter the behaviour of the code and the output it produces.
+
+If you want to ensure full reproducibility, especially across several years, you will need to capture the state of the system and libraries with which you ran the original analysis.
+
+In R the [{renv} package](https://rstudio.github.io/renv/) serves this purpose and will provide an index of all the packages used in your project as well as their version. For a particular project, it will create a local library of packages with a static version. These static packages will not be updated over time, and therefore ensure consistent results. This makes your analysis isolated, portable, and reproducible. The analogue in Python would be the [virtual environments, or venv program](https://docs.python.org/3/library/venv.html).
+
+When setting up your project you can run:
+
+``` r
+# Initiate a {renv} environment
+renv::init()
+```
+
+To initiate your static R environment. Whenever you want to save the state of your project (and its packages) you can call:
+
+``` r
+# Save the current state of the environment / project
+renv::snapshot()
+```
+
+To save any changes made to your environment. All data will be saved in a project description file called a lock file (i.e. `renv.lock`). It is advised to update the state of your project regularly, and in particular before closing a project.
+
+When you move your project to a new system, or share a project on github with collaborators, you can revert to the original state of the analysis by calling:
+
+``` r
+# On a new system, or when inheriting a project
+# from a collaborator you can use a lock file
+# to restore the session/project state using
+renv::restore()
+```
+
+> NOTE: As mentioned in the {renv} documentation: "For development and collaboration, the `.Rprofile`, `renv.lock` and `renv/activate.R` files should be committed to your version control system. But the `renv/library` directory should normally be ignored. Note that `renv::init()` will attempt to write the requisite ignore statements to the project `.gitignore`." We refer to @sec-learning-objectives-6 for details on github and its use.
+
+#### Capturing a system state
+
+Although R projects and the use of {targets} make your workflow consistent, the package versions used between various systems (e.g., your home computer or the cluster at the university might vary). To address issues with changes in the versions of package, you can use the {renv} package which manages package version (environments) for you. When tasks are even more complex and include components outside of R, you can use [*Docker*](https://www.docker.com/) to provide containerization of an operating system and the included ancillary application.
+
+The [{rocker} package](https://rocker-project.org/) provides access to some of these features within the context of reproducible R environments. Using these tools, you can therefore emulate the state of a machine, independently of the machine on which the docker file is run. These days, machine learning applications are often deployed as docker sessions to limit the complexity of installing required software components. The application of docker-based installs is outside the scope of the current course, but feel free to explore these resources as they are widespread in data science.
+
 
 ### Use version control
 

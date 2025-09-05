@@ -61,6 +61,12 @@ Chapters @sec-regressionclassification up to @sec-randomforest lead into the wor
     - A key statement of this paper summarises its content: "Some have suggested that theories are irrelevant in the big data era—that correlations are sufficient to build a vigorous science [...]. We disagree." 
     
     
+**Open Science**
+
+- https://book.the-turing-way.org/
+
+    - A collaboratively developed resource (website, book) that explains the motivation and introduces the principles and key definitions of Open Science.
+    
 **Data wrangling**
 
 - Hadley Wickham and Garrett Grolemund: "R for Data Science", https://r4ds.had.co.nz/
