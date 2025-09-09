@@ -20,17 +20,26 @@ Open Science is a way of doing research that emphasizes public and free accessib
 
 > “Open data and content can be freely used, modified, and shared by anyone for any purpose.” ([opendefinition.org](https://opendefinition.org/))
 
-At its core, Open Science is grounded in *reproducibility*: the idea that scientific results should be verifiable by others using the same methods and data. Open science is enabled by *reusability* (as was introduced in @sec-reproducible), ensuring that outputs such as datasets, software, and workflows can be adapted for new purposes, speeding up discovery across disciplines.
+At its core, Open Science is motivated by the requirement for *reproducibility* of scientific findings: Results should be testable by others using the same methods and data. More fundamentally, results should be *replicable*, *robust*, and *generalisable*. These descriptors can be understood as different combinations of the data and/or the analysis being identical between studies (or not). Open access data and software are the basis for a study to be reproducible. The analysis (software) may be reusable and can be applied to new data, making findings replicable. The same data may also be analysed differently. If findings are similar, they are robust. If a pattern or a relationship is identified consistently with multiple different combinations of data and analytic approaches, findings are generalisable. Within the context of this course, we focus primarily on the practical aspects for reproducible science, i.e., ensuring that given the same data and code, the results will be identical.
 
-Concretely, Open Science includes practices including open data, open source software, open access publishing, and open workflows and methods (see below). Beyond methods, Open Science represents a cultural shift. It challenges the traditional “publish or perish” system, where competition and secrecy often slow progress, and instead encourages collaboration, accountability, and broader participation. Several aspects motivate the cultural shift towards Open Science:
+```{r echo=FALSE}
+#| label: fig-repromatrix
+#| fig-cap: "The reproducibility matrix. This figure was created for @turingway and is used under a CC-BY 4.0 licence."
+#| out-width: 60%
+knitr::include_graphics("figures/reproducible-matrix-turing-way.jpg")
+```
 
-- Enables accountability, trust and leads to robust science.
+<!-- ![The reproducibility matrix by The Turing Way.](./figures/reproducible-matrix-turing-way.jpg){#fig-repromatrix width=60% fig.align='center'} -->
+
+*Reusability* of code in project-oriented workflows (see @sec-reproducible) is key to Open science. It ensures that outputs such as datasets, software, and workflows can be adapted for new purposes, speeding up discovery across disciplines. Concretely, Open Science includes practices including open data, open source software, open access publishing, and open workflows and methods (see below). Beyond methods, Open Science represents a cultural shift. It challenges the traditional “publish or perish” system, where competition and secrecy often slow progress, and instead encourages collaboration, accountability, and broader participation. Several aspects motivate the cultural shift towards Open Science:
+
+- Enables accountability and trust, and leads to robust science.
 
 Access to data and code enables tests and acts as a precise documentation of how results were obtained. This also reflects a response to the reproducibility crisis that has affected scientific studies and entire scientific fields. 
 
 - Creates efficient infrastructure.
  
-Making data freely accessible through the web enables fully reproducible workflows.
+Making data freely accessible through the web enables fully reproducible workflows and the integration of data access into reproducible and continuously updated workflows.
 
 - Enhances impact.
 
@@ -38,17 +47,37 @@ Making your data and code accessible and reusable enhances its uptake by the com
 
 - Serves the public and transcends discrimination.
 
-Since much research is publicly funded, its outputs should be accessible to the public and anyone, disregarding access to resources and funding.
+Since much research is publicly funded, its outputs should be accessible to the public and anyone, irrespective of access to resources and funding.
 
-It is important to acknowledge the granularity of what it takes to do good science -- science that may not just be *reproducible*, but also *replicable*, *robust*, and *generalisable*. These descriptors can be understood as different combinations of the data and/or the analysis being identical between studies (or not). Open access data and sofware are the basis for a study to be reproducible. The analysis (software) may be reusable and can be applied to new data, making findings replicable. The same data may also be analysed differently. If findings are similar, they are robust. If a pattern or a relationship is identified consistently with multiple different combinations of data and analytic approaches, findings are generalisable. Within the context of this course, we focus primarily on the practical aspects for reproducible science, i.e., ensuring that given the same data and code, the results will be (practically) identical.
-
-![The reproducibility matrix by The Turing Way.](./figures/reproducible-matrix-turing-way.jpg){#fig-repromatrix width=60% fig.align='center'}
 
 ### Open data
 
 Open data refers to the practice of making research datasets available so that others can examine, validate, and reuse them. When properly shared, data becomes a resource for the entire research community, enabling new insights and reducing duplication of effort. Yet, in practice, researchers often perceive barriers to making data open. In some cases, researchers must handle sensitive or confidential data, which cannot be openly released without consent and restrictions to openness. Finally, there are strategic considerations—sharing data may feel risky in competitive environments.
 
-Despite these challenges, expectations and the culture around open data are shifting. Many journals and funding agencies now require authors to provide data availability statements in published articles, and some make data deposition in recognized repositories a condition of publication. To guide these practices, the *FAIR* principles  -- that data should be Findable, Accessible, Interoperable, and Reusable -- have become a global standard. FAIR does not mean all data must be open, but it emphasizes that well-documented and properly archived data maximizes its potential for reuse while protecting sensitive information.
+Despite these challenges, expectations and the culture around open data are shifting. Many journals and funding agencies now require authors to provide data availability statements in published articles, and some make data deposition in recognized open research data repositories a condition of publication. To guide these practices, the [*FAIR*](https://www.go-fair.org/fair-principles/) principles [@wilkinson_fair_2016]  -- that data should be Findable, Accessible, Interoperable, and Reusable -- have become a global standard. FAIR does not mean all data must be open, but it emphasizes that well-documented and properly archived data maximizes its potential for reuse while protecting sensitive information.
+
+To ensure long-term storage of code and data, outside of commercial for profit services (e.g., Dropbox, Google Drive etc), it is best to rely on public permanent repositories, such as [Zenodo](https://zenodo.org/). Zenodo is an effort by the European commission, but accessible to all, to facilitate archiving of science projects of all nature (code and data) up to 50 GB. In addition, Zenodo provides a citable digital object identifier or DOI. This allows data and code, even if not formally published in a journal, to be cited. Other noteworthy open science storage options include [Dryad](https://datadryad.org/stash) and the [Center for Open Science](https://osf.io/). 
+
+The broad-purpose permanent data repositories mentioned above are not edited and are therefore not ideal for data discovery. In contrast, edited data repositories often have a specific thematic scope and different repositories are established in different research communities. @tbl-open-data-repositories provides a list of widely used data repositories, generalist and others, that provide manual or automated download access to their data. Note that this list contains some example and is far from extensive.
+
+
+| Repository name                 | URL                                  | Purpose                                             | Open to contributions     |
+|------------                     |----------                            |---------------                                      |-----------------------    |
+| Zenodo                          | <https://zenodo.org/>                | Generalist data repository for research data.       | Yes                       |
+| Figshare                        | <https://figshare.com/>              | Generalist data repository for research data.       | Yes                       |
+| Dryad                           | <https://datadryad.org>              | Generalist data repository for research data.       | Yes                       |
+| Environmental Data Initiative   | <https://edirepository.org/>         | Hosts ecological and environmental data             | Yes                       |
+| World Data Center for Climate   | <https://www.wdc-climate.de/ui/>     | Hosts Earth system model data, run by Deutsches Klimarechenzentrum (DKRZ) | Yes |
+| PANGAEA                         | <https://www.pangaea.de/>            | Hosts georeferenced data from earth system research | Yes                       |
+| EnviDat                         | <https://www.envidat.ch>             | Hosts envrionmental system research with a focus on Switzerland | For researchers of the Swiss Federal Institute for Forest, Snow and Landscape WSL |
+| Climate Data Store              | <https://cds.climate.copernicus.eu/> | Provides access to climate data | No |
+| Copernicus Data Space Ecosystem | <https://dataspace.copernicus.eu/>   | Provides access to data from the Copernicus Sentinel missions | No |
+| Swiss Open Geodata              | <https://www.swisstopo.admin.ch/en/geodata-and-applications>   | Provides access to geodata by the Swiss Open Government Data | No |
+| Eurostat                        | <https://ec.europa.eu/eurostat>      | Provides access to statistical data of Europe | No |
+| Swiss Open Government data      | <https://opendata.swiss/en/>         | Generalist data from the Swiss Federal statistics office. | No |
+
+: An incomplete collection of open data repositories used in Environmental sciences and Geography. Note the distinction between repositories that are open to contributions and offer hosting and DOI-minting for user-contributed datasets, and those that are not (Column 'Open to contributions'). A more complete list of open data repositories and other access points for open research data in Environmental science and Geography can be found at @loginova_list_2025. {#tbl-open-data-repositories}
+
 
 ### Open source software
 
@@ -74,11 +103,89 @@ In essence, open workflows transform research into a living, transparent process
 
 ## Practices for Open Science {#sec-practices-open-science}
 
-### Open source software
+### Open data
+
+Practices for applying FAIR data principles involve multiple methods and resources, relevant for different steps of data generation and publication.
+
+**Organise and clean your data**
+
+* Remove duplicates, errors, or inconsistencies.
+* Use clear, descriptive variable names (column names in tabular data).
+* Standardize units of measurement.
+* Make contents machine-readable (see @sec-datacleaning)
+
+**Choose an open, non-proprietary format**
+
+* For tabular data, use *CSV*.
+* For structured scientific data, consider formats like *NetCDF* or *HDF5*, which support embedded metadata.
+* For text, use *txt* or *Markdown* rather than proprietary formats (e.g., DOCX).
+* For images or media, use open formats like *PNG*, *TIFF*, *WAV*, or *MP4*.
+
+**Document your dataset**
+
+* Create a README file (plain text or Markdown, see also @sec-readme) that contains the following information:
+  * Dataset title and description.
+  * Explanation of variables (column names, units, categories).
+  * Methods used for data collection and processing.
+  * Links to related publications, software, or workflows.
+  * Author names, affiliations, and contact information.
+  * License information (e.g., [Creative Commons](https://creativecommons.org/)).
+
+**Deposit your data in a trusted open repository**
+
+* Use a *permanent repository*  with strong archival policies (see @tbl-open-data-repositories).
+* Ensure the repository generates a *digital object identifier* (DOI) for long-term citation of uploaded datasets
+* Add *metadata* to make the dataset discoverable (keywords, subject categories, abstract).
+
+**Integrate data into your workflow**
+
+* Store small (<25 MB) or intermediate datasets of a project workflow in the project’s version-controlled repository (through Git and Github, see @sec-codemgmt).
+* Use *tags and releases* to capture versions of the dataset (see @sec-open-source-software).
+* Link your Github repository to Zenodo for automatic DOI assignment when releasing a version (see [here](https://help.zenodo.org/docs/profile/linking-accounts/) and [here](https://help.zenodo.org/docs/github/enable-repository/)).
+
+**Provide a data availability statement**
+
+* Clearly indicate in your publications where the data can be found.
+* State the license and any access restrictions. Use available licenses, see e.g., [Creative Commons](https://creativecommons.org/).
+* If data is sensitive and cannot be shared, provide metadata and conditions for access.
 
 
+### Open source software {#sec-open-source-software}
 
+Developing open source software for research is more than simply sharing code -- it involves adopting practices that make your code reusable, sustainable, and valuable to the broader community. The following tools and methods are crucial to making code open.
 
+**Make it reusable**
+
+* Adopt a reusable project-oriented workflow (see @sec-reproducible).
+
+**Use version control from the start**
+
+* Make the project directory a Git repository from the start, hosted, e.g., on Github.
+
+**Make stable releases**
+
+* Use *git tags* to mark major updates of the repository. These may align with designated version names (e.g., `v1.0.0`).
+* Create releases of tags on GitHub or GitLab with notes describing changes.
+* Link your Github repository to Zenodo for automatic DOI assignment when releasing a version (see [here](https://help.zenodo.org/docs/profile/linking-accounts/) and [here](https://help.zenodo.org/docs/github/enable-repository/)).
+
+**Refactor reusable components into a library**
+
+* Further enhance reusability of functions that may be re-used across projects by creating a library (package).
+* Use a non-proprietary coding language (e.g., R, Python, Julia) for maximum accessibility of the package.
+* See [here](https://r-pkgs.org/) for a comprehensive tutorial on writing R packages.
+
+**Document**
+
+* Write vignettes (see @sec-vignettes) or tutorials showing use cases.
+* Create a project website with documentation (e.g., using [*GitHub Pages*](https://docs.github.com/en/pages), and [*pkgdown*](https://pkgdown.r-lib.org/) for R).
+* Publish a software paper in open software description journal (e.g., *Journal of Open Source Software*).
+* Submit your library to a **central archive**: CRAN for R, or PyPI for Python.
+
+**Maintain and improve the project**
+
+* Keep track of issues for bug reports and feature requests (see [here](https://docs.github.com/en/issues/tracking-your-work-with-issues/learning-about-issues/about-issues)).
+* Keep a changelog of updates and fixes.
+* Encourage community contributions through [*pull requests*](sec-pull-request) and clear contributing guidelines.
 
 
 
@@ -171,26 +278,6 @@ In essence, open workflows transform research into a living, transparent process
 
 <!-- If your R markdown file contains more code than it does text, it should be considered an R script or function (with comments or documentation). Conversely, if your RMarkdown file contains more text than code, it probably is easier to collaborate on a true word processing file (or cloud-based solution). Notebooks, such as RMarkdown, are most suitable for communicating implementations, demonstrating functions, and reporting reproducible results. They can also be used like lab notes. They are less suited for code development.  -->
 
-### Data retention
-
-Coding practices and documenting all moving parts in a coding workflow is only one practical aspect of open science. An additional component is long-term data and code retention and versioning.
-
-In @sec-codemgmt, you will learn more about *git* for code management and collaboration. Several online make use of *git* for providing web-based collaboration functionalities and remote storage of your repositories. Examples are [GitHub](https://github.com), [GitLab](https://gitlab.com), [Codeberg](https://codeberg.org), or [Bitbucket](https://bitbucket.org/). However, their remote storage service should only be considered an aid for collaboration, and not a place to store code into perpetuity. Furthermore, these services mostly have a limit to how much data can be stored in a repository (mostly \~2 GB). For small projects, data can be included in the repository itself. For larger projects and for making larger datasets accessible, this won't be possible.
-
-To ensure long-term storage of code and data, outside of commercial for profit services (e.g., Dropbox, Google Drive etc), it is best to rely on public permanent repositories, such as [Zenodo](https://zenodo.org/). Zenodo is an effort by the European commission, but accessible to all, to facilitate archiving of science projects of all nature (code and data) up to 50 GB. In addition, Zenodo provides a citable digital object identifier or DOI. This allows data and code, even if not formally published in a journal, to be cited. Other noteworthy open science storage options include [Dryad](https://datadryad.org/stash) and the [Center for Open Science](https://osf.io/). 
-
-The broad-purpose permanent data repositories mentioned above are not edited and are therefore not ideal for data discovery. In contrast, edited data repositories often have a specific thematic scope and different repositories are established in different research communities. Below you find a list of widely used data repositories, generalist and others, that provide manual or automated download access to their data. Note that this list contains some example and is far from extensive.
-
-| Data type                                                                 | Website                             | Description                                                                                   | Download                          |
-|----------------------|---------------|-------------------------------|---------------|
-| Copernicus Climate Data Store                                             | <https://cds.climate.copernicus.eu> | Freely available climate data (reanalysis as well as future projections)                      | API                               |
-| Oak Ridge National Laboratories Digital Active Archive Center (ORNL DAAC) | <https://daac.ornl.gov/>            | Environmental data of varying sources, either remote sensing, field work and or re-analysis.  | multiple APIs or manual downloads |
-| Land Processes Digital Active Archive Center (LP DAAC)                    | <https://lpdaac.usgs.gov/>          | Remote sensing (analysis ready) data products.                                                | Login walled automated downloads  |
-| Environmental Data Initiative                                             | <https://edirepository.org/>        | Generalist data repository for study data, with a strong focus on biology.                    | Manual download                   |
-| Dryad                                                                     | <https://datadryad.org>             | Generalist data repository for study data, with a strong focus on biology.                    | Manual downloads                  |
-| Zenodo                                                                    | <https://zenodo.org/>               | Generalist data repository for study data.                                                    | Manual downloads                  |
-| Eurostat                                                                  | <https://ec.europa.eu/eurostat>     | Generalist data repository for EU wide (demographic) data.                                    | Manual downloads                  |
-| Swiss Open Government data                                                | <https://opendata.swiss/en/>        | Generalist data repository from the Swiss Federal statistics office.                          | API or manual downloads           |
 
 
 ## Exercises

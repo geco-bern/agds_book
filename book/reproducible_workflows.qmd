@@ -1,4 +1,4 @@
-# Reproducible workflows {#sec-reproducible}
+# Reusable workflows {#sec-reproducible}
 
 ## Learning objectives
 
@@ -67,7 +67,7 @@ A "main" script or notebook may be added that orchestrates the workflow (like a 
 
 ### Document the project
 
-#### The README file
+#### The README file {#sec-readme}
 
 The first entry point to working with a project directory is always the `README` file, located in the parent project directory. The README should answer "What is this project, what do I need to run it, and how do I use it?" Think of it as the "lab manual" for anyone opening the project for the first time (including your future self). For a reproducible and reusable data science project, a README should typically include:
 
@@ -268,9 +268,9 @@ Good file naming facilitates transparency, findability, and reusability. Hence, 
 - The file name should reflect the name of the object that was written into that file.
 
 
-#### Executable documentation
+#### Executable documentation {#sec-vignettes}
 
-Further documentation, e.g., of certain methods of the project, demonstrated on a reduced set of data, may be provided by [RMarkdown](https://rmarkdown.rstudio.com/) files, contained in the subdirectory `vignettes/`. RMarkdown combines Markdown-formatted text with executable code, embedded in the text as *code chunks*. They can either be compiled (*knitted*) into an HTML or PDF output, where code chunks are executed upon compilation and visualization outputs are directly placed into the output, or they can be run like a script entirely or for each code chunk separately. When opened in RStudio, RMarkdown files appear in the Editor like this:
+Further documentation, e.g., of certain methods of the project, demonstrated on a reduced set of data, may be provided by [RMarkdown](https://rmarkdown.rstudio.com/) files (or *vignettes*), contained in the subdirectory `vignettes/`. RMarkdown combines Markdown-formatted text with executable code, embedded in the text as *code chunks*. They can either be compiled (*knitted*) into an HTML or PDF output, where code chunks are executed upon compilation and visualization outputs are directly placed into the output, or they can be run like a script entirely or for each code chunk separately. When opened in RStudio, RMarkdown files appear in the Editor like this:
 
 ![R Markdown document opened in the source panel.](./figures/rmarkdown_editor.png){#fig-rmarkdown}
 

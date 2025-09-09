@@ -148,7 +148,7 @@ git clone git@github.com:khufkens/YOUR_PROJECT.git
 
 You can then start working on this repository by using the modify -\> staged -\> commit -\> push workflow.
 
-#### git fork and pull request
+#### git fork and pull request {#sec-pull-request}
 
 You can also create a copy of any public GitHub project from into your own GitHub account by creating a *fork*. You can create a fork of a project by clicking the **fork** button top right on any public GitHub project page. The number of forks of a project is displayed next to the button. In case of the {rpmodel} package there are currently 24 forks of the project.
 
