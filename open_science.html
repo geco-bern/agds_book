@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.31">
+<meta name="generator" content="quarto-1.7.34">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>7&nbsp; Open science practices – Applied Geodata Science</title>
+<title>5&nbsp; Open science – Applied Geodata Science</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,42 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
 }
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
 }
-</style>
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -65,8 +50,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./code_management.html" rel="next">
-<link href="./data_variety.html" rel="prev">
+<link href="./data_variety.html" rel="next">
+<link href="./code_management.html" rel="prev">
 <link href="././figures/favicon.ico" rel="icon">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -74,14 +59,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-8ef56b68f8fa1e9d2ba328e99e439f80.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-befe23ebd2f54d8af2c8a89d1a1611f1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-384f633e49201da7a9cfd9adcd4339e6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-ed7f81c2536d4971380f0ee642568b90.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-384f633e49201da7a9cfd9adcd4339e6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-5580b768968c173edbcabd2ef8ecb882.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-ce530c4fc5b35f77c508c3bfad3cc1ab.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-5580b768968c173edbcabd2ef8ecb882.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -111,9 +96,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
-<meta name="twitter:title" content="7&nbsp; Open science practices – Applied Geodata Science">
+<meta name="twitter:title" content="5&nbsp; Open science – Applied Geodata Science">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="./figures/reproducible-matrix-turing-way.jpg">
+<meta name="twitter:image" content="figures/reproducible-matrix-turing-way.jpg">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -333,7 +318,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./open_science.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Open science practices</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./open_science.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Open science</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -359,26 +344,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./getting_started.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting started</span></span></a>
+  <a href="./primers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Primers</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./programming_primers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Programming primers</span></span></a>
+  <a href="./reproducible_workflows.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Reusable workflows</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data_wrangling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data wrangling</span></span></a>
+  <a href="./code_management.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Code management</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data_vis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data visualisation</span></span></a>
+  <a href="./open_science.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Open science</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -389,14 +374,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./open_science.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Open science practices</span></span></a>
+  <a href="./data_wrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data wrangling</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./code_management.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Code management</span></span></a>
+  <a href="./data_vis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data visualisation</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -451,20 +436,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#sec-learning-objectives-6" id="toc-sec-learning-objectives-6" class="nav-link active" data-scroll-target="#sec-learning-objectives-6"><span class="header-section-number">7.1</span> Learning objectives</a></li>
-  <li><a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial"><span class="header-section-number">7.2</span> Tutorial</a>
+  <li><a href="#sec-learning-objectives-6" id="toc-sec-learning-objectives-6" class="nav-link active" data-scroll-target="#sec-learning-objectives-6"><span class="header-section-number">5.1</span> Learning objectives</a></li>
+  <li><a href="#what-is-open-science-and-why" id="toc-what-is-open-science-and-why" class="nav-link" data-scroll-target="#what-is-open-science-and-why"><span class="header-section-number">5.2</span> What is Open Science and why?</a>
   <ul class="collapse">
-  <li><a href="#project-structure" id="toc-project-structure" class="nav-link" data-scroll-target="#project-structure"><span class="header-section-number">7.2.1</span> Project structure</a></li>
-  <li><a href="#managing-workflows" id="toc-managing-workflows" class="nav-link" data-scroll-target="#managing-workflows"><span class="header-section-number">7.2.2</span> Managing workflows</a></li>
-  <li><a href="#capturing-your-session-state" id="toc-capturing-your-session-state" class="nav-link" data-scroll-target="#capturing-your-session-state"><span class="header-section-number">7.2.3</span> Capturing your session state</a></li>
-  <li><a href="#capturing-a-system-state" id="toc-capturing-a-system-state" class="nav-link" data-scroll-target="#capturing-a-system-state"><span class="header-section-number">7.2.4</span> Capturing a system state</a></li>
-  <li><a href="#readable-reporting-using-rmarkdown" id="toc-readable-reporting-using-rmarkdown" class="nav-link" data-scroll-target="#readable-reporting-using-rmarkdown"><span class="header-section-number">7.2.5</span> Readable reporting using Rmarkdown</a></li>
-  <li><a href="#project-structure-1" id="toc-project-structure-1" class="nav-link" data-scroll-target="#project-structure-1"><span class="header-section-number">7.2.6</span> Project structure</a></li>
-  <li><a href="#data-retention" id="toc-data-retention" class="nav-link" data-scroll-target="#data-retention"><span class="header-section-number">7.2.7</span> Data retention</a></li>
+  <li><a href="#open-data" id="toc-open-data" class="nav-link" data-scroll-target="#open-data"><span class="header-section-number">5.2.1</span> Open data</a></li>
+  <li><a href="#open-source-software" id="toc-open-source-software" class="nav-link" data-scroll-target="#open-source-software"><span class="header-section-number">5.2.2</span> Open source software</a></li>
+  <li><a href="#open-access-publishing" id="toc-open-access-publishing" class="nav-link" data-scroll-target="#open-access-publishing"><span class="header-section-number">5.2.3</span> Open access publishing</a></li>
+  <li><a href="#open-workflows-and-methods" id="toc-open-workflows-and-methods" class="nav-link" data-scroll-target="#open-workflows-and-methods"><span class="header-section-number">5.2.4</span> Open workflows and methods</a></li>
   </ul></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">7.3</span> Exercises</a>
+  <li><a href="#sec-practices-open-science" id="toc-sec-practices-open-science" class="nav-link" data-scroll-target="#sec-practices-open-science"><span class="header-section-number">5.3</span> Practices for Open Science</a>
   <ul class="collapse">
-  <li><a href="#external-data" id="toc-external-data" class="nav-link" data-scroll-target="#external-data">External data</a></li>
+  <li><a href="#open-data-1" id="toc-open-data-1" class="nav-link" data-scroll-target="#open-data-1"><span class="header-section-number">5.3.1</span> Open data</a></li>
+  <li><a href="#sec-open-source-software" id="toc-sec-open-source-software" class="nav-link" data-scroll-target="#sec-open-source-software"><span class="header-section-number">5.3.2</span> Open source software</a></li>
+  </ul></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">5.4</span> Exercises</a>
+  <ul class="collapse">
   <li><a href="#a-new-project" id="toc-a-new-project" class="nav-link" data-scroll-target="#a-new-project">A new project</a></li>
   <li><a href="#tracking-the-state-of-your-project" id="toc-tracking-the-state-of-your-project" class="nav-link" data-scroll-target="#tracking-the-state-of-your-project">Tracking the state of your project</a></li>
   </ul></li>
@@ -477,7 +463,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-openscience" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Open science practices</span></span></h1>
+<h1 class="title"><span id="sec-openscience" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Open science</span></span></h1>
 </div>
 
 
@@ -494,228 +480,317 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p><strong>Chapter lead author: Koen Hufkens</strong></p>
-<section id="sec-learning-objectives-6" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="sec-learning-objectives-6"><span class="header-section-number">7.1</span> Learning objectives</h2>
+<section id="sec-learning-objectives-6" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="sec-learning-objectives-6"><span class="header-section-number">5.1</span> Learning objectives</h2>
 <p>In this chapter, you will learn the reasons for practicing open science and some of the basic methodological techniques that we can use to facilitate an open science workflow.</p>
-<p>In this chapter you will learn how to:</p>
-<ul>
-<li>structure a project</li>
-<li>manage a project workflow</li>
-<li>capture a session or machine state</li>
-<li>use dynamic reporting</li>
-<li>ensure data and code retention</li>
-</ul>
-<!-- https://www.nature.com/articles/sdata201618 -->
 </section>
-<section id="tutorial" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="tutorial"><span class="header-section-number">7.2</span> Tutorial</h2>
-<p>The scientific method relies on repeated testing of a hypothesis. When dealing with data and formal analysis, one can reduce this problem to the question: could an independent scientist attain the same results given the described methodology, data and code?</p>
-<p>Although this seems trivial, this issue has vexed the scientific community. These days, many scientific publications are based on complex analyses with often large data sets. More so, methods in publications are often insufficiently detailed to really capture the scope of an analysis. Even from a purely technical point of view, the reproducibility crisis or the inability to reproduce experimental results, is a complex problem. This is further compounded by social aspects and incentives. In recent decades, scientific research has seen a steady increase in speed due to the digitization of many fields and the commodification of science.</p>
-<p>Although digitization has opened up new research possibilities, its potential for facilitating, accelerating, and advancing science are often not fully made use of. Historically, research and its output in the form of data and code has been confined to academic journals, data and code has often not been made available, and data were not shared or behind pay-walls. This limits the impact of science also in the public domain. (In many ways, this is still the case today, in year 2023 as we write). Digitization has made research output better visible and accessible, but practical obstacles and weak standards often prevent it from uptake, re-use, and further development by the wider community.</p>
-<p>Open and reproducible science is a movement to make scientific research (output) widely accessible to the larger public, increase research transparency and enabling robust and verifiable science. Open science aims to be as open as possible about the whole scientific process, and as closed as desirable (e.g.&nbsp;privacy or security reasons).</p>
-<p>It is important to acknowledge that there is a spectrum of reproducible data and code workflows which depends on the state or source of the data and the output of the code (or analysis). Within the context of this course, we focus primarily on the practical aspects for reproducible science, i.e., ensuring that given the same data and code, the results will be similar.</p>
-<div id="fig-repromatrix" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig.align="center">
+<section id="what-is-open-science-and-why" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="what-is-open-science-and-why"><span class="header-section-number">5.2</span> What is Open Science and why?</h2>
+<p>Open Science is a way of doing research that emphasizes public and free accessibility, reusability, and transparency at every stage of the scientific process. Instead of keeping data, methods, and results behind paywalls or locked on personal computers, Open Science seeks to make them available for others to examine, test, and build upon. In brief:</p>
+<blockquote class="blockquote">
+<p>“Open data and content can be freely used, modified, and shared by anyone for any purpose.” (<a href="https://opendefinition.org/">opendefinition.org</a>)</p>
+</blockquote>
+<p>At its core, Open Science is motivated by the requirement for <em>reproducibility</em> of scientific findings: Results should be testable by others using the same methods and data. More fundamentally, results should be <em>replicable</em>, <em>robust</em>, and <em>generalisable</em>. These descriptors can be understood as different combinations of the data and/or the analysis being identical between studies (or not). Open access data and software are the basis for a study to be reproducible. The analysis (software) may be reusable and can be applied to new data, making findings replicable. The same data may also be analysed differently. If findings are similar, they are robust. If a pattern or a relationship is identified consistently with multiple different combinations of data and analytic approaches, findings are generalisable. Within the context of this course, we focus primarily on the practical aspects for reproducible science, i.e., ensuring that given the same data and code, the results will be identical.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-repromatrix" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-repromatrix-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="./figures/reproducible-matrix-turing-way.jpg" class="img-fluid figure-img" style="width:60.0%" data-fig.align="center">
+<img src="figures/reproducible-matrix-turing-way.jpg" class="img-fluid figure-img" style="width:60.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-repromatrix-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7.1: The reproducibility matrix by The Turing Way.
+Figure&nbsp;5.1: The reproducibility matrix. This figure was created for <span class="citation" data-cites="turingway">Community (<a href="references.html#ref-turingway" role="doc-biblioref">2025</a>)</span> and is used under a CC-BY 4.0 licence.
 </figcaption>
 </figure>
 </div>
-<p>The basics of open science coding and data practices rely on a number of simple concepts. The sections below describe a selection of the most important ones. Sticking to these principles and tools will increase the reproducibility of your work greatly.</p>
-<section id="project-structure" class="level3" data-number="7.2.1">
-<h3 data-number="7.2.1" class="anchored" data-anchor-id="project-structure"><span class="header-section-number">7.2.1</span> Project structure</h3>
-<p>Reproducible science relies on a number of key components. Data and code management and the tracking of required meta-data is the first step in an open science workflow.</p>
-<p>In <a href="getting_started.html" class="quarto-xref"><span>Chapter 2</span></a>, you learned how to setup an R project. An R project gathers all components of your analysis in a single directory. Although current computers make it easy to “find” your files and are largely file location-agnostic, this is not the case in many research environments. Projects grow quickly, and often, the number of files will flood a single directory. Therefore, files need a precise and structured location. This structure allows you to determine both the function and order of a workflow without reading any code.</p>
-<p>It is good practice to have a consistent project structure within and between projects. This allows you to find most project components regardless of when you return to a particular project. Structuring a project in one folder also makes projects portable. All parts reside in one location making it easy to create a <em>git</em> project from this location (see <a href="code_management.html" class="quarto-xref"><span>Chapter 8</span></a>), or just copy the project to a new drive.</p>
-<p>An example data structure for raw data processing is given below and we provide an <a href="https://github.com/geco-bern/R_proj_template">R project template</a> to work from and adjust through our <a href="https://github.com/geco-bern">lab GitHub profile</a>. A full description on using the template is provided in <a href="code_management.html" class="quarto-xref"><span>Chapter 8</span></a>.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">data-raw/</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">├─</span> raw_data_product/</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">├─</span> 00_download_raw_data.R</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">├─</span> 01_process_raw_data.R</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="managing-workflows" class="level3" data-number="7.2.2">
-<h3 data-number="7.2.2" class="anchored" data-anchor-id="managing-workflows"><span class="header-section-number">7.2.2</span> Managing workflows</h3>
-<p>Although some code is agnostic to the order of execution, many projects are effectively <em>workflows</em>, where the output of one routine is required for the successful execution of the next routine.</p>
-<p>In order to make sure that your future self, or a collaborator, understands the order in which things should be executed, it is best to number scripts accordingly. This is the most basic approach to managing workflows.</p>
-<p>In the example below, all statistics code is stored in the <code>statistics</code> folder in an overall <code>analysis</code> folder (which also includes code for figures). All statistical analyses are numbered to ensure that the output of a first analysis is available to the subsequent one.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">analysis/</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">├─</span> statistics/</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>  ├─ 00_randomforest_model.R</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>  ├─ 01_randomforest_tuning.R</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">├─</span> figures/</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>  ├─ global_model_results_map.R</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>  ├─ complex_process_visualization.R</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The code-chunk above is a visualisation of a folder (aka. directory) structure on your computer. The lines and indents denote folder levels. In this example, you have a folder <code>analysis</code> which holds two more folders <code>statistics</code> and <code>figures</code>, and in both sub-folders, you have different <code>*.R</code> files (<code>*</code> is a so-called “wild-card” which is a placeholder for any text). Note that different people may use different symbols to visualise folder structures but generally, folder levels are shown with indents, and files are identifiable by their suffixes.</p>
-<section id="automating-and-visualizing-workflows-with-targets" class="level4" data-number="7.2.2.1">
-<h4 data-number="7.2.2.1" class="anchored" data-anchor-id="automating-and-visualizing-workflows-with-targets"><span class="header-section-number">7.2.2.1</span> Automating and visualizing workflows with targets</h4>
-<p>To sidestep some of the manual management in R you can use a dedicated pipeline tool like the {targets} package in R. The package learns how your pipeline fits together, skips tasks that are already up-to-date, and runs only the necessary computation. {targets} can also visualize the progress of your workflow.</p>
-<div id="fig-targets" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig.align="center">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-targets-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="https://books.ropensci.org/targets/man/figures/tar_watch.png" class="img-fluid figure-img" style="width:60.0%" data-fig.align="center">
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-targets-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7.2: A targets visualized workflow by rOpenSci.
-</figcaption>
-</figure>
 </div>
-<p>Due to the added complexity of the {targets} package, we won’t include extensive examples of such a workflow but refer to the excellent documentation of the package for simple examples <a href="https://books.ropensci.org/targets/walkthrough.html">here</a>.</p>
-</section>
-</section>
-<section id="capturing-your-session-state" class="level3" data-number="7.2.3">
-<h3 data-number="7.2.3" class="anchored" data-anchor-id="capturing-your-session-state"><span class="header-section-number">7.2.3</span> Capturing your session state</h3>
-<p>Often, code depends on various components, packages or libraries. These libraries and all software come in specific versions, which might or might not alter the behaviour of the code and the output it produces.</p>
-<p>If you want to ensure full reproducibility, especially across several years, you will need to capture the state of the system and libraries with which you ran the original analysis.</p>
-<p>In R the <a href="https://rstudio.github.io/renv/">{renv} package</a> serves this purpose and will provide an index of all the packages used in your project as well as their version. For a particular project, it will create a local library of packages with a static version. These static packages will not be updated over time, and therefore ensure consistent results. This makes your analysis isolated, portable, and reproducible. The analogue in Python would be the <a href="https://docs.python.org/3/library/venv.html">virtual environments, or venv program</a>.</p>
-<p>When setting up your project you can run:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initiate a {renv} environment</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">init</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>To initiate your static R environment. Whenever you want to save the state of your project (and its packages) you can call:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the current state of the environment / project</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">snapshot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>To save any changes made to your environment. All data will be saved in a project description file called a lock file (i.e.&nbsp;<code>renv.lock</code>). It is advised to update the state of your project regularly, and in particular before closing a project.</p>
-<p>When you move your project to a new system, or share a project on github with collaborators, you can revert to the original state of the analysis by calling:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On a new system, or when inheriting a project</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># from a collaborator you can use a lock file</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># to restore the session/project state using</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">restore</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<blockquote class="blockquote">
-<p>NOTE: As mentioned in the {renv} documentation: “For development and collaboration, the <code>.Rprofile</code>, <code>renv.lock</code> and <code>renv/activate.R</code> files should be committed to your version control system. But the <code>renv/library</code> directory should normally be ignored. Note that <code>renv::init()</code> will attempt to write the requisite ignore statements to the project <code>.gitignore</code>.” We refer to <a href="#sec-learning-objectives-6" class="quarto-xref"><span>Section 7.1</span></a> for details on github and its use.</p>
-</blockquote>
-</section>
-<section id="capturing-a-system-state" class="level3" data-number="7.2.4">
-<h3 data-number="7.2.4" class="anchored" data-anchor-id="capturing-a-system-state"><span class="header-section-number">7.2.4</span> Capturing a system state</h3>
-<p>Although R projects and the use of {targets} make your workflow consistent, the package versions used between various systems (e.g., your home computer or the cluster at the university might vary). To address issues with changes in the versions of package, you can use the {renv} package which manages package version (environments) for you. When tasks are even more complex and include components outside of R, you can use <a href="https://www.docker.com/"><em>Docker</em></a> to provide containerization of an operating system and the included ancillary application.</p>
-<p>The <a href="https://rocker-project.org/">{rocker} package</a> provides access to some of these features within the context of reproducible R environments. Using these tools, you can therefore emulate the state of a machine, independently of the machine on which the docker file is run. These days, machine learning applications are often deployed as docker sessions to limit the complexity of installing required software components. The application of docker-based installs is outside the scope of the current course, but feel free to explore these resources as they are widespread in data science.</p>
-</section>
-<section id="readable-reporting-using-rmarkdown" class="level3" data-number="7.2.5">
-<h3 data-number="7.2.5" class="anchored" data-anchor-id="readable-reporting-using-rmarkdown"><span class="header-section-number">7.2.5</span> Readable reporting using Rmarkdown</h3>
-<p>Within Rstudio, you can use Rmarkdown dynamic documents to combine both text and code. Rmarkdown is ideal for <em>reporting</em>, i.e., writing your final document and presenting your analysis results. A Rmarkdown document consists of a header that specifies document properties (whether it should be rendered as an html page, a docx file or a pdf), and the actual content. You have encountered RMarkdown already in <a href="getting_started.html#sec-rmarkdown" class="quarto-xref"><span>Section 2.2.6</span></a>.</p>
-</section>
-<section id="project-structure-1" class="level3" data-number="7.2.6">
-<h3 data-number="7.2.6" class="anchored" data-anchor-id="project-structure-1"><span class="header-section-number">7.2.6</span> Project structure</h3>
-<p>In R projects, all files can be referenced relative to the top-most path of the project. When opening <code>your_project.Rproj</code> in RStudio, you can load data that is located in a sub-directory of the project directory <code>./data/</code> by <code>read.table("./data/some_data.csv")</code>. The use of <em>relative paths</em> and consistent directory structures across projects, enables that projects can easily be ported across computers and code adopted across projects.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">project/</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">├─</span> your_project.Rproj</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">├─</span> vignettes/</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>  ├─ your_dynamic_document.Rmd</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="ex">├─</span> data/</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="ex">│</span>  ├─ some_data.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Rmarkdown files commonly reside in a sub-directory <code>./vignettes/</code> and are rendered relative to the file path where it is located. This means that to access data which resides in <code>data/</code> using code in <code>./vignettes/your_dynamic_document.Rmd</code>, we would have to write:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">'../data/some_data.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Note the <code>../</code> to go one level up. To allow for more flexibility in file locations within your project folder, you may use the <a href="https://here.r-lib.org/">{here} package</a> package. I gathers the absolute path of the R project and allows for a specification of paths inside scripts and functions that always start from the top project directory, irrespective of where the script that implements the reading-code is located. Therefore, we can just write:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.table</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">'data/some_data.csv'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>But why not use absolute paths to begin with? Portability! When I would run your <code>\*.Rmd</code> file with an absolute path on my computer, it would not render as the file <code>some_data.csv</code> would then be located at: <code>/my_computer/project/data/some_data.csv</code></p>
-<section id="limitations-of-notebooks" class="level4" data-number="7.2.6.1">
-<h4 data-number="7.2.6.1" class="anchored" data-anchor-id="limitations-of-notebooks"><span class="header-section-number">7.2.6.1</span> Limitations of notebooks</h4>
-<p>The file referencing issue and the common use of Rmarkdown, and notebooks in general, as a one size fits all solution, containing all aspects from data cleaning to reporting, implies some limitations. RMarkdown documents mix two cognitive tasks, writing text content (i.e.&nbsp;reporting) and writing code. Switching between these two modes comes with undue overhead. If you code, you should not be writing prose, and vise versa.</p>
-<p>If your R markdown file contains more code than it does text, it should be considered an R script or function (with comments or documentation). Conversely, if your RMarkdown file contains more text than code, it probably is easier to collaborate on a true word processing file (or cloud-based solution). Notebooks, such as RMarkdown, are most suitable for communicating implementations, demonstrating functions, and reporting reproducible results. They can also be used like lab notes. They are less suited for code development.</p>
-</section>
-</section>
-<section id="data-retention" class="level3" data-number="7.2.7">
-<h3 data-number="7.2.7" class="anchored" data-anchor-id="data-retention"><span class="header-section-number">7.2.7</span> Data retention</h3>
-<p>Coding practices and documenting all moving parts in a coding workflow is only one practical aspect of open science. An additional component is long-term data and code retention and versioning.</p>
-<p>In <a href="code_management.html" class="quarto-xref"><span>Chapter 8</span></a>, you will learn more about <em>git</em> for code management and collaboration. Several online make use of <em>git</em> for providing web-based collaboration functionalities and remote storage of your repositories. Examples are <a href="https://github.com">GitHub</a>, <a href="https://gitlab.com">GitLab</a>, <a href="https://codeberg.org">Codeberg</a>, or <a href="https://bitbucket.org/">Bitbucket</a>. However, their remote storage service should only be considered an aid for collaboration, and not a place to store code into perpetuity. Furthermore, these services mostly have a limit to how much data can be stored in a repository (mostly ~2 GB). For small projects, data can be included in the repository itself. For larger projects and for making larger datasets accessible, this won’t be possible.</p>
+<!-- ![The reproducibility matrix by The Turing Way.](./figures/reproducible-matrix-turing-way.jpg){#fig-repromatrix width=60% fig.align='center'} -->
+<p><em>Reusability</em> of code in project-oriented workflows (see <a href="reproducible_workflows.html" class="quarto-xref"><span>Chapter 3</span></a>) is key to Open science. It ensures that outputs such as datasets, software, and workflows can be adapted for new purposes, speeding up discovery across disciplines. Concretely, Open Science includes practices including open data, open source software, open access publishing, and open workflows and methods (see below). Beyond methods, Open Science represents a cultural shift. It challenges the traditional “publish or perish” system, where competition and secrecy often slow progress, and instead encourages collaboration, accountability, and broader participation. Several aspects motivate the cultural shift towards Open Science:</p>
+<ul>
+<li>Enables accountability and trust, and leads to robust science.</li>
+</ul>
+<p>Access to data and code enables tests and acts as a precise documentation of how results were obtained. This also reflects a response to the reproducibility crisis that has affected scientific studies and entire scientific fields.</p>
+<ul>
+<li>Creates efficient infrastructure.</li>
+</ul>
+<p>Making data freely accessible through the web enables fully reproducible workflows and the integration of data access into reproducible and continuously updated workflows.</p>
+<ul>
+<li>Enhances impact.</li>
+</ul>
+<p>Making your data and code accessible and reusable enhances its uptake by the community. This makes your work valuable and visible – you create impact.</p>
+<ul>
+<li>Serves the public and transcends discrimination.</li>
+</ul>
+<p>Since much research is publicly funded, its outputs should be accessible to the public and anyone, irrespective of access to resources and funding.</p>
+<section id="open-data" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="open-data"><span class="header-section-number">5.2.1</span> Open data</h3>
+<p>Open data refers to the practice of making research datasets available so that others can examine, validate, and reuse them. When properly shared, data becomes a resource for the entire research community, enabling new insights and reducing duplication of effort. Yet, in practice, researchers often perceive barriers to making data open. In some cases, researchers must handle sensitive or confidential data, which cannot be openly released without consent and restrictions to openness. Finally, there are strategic considerations—sharing data may feel risky in competitive environments.</p>
+<p>Despite these challenges, expectations and the culture around open data are shifting. Many journals and funding agencies now require authors to provide data availability statements in published articles, and some make data deposition in recognized open research data repositories a condition of publication. To guide these practices, the <a href="https://www.go-fair.org/fair-principles/"><em>FAIR</em></a> principles <span class="citation" data-cites="wilkinson_fair_2016">(<a href="references.html#ref-wilkinson_fair_2016" role="doc-biblioref">Wilkinson et al. 2016</a>)</span> – that data should be Findable, Accessible, Interoperable, and Reusable – have become a global standard. FAIR does not mean all data must be open, but it emphasizes that well-documented and properly archived data maximizes its potential for reuse while protecting sensitive information.</p>
 <p>To ensure long-term storage of code and data, outside of commercial for profit services (e.g., Dropbox, Google Drive etc), it is best to rely on public permanent repositories, such as <a href="https://zenodo.org/">Zenodo</a>. Zenodo is an effort by the European commission, but accessible to all, to facilitate archiving of science projects of all nature (code and data) up to 50 GB. In addition, Zenodo provides a citable digital object identifier or DOI. This allows data and code, even if not formally published in a journal, to be cited. Other noteworthy open science storage options include <a href="https://datadryad.org/stash">Dryad</a> and the <a href="https://osf.io/">Center for Open Science</a>.</p>
-<p>The broad-purpose permanent data repositories mentioned above are not edited and are therefore not ideal for data discovery. In contrast, edited data repositories often have a specific thematic scope and different repositories are established in different research communities. Below you find a list of widely used data repositories, generalist and others, that provide manual or automated download access to their data. Note that this list contains some example and is far from extensive.</p>
+<p>The broad-purpose permanent data repositories mentioned above are not edited and are therefore not ideal for data discovery. In contrast, edited data repositories often have a specific thematic scope and different repositories are established in different research communities. <a href="#tbl-open-data-repositories" class="quarto-xref">Table&nbsp;<span>5.1</span></a> provides a list of widely used data repositories, generalist and others, that provide manual or automated download access to their data. Note that this list contains some example and is far from extensive.</p>
+<div id="tbl-open-data-repositories" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-open-data-repositories-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5.1: An incomplete collection of open data repositories used in Environmental sciences and Geography. Note the distinction between repositories that are open to contributions and offer hosting and DOI-minting for user-contributed datasets, and those that are not (Column ‘Open to contributions’). A more complete list of open data repositories and other access points for open research data in Environmental science and Geography can be found at <span class="citation" data-cites="loginova_list_2025">Loginova and Varvaris (<a href="references.html#ref-loginova_list_2025" role="doc-biblioref">2025</a>)</span>.
+</figcaption>
+<div aria-describedby="tbl-open-data-repositories-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th>Data type</th>
-<th>Website</th>
-<th>Description</th>
-<th>Download</th>
+<th>Repository name</th>
+<th>URL</th>
+<th>Purpose</th>
+<th>Open to contributions</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Copernicus Climate Data Store</td>
-<td><a href="https://cds.climate.copernicus.eu" class="uri">https://cds.climate.copernicus.eu</a></td>
-<td>Freely available climate data (reanalysis as well as future projections)</td>
-<td>API</td>
+<td>Zenodo</td>
+<td><a href="https://zenodo.org/" class="uri">https://zenodo.org/</a></td>
+<td>Generalist data repository for research data.</td>
+<td>Yes</td>
 </tr>
 <tr class="even">
-<td>Oak Ridge National Laboratories Digital Active Archive Center (ORNL DAAC)</td>
-<td><a href="https://daac.ornl.gov/" class="uri">https://daac.ornl.gov/</a></td>
-<td>Environmental data of varying sources, either remote sensing, field work and or re-analysis.</td>
-<td>multiple APIs or manual downloads</td>
-</tr>
-<tr class="odd">
-<td>Land Processes Digital Active Archive Center (LP DAAC)</td>
-<td><a href="https://lpdaac.usgs.gov/" class="uri">https://lpdaac.usgs.gov/</a></td>
-<td>Remote sensing (analysis ready) data products.</td>
-<td>Login walled automated downloads</td>
-</tr>
-<tr class="even">
-<td>Environmental Data Initiative</td>
-<td><a href="https://edirepository.org/" class="uri">https://edirepository.org/</a></td>
-<td>Generalist data repository for study data, with a strong focus on biology.</td>
-<td>Manual download</td>
+<td>Figshare</td>
+<td><a href="https://figshare.com/" class="uri">https://figshare.com/</a></td>
+<td>Generalist data repository for research data.</td>
+<td>Yes</td>
 </tr>
 <tr class="odd">
 <td>Dryad</td>
 <td><a href="https://datadryad.org" class="uri">https://datadryad.org</a></td>
-<td>Generalist data repository for study data, with a strong focus on biology.</td>
-<td>Manual downloads</td>
+<td>Generalist data repository for research data.</td>
+<td>Yes</td>
 </tr>
 <tr class="even">
-<td>Zenodo</td>
-<td><a href="https://zenodo.org/" class="uri">https://zenodo.org/</a></td>
-<td>Generalist data repository for study data.</td>
-<td>Manual downloads</td>
+<td>Environmental Data Initiative</td>
+<td><a href="https://edirepository.org/" class="uri">https://edirepository.org/</a></td>
+<td>Hosts ecological and environmental data</td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td>World Data Center for Climate</td>
+<td><a href="https://www.wdc-climate.de/ui/" class="uri">https://www.wdc-climate.de/ui/</a></td>
+<td>Hosts Earth system model data, run by Deutsches Klimarechenzentrum (DKRZ)</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td>PANGAEA</td>
+<td><a href="https://www.pangaea.de/" class="uri">https://www.pangaea.de/</a></td>
+<td>Hosts georeferenced data from earth system research</td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td>EnviDat</td>
+<td><a href="https://www.envidat.ch" class="uri">https://www.envidat.ch</a></td>
+<td>Hosts envrionmental system research with a focus on Switzerland</td>
+<td>For researchers of the Swiss Federal Institute for Forest, Snow and Landscape WSL</td>
+</tr>
+<tr class="even">
+<td>Climate Data Store</td>
+<td><a href="https://cds.climate.copernicus.eu/" class="uri">https://cds.climate.copernicus.eu/</a></td>
+<td>Provides access to climate data</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>Copernicus Data Space Ecosystem</td>
+<td><a href="https://dataspace.copernicus.eu/" class="uri">https://dataspace.copernicus.eu/</a></td>
+<td>Provides access to data from the Copernicus Sentinel missions</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>Swiss Open Geodata</td>
+<td><a href="https://www.swisstopo.admin.ch/en/geodata-and-applications" class="uri">https://www.swisstopo.admin.ch/en/geodata-and-applications</a></td>
+<td>Provides access to geodata by the Swiss Open Government Data</td>
+<td>No</td>
 </tr>
 <tr class="odd">
 <td>Eurostat</td>
 <td><a href="https://ec.europa.eu/eurostat" class="uri">https://ec.europa.eu/eurostat</a></td>
-<td>Generalist data repository for EU wide (demographic) data.</td>
-<td>Manual downloads</td>
+<td>Provides access to statistical data of Europe</td>
+<td>No</td>
 </tr>
 <tr class="even">
 <td>Swiss Open Government data</td>
 <td><a href="https://opendata.swiss/en/" class="uri">https://opendata.swiss/en/</a></td>
-<td>Generalist data repository from the Swiss Federal statistics office.</td>
-<td>API or manual downloads</td>
+<td>Generalist data from the Swiss Federal statistics office.</td>
+<td>No</td>
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
+</section>
+<section id="open-source-software" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="open-source-software"><span class="header-section-number">5.2.2</span> Open source software</h3>
+<p>Software is often as central to research as data, yet historically it has been less visible in scholarly outputs. Open source software addresses this gap by making code freely accessible for anyone to use, examine, and extend. A typical project might start as a tool written for a specific study, but once shared and adapted for more general applications, it can evolve into a library that supports many projects across a community. Also specialized software, such as a model for simulating a physical system, can become widely useful if written in a non-proprietary coding language and accompanied by sufficient documentation.</p>
+<p>The benefits of open source are significant. Publicly available code enables reproducibility by letting others see exactly how analyses were performed. It also reduces dependence on proprietary systems, which may lock research into costly or opaque environments. Over time, well-maintained open source projects can attract contributions from the wider community, enhancing functionality and improving reliability. Version control platforms like <em>GitHub</em> make this collaborative development possible by offering tools for <a href="https://docs.github.com/en/issues/tracking-your-work-with-issues/learning-about-issues/about-issues"><em>issue tracking</em></a>, <a href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests"><em>pull requests</em></a>, and <a href="https://docs.github.com/en/actions/get-started/continuous-integration"><em>continuous integration testing</em></a>. When paired with clear <a href="https://creativecommons.org/share-your-work/cclicenses/"><em>licensing</em></a>, open source software not only supports transparency but also lays the foundation fair crediting and for cumulative progress.</p>
+</section>
+<section id="open-access-publishing" class="level3" data-number="5.2.3">
+<h3 data-number="5.2.3" class="anchored" data-anchor-id="open-access-publishing"><span class="header-section-number">5.2.3</span> Open access publishing</h3>
+<p>One of the most visible aspects of Open Science is open access publishing, which aims to make research articles freely available to everyone. The motivation is straightforward: since much research is publicly funded, the public should not face paywalls to access it. However, the reality of traditional publishing has created a crisis. Commercial publishers often charge universities and libraries high subscription fees, while researchers – who generate content, review manuscripts, and edit journals without pay – receive little in return. The public ends up paying twice: once to fund the research through salaries and grants, and again through subscription costs.</p>
+<p>Open access offers alternative models. Some scholarly societies, such as the <a href="https://www.egu.eu/"><em>European Geosciences Union</em></a> and the <a href="https://www.agu.org/"><em>American Geophysical Union</em></a>, have pioneered non-profit publishing routes where revenues sustain the scientific community rather than shareholders. <em>Preprint</em> servers also play an increasingly important role, allowing researchers to freely share findings rapidly before peer review.</p>
+<p>Within formal publishing, two main <a href="https://open-access.network/en/information/open-access-primers/green-and-gold">pathways to open access</a> exist. <em>Gold open access</em> makes articles immediately free to read on the publisher’s site, often supported by article processing charges (APCs) paid by authors or their institutions. <em>Green open access</em> relies on authors self-archiving preprints or accepted manuscripts in institutional or subject repositories, where they remain freely available even if the journal version is behind a paywall. Together, these models are reshaping the landscape of scholarly communication toward greater openness.</p>
+</section>
+<section id="open-workflows-and-methods" class="level3" data-number="5.2.4">
+<h3 data-number="5.2.4" class="anchored" data-anchor-id="open-workflows-and-methods"><span class="header-section-number">5.2.4</span> Open workflows and methods</h3>
+<p>Beyond data, software, and publications, Open Science also encompasses the entire research workflow. Open workflows mean that the processes behind a study – from data collection protocols to analysis scripts – are documented and shared in ways that others can follow. This makes research more transparent and easier to reuse. For example, maintaining project-oriented workflows where data, code, and documentation are stored systematically helps others (and one’s future self) understand the work. In <a href="reproducible_workflows.html" class="quarto-xref"><span>Chapter 3</span></a>, you learned what it takes to implement reusable, project-oriented workflows.</p>
+<p>Version control systems like Git allow researchers to capture the history of their analysis workflows, while platforms like GitHub provide mechanisms for collaboration, peer review of code, and continuous integration testing to ensure reliability. Coupled with practices like versioning and tagged releases, these tools enable researchers to share stable snapshots of their work that can be cited and archived. Open workflows are also supported by <em>data management plans</em>, which assign clear roles and responsibilities, define storage and backup strategies, and address long-term preservation of outputs. More on such practices below in <a href="#sec-practices-open-science" class="quarto-xref"><span>Section 5.3</span></a></p>
+<p>In essence, open workflows transform research into a living, transparent process rather than a black box that only produces final results. This shift helps ensure that scientific claims can be checked, methods can be reused, and future work can build more efficiently on what has already been done.</p>
 </section>
 </section>
-<section id="exercises" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="exercises"><span class="header-section-number">7.3</span> Exercises</h2>
-<section id="external-data" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="external-data">External data</h3>
-<p>You inherit a project folder which contains the following files.</p>
-<pre><code>~/project/
-├─ survey.xlsx
-├─ xls conversion.csv
-├─ xls conversion (copy 1).csv
-├─ Model-test_1.R
-├─ Model-test-final.R
-├─ Plots.R
-├─ Figure 1.png
-├─ test.png
-├─ Rplot01.png
-├─ Report.Rmd
-├─ Report.html
-├─ my_functions.R</code></pre>
-<p>What are your steps to make this project more reproducible? Write down how and why you would organize your project.</p>
+<section id="sec-practices-open-science" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="sec-practices-open-science"><span class="header-section-number">5.3</span> Practices for Open Science</h2>
+<section id="open-data-1" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="open-data-1"><span class="header-section-number">5.3.1</span> Open data</h3>
+<p>Practices for applying FAIR data principles involve multiple methods and resources, relevant for different steps of data generation and publication.</p>
+<p><strong>Organise and clean your data</strong></p>
+<ul>
+<li>Remove duplicates, errors, or inconsistencies.</li>
+<li>Use clear, descriptive variable names (column names in tabular data).</li>
+<li>Standardize units of measurement.</li>
+<li>Make contents machine-readable (see <a href="data_wrangling.html#sec-datacleaning" class="quarto-xref"><span>Section 7.3.10</span></a>)</li>
+</ul>
+<p><strong>Choose an open, non-proprietary format</strong></p>
+<ul>
+<li>For tabular data, use <em>CSV</em>.</li>
+<li>For structured scientific data, consider formats like <em>NetCDF</em> or <em>HDF5</em>, which support embedded metadata.</li>
+<li>For text, use <em>txt</em> or <em>Markdown</em> rather than proprietary formats (e.g., DOCX).</li>
+<li>For images or media, use open formats like <em>PNG</em>, <em>TIFF</em>, <em>WAV</em>, or <em>MP4</em>.</li>
+</ul>
+<p><strong>Document your dataset</strong></p>
+<ul>
+<li>Create a README file (plain text or Markdown, see also <a href="reproducible_workflows.html#sec-readme" class="quarto-xref"><span>Section 3.4.3.1</span></a>) that contains the following information:
+<ul>
+<li>Dataset title and description.</li>
+<li>Explanation of variables (column names, units, categories).</li>
+<li>Methods used for data collection and processing.</li>
+<li>Links to related publications, software, or workflows.</li>
+<li>Author names, affiliations, and contact information.</li>
+<li>License information (e.g., <a href="https://creativecommons.org/">Creative Commons</a>).</li>
+</ul></li>
+</ul>
+<p><strong>Deposit your data in a trusted open repository</strong></p>
+<ul>
+<li>Use a <em>permanent repository</em> with strong archival policies (see <a href="#tbl-open-data-repositories" class="quarto-xref">Table&nbsp;<span>5.1</span></a>).</li>
+<li>Ensure the repository generates a <em>digital object identifier</em> (DOI) for long-term citation of uploaded datasets</li>
+<li>Add <em>metadata</em> to make the dataset discoverable (keywords, subject categories, abstract).</li>
+</ul>
+<p><strong>Integrate data into your workflow</strong></p>
+<ul>
+<li>Store small (&lt;25 MB) or intermediate datasets of a project workflow in the project’s version-controlled repository (through Git and Github, see <a href="code_management.html" class="quarto-xref"><span>Chapter 4</span></a>).</li>
+<li>Use <em>tags and releases</em> to capture versions of the dataset (see <a href="#sec-open-source-software" class="quarto-xref"><span>Section 5.3.2</span></a>).</li>
+<li>Link your Github repository to Zenodo for automatic DOI assignment when releasing a version (see <a href="https://help.zenodo.org/docs/profile/linking-accounts/">here</a> and <a href="https://help.zenodo.org/docs/github/enable-repository/">here</a>).</li>
+</ul>
+<p><strong>Provide a data availability statement</strong></p>
+<ul>
+<li>Clearly indicate in your publications where the data can be found.</li>
+<li>State the license and any access restrictions. Use available licenses, see e.g., <a href="https://creativecommons.org/">Creative Commons</a>.</li>
+<li>If data is sensitive and cannot be shared, provide metadata and conditions for access.</li>
+</ul>
 </section>
+<section id="sec-open-source-software" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="sec-open-source-software"><span class="header-section-number">5.3.2</span> Open source software</h3>
+<p>Developing open source software for research is more than simply sharing code – it involves adopting practices that make your code reusable, sustainable, and valuable to the broader community. The following tools and methods are crucial to making code open.</p>
+<p><strong>Make it reusable</strong></p>
+<ul>
+<li>Adopt a reusable project-oriented workflow (see <a href="reproducible_workflows.html" class="quarto-xref"><span>Chapter 3</span></a>).</li>
+</ul>
+<p><strong>Use version control from the start</strong></p>
+<ul>
+<li>Make the project directory a Git repository from the start, hosted, e.g., on Github.</li>
+</ul>
+<p><strong>Make stable releases</strong></p>
+<ul>
+<li>Use <em>git tags</em> to mark major updates of the repository. These may align with designated version names (e.g., <code>v1.0.0</code>).</li>
+<li>Create releases of tags on GitHub or GitLab with notes describing changes.</li>
+<li>Link your Github repository to Zenodo for automatic DOI assignment when releasing a version (see <a href="https://help.zenodo.org/docs/profile/linking-accounts/">here</a> and <a href="https://help.zenodo.org/docs/github/enable-repository/">here</a>).</li>
+</ul>
+<p><strong>Refactor reusable components into a library</strong></p>
+<ul>
+<li>Further enhance reusability of functions that may be re-used across projects by creating a library (package).</li>
+<li>Use a non-proprietary coding language (e.g., R, Python, Julia) for maximum accessibility of the package.</li>
+<li>See <a href="https://r-pkgs.org/">here</a> for a comprehensive tutorial on writing R packages.</li>
+</ul>
+<p><strong>Document</strong></p>
+<ul>
+<li>Write vignettes (see <a href="reproducible_workflows.html#sec-vignettes" class="quarto-xref"><span>Section 3.4.3.4</span></a>) or tutorials showing use cases.</li>
+<li>Create a project website with documentation (e.g., using <a href="https://docs.github.com/en/pages"><em>GitHub Pages</em></a>, and <a href="https://pkgdown.r-lib.org/"><em>pkgdown</em></a> for R).</li>
+<li>Publish a software paper in open software description journal (e.g., <em>Journal of Open Source Software</em>).</li>
+<li>Submit your library to a <strong>central archive</strong>: CRAN for R, or PyPI for Python.</li>
+</ul>
+<p><strong>Maintain and improve the project</strong></p>
+<ul>
+<li>Keep track of issues for bug reports and feature requests (see <a href="https://docs.github.com/en/issues/tracking-your-work-with-issues/learning-about-issues/about-issues">here</a>).</li>
+<li>Keep a changelog of updates and fixes.</li>
+<li>Encourage community contributions through <a href="sec-pull-request"><em>pull requests</em></a> and clear contributing guidelines.</li>
+</ul>
+<!-- ## Tutorial -->
+<!-- The scientific method relies on repeated testing of a hypothesis. When dealing with data and formal analysis, one can reduce this problem to the question: could an independent scientist attain the same results given the described methodology, data and code? -->
+<!-- Although this seems trivial, this issue has vexed the scientific community. These days, many scientific publications are based on complex analyses with often large data sets. More so, methods in publications are often insufficiently detailed to really capture the scope of an analysis. Even from a purely technical point of view, the reproducibility crisis or the inability to reproduce experimental results, is a complex problem. This is further compounded by social aspects and incentives. In recent decades, scientific research has seen a steady increase in speed due to the digitization of many fields and the commodification of science. -->
+<!-- Although digitization has opened up new research possibilities, its potential for facilitating, accelerating, and advancing science are often not fully made use of. Historically, research and its output in the form of data and code has been confined to academic journals, data and code has often not been made available, and data were not shared or behind pay-walls. This limits the impact of science also in the public domain. (In many ways, this is still the case today, in year 2023 as we write). Digitization has made research output better visible and accessible, but practical obstacles and weak standards often prevent it from uptake, re-use, and further development by the wider community. -->
+<!-- Open and reproducible science is a movement to make scientific research (output) widely accessible to the larger public, increase research transparency and enabling robust and verifiable science. Open science aims to be as open as possible about the whole scientific process, and as closed as desirable (e.g. privacy or security reasons). -->
+<!-- The basics of open science coding and data practices rely on a number of simple concepts. The sections below describe a selection of the most important ones. Sticking to these principles and tools will increase the reproducibility of your work greatly. -->
+<!-- ### Project structure -->
+<!-- Reproducible science relies on a number of key components. Data and code management and the tracking of required meta-data is the first step in an open science workflow.  -->
+<!-- In @sec-reproducible, you learned how to setup an R project. An R project gathers all components of your analysis in a single directory. Although current computers make it easy to "find" your files and are largely file location-agnostic, this is not the case in many research environments. Projects grow quickly, and often, the number of files will flood a single directory. Therefore, files need a precise and structured location. This structure allows you to determine both the function and order of a workflow without reading any code. -->
+<!-- It is good practice to have a consistent project structure within and between projects. This allows you to find most project components regardless of when you return to a particular project. Structuring a project in one folder also makes projects portable. All parts reside in one location making it easy to create a *git* project from this location (see @sec-codemgmt), or just copy the project to a new drive. -->
+<!-- An example data structure for raw data processing is given below and we provide an [R project template](https://github.com/geco-bern/R_proj_template) to work from and adjust through our [lab GitHub profile](https://github.com/geco-bern). A full description on using the template is provided in @sec-codemgmt. -->
+<!-- ``` bash -->
+<!-- data-raw/ -->
+<!-- ├─ raw_data_product/ -->
+<!-- ├─ 00_download_raw_data.R -->
+<!-- ├─ 01_process_raw_data.R -->
+<!-- ``` -->
+<!-- ### Managing workflows -->
+<!-- Although some code is agnostic to the order of execution, many projects are effectively *workflows*, where the output of one routine is required for the successful execution of the next routine. -->
+<!-- In order to make sure that your future self, or a collaborator, understands the order in which things should be executed, it is best to number scripts accordingly. This is the most basic approach to managing workflows. -->
+<!-- In the example below, all statistics code is stored in the `statistics` folder in an overall `analysis` folder (which also includes code for figures). All statistical analyses are numbered to ensure that the output of a first analysis is available to the subsequent one. -->
+<!-- ``` bash -->
+<!-- analysis/ -->
+<!-- ├─ statistics/ -->
+<!-- │  ├─ 00_randomforest_model.R -->
+<!-- │  ├─ 01_randomforest_tuning.R -->
+<!-- ├─ figures/ -->
+<!-- │  ├─ global_model_results_map.R -->
+<!-- │  ├─ complex_process_visualization.R -->
+<!-- ``` -->
+<!-- The code-chunk above is a visualisation of a folder (aka. directory) structure on your computer. The lines and indents denote folder levels. In this example, you have a folder `analysis` which holds two more folders `statistics` and `figures`, and in both sub-folders, you have different `*.R` files (`*` is a so-called "wild-card" which is a placeholder for any text). Note that different people may use different symbols to visualise folder structures but generally, folder levels are shown with indents, and files are identifiable by their suffixes. -->
+<!-- #### Automating and visualizing workflows with targets -->
+<!-- To sidestep some of the manual management in R you can use a dedicated pipeline tool like the {targets} package in R. The package learns how your pipeline fits together, skips tasks that are already up-to-date, and runs only the necessary computation. {targets} can also visualize the progress of your workflow. -->
+<!-- ![A targets visualized workflow by rOpenSci.](https://books.ropensci.org/targets/man/figures/tar_watch.png){#fig-targets width=60% fig.align='center'} -->
+<!-- Due to the added complexity of the {targets} package, we won't include extensive examples of such a workflow but refer to the excellent documentation of the package for simple examples [here](https://books.ropensci.org/targets/walkthrough.html). -->
+<!-- ### Capturing your session state -->
+<!-- ### Readable reporting using Rmarkdown -->
+<!-- Within Rstudio, you can use Rmarkdown dynamic documents to combine both text and code. Rmarkdown is ideal for *reporting*, i.e., writing your final document and presenting your analysis results. A Rmarkdown document consists of a header that specifies document properties (whether it should be rendered as an html page, a docx file or a pdf), and the actual content. You have encountered RMarkdown already in @sec-rmarkdown. -->
+<!-- ### Project structure -->
+<!-- In R projects, all files can be referenced relative to the top-most path of the project. When opening `your_project.Rproj` in RStudio, you can load data that is located in a sub-directory of the project directory `./data/` by `read.table("./data/some_data.csv")`. The use of *relative paths* and consistent directory structures across projects, enables that projects can easily be ported across computers and code adopted across projects. -->
+<!-- ``` bash -->
+<!-- project/ -->
+<!-- ├─ your_project.Rproj -->
+<!-- ├─ vignettes/ -->
+<!-- │  ├─ your_dynamic_document.Rmd -->
+<!-- ├─ data/ -->
+<!-- │  ├─ some_data.csv -->
+<!-- ``` -->
+<!-- But why not use absolute paths to begin with? Portability! When I would run your `\*.Rmd` file with an absolute path on my computer, it would not render as the file `some_data.csv` would then be located at: `/my_computer/project/data/some_data.csv` -->
+<!-- #### Limitations of notebooks -->
+<!-- The file referencing issue and the common use of Rmarkdown, and notebooks in general, as a one size fits all solution, containing all aspects from data cleaning to reporting, implies some limitations. RMarkdown documents mix two cognitive tasks, writing text content (i.e. reporting) and writing code. Switching between these two modes comes with undue overhead. If you code, you should not be writing prose, and vise versa. -->
+<!-- If your R markdown file contains more code than it does text, it should be considered an R script or function (with comments or documentation). Conversely, if your RMarkdown file contains more text than code, it probably is easier to collaborate on a true word processing file (or cloud-based solution). Notebooks, such as RMarkdown, are most suitable for communicating implementations, demonstrating functions, and reporting reproducible results. They can also be used like lab notes. They are less suited for code development.  -->
+</section>
+</section>
+<section id="exercises" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="exercises"><span class="header-section-number">5.4</span> Exercises</h2>
 <section id="a-new-project" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="a-new-project">A new project</h3>
 <p>What are the basic steps to create a reproducible workflow from a file management perspective? Create your own R project using these principles and provide details the on steps involved and why they matter.</p>
 <p>The project should be a reproducible workflow:</p>
 <ul>
 <li><p>Download and plot a MODIS land cover map for Belgium using skills you learned in <a href="data_variety.html" class="quarto-xref"><span>Chapter 6</span></a>.</p></li>
-<li><p>Write a function to count the occurrences of land cover classes in the map as a formal function using skills you learned in <a href="data_wrangling.html" class="quarto-xref"><span>Chapter 4</span></a>.</p></li>
-<li><p>Create a plot of the land cover map, see <a href="data_vis.html" class="quarto-xref"><span>Chapter 5</span></a>.</p></li>
+<li><p>Write a function to count the occurrences of land cover classes in the map as a formal function using skills you learned in <a href="data_wrangling.html" class="quarto-xref"><span>Chapter 7</span></a>.</p></li>
+<li><p>Create a plot of the land cover map, see <a href="data_vis.html" class="quarto-xref"><span>Chapter 8</span></a>.</p></li>
 <li><p>Write a dynamic report describing your answers to the above questions regarding how to structure a reproducible workflow.</p></li>
 </ul>
 </section>
@@ -732,6 +807,17 @@ Figure&nbsp;7.2: A targets visualized workflow by rOpenSci.
 </ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-turingway" class="csl-entry" role="listitem">
+Community, The Turing Way. 2025. <span>“The Turing Way: A Handbook for Reproducible, Ethical and Collaborative Research.”</span> Zenodo. <a href="https://doi.org/10.5281/zenodo.15213042">https://doi.org/10.5281/zenodo.15213042</a>.
+</div>
+<div id="ref-loginova_list_2025" class="csl-entry" role="listitem">
+Loginova, Daria, and Ioannis Varvaris. 2025. <span>“The <span>List</span> of <span>Open</span> <span>Data</span> <span>Sources</span> for <span>Agricultural</span>, <span>Food</span>, <span>Land</span>, and <span>Socio</span>-<span>Economic</span> <span>Research</span>,”</span> April. <a href="https://www.alexandria.unisg.ch/handle/20.500.14171/122369">https://www.alexandria.unisg.ch/handle/20.500.14171/122369</a>.
+</div>
+<div id="ref-wilkinson_fair_2016" class="csl-entry" role="listitem">
+Wilkinson, Mark D., Michel Dumontier, IJsbrand Jan Aalbersberg, Gabrielle Appleton, Myles Axton, Arie Baak, Niklas Blomberg, et al. 2016. <span>“The <span>FAIR</span> <span>Guiding</span> <span>Principles</span> for Scientific Data Management and Stewardship.”</span> <em>Scientific Data</em> 3 (1): 160018. <a href="https://doi.org/10.1038/sdata.2016.18">https://doi.org/10.1038/sdata.2016.18</a>.
+</div>
+</div>
 </section>
 </section>
 
@@ -1150,13 +1236,13 @@ Figure&nbsp;7.2: A targets visualized workflow by rOpenSci.
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./data_variety.html" class="pagination-link" aria-label="Data variety">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data variety</span></span>
+      <a href="./code_management.html" class="pagination-link" aria-label="Code management">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Code management</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./code_management.html" class="pagination-link" aria-label="Code management">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Code management</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./data_variety.html" class="pagination-link" aria-label="Data variety">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data variety</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

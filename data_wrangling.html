@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.31">
+<meta name="generator" content="quarto-1.7.34">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>4&nbsp; Data wrangling – Applied Geodata Science</title>
+<title>7&nbsp; Data wrangling – Applied Geodata Science</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -66,7 +66,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./data_vis.html" rel="next">
-<link href="./programming_primers.html" rel="prev">
+<link href="./data_variety.html" rel="prev">
 <link href="././figures/favicon.ico" rel="icon">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -74,14 +74,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-8ef56b68f8fa1e9d2ba328e99e439f80.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-befe23ebd2f54d8af2c8a89d1a1611f1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-384f633e49201da7a9cfd9adcd4339e6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-ed7f81c2536d4971380f0ee642568b90.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-384f633e49201da7a9cfd9adcd4339e6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-5580b768968c173edbcabd2ef8ecb882.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-ce530c4fc5b35f77c508c3bfad3cc1ab.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-5580b768968c173edbcabd2ef8ecb882.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -140,7 +140,7 @@ window.Quarto = {
 };
 </script>
 
-<meta name="twitter:title" content="4&nbsp; Data wrangling – Applied Geodata Science">
+<meta name="twitter:title" content="7&nbsp; Data wrangling – Applied Geodata Science">
 <meta name="twitter:description" content="">
 <meta name="twitter:image" content="data_wrangling_files/figure-html/unnamed-chunk-13-1.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -362,7 +362,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data_wrangling.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data wrangling</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data_wrangling.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data wrangling</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -388,26 +388,26 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./getting_started.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting started</span></span></a>
+  <a href="./primers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Primers</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./programming_primers.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Programming primers</span></span></a>
+  <a href="./reproducible_workflows.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Reusable workflows</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data_wrangling.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data wrangling</span></span></a>
+  <a href="./code_management.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Code management</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data_vis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data visualisation</span></span></a>
+  <a href="./open_science.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Open science</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -418,14 +418,14 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./open_science.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Open science practices</span></span></a>
+  <a href="./data_wrangling.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data wrangling</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./code_management.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Code management</span></span></a>
+  <a href="./data_vis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data visualisation</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -480,36 +480,36 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">4.1</span> Learning objectives</a></li>
-  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup"><span class="header-section-number">4.2</span> Setup</a></li>
-  <li><a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial"><span class="header-section-number">4.3</span> Tutorial</a>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">7.1</span> Learning objectives</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup"><span class="header-section-number">7.2</span> Setup</a></li>
+  <li><a href="#tutorial" id="toc-tutorial" class="nav-link" data-scroll-target="#tutorial"><span class="header-section-number">7.3</span> Tutorial</a>
   <ul class="collapse">
-  <li><a href="#example-data" id="toc-example-data" class="nav-link" data-scroll-target="#example-data"><span class="header-section-number">4.3.1</span> Example data</a></li>
-  <li><a href="#tidyverse" id="toc-tidyverse" class="nav-link" data-scroll-target="#tidyverse"><span class="header-section-number">4.3.2</span> Tidyverse</a></li>
-  <li><a href="#reading-tabular-data" id="toc-reading-tabular-data" class="nav-link" data-scroll-target="#reading-tabular-data"><span class="header-section-number">4.3.3</span> Reading tabular data</a></li>
-  <li><a href="#variable-selection" id="toc-variable-selection" class="nav-link" data-scroll-target="#variable-selection"><span class="header-section-number">4.3.4</span> Variable selection</a></li>
-  <li><a href="#time-objects" id="toc-time-objects" class="nav-link" data-scroll-target="#time-objects"><span class="header-section-number">4.3.5</span> Time objects</a></li>
-  <li><a href="#variable-re--definition" id="toc-variable-re--definition" class="nav-link" data-scroll-target="#variable-re--definition"><span class="header-section-number">4.3.6</span> Variable (re-) definition</a></li>
-  <li><a href="#axes-of-variation" id="toc-axes-of-variation" class="nav-link" data-scroll-target="#axes-of-variation"><span class="header-section-number">4.3.7</span> Axes of variation</a></li>
-  <li><a href="#tidydata" id="toc-tidydata" class="nav-link" data-scroll-target="#tidydata"><span class="header-section-number">4.3.8</span> Tidy data</a></li>
-  <li><a href="#aggregating-data" id="toc-aggregating-data" class="nav-link" data-scroll-target="#aggregating-data"><span class="header-section-number">4.3.9</span> Aggregating data</a></li>
-  <li><a href="#data-cleaning" id="toc-data-cleaning" class="nav-link" data-scroll-target="#data-cleaning"><span class="header-section-number">4.3.10</span> Data cleaning</a></li>
-  <li><a href="#writing-data-to-csv" id="toc-writing-data-to-csv" class="nav-link" data-scroll-target="#writing-data-to-csv"><span class="header-section-number">4.3.11</span> Writing data to CSV</a></li>
-  <li><a href="#combining-relational-data" id="toc-combining-relational-data" class="nav-link" data-scroll-target="#combining-relational-data"><span class="header-section-number">4.3.12</span> Combining relational data</a></li>
+  <li><a href="#example-data" id="toc-example-data" class="nav-link" data-scroll-target="#example-data"><span class="header-section-number">7.3.1</span> Example data</a></li>
+  <li><a href="#tidyverse" id="toc-tidyverse" class="nav-link" data-scroll-target="#tidyverse"><span class="header-section-number">7.3.2</span> Tidyverse</a></li>
+  <li><a href="#reading-tabular-data" id="toc-reading-tabular-data" class="nav-link" data-scroll-target="#reading-tabular-data"><span class="header-section-number">7.3.3</span> Reading tabular data</a></li>
+  <li><a href="#variable-selection" id="toc-variable-selection" class="nav-link" data-scroll-target="#variable-selection"><span class="header-section-number">7.3.4</span> Variable selection</a></li>
+  <li><a href="#time-objects" id="toc-time-objects" class="nav-link" data-scroll-target="#time-objects"><span class="header-section-number">7.3.5</span> Time objects</a></li>
+  <li><a href="#variable-re--definition" id="toc-variable-re--definition" class="nav-link" data-scroll-target="#variable-re--definition"><span class="header-section-number">7.3.6</span> Variable (re-) definition</a></li>
+  <li><a href="#axes-of-variation" id="toc-axes-of-variation" class="nav-link" data-scroll-target="#axes-of-variation"><span class="header-section-number">7.3.7</span> Axes of variation</a></li>
+  <li><a href="#tidydata" id="toc-tidydata" class="nav-link" data-scroll-target="#tidydata"><span class="header-section-number">7.3.8</span> Tidy data</a></li>
+  <li><a href="#aggregating-data" id="toc-aggregating-data" class="nav-link" data-scroll-target="#aggregating-data"><span class="header-section-number">7.3.9</span> Aggregating data</a></li>
+  <li><a href="#sec-datacleaning" id="toc-sec-datacleaning" class="nav-link" data-scroll-target="#sec-datacleaning"><span class="header-section-number">7.3.10</span> Data cleaning</a></li>
+  <li><a href="#writing-data-to-csv" id="toc-writing-data-to-csv" class="nav-link" data-scroll-target="#writing-data-to-csv"><span class="header-section-number">7.3.11</span> Writing data to CSV</a></li>
+  <li><a href="#combining-relational-data" id="toc-combining-relational-data" class="nav-link" data-scroll-target="#combining-relational-data"><span class="header-section-number">7.3.12</span> Combining relational data</a></li>
   </ul></li>
-  <li><a href="#sec-extramaterialwrangling" id="toc-sec-extramaterialwrangling" class="nav-link" data-scroll-target="#sec-extramaterialwrangling"><span class="header-section-number">4.4</span> Extra material</a>
+  <li><a href="#sec-extramaterialwrangling" id="toc-sec-extramaterialwrangling" class="nav-link" data-scroll-target="#sec-extramaterialwrangling"><span class="header-section-number">7.4</span> Extra material</a>
   <ul class="collapse">
-  <li><a href="#functional-programming-i" id="toc-functional-programming-i" class="nav-link" data-scroll-target="#functional-programming-i"><span class="header-section-number">4.4.1</span> Functional programming I</a></li>
-  <li><a href="#sec-strings" id="toc-sec-strings" class="nav-link" data-scroll-target="#sec-strings"><span class="header-section-number">4.4.2</span> Strings</a></li>
-  <li><a href="#functional-programming-ii" id="toc-functional-programming-ii" class="nav-link" data-scroll-target="#functional-programming-ii"><span class="header-section-number">4.4.3</span> Functional programming II</a></li>
+  <li><a href="#functional-programming-i" id="toc-functional-programming-i" class="nav-link" data-scroll-target="#functional-programming-i"><span class="header-section-number">7.4.1</span> Functional programming I</a></li>
+  <li><a href="#sec-strings" id="toc-sec-strings" class="nav-link" data-scroll-target="#sec-strings"><span class="header-section-number">7.4.2</span> Strings</a></li>
+  <li><a href="#functional-programming-ii" id="toc-functional-programming-ii" class="nav-link" data-scroll-target="#functional-programming-ii"><span class="header-section-number">7.4.3</span> Functional programming II</a></li>
   </ul></li>
-  <li><a href="#exerciseswrangling" id="toc-exerciseswrangling" class="nav-link" data-scroll-target="#exerciseswrangling"><span class="header-section-number">4.5</span> Exercises</a>
+  <li><a href="#exerciseswrangling" id="toc-exerciseswrangling" class="nav-link" data-scroll-target="#exerciseswrangling"><span class="header-section-number">7.5</span> Exercises</a>
   <ul class="collapse">
   <li><a href="#star-wars" id="toc-star-wars" class="nav-link" data-scroll-target="#star-wars">Star wars</a></li>
   <li><a href="#aggregating" id="toc-aggregating" class="nav-link" data-scroll-target="#aggregating">Aggregating</a></li>
   <li><a href="#patterns-in-data-quality" id="toc-patterns-in-data-quality" class="nav-link" data-scroll-target="#patterns-in-data-quality">Patterns in data quality</a></li>
   </ul></li>
-  <li><a href="#sec-retidy" id="toc-sec-retidy" class="nav-link" data-scroll-target="#sec-retidy"><span class="header-section-number">4.6</span> Report Exercise</a>
+  <li><a href="#sec-retidy" id="toc-sec-retidy" class="nav-link" data-scroll-target="#sec-retidy"><span class="header-section-number">7.6</span> Report Exercise</a>
   <ul class="collapse">
   <li><a href="#analyzing-changes-in-soil-organic-matter-during-elevated-co_2-experiments" id="toc-analyzing-changes-in-soil-organic-matter-during-elevated-co_2-experiments" class="nav-link" data-scroll-target="#analyzing-changes-in-soil-organic-matter-during-elevated-co_2-experiments">Analyzing changes in soil organic matter during elevated CO<span class="math inline">\(_2\)</span> experiments</a></li>
   <li><a href="#deliverables-for-the-report" id="toc-deliverables-for-the-report" class="nav-link" data-scroll-target="#deliverables-for-the-report">Deliverables for the report</a></li>
@@ -523,7 +523,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-datawrangling" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data wrangling</span></span></h1>
+<h1 class="title"><span id="sec-datawrangling" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data wrangling</span></span></h1>
 </div>
 
 
@@ -541,8 +541,8 @@ window.Quarto = {
 
 
 <p><strong>Chapter lead author: Benjamin Stocker</strong></p>
-<section id="learning-objectives" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">4.1</span> Learning objectives</h2>
+<section id="learning-objectives" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">7.1</span> Learning objectives</h2>
 <p>In this chapter you will learn how to manipluate and transform data, a curcial part of the data science workflow.</p>
 <p>You will learn how to:</p>
 <ul>
@@ -553,8 +553,8 @@ window.Quarto = {
 <li>handle bad and/or missing data</li>
 </ul>
 </section>
-<section id="setup" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="setup"><span class="header-section-number">4.2</span> Setup</h2>
+<section id="setup" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="setup"><span class="header-section-number">7.2</span> Setup</h2>
 <p>In this Chapter, we will need the following libraries</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
@@ -565,13 +565,13 @@ window.Quarto = {
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="tutorial" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="tutorial"><span class="header-section-number">4.3</span> Tutorial</h2>
+<section id="tutorial" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="tutorial"><span class="header-section-number">7.3</span> Tutorial</h2>
 <p>Exploratory data analysis - the transformation, visualization, and modelling of data - is the central part of any (geo-) data science workflow and typically takes up a majority of the time we spend on a research project. The transformation of data often turns out to be particularly (and often surprisingly) time-demanding. Therefore, it is key to master typical steps of data transformation, and to implement them in a transparent fashion and efficiently - both in terms of robustness against coding errors (“bugs”) and in terms of code execution speed.</p>
 <p>We refer to data <em>wrangling</em> here to encompass the steps for preparing the data set <em>prior</em> to modelling - including, the combination of variables from different data sources, the removal of bad data, and the aggregation of data to the desired resolution or granularity (e.g., averaging over all time steps in a day, or over all replicates in a sample).</p>
 <p>In contrast, <em>pre-processing</em> refers to the additional steps that are either required by the the specific machine learning algorithm used with the data (e.g., centering and scaling for K-Nearest Neighbors or Neural Networks), the gap-filling of variables, or the transformation of variables guided by the resulting improvement of the predictive power of the machine learning model. Pre-processing is part of the modelling workflow and includes all steps that apply transformations that use parameters derived from the data. We will introduce and discuss data pre-processing in <a href="supervised_ml_I.html" class="quarto-xref"><span>Chapter 10</span></a>.</p>
-<section id="example-data" class="level3" data-number="4.3.1">
-<h3 data-number="4.3.1" class="anchored" data-anchor-id="example-data"><span class="header-section-number">4.3.1</span> Example data</h3>
+<section id="example-data" class="level3" data-number="7.3.1">
+<h3 data-number="7.3.1" class="anchored" data-anchor-id="example-data"><span class="header-section-number">7.3.1</span> Example data</h3>
 <p>The example data used in this chapter are parallel time series of (gaseous) CO<span class="math inline">\(_2\)</span> and water vapor exchange fluxes between the vegetation and the atmosphere, along with various meteorological variables measured in parallel. Quasi-continuous measurements of temporally changing gas exchange fluxes are obtained with the eddy covariance technique which relies on the parallel quantification of vertical wind speeds and gas concentrations.</p>
 <p>The data are provided at half-hourly resolution for the site <a href="https://www.swissfluxnet.ethz.ch/index.php/sites/ch-lae-laegeren/site-info-ch-lae/">CH-Lae</a>, located on the south slope of the Lägern mountain on the Swiss Plateau at 689 m a.s.l. in a mixed forest with a distinct seasonal course of active green leaves (a substantial portion of the trees in the measured forest are deciduous). The dataset is generated and formatted following standard protocols (<a href="https://fluxnet.org//data/fluxnet2015-dataset/">FLUXNET2015</a>). For more information of the variables in the dataset, see the <a href="http://fluxnet.fluxdata.org/data/fluxnet2015-dataset/">FLUXNET2015 website</a> and <a href="https://www.nature.com/articles/s41597-020-0534-3">Pastorello et al., 2020</a> for a comprehensive documentation of variable definitions and methods.</p>
 <p>For our demonstrations, the following variables are the most relevant:</p>
@@ -591,15 +591,15 @@ window.Quarto = {
 </ul>
 <p>Suffixes <code>_*</code> indicate that multiple estimates for respective variables are available and distinguished by different suffixes. For example, variables <code>TA_*</code> contain the same information, but are derived with slightly different assumptions and gap-filling techniques. The meanings of suffixes are described in <a href="https://www.nature.com/articles/s41597-020-0534-3">Pastorello et al., 2020</a>.</p>
 </section>
-<section id="tidyverse" class="level3" data-number="4.3.2">
-<h3 data-number="4.3.2" class="anchored" data-anchor-id="tidyverse"><span class="header-section-number">4.3.2</span> Tidyverse</h3>
+<section id="tidyverse" class="level3" data-number="7.3.2">
+<h3 data-number="7.3.2" class="anchored" data-anchor-id="tidyverse"><span class="header-section-number">7.3.2</span> Tidyverse</h3>
 <p>The tidyverse is a collection of R packages and functions that share a common design philosophy, enabling a particularly efficient implementation of transformation steps on tabular data. The most important data and function design principle of the tidyverse is that each function takes a data frame as its first argument and returns a data frame as its output.</p>
 <!-- Working on a (geo-) data science project, we want to efficiently progress through the multiple circles of exploratory data analysis. The following aspects are particularly important for fast and error-free progression. First, the programming language should be conducive of fast, intuitive, and error-free coding. Second, code that we have written once should be legible by others and by our future selves (even after a long holiday or after the manuscript has been seen by all reviewers months after we finished the analysis for our initial submission). It's the daily reality of us (geo-) data scientist that the code we write is harder to read than text in a newspaper, and that it will have bugs. There is (so far) no magic solution to this. But the R tidyverse comes close.  -->
 <p>From this design principles, even the most convoluted code and implementation of data transformation steps fall into place and fast and error-free progression through exploratory data analysis is facilitated. Therefore, you will be introduced to the R {tidyverse} here and we heavily rely on this <em>dialect</em> of the R language throughout the remainder of this course.</p>
 </section>
-<section id="reading-tabular-data" class="level3" data-number="4.3.3">
-<h3 data-number="4.3.3" class="anchored" data-anchor-id="reading-tabular-data"><span class="header-section-number">4.3.3</span> Reading tabular data</h3>
-<p>Tabular data are organised in rows and columns. R data frames are tabular data. As introduced in <a href="getting_started.html" class="quarto-xref"><span>Chapter 2</span></a>, each column can be regarded as a vector of a certain type. Each row contains the same number of columns and each column contains the same type of values (for example numeric, or characters). Each row can be regarded as a separate instance or data record - for example a record of simultaneously taken measurements of different variables, along with some attributes and meta information (e.g., the date). In <a href="data_variety.html" class="quarto-xref"><span>Chapter 6</span></a>, you will be introduced to other types of data.</p>
+<section id="reading-tabular-data" class="level3" data-number="7.3.3">
+<h3 data-number="7.3.3" class="anchored" data-anchor-id="reading-tabular-data"><span class="header-section-number">7.3.3</span> Reading tabular data</h3>
+<p>Tabular data are organised in rows and columns. R data frames are tabular data. As introduced in <a href="primers.html" class="quarto-xref"><span>Chapter 2</span></a>, each column can be regarded as a vector of a certain type. Each row contains the same number of columns and each column contains the same type of values (for example numeric, or characters). Each row can be regarded as a separate instance or data record - for example a record of simultaneously taken measurements of different variables, along with some attributes and meta information (e.g., the date). In <a href="data_variety.html" class="quarto-xref"><span>Chapter 6</span></a>, you will be introduced to other types of data.</p>
 <p>The most common format for tabular data are CSV (comma-separated-values), typically indicated by the file name suffix <code>.csv</code>. CSV is a text-based file format, readable across platforms and does not rely on proprietary software (as opposed to, for example, <code>.xlsx</code>). The first row in a CSV file typically specifies the name of the variable provided in the respective column.</p>
 <p>Let’s get started with working with our example data set and read it into R, as the variable <code>half_hourly_fluxes</code>. Note that the naming of variables can be important for keeping code legible. Chose intuitively understandable names that describe what the object represents (as done here).</p>
 <p>To import the data into the R environment, we use the function <code>read_csv()</code> from the {readr} package (part of tidyverse). In other R code, you will also encounter the base R <code>read.csv()</code> function. However, <code>read_csv()</code> is much faster and reads data into a tidyverse-data frame (a <em>tibble</em>) which has some useful additional characteristics, on top of a common R data frame. For example, <em>tibbles</em> generate a nicely readable output when printing the object as is done below.</p>
@@ -630,12 +630,12 @@ window.Quarto = {
 </div>
 </div>
 <blockquote class="blockquote">
-<p>To reproduce this code chunk, you can download the file <code>FLX_CH-Lae_FLUXNET2015_FULLSET_HH_2004-2006.csv</code> from <a href="https://raw.githubusercontent.com/geco-bern/agds_book/refs/heads/main/book/data/FLX_CH-Lae_FLUXNET2015_FULLSET_HH_2004-2006.csv">here</a> and read it from the local path where the file is stored on your machine. All data files used in this tutorials are stored <a href="https://github.com/geco-bern/agds/tree/main/data">here</a>.</p>
+<p>To reproduce this code chunk, you can download the file <code>FLX_CH-Lae_FLUXNET2015_FULLSET_HH_2004-2006.csv</code> from <a href="https://raw.githubusercontent.com/geco-bern/agds_book/refs/heads/main/book/data/FLX_CH-Lae_FLUXNET2015_FULLSET_HH_2004-2006.csv">here</a> and read it from the local path where the file is stored on your machine. All data files used in this tutorials are stored <a href="https://github.com/geco-bern/agds_book/tree/main/book/data">here</a>.</p>
 </blockquote>
 <p>Since the file is properly formatted, with variable names given in the first line of the file, the function <code>read_csv()</code> identifies them correctly as column names and interprets values in each column as values of a consistent type (as numeric <code>&lt;dbl&gt;</code>). The file is also automatically machine-readable because it has no merged cells and only one value per cell.</p>
 </section>
-<section id="variable-selection" class="level3" data-number="4.3.4">
-<h3 data-number="4.3.4" class="anchored" data-anchor-id="variable-selection"><span class="header-section-number">4.3.4</span> Variable selection</h3>
+<section id="variable-selection" class="level3" data-number="7.3.4">
+<h3 data-number="7.3.4" class="anchored" data-anchor-id="variable-selection"><span class="header-section-number">7.3.4</span> Variable selection</h3>
 <p>For our further data exploration, we will reduce the data frame we are working with and select a reduced set of variables. Reducing the dataset can have the advantage of speeding up further processing steps, especially when the data are large. For the further steps in this chapter we will now subset our original data. We select the following variants of variables described above, plus some additional variables (further information in <a href="https://www.nature.com/articles/s41597-020-0534-3">Pastorello et al., 2020</a>):</p>
 <ul>
 <li>All variables with names starting with <code>TIMESTAMP</code>)</li>
@@ -660,8 +660,8 @@ window.Quarto = {
 </div>
 <p>This reduces our dataset from 235 available variables to 20 variables. As you can see, <code>select()</code> is a powerful tool to apply multiple selection criteria on your data frame in one step. It takes many functions that make filtering the columns easier. For example, criteria can be formulated based on the variable names with <code>starts_with()</code>, <code>ends_with()</code>, <code>contains()</code>, <code>matches()</code>, etc. Using these functions within <code>select()</code> can help if several column names start with the same characters or contain the same pattern and all need to be selected. If a minus (<code>-</code>) is added in front of a column name or one of the mentioned functions within <code>select()</code>, then R will not include the stated column(s). Note that the selection criteria are evaluated in the order we write them in the <code>select()</code> function call. You can find the complete reference for selecting variables <a href="https://dplyr.tidyverse.org/reference/select.html">here</a>.</p>
 </section>
-<section id="time-objects" class="level3" data-number="4.3.5">
-<h3 data-number="4.3.5" class="anchored" data-anchor-id="time-objects"><span class="header-section-number">4.3.5</span> Time objects</h3>
+<section id="time-objects" class="level3" data-number="7.3.5">
+<h3 data-number="7.3.5" class="anchored" data-anchor-id="time-objects"><span class="header-section-number">7.3.5</span> Time objects</h3>
 <p>The automatic interpretation of the variables <code>TIMESTAMP_START</code> and <code>TIMESTAMP_END</code> by the function <code>read_csv()</code> is not optimal:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(half_hourly_fluxes<span class="sc">$</span>TIMESTAMP_START[[<span class="dv">1</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -698,8 +698,8 @@ window.Quarto = {
 </div>
 <p>The number 1 stands for the month of the year, i.e., January. You can find more information on formatting dates and time within the {tidyverse} <a href="https://r4ds.had.co.nz/dates-and-times.html">here</a>, and a complete reference of the {lubridate} package is available <a href="https://lubridate.tidyverse.org/">here</a>.</p>
 </section>
-<section id="variable-re--definition" class="level3" data-number="4.3.6">
-<h3 data-number="4.3.6" class="anchored" data-anchor-id="variable-re--definition"><span class="header-section-number">4.3.6</span> Variable (re-) definition</h3>
+<section id="variable-re--definition" class="level3" data-number="7.3.6">
+<h3 data-number="7.3.6" class="anchored" data-anchor-id="variable-re--definition"><span class="header-section-number">7.3.6</span> Variable (re-) definition</h3>
 <p>Since <code>read_csv()</code> did not interpret the <code>TIMESTAMP_*</code> variables as desired, we may convert the entire column in the data frame into a date-time object. In base-R, we would do this by:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>half_hourly_fluxes<span class="sc">$</span>TIMESTAMP_START <span class="ot">&lt;-</span> <span class="fu">ymd_hm</span>(half_hourly_fluxes<span class="sc">$</span>TIMESTAMP_START)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -734,8 +734,8 @@ window.Quarto = {
 <p>We will encounter more ways to use mutate later in this tutorial. A complete reference to <code>mutate()</code> is available <a href="https://r4ds.had.co.nz/transform.html#add-new-variables-with-mutate">here</a>.</p>
 <p>If you only want to change the name of a variable, but not modify its values, you can do so with the {dplyr} function <code>rename()</code>.</p>
 </section>
-<section id="axes-of-variation" class="level3" data-number="4.3.7">
-<h3 data-number="4.3.7" class="anchored" data-anchor-id="axes-of-variation"><span class="header-section-number">4.3.7</span> Axes of variation</h3>
+<section id="axes-of-variation" class="level3" data-number="7.3.7">
+<h3 data-number="7.3.7" class="anchored" data-anchor-id="axes-of-variation"><span class="header-section-number">7.3.7</span> Axes of variation</h3>
 <p>Tabular data are two-dimensional (rows <span class="math inline">\(\times\)</span> columns), but not all two-dimensional data are tabular. For example, raster data are a two-dimensional array of data (a matrix) representing variables on an evenly spaced grid, for example pixels in remotely sensed imagery. For example the <code>volcano</code> data (provided as an example dataset in R) is a matrix - each column contains the same variable, and no variable names are provided.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>volcano[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -767,7 +767,7 @@ window.Quarto = {
 </div>
 </div>
 <blockquote class="blockquote">
-<p>Note: <code>plot()</code> is the very basic of plotting data. In <a href="data_vis.html" class="quarto-xref"><span>Chapter 5</span></a>, you will get introduced to additional methods for visualising data. The argument <code>type = "l"</code> indicates that we want a line plot, rather than points.</p>
+<p>Note: <code>plot()</code> is the very basic of plotting data. In <a href="data_vis.html" class="quarto-xref"><span>Chapter 8</span></a>, you will get introduced to additional methods for visualising data. The argument <code>type = "l"</code> indicates that we want a line plot, rather than points.</p>
 </blockquote>
 <p>Over the course of an entire year, shortwave incoming radiation varies with the seasons, peaking in summer:</p>
 <div class="cell">
@@ -811,8 +811,8 @@ window.Quarto = {
 </div>
 <p>Note that we used <code>mutate()</code> here to create a new variable (column) in the data frame, as opposed to above where we overwrote an existing variable with the same function.</p>
 </section>
-<section id="tidydata" class="level3" data-number="4.3.8">
-<h3 data-number="4.3.8" class="anchored" data-anchor-id="tidydata"><span class="header-section-number">4.3.8</span> Tidy data</h3>
+<section id="tidydata" class="level3" data-number="7.3.8">
+<h3 data-number="7.3.8" class="anchored" data-anchor-id="tidydata"><span class="header-section-number">7.3.8</span> Tidy data</h3>
 <p>Data comes in many forms and shapes. For example, Excel provides a playground for even the wildest layouts of information in some remotely tabular form and merged cells as we will see in the <a href="#exerciseswrangling">Exercises</a>. A data frame imposes a relatively strict formatting in named columns of equal length. But even data frames can come in various shapes - even if the information they contain is the same.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>co2_concentration</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -872,7 +872,7 @@ window.Quarto = {
 <img src="./figures/tidy_data.png" class="img-fluid figure-img" style="width:100.0%" data-fig.align="center">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tidy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4.1: Rules for tidy data. Figure from <a href="https://r4ds.had.co.nz/tidy-data.html">Wickham and Grolemund (2017)</a>.
+Figure&nbsp;7.1: Rules for tidy data. Figure from <a href="https://r4ds.had.co.nz/tidy-data.html">Wickham and Grolemund (2017)</a>.
 </figcaption>
 </figure>
 </div>
@@ -897,7 +897,7 @@ Figure&nbsp;4.1: Rules for tidy data. Figure from <a href="https://r4ds.had.co.n
 # ℹ 26 more rows</code></pre>
 </div>
 </div>
-<p>This corresponds to the format of <code>co2_concentration</code> and is tidy. A long format of data frames is required to visualise data using the plotting functions of the {ggplot2} package which will be introduced in <a href="data_vis.html" class="quarto-xref"><span>Chapter 5</span></a>.</p>
+<p>This corresponds to the format of <code>co2_concentration</code> and is tidy. A long format of data frames is required to visualise data using the plotting functions of the {ggplot2} package which will be introduced in <a href="data_vis.html" class="quarto-xref"><span>Chapter 8</span></a>.</p>
 <p>Either way, for certain applications, it may be advantageous to work with a wide format. We can convert from a long to a wide format by:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>co2_concentration <span class="sc">|&gt;</span> </span>
@@ -923,8 +923,8 @@ Figure&nbsp;4.1: Rules for tidy data. Figure from <a href="https://r4ds.had.co.n
 <p>When seeking, for example, the average CO2 concentration for each month, you may be tempted to work with a wide data frame and treat it as a matrix to calculate a mean by rows. You can do so, but then, you leave the <code>tidyverse</code>. This will complicate your life. You’ll learn how to perform tidy data aggregation below.</p>
 <p>The concept of tidy data can even be taken further by understanding a “value” as any object type, e.g., a list or a data frame. This leads to a list or data frame “nested” within a data frame. You will learn more about this below.</p>
 </section>
-<section id="aggregating-data" class="level3" data-number="4.3.9">
-<h3 data-number="4.3.9" class="anchored" data-anchor-id="aggregating-data"><span class="header-section-number">4.3.9</span> Aggregating data</h3>
+<section id="aggregating-data" class="level3" data-number="7.3.9">
+<h3 data-number="7.3.9" class="anchored" data-anchor-id="aggregating-data"><span class="header-section-number">7.3.9</span> Aggregating data</h3>
 <p>Aggregating data refers to collapsing a larger set of values into a smaller set of values that are derived from the larger set. For example, we can aggregate over all <span class="math inline">\(N\)</span> rows in a data frame (<span class="math inline">\(N\times M\)</span>), calculating the sum for each of the <span class="math inline">\(M\)</span> columns. This returns a data frame (<span class="math inline">\(1 \times M\)</span>) with the same number of columns as the initial data frame, but only one row. Often, aggregations are done not across all rows but for rows within <span class="math inline">\(G\)</span> groups of rows. This yields a data frame (<span class="math inline">\(G \times M\)</span>) with the number of rows corresponding to the number of groups.</p>
 <p>Let’s say we want to calculate the mean of half-hourly shortwave radiation within each day. We thus have <span class="math inline">\(N\)</span> half-hourly time steps in <span class="math inline">\(G\)</span> days. That is, to aggregate our half-hourly data to daily data by taking a mean. There are two pieces of information needed for an aggregation step: The factor (or “axis of variation”), here days, that groups a vector of values for collapsing it into a single value, and the function used for collapsing values, here, the <code>mean()</code> function. This function should take a vector as an argument and return a single value as an output. These two steps are implemented by the {dplyr} functions <code>group_by()</code> and <code>summarise()</code>. The entire aggregation workflow is implemented by the following code:</p>
 <div class="cell">
@@ -1008,13 +1008,13 @@ Figure&nbsp;4.1: Rules for tidy data. Figure from <a href="https://r4ds.had.co.n
 # ℹ 1,086 more rows</code></pre>
 </div>
 </div>
-<p>Here, the data frame has one row per date and therefore the same number of rows as the data frame <code>daily_fluxes</code>, but the data itself is not reduced by a summarising function. Instead, the data are kept at the half-hourly level, but it’s nested inside the new column <code>data</code>, which now contains a list of half-hourly data frames for each day. This is just a brief perspective of what nesting is about. More is explained in Section <a href="#sec-extramaterialwrangling" class="quarto-xref"><span>Section 4.4</span></a>. More comprehensive tutorials on nesting and functional programming are provided in <a href="https://dcl-prog.stanford.edu/">Altman, Behrman and Wickham (2021)</a> or in <a href="https://r4ds.had.co.nz/iteration.html">Wickham and Grolemund (2017), Chapter 21</a>.</p>
+<p>Here, the data frame has one row per date and therefore the same number of rows as the data frame <code>daily_fluxes</code>, but the data itself is not reduced by a summarising function. Instead, the data are kept at the half-hourly level, but it’s nested inside the new column <code>data</code>, which now contains a list of half-hourly data frames for each day. This is just a brief perspective of what nesting is about. More is explained in Section <a href="#sec-extramaterialwrangling" class="quarto-xref"><span>Section 7.4</span></a>. More comprehensive tutorials on nesting and functional programming are provided in <a href="https://dcl-prog.stanford.edu/">Altman, Behrman and Wickham (2021)</a> or in <a href="https://r4ds.had.co.nz/iteration.html">Wickham and Grolemund (2017), Chapter 21</a>.</p>
 </section>
-<section id="data-cleaning" class="level3" data-number="4.3.10">
-<h3 data-number="4.3.10" class="anchored" data-anchor-id="data-cleaning"><span class="header-section-number">4.3.10</span> Data cleaning</h3>
+<section id="sec-datacleaning" class="level3" data-number="7.3.10">
+<h3 data-number="7.3.10" class="anchored" data-anchor-id="sec-datacleaning"><span class="header-section-number">7.3.10</span> Data cleaning</h3>
 <p>Data cleaning is often a time-consuming task and decisions taken during data cleaning may be critical for analyses and modelling. In the following, we distinguish between cleaning formats, the identification (and removal) of “bad” data, and the gap-filling of missing or removed data. An excellent resource for further reading is the <a href="https://github.com/Quartz/bad-data-guide">Quartz Guide to Bad Data</a> which provides an overview of how to deal with different types of bad data.</p>
-<section id="cleaning-formats" class="level4" data-number="4.3.10.1">
-<h4 data-number="4.3.10.1" class="anchored" data-anchor-id="cleaning-formats"><span class="header-section-number">4.3.10.1</span> Cleaning formats</h4>
+<section id="cleaning-formats" class="level4" data-number="7.3.10.1">
+<h4 data-number="7.3.10.1" class="anchored" data-anchor-id="cleaning-formats"><span class="header-section-number">7.3.10.1</span> Cleaning formats</h4>
 <p>As a general principle, we want to have <em>machine readable</em> data. Key for achieving machine-readability is that a cell should only contain one value of one type. Hence, for example, character strings should be kept in separate columns (as separate variables) from numeric data. Character strings can impose particular challenges for achieving machine-readability. Typically, they encode categorical or ordinal information, but are prone to spelling inconsistencies or errors that undermine the ordering or categorization. Here are typical examples for challenges working with character strings and lessons for avoiding problems:</p>
 <ul>
 <li><p>Often, character strings encode the units of a measurement, and entries may be <code>c("kg m-2", "kg/m2", "Kg / m2", "1000 g m-2")</code> . They are all equivalent, but “the machine” treats them as non-identical. To clean such data, one may compile a lookup-table to identify equivalent (but not identical) strings. Much better is to specify a consistent treatment of units before data collection.</p></li>
@@ -1036,15 +1036,15 @@ Figure&nbsp;4.1: Rules for tidy data. Figure from <a href="https://r4ds.had.co.n
 <li>An entry like <code>&gt;10 m</code> is not a friend of a data scientist. Here, we have three pieces of information: <code>&gt;</code> as in “greater than”, <code>10</code>, and <code>m</code> indicating the units. A machine-readable format would be obtained by creating separate columns for each piece of information. The <code>&gt;</code> should be avoided already at the stage of recording the data. Here, we may have to find a solution for encoding it in a machine readable manner (see <a href="#exerciseswrangling">Exercises</a>).</li>
 </ul>
 <!-- -   Can you think of more such examples? (-\> Exercises)  -->
-<p>String manipulations are usually required for cleaning data. The <a href="#sec-strings" class="quarto-xref"><span>Section 4.4.2</span></a> below demonstrates some simple examples.</p>
+<p>String manipulations are usually required for cleaning data. The <a href="#sec-strings" class="quarto-xref"><span>Section 7.4.2</span></a> below demonstrates some simple examples.</p>
 <p>Note that a majority of machine learning algorithms and other statistical model types require all data to be numeric. Methods exist to convert categorical data into numeric data, as we will learn later. We re-visit data cleaning in the form of data <em>pre-processing</em> as part of the modelling workflow in <a href="supervised_ml_I.html" class="quarto-xref"><span>Chapter 10</span></a>.</p>
 </section>
-<section id="sec-baddata" class="level4" data-number="4.3.10.2">
-<h4 data-number="4.3.10.2" class="anchored" data-anchor-id="sec-baddata"><span class="header-section-number">4.3.10.2</span> Bad data</h4>
+<section id="sec-baddata" class="level4" data-number="7.3.10.2">
+<h4 data-number="7.3.10.2" class="anchored" data-anchor-id="sec-baddata"><span class="header-section-number">7.3.10.2</span> Bad data</h4>
 <p>Data may be “bad” for different reasons, including sensor error, human error, a data point representing a different population, or unsuitable measurement conditions. In this sense, data are “bad” if they don’t represent what they are assumed by the user to represent. Its presence in analyses and modelling may undermine the model skill or even lead to spurious results. A goal of data cleaning typically is to remove bad data. But how to detect them? And how safe is it to remove them?</p>
 <p>A diversity of processes may generate bad data and it is often not possible to formulate rules and criteria for their identification <em>a priori</em>. Therefore, an understanding of the data and the data generation processes is important for the identification and treatment of bad data. Often, such an understanding is gained by repeated exploratory data analysis cycles, involving the visualization, transformation, and analysis of the data.</p>
 <p>Ideally, information about the quality of the data are provided as part of the dataset. Also other meta-information (e.g., sensor type, human recording the data, environmental conditions during the data collection) may be valuable for data cleaning purposes. In our example dataset, the column with suffices <code>_QC</code> provide such information (see ‘Example data’ section above) and an example for their use in data cleaning is given further below.</p>
-<p>Bad data may come in the form of <em>outliers</em>, which are commonly defined based on their value with respect to the <em>distribution</em> of all values of the same variable in a dataset. Hence, their identification most commonly relies on quantifying their distance from the center of the variable’s empirical distribution. The default <code>boxplot()</code> plotting function in R (which we will learn about more in <a href="data_vis.html" class="quarto-xref"><span>Chapter 5</span></a>) shows the median (bold line in the center), the upper and lower quartiles (corresponding to the 25% and the 75% quantiles, often referred to as <span class="math inline">\(Q_1\)</span> and <span class="math inline">\(Q_3\)</span> , given by the upper and lower edge of the box plot) and the range of <span class="math inline">\(( Q_1 - 1.5 (Q_3 - Q_1), Q_3 + 1.5 (Q_3 - Q_1))\)</span>. Any point outside this range is plotted by a circle and labeled an “outlier”. However, this definition is very restrictive and may lead to a false labeling of outliers, in particular if they are drawn from a distribution with a fat tail or from asymmetrical distributions.</p>
+<p>Bad data may come in the form of <em>outliers</em>, which are commonly defined based on their value with respect to the <em>distribution</em> of all values of the same variable in a dataset. Hence, their identification most commonly relies on quantifying their distance from the center of the variable’s empirical distribution. The default <code>boxplot()</code> plotting function in R (which we will learn about more in <a href="data_vis.html" class="quarto-xref"><span>Chapter 8</span></a>) shows the median (bold line in the center), the upper and lower quartiles (corresponding to the 25% and the 75% quantiles, often referred to as <span class="math inline">\(Q_1\)</span> and <span class="math inline">\(Q_3\)</span> , given by the upper and lower edge of the box plot) and the range of <span class="math inline">\(( Q_1 - 1.5 (Q_3 - Q_1), Q_3 + 1.5 (Q_3 - Q_1))\)</span>. Any point outside this range is plotted by a circle and labeled an “outlier”. However, this definition is very restrictive and may lead to a false labeling of outliers, in particular if they are drawn from a distribution with a fat tail or from asymmetrical distributions.</p>
 <p>Outliers may also be identified via multivariate distributions. We will re-visit such methods later, in <a href="regression_classification.html" class="quarto-xref"><span>Chapter 9</span></a>. For certain applications, outliers or <em>anomalies</em> may be the target of the investigation, not the noise in the data. This has spurred the field of <a href="https://en.wikipedia.org/wiki/Anomaly_detection"><em>anomaly detection</em></a> which relies on machine learning algorithms for determining whether a value is anomalous, given a set of covariates.</p>
 <p>Sensor error or algorithm error may generate spurious values, identified, for example when a continuous variable attains the numerically identical value with a spuriously high frequency.</p>
 <div class="cell">
@@ -1061,8 +1061,8 @@ Figure&nbsp;4.1: Rules for tidy data. Figure from <a href="https://r4ds.had.co.n
 <p>The probability of a certain numeric value of a continuous variable to appear twice in a dataset is practically zero. Here, several values appear multiple times - the value <code>5.18422</code> even 32 times! This must be bad data.</p>
 <p>Other processes may lead to spurious trends or <em>drift</em> in the data, for example caused by sensor degradation. Spurious <em>step changes</em> or <em>change points</em> in time series or in (multivariate) regressions may be related to the replacement or deplacement of the measuring device. Different methods and R libraries help identifying such cases (see for example <a href="https://www.marinedatascience.co/blog/2019/09/28/comparison-of-change-point-detection-methods/">this</a> tutorial). Solutions have to be found for the remediation of such spurious patterns in the data on a case-by-case basis.</p>
 </section>
-<section id="handling-missing-data" class="level4" data-number="4.3.10.3">
-<h4 data-number="4.3.10.3" class="anchored" data-anchor-id="handling-missing-data"><span class="header-section-number">4.3.10.3</span> Handling missing data</h4>
+<section id="handling-missing-data" class="level4" data-number="7.3.10.3">
+<h4 data-number="7.3.10.3" class="anchored" data-anchor-id="handling-missing-data"><span class="header-section-number">7.3.10.3</span> Handling missing data</h4>
 <p>The question about when data are “bad” and whether to remove it is often critical. Such decisions are important to keep track of and should be reported as transparently as possible in publications. In reality, where the data generation process may start in the field with actual human beings writing notes in a lab book, and where the human collecting the data is often not the same as the human analyzing the data or writing the paper, it’s often more difficult to keep track of such decisions. As a general principle, it is advisable to design data records such that decisions made during the data collection process remain transparent throughout all stages of the workflow and that sufficient information be collected to enable later revisions of particularly critical decisions. In practice, this means that the removal of data and entire rows should be avoided and implemented only at the very last step if necessary (e.g., when passing the data into a model fitting function). Instead, information about whether data are bad should be kept in a separate, categorical, variable (a <em>quality control</em> variable, like <code>*_QC</code> variables in our example data <code>half_hourly_fluxes</code>).</p>
 <p>Data may be missing for several reasons. Some yield random patterns of missing data, others not. In the latter case, we can speak of <em>informative missingness</em> (<a href="http://www.feat.engineering/">Kuhn and Johnson, 2019</a>) and its information can be used for modelling. For categorical data, we may replace such data with <code>"none"</code> (instead of <code>NA</code>). Some machine learning algorithms (mainly tree-based methods, e.g., Random Forest) can handle missing values. However, when comparing the performance of alternative ML algorithms, they should be tested with the same data and removing missing data should be done beforehand.</p>
 <p>Most machine learning algorithms require missing values to be removed. That is, if any of the cells in one row has a missing value, the entire cell gets removed. This generally leads to a loss of information contained in the remaining variables. Methods exist to <em>impute</em> missing values in order to avoid this information loss. However, the gain of data imputation has to be traded off against effects of associating the available variables with the imputed (knowingly wrong) values, and effects of <em>data leakage</em> have to be considered. Data imputation as part of the modelling process will be dealt with in <a href="supervised_ml_I.html" class="quarto-xref"><span>Chapter 10</span></a>.</p>
@@ -1122,7 +1122,7 @@ Figure&nbsp;4.1: Rules for tidy data. Figure from <a href="https://r4ds.had.co.n
 </div>
 </div>
 </div>
-<p>For many applications, we want to filter the data so that the values of particular variables satisfy certain conditions. The {dplyr} function used for such tasks is <code>filter()</code>. As argument, it takes the expressions that specify the criterion for filtering using logical operators (<code>&gt;, &gt;=, &lt;, ==, !-, ...</code>, see <a href="getting_started.html" class="quarto-xref"><span>Chapter 2</span></a>). Multiple filtering criteria can be combined with logical (boolean) operators:</p>
+<p>For many applications, we want to filter the data so that the values of particular variables satisfy certain conditions. The {dplyr} function used for such tasks is <code>filter()</code>. As argument, it takes the expressions that specify the criterion for filtering using logical operators (<code>&gt;, &gt;=, &lt;, ==, !-, ...</code>, see <a href="primers.html" class="quarto-xref"><span>Chapter 2</span></a>). Multiple filtering criteria can be combined with logical (boolean) operators:</p>
 <ul>
 <li><code>&amp;</code>: logical AND</li>
 <li><code>|</code>: logical OR</li>
@@ -1151,18 +1151,18 @@ Figure&nbsp;4.1: Rules for tidy data. Figure from <a href="https://r4ds.had.co.n
 <p>An excellent source for a more comprehensive introduction to missing data handling is given in <a href="https://bookdown.org/max/FES/handling-missing-data.html">Kuhn and Johnson (2019)</a>.</p>
 </section>
 </section>
-<section id="writing-data-to-csv" class="level3" data-number="4.3.11">
-<h3 data-number="4.3.11" class="anchored" data-anchor-id="writing-data-to-csv"><span class="header-section-number">4.3.11</span> Writing data to CSV</h3>
+<section id="writing-data-to-csv" class="level3" data-number="7.3.11">
+<h3 data-number="7.3.11" class="anchored" data-anchor-id="writing-data-to-csv"><span class="header-section-number">7.3.11</span> Writing data to CSV</h3>
 <p>After having applied some data reduction and cleaning steps above, let’s save the data frame in the form of a CSV file for use in later chapters.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(half_hourly_fluxes, <span class="at">file =</span> <span class="st">"data/FLX_CH-Lae_FLUXNET2015_FULLSET_HH_2004-2006_CLEAN.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <blockquote class="blockquote">
-<p>Note: Making a file publicly available as a <code>.rds</code> or <code>.RData</code> file (explained in <a href="getting_started.html" class="quarto-xref"><span>Chapter 2</span></a>) violates the open science principles (introduced in <a href="open_science.html" class="quarto-xref"><span>Chapter 7</span></a>). These two formats make it very easy to save R objects related to your analysis project, but are not adequate to save <em>data</em>. Therefore, whenever possible, save your data in a format that is readable across platforms without requiring proprietary software. Hence use <code>write_csv()</code> from {readr} whenever possible. We will encounter other non-proprietary formats that let you save and share more complex data structures in <a href="data_variety.html" class="quarto-xref"><span>Chapter 6</span></a>.</p>
+<p>Note: Making a file publicly available as a <code>.rds</code> file (explained in <a href="primers.html" class="quarto-xref"><span>Chapter 2</span></a>) violates the open science principles (introduced in <a href="open_science.html" class="quarto-xref"><span>Chapter 5</span></a>). These two formats make it very easy to save R objects related to your analysis project, but are not adequate to publicly share <em>data</em>. Therefore, whenever possible, save your data in a format that is readable across platforms without requiring proprietary software. Hence use <code>write_csv()</code> from {readr} whenever possible. We will encounter other non-proprietary formats that let you save and share more complex data structures in <a href="data_variety.html" class="quarto-xref"><span>Chapter 6</span></a>.</p>
 </blockquote>
 </section>
-<section id="combining-relational-data" class="level3" data-number="4.3.12">
-<h3 data-number="4.3.12" class="anchored" data-anchor-id="combining-relational-data"><span class="header-section-number">4.3.12</span> Combining relational data</h3>
+<section id="combining-relational-data" class="level3" data-number="7.3.12">
+<h3 data-number="7.3.12" class="anchored" data-anchor-id="combining-relational-data"><span class="header-section-number">7.3.12</span> Combining relational data</h3>
 <p>Often, data are spread across multiple files and tables and need to be combined for the planned analysis. In the simplest case, data frames have an identical number of columns, arranged in the same order, and we can “stack” them along rows:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>co2_conc_subset_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1298,10 +1298,10 @@ Figure&nbsp;4.1: Rules for tidy data. Figure from <a href="https://r4ds.had.co.n
 <p>Other variants of <code>*_join()</code> are available as described <a href="https://r4ds.had.co.nz/relational-data.html">here</a>.</p>
 </section>
 </section>
-<section id="sec-extramaterialwrangling" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="sec-extramaterialwrangling"><span class="header-section-number">4.4</span> Extra material</h2>
-<section id="functional-programming-i" class="level3" data-number="4.4.1">
-<h3 data-number="4.4.1" class="anchored" data-anchor-id="functional-programming-i"><span class="header-section-number">4.4.1</span> Functional programming I</h3>
+<section id="sec-extramaterialwrangling" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="sec-extramaterialwrangling"><span class="header-section-number">7.4</span> Extra material</h2>
+<section id="functional-programming-i" class="level3" data-number="7.4.1">
+<h3 data-number="7.4.1" class="anchored" data-anchor-id="functional-programming-i"><span class="header-section-number">7.4.1</span> Functional programming I</h3>
 <p>Above, we read a CSV table into R and applied several data transformation steps. In practice, we often have to apply the same data transformation steps repeatedly over a set of similar objects. This <em>extra material</em> section outlines an example workflow for demonstrating how to efficiently work with lists of similar objects - in particular, lists of data frames.</p>
 <p>Our aim is to read a set of files into R data frames and apply transformation steps to each data frame separately. Here, we will work with daily data, not half-hourly data. The daily data contains largely identical variables with consistent naming and units as in the half-hourly data (description above). Let’s start by creating a list of paths that point to the files with daily data. They are all located in the directory <code>"./data"</code> and share a certain string of characters in their file names <code>"_FLUXNET2015_FULLSET_DD_"</code>.</p>
 <div class="cell">
@@ -1315,7 +1315,7 @@ Figure&nbsp;4.1: Rules for tidy data. Figure from <a href="https://r4ds.had.co.n
 </div>
 </div>
 <blockquote class="blockquote">
-<p>To reproduce this code chunk, you can download the files <code>FLX_CH-Lae_FLUXNET2015_FULLSET_HH_2004-2006.csv</code> from <a href="https://github.com/geco-bern/agds/tree/main/data">here</a> and read it from the local path where the file is stored on your machine.</p>
+<p>To reproduce this code chunk, you can download the files <code>FLX_CH-Lae_FLUXNET2015_FULLSET_HH_2004-2006.csv</code> from <a href="https://github.com/geco-bern/agds_book/tree/main/book/data">here</a> and read it from the local path where the file is stored on your machine.</p>
 </blockquote>
 <p><code>vec_files</code> is now a vector of three files paths as character strings. To read in the three files and combine the three data frames (<code>list_df</code> below) into a list of data frames, we could use a <code>for</code> loop:</p>
 <div class="cell">
@@ -1409,8 +1409,8 @@ Figure&nbsp;4.1: Rules for tidy data. Figure from <a href="https://r4ds.had.co.n
 </div>
 </div>
 </section>
-<section id="sec-strings" class="level3" data-number="4.4.2">
-<h3 data-number="4.4.2" class="anchored" data-anchor-id="sec-strings"><span class="header-section-number">4.4.2</span> Strings</h3>
+<section id="sec-strings" class="level3" data-number="7.4.2">
+<h3 data-number="7.4.2" class="anchored" data-anchor-id="sec-strings"><span class="header-section-number">7.4.2</span> Strings</h3>
 <p>The column <code>siteid</code> currently contains strings specifying the full paths of the files that were read in earlier. The next task is to extract the site name from these strings. The file names follow a clear pattern (this also highlights why naming files wisely can often make life a lot simpler).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>daily_fluxes_allsites<span class="sc">$</span>siteid <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1461,8 +1461,8 @@ Figure&nbsp;4.1: Rules for tidy data. Figure from <a href="https://r4ds.had.co.n
 </div>
 </div>
 </section>
-<section id="functional-programming-ii" class="level3" data-number="4.4.3">
-<h3 data-number="4.4.3" class="anchored" data-anchor-id="functional-programming-ii"><span class="header-section-number">4.4.3</span> Functional programming II</h3>
+<section id="functional-programming-ii" class="level3" data-number="7.4.3">
+<h3 data-number="7.4.3" class="anchored" data-anchor-id="functional-programming-ii"><span class="header-section-number">7.4.3</span> Functional programming II</h3>
 <p>Functions can be applied to a list of objects of any type. Therefore, <code>purrr::map()</code> is a powerful approach to “iterating” over multiple instances of the same object type and can be used for all sorts of tasks. In the following, list elements are data frames of daily data and the function <code>lm()</code> fits a linear regression model of GPP versus shortwave radiation to each sites’ data. We’ll learn more about fitting statistical models in R in <a href="regression_classification.html" class="quarto-xref"><span>Chapter 9</span></a>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>list_linmod <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">map</span>(list_df, <span class="sc">~</span><span class="fu">lm</span>(GPP_NT_VUT_REF <span class="sc">~</span> SW_IN_F, <span class="at">data =</span> .))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1609,10 +1609,10 @@ Figure&nbsp;4.1: Rules for tidy data. Figure from <a href="https://r4ds.had.co.n
 </div>
 </section>
 </section>
-<section id="exerciseswrangling" class="level2" data-number="4.5">
-<h2 data-number="4.5" class="anchored" data-anchor-id="exerciseswrangling"><span class="header-section-number">4.5</span> Exercises</h2>
+<section id="exerciseswrangling" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="exerciseswrangling"><span class="header-section-number">7.5</span> Exercises</h2>
 <blockquote class="blockquote">
-<p><em>Hint</em>: For all exercises remember the resources we provided on finding help in section <a href="programming_primers.html#sec-findinghelp" class="quarto-xref"><span>Section 3.2.3</span></a>.</p>
+<p><em>Hint</em>: For all exercises remember the resources we provided on finding help in section <a href="primers.html#sec-findinghelp" class="quarto-xref"><span>Section 2.12</span></a>.</p>
 </blockquote>
 <section id="star-wars" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="star-wars">Star wars</h3>
@@ -1648,8 +1648,8 @@ Figure&nbsp;4.1: Rules for tidy data. Figure from <a href="https://r4ds.had.co.n
 <p>Perform an aggregation of the half-hourly GPP data (variable <code>GPP_NT_VUT_REF</code>) to daily means of the unmodified data read from file <code>FLX_CH-Lae_FLUXNET2015_FULLSET_HH_2004-2006.csv</code>, and from cleaned data where only measured (not gap-filled) data is kept. This yields two data frames with daily GPP data. Calculate the overall mean GPP for the two data frames (across all days in the data frame). Are the overall mean GPP values equal? If not, why?</p>
 </section>
 </section>
-<section id="sec-retidy" class="level2" data-number="4.6">
-<h2 data-number="4.6" class="anchored" data-anchor-id="sec-retidy"><span class="header-section-number">4.6</span> Report Exercise</h2>
+<section id="sec-retidy" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="sec-retidy"><span class="header-section-number">7.6</span> Report Exercise</h2>
 <section id="analyzing-changes-in-soil-organic-matter-during-elevated-co_2-experiments" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="analyzing-changes-in-soil-organic-matter-during-elevated-co_2-experiments">Analyzing changes in soil organic matter during elevated CO<span class="math inline">\(_2\)</span> experiments</h3>
 <p>Open Science requires that data underlying published research articles is made available upon publication of the article. A separate aspect is the format of the shared data. Is it provided in an open-access data format? How easy is it to use the data for your own analyses? In this exercise, you will encounter data that was made freely available, but not in an open access format. Although it is “nice-looking” data, you will encounter that it is not tidy.</p>
@@ -1678,10 +1678,10 @@ Figure&nbsp;4.1: Rules for tidy data. Figure from <a href="https://r4ds.had.co.n
 </section>
 <section id="deliverables-for-the-report" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="deliverables-for-the-report">Deliverables for the report</h3>
-<p>A key learning of this course is that you know how to create reproducible workflows and we pay a lot of attention on this during the assessment. You will learn more about the specific aspects to do so in <a href="open_science.html" class="quarto-xref"><span>Chapter 7</span></a> and <a href="code_management.html" class="quarto-xref"><span>Chapter 8</span></a>. So, if the following instructions for submitting this report exercise may sound cryptic, hang tight! It will make more sense as you work through this course.</p>
-<p>You have to submit all report exercises via your GitHub repository that you created in <a href="getting_started.html#sec-setupreport" class="quarto-xref"><span>Section 2.2.8.4</span></a>. For now, save this report exercise as a RMarkdown file with the name <code>re_tidy.Rmd</code> and place that file in a sub-directory called <code>vignettes</code> (a directory is simply a folder), which is located in your project directory (in full notation that means save your RMarkdown as <code>./vignettes/re_tidy.Rmd</code>). Additionally, produce a HTML version of your solution by knitting your RMarkdown file (see the <code>Knit</code> command in the panel below the files tabs in RStudio). Save this HTML file in the same <code>vignettes</code> directory (<code>./vignettes/re_tidy.html</code>). For your cleaned dataset, pick a sensible name and put it into a sub-direcory called <code>./data</code>. As with all other report exercises, make sure that your work is reproducible, for example, by letting another student download your repository from GitHub and knit your RMarkdown files on their computer.</p>
+<p>A key learning of this course is that you know how to create reproducible workflows and we pay a lot of attention on this during the assessment. You will learn more about the specific aspects to do so in <a href="open_science.html" class="quarto-xref"><span>Chapter 5</span></a> and <a href="code_management.html" class="quarto-xref"><span>Chapter 4</span></a>. So, if the following instructions for submitting this report exercise may sound cryptic, hang tight! It will make more sense as you work through this course.</p>
+<p>You have to submit all report exercises via your GitHub repository that you created in <a href="code_management.html#sec-setupreport" class="quarto-xref"><span>Section 4.3.0.2</span></a>. For now, save this report exercise as a RMarkdown file with the name <code>re_tidy.Rmd</code> and place that file in a sub-directory called <code>vignettes</code> (a directory is simply a folder), which is located in your project directory (in full notation that means save your RMarkdown as <code>./vignettes/re_tidy.Rmd</code>). Additionally, produce a HTML version of your solution by knitting your RMarkdown file (see the <code>Knit</code> command in the panel below the files tabs in RStudio). Save this HTML file in the same <code>vignettes</code> directory (<code>./vignettes/re_tidy.html</code>). For your cleaned dataset, pick a sensible name and put it into a sub-direcory called <code>./data</code>. As with all other report exercises, make sure that your work is reproducible, for example, by letting another student download your repository from GitHub and knit your RMarkdown files on their computer.</p>
 <blockquote class="blockquote">
-<p><strong>Important</strong>: Structure your RMarkdown so that you first load necessary libraries, load your data and then write down your solution. <strong>Remember to access files with relative paths and not with hard-coded paths</strong>. So, access your file via <code>here::here('data/tidy_data.csv</code>), where <code>here</code> starts at the position of your <code>.Rproj</code> file. <strong>Never</strong> write hard-coded paths that looks like this: <code>"~/Desktop/Studium/.../tidy_data.csv"</code> or <code>"C:/Users/.../tidy_data.csv"</code> (see <a href="getting_started.html#sec-wspmgmt" class="quarto-xref"><span>Section 2.2.7</span></a>).</p>
+<p><strong>Important</strong>: Structure your RMarkdown so that you first load necessary libraries, load your data and then write down your solution. <strong>Remember to access files with relative paths and not with hard-coded paths</strong>. So, access your file via <code>here::here('data/tidy_data.csv</code>), where <code>here</code> starts at the position of your <code>.Rproj</code> file. <strong>Never</strong> write hard-coded paths that looks like this: <code>"~/Desktop/Studium/.../tidy_data.csv"</code> or <code>"C:/Users/.../tidy_data.csv"</code> (see <a href="reproducible_workflows.html" class="quarto-xref"><span>Chapter 3</span></a>).</p>
 </blockquote>
 <blockquote class="blockquote">
 <p>Tip: Your results do not have to match the results from the paper. It is important that you make your code reproducible, aggregate the data as instructed, and interpret your results.</p>
@@ -2109,13 +2109,13 @@ Figure&nbsp;4.1: Rules for tidy data. Figure from <a href="https://r4ds.had.co.n
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./programming_primers.html" class="pagination-link" aria-label="Programming primers">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Programming primers</span></span>
+      <a href="./data_variety.html" class="pagination-link" aria-label="Data variety">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data variety</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./data_vis.html" class="pagination-link" aria-label="Data visualisation">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data visualisation</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data visualisation</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

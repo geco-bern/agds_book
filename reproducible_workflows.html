@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.34">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>3&nbsp; Reusable workflows – Applied Geodata Science</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./code_management.html" rel="next">
+<link href="./primers.html" rel="prev">
+<link href="././figures/favicon.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-befe23ebd2f54d8af2c8a89d1a1611f1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-5580b768968c173edbcabd2ef8ecb882.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-ce530c4fc5b35f77c508c3bfad3cc1ab.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-5580b768968c173edbcabd2ef8ecb882.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<meta name="twitter:title" content="3&nbsp; Reusable workflows – Applied Geodata Science">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="./figures/rmarkdown_editor.png">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./images/logo.png" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title"></span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="./index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools tools-wide">
+    <a href="https://github.com/geco-bern/agds_book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="https://twitter.com/intent/tweet?url=|url|">
+              <i class="bi bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item quarto-navbar-tools-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+              <i class="bi bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+      </ul>
+    </div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./reproducible_workflows.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Reusable workflows</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./primers.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Primers</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./reproducible_workflows.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Reusable workflows</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./code_management.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Code management</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./open_science.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Open science</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data_variety.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data variety</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data_wrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data wrangling</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data_vis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data visualisation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./regression_classification.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Regression and classification</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./supervised_ml_I.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Supervised machine learning I</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./supervised_ml_II.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Supervised machine learning II</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./randomforest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Random Forest</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./interpretable-ml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Interpretable Machine Learning</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./appendix.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Appendix</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">References</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">3.1</span> Learning objectives</a></li>
+  <li><a href="#why-reproducible" id="toc-why-reproducible" class="nav-link" data-scroll-target="#why-reproducible"><span class="header-section-number">3.2</span> Why reproducible?</a></li>
+  <li><a href="#why-reusable" id="toc-why-reusable" class="nav-link" data-scroll-target="#why-reusable"><span class="header-section-number">3.3</span> Why reusable?</a></li>
+  <li><a href="#practices-for-reusability" id="toc-practices-for-reusability" class="nav-link" data-scroll-target="#practices-for-reusability"><span class="header-section-number">3.4</span> Practices for reusability</a>
+  <ul class="collapse">
+  <li><a href="#sec-project_structure" id="toc-sec-project_structure" class="nav-link" data-scroll-target="#sec-project_structure"><span class="header-section-number">3.4.1</span> Structure your project</a></li>
+  <li><a href="#sec-separate_tasks" id="toc-sec-separate_tasks" class="nav-link" data-scroll-target="#sec-separate_tasks"><span class="header-section-number">3.4.2</span> Separate tasks</a></li>
+  <li><a href="#document-the-project" id="toc-document-the-project" class="nav-link" data-scroll-target="#document-the-project"><span class="header-section-number">3.4.3</span> Document the project</a></li>
+  <li><a href="#keep-raw-data-immutable" id="toc-keep-raw-data-immutable" class="nav-link" data-scroll-target="#keep-raw-data-immutable"><span class="header-section-number">3.4.4</span> Keep raw data immutable</a></li>
+  <li><a href="#use-relative-paths" id="toc-use-relative-paths" class="nav-link" data-scroll-target="#use-relative-paths"><span class="header-section-number">3.4.5</span> Use relative paths</a></li>
+  <li><a href="#style-your-code" id="toc-style-your-code" class="nav-link" data-scroll-target="#style-your-code"><span class="header-section-number">3.4.6</span> Style your code</a></li>
+  <li><a href="#document-dependencies" id="toc-document-dependencies" class="nav-link" data-scroll-target="#document-dependencies"><span class="header-section-number">3.4.7</span> Document dependencies</a></li>
+  <li><a href="#use-version-control" id="toc-use-version-control" class="nav-link" data-scroll-target="#use-version-control"><span class="header-section-number">3.4.8</span> Use version control</a></li>
+  <li><a href="#r-specific-reusability-practices" id="toc-r-specific-reusability-practices" class="nav-link" data-scroll-target="#r-specific-reusability-practices"><span class="header-section-number">3.4.9</span> R-specific reusability practices</a></li>
+  </ul></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">3.5</span> Exercises</a>
+  <ul class="collapse">
+  <li><a href="#workspace" id="toc-workspace" class="nav-link" data-scroll-target="#workspace">Workspace</a></li>
+  <li><a href="#external-data" id="toc-external-data" class="nav-link" data-scroll-target="#external-data">External data</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="sec-reproducible" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Reusable workflows</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="learning-objectives" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">3.1</span> Learning objectives</h2>
+<p>You will learn to:</p>
+<ul>
+<li>know what it takes to make a workflow reproducible and code reusable</li>
+<li>apply principles and tools for a project-oriented workflow</li>
+</ul>
+</section>
+<section id="why-reproducible" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="why-reproducible"><span class="header-section-number">3.2</span> Why reproducible?</h2>
+<p>Reproducibility is key for the scientific method. In traditional laboratory science, experiments are documented in detail so that other researchers can repeat the procedure and confirm the results. In data science, our “experiments” are often computational: data cleaning pipelines, statistical analyses, and fitting models. For these, our code becomes the lab notebook. If the code cannot be rerun reliably, the scientific claims it supports are weakened.</p>
+<p>This is why reproducible code is central to computational research. Reproducibility means that given the same data and computing environment, someone else can re-run the analysis and arrive at the same outputs.</p>
+</section>
+<section id="why-reusable" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="why-reusable"><span class="header-section-number">3.3</span> Why reusable?</h2>
+<p>Closely related to reproducibility of an analysis is the <em>reusability</em> of code. It extends the value of our work by making code adaptable to new datasets, questions, or projects. Together, these practices support the transparency, credibility, and progress of science. A common barrier to reproducibility is that code is often scattered across folders, dependent on hidden configuration files, or assumes local resources that others cannot access. These habits make our analyses fragile: they may work on our laptop today, but not tomorrow on a colleague’s machine—or even on our own machine six months later.</p>
+<p>To address this, it is helpful to adopt a <em>project-oriented workflow</em>. In this approach, every analysis lives inside a clearly defined project directory that contains:</p>
+<ul>
+<li>The data (or instructions for obtaining it).</li>
+<li>The code needed to process, analyze, and visualize.</li>
+<li>The documentation explaining the workflow.</li>
+<li>The results generated (figures, tables, reports).</li>
+</ul>
+<p>Two guiding principles are the basis for reusable code and project-oriented workflows:</p>
+<ul>
+<li><em>Self-contained</em>: the project does not depend on hidden files or settings outside its own directory. Everything needed to rerun the analysis is either included in the project or explicitly documented.</li>
+<li><em>Portable</em>: the project can be moved (e.g., shared via version control, sent as a zip file, or run on a server) and still work without modification.</li>
+</ul>
+<p>By keeping projects self-contained and portable, we transform code from a collection of personal notes into a scientific artifact that others can confidently reuse, adapt, and extend. Reusable code is also the basis for Open Science (<a href="open_science.html" class="quarto-xref"><span>Chapter 5</span></a>).</p>
+</section>
+<section id="practices-for-reusability" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="practices-for-reusability"><span class="header-section-number">3.4</span> Practices for reusability</h2>
+<p>Below is a list that may serve as a key to making code re-usable.</p>
+<section id="sec-project_structure" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="sec-project_structure"><span class="header-section-number">3.4.1</span> Structure your project</h3>
+<p>Think of all files that are linked to a certain data science workflow as belonging together into one <em>project</em>. A project is therefore a directory that contains the code it uses and the outputs it produces. Different types of files go in different sub-directories of the project main directory, and are given descriptive names. It is important to keep a clear and general order to make your project directory and code useful and easily readable and navigatable for others and your future self (once you revisit old code months after you wrote it). To do so, always keep files of the same type in sub-directories that are always named the same way across projects. A common structure (with common file types per subdirectory) for R-based projects is:</p>
+<pre><code>my-project/
+├── analysis/   # scripts that implement individual steps of the workflow (.R files)
+├── data/       # processed data files, generated by the project's scripts (.csv, .rds, .nc, etc.)
+├── data-raw/   # immutable data files, obtained from external sources. May also contain scripts to download them.
+├── fig/        # figures, generated by the project's scripts (.pdf, .png)
+├── R/          # function definitions (.R)
+├── README      # a text file that contains essential information about the project directory
+├── src/        # shell scripts (.sh)
+└── vignettes/  # reports (.Rmd)</code></pre>
+</section>
+<section id="sec-separate_tasks" class="level3" data-number="3.4.2">
+<h3 data-number="3.4.2" class="anchored" data-anchor-id="sec-separate_tasks"><span class="header-section-number">3.4.2</span> Separate tasks</h3>
+<p>Separate and encapsulate tasks into functions and scripts. Instead of long, monolithic scripts, break analyses into modular steps. Steps may have to follow a certain sequence as there may be dependencies between them. For example, a first step reads raw data from a file in <code>data-raw</code> and performs some data transformation. Especially if this data transformation is computationally intensive, its output should be written into a file (in <code>data/</code>), from which it is read again at the start of the second workflow step. To clarify such sequential dependencies and specify the order in which scripts are to be executed, it is good practice to provide numbers as script names. For example:</p>
+<pre><code>my-project/
+└── analysis/
+  ├── 01_transform_data.R
+  ├── 02_fit_models.R
+  └── 03_create_plots.R</code></pre>
+<p>A “main” script or notebook may be added that orchestrates the workflow (like a recipe) and runs individual scripts. It can serve as a clear entry point to reproducing your analysis – from original data to published figures – and makes it easy for others to run steps in the right order.</p>
+</section>
+<section id="document-the-project" class="level3" data-number="3.4.3">
+<h3 data-number="3.4.3" class="anchored" data-anchor-id="document-the-project"><span class="header-section-number">3.4.3</span> Document the project</h3>
+<section id="sec-readme" class="level4" data-number="3.4.3.1">
+<h4 data-number="3.4.3.1" class="anchored" data-anchor-id="sec-readme"><span class="header-section-number">3.4.3.1</span> The README file</h4>
+<p>The first entry point to working with a project directory is always the <code>README</code> file, located in the parent project directory. The README should answer “What is this project, what do I need to run it, and how do I use it?” Think of it as the “lab manual” for anyone opening the project for the first time (including your future self). For a reproducible and reusable data science project, a README should typically include:</p>
+<p><strong>Project Overview</strong></p>
+<ul>
+<li>Title of the project.</li>
+<li>A short description of the purpose and what kind of analysis/modelling/visualisation it implements.</li>
+<li>A short description of the key outputs it generates (e.g., models, figures, reports).</li>
+</ul>
+<p><strong>Data</strong></p>
+<ul>
+<li>Where the data, used as input to the project workflow, comes from (source, URL, citation).</li>
+<li>Instructions for accessing or downloading data (if not included in the repo). If applicable, refer to a data download script, located in <code>data-raw</code>.</li>
+<li>Clear statement if large data files are excluded from the repository. If so, and if such large data files are required but external to the repository, describe where they are located and explain that corresponding files may have to be downloaded by the user and which paths have to be adjusted in which script for pointing to these external data files.</li>
+</ul>
+<p><strong>Project structure</strong></p>
+<ul>
+<li>A brief explanation of the folder layout (see Sec. <a href="#sec-project_structure" class="quarto-xref"><span>Section 3.4.1</span></a>).</li>
+<li>An explanation of what workflow step is implemented by what script.</li>
+<li>An explanation of key data files generated by individual workflow steps (scripts) and required by subsequent workflow steps.</li>
+</ul>
+<p><strong>How to reproduce the analysis</strong></p>
+<ul>
+<li>Instructions for running the workflow end-to-end, specifying the sequence by which scripts are to be run. Ideally, this is reflected also by file names of scripts in subdirectory <code>analysis/</code> (see Sec. <a href="#sec-separate_tasks" class="quarto-xref"><span>Section 3.4.2</span></a>). Alternatively, a main script can be added that runs the scripts for individual workflow steps in the right order.</li>
+<li>Expected runtime or computational requirements.</li>
+</ul>
+<p><strong>Results</strong></p>
+<ul>
+<li>Where to find generated results (reports, plots, models).</li>
+<li>Links to pre-rendered reports (e.g., HTML, PDF, Quarto).</li>
+</ul>
+<p><strong>Dependencies</strong></p>
+<ul>
+<li>List of R packages (or other software) required.</li>
+<li>Recommended: include an environment management tool (e.g., <code>renv.lock</code> file).</li>
+<li>Any system dependencies (e.g., NetCDF, GDAL, Java).</li>
+</ul>
+<p><strong>Collaboration &amp; reuse</strong></p>
+<ul>
+<li>Licensing terms (e.g., MIT, GPL, CC-BY).</li>
+<li>How others can cite or acknowledge the project.</li>
+<li>Contact information or maintainer’s name.</li>
+</ul>
+<p><strong>Optional but useful extras</strong></p>
+<ul>
+<li>Badges (build status, license, DOI, R-CMD-check).</li>
+<li>Changelog or release notes.</li>
+<li>References or background reading.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Format documentation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>To ease readability of the README file, it is advised that it contains basic formatting, using <a href="https://www.markdownguide.org/">Markdown</a>. A Markdown-formatted can be interpreted as such when given the suffix <code>.md</code>. Hence, save it as <code>README.md</code> in top-level directory of your project.</p>
+<p>Markdown formatting is specified on raw text and provides minimal but essential formatting options. Below is a Markdown “cheatsheet”, copied from <a href="https://www.markdownguide.org/assets/markdown-cheat-sheet.md">www.markdownguide.org</a>.</p>
+<pre><code>## Basic Syntax
+
+These are the elements outlined in John Gruber’s original design document. All Markdown applications support these elements.
+
+### Heading
+
+# H1
+## H2
+### H3
+
+### Bold
+
+**bold text**
+
+### Italic
+
+*italicized text*
+
+### Blockquote
+
+&gt; blockquote
+
+### Ordered List
+
+1. First item
+2. Second item
+3. Third item
+
+### Unordered List
+
+- First item
+- Second item
+- Third item
+
+### Code
+
+`code`
+
+### Horizontal Rule
+
+---
+
+### Link
+
+[Markdown Guide](https://www.markdownguide.org)
+
+### Image
+
+![alt text](https://www.markdownguide.org/assets/images/tux.png)
+
+## Extended Syntax
+
+These elements extend the basic syntax by adding additional features. Not all Markdown applications support these elements.
+
+### Table
+
+| Syntax | Description |
+| ----------- | ----------- |
+| Header | Title |
+| Paragraph | Text |
+
+### Fenced Code Block
+</code></pre>
+<p>{ “firstName”: “John”, “lastName”: “Smith”, “age”: 25 }</p>
+<pre><code>
+### Footnote
+
+Here's a sentence with a footnote. [^1]
+
+[^1]: This is the footnote.
+
+### Heading ID
+
+### My Great Heading {#custom-id}
+
+### Definition List
+
+term
+: definition
+
+### Strikethrough
+
+~~The world is flat.~~
+
+### Task List
+
+- [x] Write the press release
+- [ ] Update the website
+- [ ] Contact the media
+
+### Emoji
+
+That is so funny! :joy:
+
+(See also [Copying and Pasting Emoji](https://www.markdownguide.org/extended-syntax/#copying-and-pasting-emoji))
+
+### Highlight
+
+I need to highlight these ==very important words==.
+
+### Subscript
+
+H~2~O
+
+### Superscript
+
+X^2^</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="commenting" class="level4" data-number="3.4.3.2">
+<h4 data-number="3.4.3.2" class="anchored" data-anchor-id="commenting"><span class="header-section-number">3.4.3.2</span> Commenting</h4>
+<p>Use comments to describe in human-readable text what the code does. Comments are all that appears to the right of a <code>#</code> and are code parts that are not interpreted by R and not executed. Adding comments in the code greatly helps you and others to read your code, understand what it does, modify it, and resolve errors (bugs).</p>
+<p>Here is a list of rules for good commenting (from <a href="https://stackoverflow.blog/2021/12/23/best-practices-for-writing-code-comments/">here</a>):</p>
+<ul>
+<li>Comments should not duplicate the code.</li>
+<li>Good comments do not excuse unclear code.</li>
+<li>Explain unidiomatic code in comments.</li>
+<li>Provide links to the original source of copied code.</li>
+<li>Include links to external references where they will be most helpful.</li>
+<li>Add comments when fixing bugs.</li>
+<li>Use comments to mark incomplete implementations.</li>
+</ul>
+</section>
+<section id="file-naming" class="level4" data-number="3.4.3.3">
+<h4 data-number="3.4.3.3" class="anchored" data-anchor-id="file-naming"><span class="header-section-number">3.4.3.3</span> File naming</h4>
+<p>Good file naming facilitates transparency, findability, and reusability. Hence, file naming matters. The following points should be considered (see also <a href="https://book.the-turing-way.org/reproducible-research/rdm/rdm-storage#rr-rdm-storage-conventions">here</a>):</p>
+<ul>
+<li>Include the type of a file’s content in its name (e.g., <code>map_</code>, <code>df_</code> for data frame, <code>mod_</code> for a model object, etc.)</li>
+<li>Chose the right suffix for a given file format (e.g., <code>.csv</code>, <code>.nc</code>, <code>.txt</code>, <code>.md</code>)</li>
+<li>If multiple versions of the file should be kept, give the file a date in the format <code>YYYYMMDD</code> or give it a version number (e.g., <code>v1</code>).</li>
+<li>Avoid special characters (<code>()?\!@\*%{[&lt;&gt;</code>) and spaces.</li>
+<li>Use underscores (<code>_</code>), not dots (except for the dot before the suffix).</li>
+<li>Avoid uppercase.</li>
+<li>The file name should reflect the name of the object that was written into that file.</li>
+</ul>
+</section>
+<section id="sec-vignettes" class="level4" data-number="3.4.3.4">
+<h4 data-number="3.4.3.4" class="anchored" data-anchor-id="sec-vignettes"><span class="header-section-number">3.4.3.4</span> Executable documentation</h4>
+<p>Further documentation, e.g., of certain methods of the project, demonstrated on a reduced set of data, may be provided by <a href="https://rmarkdown.rstudio.com/">RMarkdown</a> files (or <em>vignettes</em>), contained in the subdirectory <code>vignettes/</code>. RMarkdown combines Markdown-formatted text with executable code, embedded in the text as <em>code chunks</em>. They can either be compiled (<em>knitted</em>) into an HTML or PDF output, where code chunks are executed upon compilation and visualization outputs are directly placed into the output, or they can be run like a script entirely or for each code chunk separately. When opened in RStudio, RMarkdown files appear in the Editor like this:</p>
+<div id="fig-rmarkdown" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rmarkdown-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./figures/rmarkdown_editor.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rmarkdown-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.1: R Markdown document opened in the source panel.
+</figcaption>
+</figure>
+</div>
+<p>As shown in <a href="#fig-rmarkdown" class="quarto-xref">Figure&nbsp;<span>3.1</span></a>, an RMarkdown file consists of a header that specifies the document properties, such as how it should be rendered (as an html page, a docx file or a pdf).</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">---</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">title:</span> <span class="st">"Simple global map"</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">author:</span> Alex Humboldt</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ex">output:</span> html_document</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ex">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Below the header follow the contents as either text or code <em>chunks</em>.</p>
+<p>Code chunks that contain executable R code are opened by a line <code>```{r}</code>.</p>
+<p>The document can be rendered by calling <code>rmarkdown::render()</code> on the command line or hitting the <strong>Knit</strong> button in the RStudio IDE. Depending on your settings a html file, pdf or docx file will be generated in your current directory (and or displayed in the IDE viewer). The RMarkdown source file shown in <a href="#fig-rmarkdown" class="quarto-xref">Figure&nbsp;<span>3.1</span></a> is rendered to:</p>
+<div id="fig-rmarkdownrender" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig.align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rmarkdownrender-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./figures/rmarkdown_render.png" class="img-fluid figure-img" style="width:75.0%" data-fig.align="center">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rmarkdownrender-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.2: Rendered HTML output.
+</figcaption>
+</figure>
+</div>
+<p>Note that the code chunk produced a figure as an output which was placed directly in the rendered html. This demonstrates the usefulness of RMarkdown as <em>notebooks</em> to document entire workflows and make their outputs reproducible.</p>
+<p>To create a new RMarkdown file, select from the drop-down menu in the top-left corner of RStudio as shown below:</p>
+<div id="fig-newrmarkdown" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig.align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-newrmarkdown-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./figures/newrmarkdown.png" class="img-fluid figure-img" style="width:25.0%" data-fig.align="center">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-newrmarkdown-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.3: Create a new RMarkdown file.
+</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="keep-raw-data-immutable" class="level3" data-number="3.4.4">
+<h3 data-number="3.4.4" class="anchored" data-anchor-id="keep-raw-data-immutable"><span class="header-section-number">3.4.4</span> Keep raw data immutable</h3>
+<p>All analyses start with one or more datasets that are obtained from external sources or compiled by the researcher. Such <em>original</em> data may be contained in the project, and is typically stored in the <code>data-raw/</code> folder. These files must never be overwritten. Instead, generate derived data files and save them in <code>data/</code>. This preserves provenance of the data and makes it possible to restart analyses from scratch. Document the source of all original data by info added in the <code>README</code> file.</p>
+</section>
+<section id="use-relative-paths" class="level3" data-number="3.4.5">
+<h3 data-number="3.4.5" class="anchored" data-anchor-id="use-relative-paths"><span class="header-section-number">3.4.5</span> Use relative paths</h3>
+<p>… not absolute paths. The use of absolute paths, i.e., a path starting at the root of your local file system, is the enemy of portability. Since your collaborator’s file system and location of the project folder with most certainly not be the same as it is on your machine, the code will break. By using relative paths and read and write only from and to locations in your project directory, you make your code – the entire project – portable.</p>
+<ul>
+<li><p>Bad practice with absolute path:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">"/Users/alex/Desktop/data/file.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+<li><p>Good practice with relative path, using <code>here()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"file.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+</ul>
+<p>As an example, consider the following. RMarkdown files commonly reside in a sub-directory <code>./vignettes/</code> and are rendered relative to the file path where it is located. This means that to access data which resides in <code>data/</code> using code in <code>./vignettes/your_dynamic_document.Rmd</code>, we would have to write:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'../data/some_data.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Note the <code>../</code> to go one level up. However, when the same code is executed from another level of the project’s directory structure, this code won’t work anymore.</p>
+<p>To allow for more flexibility in file locations within your project folder, you may use the <a href="https://here.r-lib.org/">{here} package</a> package. I gathers the absolute path of the R project and allows for a specification of paths inside scripts and functions that always start from the top project directory, irrespective of where the script that implements the reading-code is located.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>here() starts at /home/runner/work/agds_book/agds_book</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">here</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "/home/runner/work/agds_book/agds_book"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">file.exists</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"df.csv"</span>))   <span class="co"># use here("data", "df.csv") instead of here("data/df.csv") to make it portable also to non-UNIX-based systems.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p>Should any file to which a path of your project points not be contained in the project itself, an absolute path to an external file may be unavoidable. In such cases, clarify in the <code>README</code> where such absolute paths must be modified. Here, we used the function <code>here()</code> from the R package <em>here</em>. This creates a path, relative to the project’s parent directory and enables full portability of the code within your project. In other words, it doesn’t matter whether you run that line of code from within different subdirectories.</p>
+</section>
+<section id="style-your-code" class="level3" data-number="3.4.6">
+<h3 data-number="3.4.6" class="anchored" data-anchor-id="style-your-code"><span class="header-section-number">3.4.6</span> Style your code</h3>
+<p>Nice code is clean, readable, consistent, and extensible (easily modified or adapted). Ugly code works, but is hard to work with. There is no strict right or wrong about coding style, but certain aspects make it easier to read and use code and consistency in styling code is key to code legibility. Therefore, good coding style is not entirely subjective.</p>
+<p>A comprehensive best practices guide is given by the <a href="https://style.tidyverse.org/">tidyverse style guide</a>.</p>
+<p>Automated styling of your code, including the adherence to <em>tidyverse</em> style, can be done with the {styler} R package. Once installed, you can trigger “stylification” in RStudio by pressing ctrl/cmd + shift + P and then type in “style”, see <a href="https://rfortherestofus.com/2024/03/styler-package#:~:text=But%20the%20cool%20thing%20is,then%20type%20in%20%E2%80%9Cstyle%E2%80%9D.">here</a>.</p>
+<p>Here are a few points to consider.</p>
+<section id="spaces-and-breaks" class="level4" data-number="3.4.6.1">
+<h4 data-number="3.4.6.1" class="anchored" data-anchor-id="spaces-and-breaks"><span class="header-section-number">3.4.6.1</span> Spaces and breaks</h4>
+<p>Adding enough white spaces and line breaks in the right locations greatly helps the legibility of code. Cramming variables, operators, and brackets without spaces leaves an unintelligible sequence of characters and it will not be clear what parts go together. Therefore, consider the following points:</p>
+<ul>
+<li>Use spaces around operators (<code>=</code>, <code>+</code>, <code>-</code>, <code>&lt;-</code>, <code>&gt;</code>, etc.).</li>
+<li>Use <code>&lt;-</code>, not <code>=</code>, for allocating a value to a variable.</li>
+<li>Code inside curly brackets should be <em>indented</em> (recommended: two white spaces at the beginning of each line for each indentation level - don’t use tabs).</li>
+</ul>
+<p>An example for a nice bit of code:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (temp <span class="sc">&gt;</span> <span class="fl">5.0</span>){</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  growth_temp <span class="ot">&lt;-</span> growth_temp <span class="sc">+</span> temp  </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="variable-naming" class="level4" data-number="3.4.6.2">
+<h4 data-number="3.4.6.2" class="anchored" data-anchor-id="variable-naming"><span class="header-section-number">3.4.6.2</span> Variable naming</h4>
+<p>It is recommended to use concise and descriptive variable names. Different variable naming styles are being used. In this course, we use lowercase letters, and underscores (<code>_</code>) to separate words within a variable name (<code>_</code>). Avoid (<code>.</code>) as they are reserved for certain types of objects in R. Also, avoid naming your objects with names of common functions and variables since your re-definition will mask already defined object names.</p>
+<p>For example, <code>df_daily</code> is a data frame with data at a daily resolution. Or <code>clean_daily</code> is a function that cleans daily data. Note that a verb is used as a name for a function and an underscore (<code>_</code>) is used to separate words.</p>
+<p>It is also recommended to avoid variable names consisting of only one character. Single-letter names make it practically impossible to search for that variable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Good</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>day_01</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Bad</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>DayOne</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>day.one</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>first_day_of_the_month</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>djm1</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Very bad</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>mean <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">sum</span>(x)<span class="sc">/</span><span class="fu">length</span>(x) <span class="co"># mean() itself is already a function</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>T <span class="ot">&lt;-</span> <span class="cn">FALSE</span> <span class="co"># T is an abbreviation of TRUE</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="co"># c() is used to create a vector (example &lt;- c(1, 2, 3))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="organising-scripts" class="level4" data-number="3.4.6.3">
+<h4 data-number="3.4.6.3" class="anchored" data-anchor-id="organising-scripts"><span class="header-section-number">3.4.6.3</span> Organising scripts</h4>
+<p>Load libraries at the very beginning of a script, followed, by reading data or functions from files. Functions should be defined in separate <code>.R</code> files, unless they are only a few lines long, or only used in one place. Then, include the sequence of statements. The name of the script should be short and concise and indicate what the script does.</p>
+<p>To visually separate parts of a script, use commented lines (e.g., <code>#----</code>). The RStudio text editor automatically recognizes <code>----</code> added to the right end of a commented line and interprets it as a block of content which can be navigated by using the document (<strong>Outline</strong> button in the top right corner of the editor panel).</p>
+<p>Avoid reading entire workspace environments (e.g., <code>load(old_environment.RData)</code>), deleting environments <code>rm(list=ls())</code>, loading hidden dependencies (e.g., <code>.Rprofile</code>), or changing the working directory (<code>setwd("~/other_dir/"</code>) as part of a script.</p>
+<p>Note that information about the author of the script, its creation date, and modifications, etc. should not be added as commented text in the file. In <a href="code_management.html" class="quarto-xref"><span>Chapter 4</span></a>, we will learn about the code versioning control system <em>git</em>, which keeps track of all this as meta information associated with files.</p>
+</section>
+</section>
+<section id="document-dependencies" class="level3" data-number="3.4.7">
+<h3 data-number="3.4.7" class="anchored" data-anchor-id="document-dependencies"><span class="header-section-number">3.4.7</span> Document dependencies</h3>
+<p>Often, code depends on various components, packages or libraries. These libraries and all software come in specific versions, which might or might not alter the behaviour of the code and the output it produces.</p>
+<p>If you want to ensure full reproducibility, especially across several years, you will need to capture the state of the system and libraries with which you ran the original analysis.</p>
+<p>In R the <a href="https://rstudio.github.io/renv/">{renv} package</a> serves this purpose and will provide an index of all the packages used in your project as well as their version. For a particular project, it will create a local library of packages with a static version. These static packages will not be updated over time, and therefore ensure consistent results. This makes your analysis isolated, portable, and reproducible. The analogue in Python would be the <a href="https://docs.python.org/3/library/venv.html">virtual environments, or venv program</a>.</p>
+<p>When setting up your project you can run:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initiate a {renv} environment</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">init</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To initiate your static R environment. Whenever you want to save the state of your project (and its packages) you can call:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the current state of the environment / project</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">snapshot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To save any changes made to your environment. All data will be saved in a project description file called a lock file (i.e.&nbsp;<code>renv.lock</code>). It is advised to update the state of your project regularly, and in particular before closing a project.</p>
+<p>When you move your project to a new system, or share a project on github with collaborators, you can revert to the original state of the analysis by calling:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># On a new system, or when inheriting a project</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># from a collaborator you can use a lock file</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># to restore the session/project state using</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">restore</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<blockquote class="blockquote">
+<p>NOTE: As mentioned in the {renv} documentation: “For development and collaboration, the <code>.Rprofile</code>, <code>renv.lock</code> and <code>renv/activate.R</code> files should be committed to your version control system. But the <code>renv/library</code> directory should normally be ignored. Note that <code>renv::init()</code> will attempt to write the requisite ignore statements to the project <code>.gitignore</code>.” We refer to <a href="open_science.html#sec-learning-objectives-6" class="quarto-xref"><span>Section 5.1</span></a> for details on github and its use.</p>
+</blockquote>
+<section id="capturing-a-system-state" class="level4" data-number="3.4.7.1">
+<h4 data-number="3.4.7.1" class="anchored" data-anchor-id="capturing-a-system-state"><span class="header-section-number">3.4.7.1</span> Capturing a system state</h4>
+<p>Although R projects and the use of {targets} make your workflow consistent, the package versions used between various systems (e.g., your home computer or the cluster at the university might vary). To address issues with changes in the versions of package, you can use the {renv} package which manages package version (environments) for you. When tasks are even more complex and include components outside of R, you can use <a href="https://www.docker.com/"><em>Docker</em></a> to provide containerization of an operating system and the included ancillary application.</p>
+<p>The <a href="https://rocker-project.org/">{rocker} package</a> provides access to some of these features within the context of reproducible R environments. Using these tools, you can therefore emulate the state of a machine, independently of the machine on which the docker file is run. These days, machine learning applications are often deployed as docker sessions to limit the complexity of installing required software components. The application of docker-based installs is outside the scope of the current course, but feel free to explore these resources as they are widespread in data science.</p>
+</section>
+</section>
+<section id="use-version-control" class="level3" data-number="3.4.8">
+<h3 data-number="3.4.8" class="anchored" data-anchor-id="use-version-control"><span class="header-section-number">3.4.8</span> Use version control</h3>
+<p>Code modifications and states of your project can be kept track of through version control software, like <em>Git</em>, as further described in <a href="code_management.html" class="quarto-xref"><span>Chapter 4</span></a>. This enables collaboration, rollbacks, and transparency in project evolution.</p>
+</section>
+<section id="r-specific-reusability-practices" class="level3" data-number="3.4.9">
+<h3 data-number="3.4.9" class="anchored" data-anchor-id="r-specific-reusability-practices"><span class="header-section-number">3.4.9</span> R-specific reusability practices</h3>
+<section id="sec-rprojects" class="level4" data-number="3.4.9.1">
+<h4 data-number="3.4.9.1" class="anchored" data-anchor-id="sec-rprojects"><span class="header-section-number">3.4.9.1</span> Work in projects</h4>
+<p>An <em>R Project</em> is a feature in RStudio that creates a self-contained working environment for your analysis - the embodiment of a project-oriented workflow. When you create or open a project (<code>.Rproj</code> file), RStudio sets the project directory as the working directory and automatically detect connections to Git or other features of your project that enable specific functionalities (e.g., building and testing of an <em>R package</em> project).</p>
+<p>To create a new R project, go to the <strong>File</strong> menu and select <strong>New Project…</strong>. This will open the <em>New Project</em> dialog, where you can choose where to save your project and what type of project to create. The current project that you are working on is shown on the upper right corner of the RStudio interface. Here you can also switch between existing projects or create a new one.</p>
+<div id="fig-projectmenu" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig.align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-projectmenu-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="./figures/RStudio_RProject_screenshot.png" class="img-fluid figure-img" style="width:30.0%" data-fig.align="center">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-projectmenu-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.4: R project menu.
+</figcaption>
+</figure>
+</div>
+<p>When starting a new project, named <code>project_name</code>, a file <code>project_name.Rproj</code> is created in the top-level project directory. It stores information about your the session (settings, open files, etc.), automatically enables useful features in RStudio for easy package, website, or book building, lets you manage code version control (see next sub-section), and optionally (not recommended) stores the environment of your current session. It is not recommended to save and restore entire environments. Instead read and write objects from and into files to guarantee control, transparency, and reproducibility. When you want to continue working on an existing R project, you can start a new session by clicking on your <code>project_name.Rproj</code> file. This restores</p>
+</section>
+<section id="avoid-clearing-or-dumping-the-entire-r-environment" class="level4" data-number="3.4.9.2">
+<h4 data-number="3.4.9.2" class="anchored" data-anchor-id="avoid-clearing-or-dumping-the-entire-r-environment"><span class="header-section-number">3.4.9.2</span> Avoid clearing or dumping the entire R environment</h4>
+<ul>
+<li>Don’t use <code>rm(list = ls())</code> to reset the workspace — it can mask missing dependencies in scripts.</li>
+<li>Don’t save the whole session environment to an <code>.RData</code> file — it encourages hidden states and makes workflows fragile.</li>
+<li>Instead: write scripts that start fresh and explicitly load all data and libraries they need.</li>
+</ul>
+</section>
+<section id="avoid-setwd" class="level4" data-number="3.4.9.3">
+<h4 data-number="3.4.9.3" class="anchored" data-anchor-id="avoid-setwd"><span class="header-section-number">3.4.9.3</span> Avoid <code>setwd()</code></h4>
+<ul>
+<li>Hard-coding working directories breaks portability.</li>
+<li>Instead, use relative paths or packages like <code>here()</code> to construct paths relative to the project root (see above).</li>
+</ul>
+</section>
+<section id="manage-libraries-explicitly" class="level4" data-number="3.4.9.4">
+<h4 data-number="3.4.9.4" class="anchored" data-anchor-id="manage-libraries-explicitly"><span class="header-section-number">3.4.9.4</span> Manage libraries explicitly</h4>
+<ul>
+<li>Load required libraries at the top of the script or RMarkdown vignette, never inside functions.</li>
+<li>This makes dependencies transparent.</li>
+<li>Use <code>::</code> when you only need a single function from a package, or when two packages provide functions with the same name. This balance keeps dependencies clear without cluttering code unnecessarily.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load globally if used throughout</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Use :: if only calling occasionally ...</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"df.csv"</span>))</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ... or to disambiguate (other functions called 'filter()' exported from other libraries which may mask dplyr::filter if loaded after dplyr)</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span> </span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(age <span class="sc">&gt;</span> <span class="dv">18</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  name      age is_married
+  &lt;chr&gt;   &lt;dbl&gt; &lt;lgl&gt;     
+1 Peter      56 TRUE      
+2 Alex       30 TRUE      
+3 Charlie    42 FALSE     </code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="exercises" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="exercises"><span class="header-section-number">3.5</span> Exercises</h2>
+<section id="workspace" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="workspace">Workspace</h3>
+<p>Create a new <em>R project</em> and create sub-directories in a meaningful way (as described in this Chapter). Create an RMarkdown file in your new project which implements your solutions to above exercises. Give the file a title, implement some structure in the document, and write some text explaining what your code does.</p>
+</section>
+<section id="external-data" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="external-data">External data</h3>
+<p>You inherit a project folder which contains the following files.</p>
+<pre><code>~/project/
+├─ survey.xlsx
+├─ xls conversion.csv
+├─ xls conversion (copy 1).csv
+├─ Model-test_1.R
+├─ Model-test-final.R
+├─ Plots.R
+├─ Figure 1.png
+├─ test.png
+├─ Rplot01.png
+├─ Report.Rmd
+├─ Report.html
+├─ my_functions.R</code></pre>
+<p>What are your steps to make this project more reproducible? Write down how and why you would organize your project.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./primers.html" class="pagination-link" aria-label="Primers">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Primers</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./code_management.html" class="pagination-link" aria-label="Code management">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Code management</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
