@@ -52,7 +52,7 @@ y = \sum_{n=0}^N a_n x^n
 $$ $a_n$ are the coefficients, i.e., model parameters. The goal of the training is to find the coefficients $a_n$ so that the predicted $\hat{Y}$ fits observed $Y$ best. From the above definition, the polynomial of degree 15 has 16 parameters, while the polynomial of degree 1 has two parameters (and corresponds to a simple bivariate linear regression). You can imagine that the polynomial of degree 15 is much more flexible and should thus yield the closest fit to the training data. This is indeed the case.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-true_fun <- function(x){
+true_fun <- function(x) {
   cos(1.5 * pi * x)
 }
 
@@ -61,7 +61,7 @@ set.seed(2)
 n_samples <- 30
 
 # create training data
-df_train <- tibble( x = runif(n_samples, min = 0, max = 1)) |>
+df_train <- tibble(x = runif(n_samples, min = 0, max = 1)) |>
   mutate(y = true_fun(x) + 0.1 * rnorm(n_samples)) |>
   arrange(x)
 
@@ -70,8 +70,7 @@ polyfit_4 <- lm(y ~ poly(x, 4), data = df_train)
 polyfit_15 <- lm(y ~ poly(x, 15), data = df_train)
 
 # create a function that takes the data set (here training) and the models and returns the evaluation results (plot with annotated RMSE)
-eval_fits <- function(df, polyfit_1, polyfit_4, polyfit_15, justdata = FALSE){
-
+eval_fits <- function(df, polyfit_1, polyfit_4, polyfit_15, justdata = FALSE) {
   # training results
   df <- df |>
     dplyr::rename(y_true = y) |>
@@ -91,39 +90,41 @@ eval_fits <- function(df, polyfit_1, polyfit_4, polyfit_15, justdata = FALSE){
   df_metrics_train <- tibble(
     fittype = "poly1",
     rmse = yardstick::metrics(df,
-                              truth = y_true,
-                              estimate = poly1
-                              ) |>
+      truth = y_true,
+      estimate = poly1
+    ) |>
       dplyr::filter(.metric == "rmse") |>
-      dplyr::pull(.estimate)) |>
+      dplyr::pull(.estimate)
+  ) |>
     bind_rows(
       tibble(
-       fittype = "poly4",
+        fittype = "poly4",
         rmse = yardstick::metrics(df,
-                                  truth = y_true,
-                                  estimate = poly4
-                                  ) |>
-         dplyr::filter(.metric == "rmse") |>
-         dplyr::pull(.estimate))
+          truth = y_true,
+          estimate = poly4
+        ) |>
+          dplyr::filter(.metric == "rmse") |>
+          dplyr::pull(.estimate)
+      )
     ) |>
     bind_rows(
       tibble(
-       fittype = "poly15",
+        fittype = "poly15",
         rmse = yardstick::metrics(df,
-                                  truth = y_true,
-                                  estimate = poly15
-                                  ) |>
-         dplyr::filter(.metric == "rmse") |>
-         dplyr::pull(.estimate))
+          truth = y_true,
+          estimate = poly15
+        ) |>
+          dplyr::filter(.metric == "rmse") |>
+          dplyr::pull(.estimate)
+      )
     )
 
   # plot training results
-  if (justdata){
+  if (justdata) {
     gg <- ggplot() +
       geom_point(data = df, aes(x, y_true)) +
       ylim(-1.5, 1) +
       labs(y = "y")
-    
   } else {
     gg <- ggplot() +
       geom_point(data = df, aes(x, y_true)) +
@@ -131,18 +132,20 @@ eval_fits <- function(df, polyfit_1, polyfit_4, polyfit_15, justdata = FALSE){
       stat_function(fun = true_fun, linetype = "dotted") +
       ylim(-1.5, 1) +
       labs(
-        subtitle = paste("RMSE: poly1 =", format(df_metrics_train$rmse[1], digits = 2), 
-                         ", poly4 =", format(df_metrics_train$rmse[2], digits = 2), 
-                         ", poly15 =", format(df_metrics_train$rmse[3], digits = 2)),
-        y = "y")
-    
+        subtitle = paste(
+          "RMSE: poly1 =", format(df_metrics_train$rmse[1], digits = 2),
+          ", poly4 =", format(df_metrics_train$rmse[2], digits = 2),
+          ", poly15 =", format(df_metrics_train$rmse[3], digits = 2)
+        ),
+        y = "y"
+      )
   }
 
   return(gg)
 }
 
 gg <- eval_fits(df_train, polyfit_1, polyfit_4, polyfit_15)
-gg + 
+gg +
   labs(title = "Training") +
   theme_classic()
 ```
@@ -153,12 +156,12 @@ We can use the same fitted models on data that was *not* used for model fitting 
 set.seed(1)
 
 # create testing data
-df_test <- tibble( x = runif(n_samples, min = 0, max = 1)) |>
+df_test <- tibble(x = runif(n_samples, min = 0, max = 1)) |>
   dplyr::mutate(y = true_fun(x) + 0.1 * rnorm(n_samples)) |>
   dplyr::arrange(x)
 
 gg <- eval_fits(df_test, polyfit_1, polyfit_4, polyfit_15)
-gg + 
+gg +
   labs(title = "Validation") +
   theme_classic()
 ```
@@ -173,12 +176,12 @@ The *out-of-sample performance* of "poly15" gets even worse when applying the fi
 set.seed(1)
 
 # create testing data
-df_test <- tibble( x = runif(n_samples, min = 0, max = 1.2)) |>
+df_test <- tibble(x = runif(n_samples, min = 0, max = 1.2)) |>
   dplyr::mutate(y = true_fun(x) + 0.1 * rnorm(n_samples)) |>
   dplyr::arrange(x)
 
 gg <- eval_fits(df_test, polyfit_1, polyfit_4, polyfit_15)
-gg + 
+gg +
   labs(title = "Validation (with extrapolation)") +
   theme_classic()
 ```
@@ -200,33 +203,31 @@ The data set `FLX_CH-Dav_FLUXNET2015_FULLSET_DD_1997-2014_1-3.csv` contains a ti
 Let's read the data, select suitable variables, interpret missing value codes, and select only good-quality data (where at least 80% of the underlying half-hourly data was good quality measured data, and not gap-filled).
 
 ```{r warning=FALSE, message=FALSE}
-daily_fluxes <- read_csv("./data/FLX_CH-Dav_FLUXNET2015_FULLSET_DD_1997-2014_1-3.csv") |>  
-  
+daily_fluxes <- read_csv("./data/FLX_CH-Dav_FLUXNET2015_FULLSET_DD_1997-2014_1-3.csv") |>
   # select only the variables we are interested in
-  dplyr::select(TIMESTAMP,
-                GPP_NT_VUT_REF,    # the target
-                ends_with("_QC"),  # quality control info
-                ends_with("_F"),   # includes all all meteorological covariates
-                -contains("JSB")   # weird useless variable
-                ) |>
-
+  dplyr::select(
+    TIMESTAMP,
+    GPP_NT_VUT_REF, # the target
+    ends_with("_QC"), # quality control info
+    ends_with("_F"), # includes all all meteorological covariates
+    -contains("JSB") # weird useless variable
+  ) |>
   # convert to a nice date object
   dplyr::mutate(TIMESTAMP = lubridate::ymd(TIMESTAMP)) |>
-
   # set all -9999 to NA
-  mutate(across(where(is.numeric), ~na_if(., -9999))) |> 
-  
+  mutate(across(where(is.numeric), ~ na_if(., -9999))) |>
   # retain only data based on >=80% good-quality measurements
   # overwrite bad data with NA (not dropping rows)
-  dplyr::mutate(GPP_NT_VUT_REF = ifelse(NEE_VUT_REF_QC < 0.8, NA, GPP_NT_VUT_REF),
-                TA_F           = ifelse(TA_F_QC        < 0.8, NA, TA_F),
-                SW_IN_F        = ifelse(SW_IN_F_QC     < 0.8, NA, SW_IN_F),
-                LW_IN_F        = ifelse(LW_IN_F_QC     < 0.8, NA, LW_IN_F),
-                VPD_F          = ifelse(VPD_F_QC       < 0.8, NA, VPD_F),
-                PA_F           = ifelse(PA_F_QC        < 0.8, NA, PA_F),
-                P_F            = ifelse(P_F_QC         < 0.8, NA, P_F),
-                WS_F           = ifelse(WS_F_QC        < 0.8, NA, WS_F)) |> 
-
+  dplyr::mutate(
+    GPP_NT_VUT_REF = ifelse(NEE_VUT_REF_QC < 0.8, NA, GPP_NT_VUT_REF),
+    TA_F = ifelse(TA_F_QC < 0.8, NA, TA_F),
+    SW_IN_F = ifelse(SW_IN_F_QC < 0.8, NA, SW_IN_F),
+    LW_IN_F = ifelse(LW_IN_F_QC < 0.8, NA, LW_IN_F),
+    VPD_F = ifelse(VPD_F_QC < 0.8, NA, VPD_F),
+    PA_F = ifelse(PA_F_QC < 0.8, NA, PA_F),
+    P_F = ifelse(P_F_QC < 0.8, NA, P_F),
+    WS_F = ifelse(WS_F_QC < 0.8, NA, WS_F)
+  ) |>
   # drop QC variables (no longer needed)
   dplyr::select(-ends_with("_QC"))
 ```
@@ -269,9 +270,9 @@ The way we formulate a model can be understood as being independent of the algor
 
 ```{r class.source = 'fold-show'}
 caret::train(
-  form = GPP_NT_VUT_REF ~ SW_IN_F + VPD_F + TA_F, 
-  data = daily_fluxes |> drop_na(),  # drop missing values
-  trControl = caret::trainControl(method = "none"),  # no resampling
+  form = GPP_NT_VUT_REF ~ SW_IN_F + VPD_F + TA_F,
+  data = daily_fluxes |> drop_na(), # drop missing values
+  trControl = caret::trainControl(method = "none"), # no resampling
   method = "lm"
 )
 ```
@@ -282,8 +283,8 @@ Of course, it is an overkill to write this as in the code chunk above compared t
 
 ```{r class.source = 'fold-show'}
 caret::train(
-  form = GPP_NT_VUT_REF ~ SW_IN_F + VPD_F + TA_F, 
-  data = daily_fluxes |> drop_na(), 
+  form = GPP_NT_VUT_REF ~ SW_IN_F + VPD_F + TA_F,
+  data = daily_fluxes |> drop_na(),
   trControl = caret::trainControl(method = "none"),
   method = "knn"
 )
@@ -307,7 +308,7 @@ An important aspect to consider when splitting the data is to make sure that all
 Several alternative functions for the data splitting step are available from different packages in R. We use the the *rsample* package here as it allows to additionally make sure that data from the full range of a given variable's values (`VPD_F` in the example below) are well covered in both training and testing sets.
 
 ```{r warning=FALSE, message=FALSE}
-set.seed(123)  # for reproducibility
+set.seed(123) # for reproducibility
 split <- rsample::initial_split(daily_fluxes, prop = 0.7, strata = "VPD_F")
 daily_fluxes_train <- rsample::training(split)
 daily_fluxes_test <- rsample::testing(split)
@@ -316,13 +317,13 @@ daily_fluxes_test <- rsample::testing(split)
 Plot the distribution of values in the training and testing sets.
 
 ```{r warning=FALSE, message=FALSE}
-plot_data <- daily_fluxes_train |> 
-  dplyr::mutate(split = "train") |> 
-  dplyr::bind_rows(daily_fluxes_test |> 
-  dplyr::mutate(split = "test")) |> 
+plot_data <- daily_fluxes_train |>
+  dplyr::mutate(split = "train") |>
+  dplyr::bind_rows(daily_fluxes_test |>
+    dplyr::mutate(split = "test")) |>
   tidyr::pivot_longer(cols = 2:9, names_to = "variable", values_to = "value")
 
-plot_data |> 
+plot_data |>
   ggplot(aes(x = value, y = ..density.., color = split)) +
   geom_density() +
   facet_wrap(~variable, scales = "free")
@@ -339,7 +340,7 @@ Often, multiple splits of the data are considered during model training. Hence, 
 The [{recipes}](https://recipes.tidymodels.org/) package provides an even more powerful way for specifying the *formula* and pre-processing steps in one go. It is compatible with the `train()` function of {caret}. For the same formula as above, and an example where the data `daily_fluxes_train` is to be normalized (centered and scaled), we can specify a "recipe" using the pipe operator as:
 
 ```{r warning=FALSE, message=FALSE}
-pp <- recipes::recipe(GPP_NT_VUT_REF ~ SW_IN_F + VPD_F + TA_F, data = daily_fluxes_train) |> 
+pp <- recipes::recipe(GPP_NT_VUT_REF ~ SW_IN_F + VPD_F + TA_F, data = daily_fluxes_train) |>
   recipes::step_center(recipes::all_numeric(), -recipes::all_outcomes()) |>
   recipes::step_scale(recipes::all_numeric(), -recipes::all_outcomes())
 ```
@@ -350,8 +351,8 @@ The object `pp` can then be supplied to `train()` as its first argument:
 
 ```{r warning=FALSE, message=FALSE, eval=FALSE}
 caret::train(
-  pp, 
-  data = daily_fluxes_train, 
+  pp,
+  data = daily_fluxes_train,
   method = "knn",
   trControl = caret::trainControl(method = "none")
 )
@@ -364,10 +365,10 @@ The example above showed data standardization as a data pre-processing step. Dat
 Several algorithms explicitly require data to be standardized so that values of all predictors vary within a comparable range. The necessity of this step becomes obvious when considering KNN, where the magnitude of the distance is strongly influenced by the order of magnitude of the predictor values. Here are the ranges and quantiles of the available variables.
 
 ```{r warning=FALSE, message=FALSE}
-daily_fluxes |> 
-  summarise(across(where(is.numeric), ~quantile(.x, probs = c(0, 0.25, 0.5, 0.75, 1), na.rm = TRUE))) |> 
-  t() |> 
-  as_tibble(rownames = "variable") |> 
+daily_fluxes |>
+  summarise(across(where(is.numeric), ~ quantile(.x, probs = c(0, 0.25, 0.5, 0.75, 1), na.rm = TRUE))) |>
+  t() |>
+  as_tibble(rownames = "variable") |>
   setNames(c("variable", "min", "q25", "q50", "q75", "max"))
 ```
 
@@ -382,7 +383,7 @@ As seen above for the feature engineering example, the object `pp` does not cont
 To actually transform the data, we first have to "prepare" the recipe:
 
 ```{r warning=FALSE, message=FALSE}
-pp_prep <- recipes::prep(pp, training = daily_fluxes_train) 
+pp_prep <- recipes::prep(pp, training = daily_fluxes_train)
 ```
 
 Finally we can actually transform the data. That is, "juice" the prepared recipe.
@@ -404,12 +405,12 @@ The effect is of standardization is illustrated by comparing original and transf
 
 ```{r warning=FALSE, message=FALSE}
 # prepare data for plotting
-plot_data_original <- daily_fluxes_train |> 
-  dplyr::select(one_of(c("SW_IN_F", "VPD_F", "TA_F"))) |> 
+plot_data_original <- daily_fluxes_train |>
+  dplyr::select(one_of(c("SW_IN_F", "VPD_F", "TA_F"))) |>
   tidyr::pivot_longer(cols = c(SW_IN_F, VPD_F, TA_F), names_to = "var", values_to = "val")
 
-plot_data_juiced <- daily_fluxes_juiced |> 
-  dplyr::select(one_of(c("SW_IN_F", "VPD_F", "TA_F"))) |> 
+plot_data_juiced <- daily_fluxes_juiced |>
+  dplyr::select(one_of(c("SW_IN_F", "VPD_F", "TA_F"))) |>
   tidyr::pivot_longer(cols = c(SW_IN_F, VPD_F, TA_F), names_to = "var", values_to = "val")
 
 # plot density
@@ -435,9 +436,9 @@ Visualizing missing data is the essential first step in making decisions about d
 ```{r warning=FALSE, message=FALSE}
 visdat::vis_miss(
   daily_fluxes,
-  cluster = FALSE, 
+  cluster = FALSE,
   warn_large_data = FALSE
-  )
+)
 ```
 
 Here, the variable `LW_IN_F` (longwave radiation) is affected by a lot of missing data. Note that we applied a data cleaning step along with the data read-in at the very top of this Chapter. There, we applied a filtering criterion where values are only retained if at least 80% of the underlying half-hourly data is actual measured (and not gap-filled) data. Whether to drop the variable for further modelling should be informed also by our understanding of the data and the processes relevant for the modelling task. Here, the modelling target is GPP and the carbon cycle specialists among the readers may know that longwave radiation is not a known important control on GPP (ecosystem photosynthesis). Therefore, we may consider dropping this variable from the dataset for our modelling task. The remaining variables are affected by less frequent missingness with which we will deal otherwise.
@@ -447,14 +448,14 @@ Here, the variable `LW_IN_F` (longwave radiation) is affected by a lot of missin
 Imputation refers to the replacement of missing values with with a "best guess" value ([Boehmke and Greenwell](https://bradleyboehmke.github.io/HOML/)). Different approaches exist for determining that best guess. The most basic approach is to impute missing values with the mean or median of the available values of the same variable, which can be implemented using `step_impute_*()` from the {recipes} package. For example, to impute the median for all predictors separately:
 
 ```{r warning=FALSE, message=FALSE}
-pp |> 
+pp |>
   step_impute_median(all_predictors())
 ```
 
 Imputing by the mean or median is "uninformative". We may use information about the co-variation of multiple variables for imputing missing values. For example, for imputing missing VPD values, we may consider the fact that VPD tends to be high when air temperature is high. Therefore, missing VPD values can be modeled as a function of other co-variates (predictors). Several approaches to modelling missing values are available through the {recipes} package (see [here](https://recipes.tidymodels.org/reference/index.html#step-functions-imputation)). For example, we can use KNN with five neighbors as:
 
 ```{r warning=FALSE, message=FALSE}
-pp |> 
+pp |>
   step_impute_knn(all_predictors(), neighbors = 5)
 ```
 
@@ -477,7 +478,7 @@ Note that in a case where color is strictly one of `c("red", "red", "green", "bl
 Using the recipes package, one-hot encoding is implemented by:
 
 ```{r warning=FALSE, message=FALSE}
-recipe(GPP_NT_VUT_REF ~ ., data = daily_fluxes) |> 
+recipe(GPP_NT_VUT_REF ~ ., data = daily_fluxes) |>
   step_dummy(all_nominal(), one_hot = TRUE)
 ```
 
@@ -499,7 +500,7 @@ caret::nearZeroVar(daily_fluxes, saveMetrics = TRUE)
 Using the recipes package, we can add a step that removes zero-variance predictors by:
 
 ```{r warning=FALSE, message=FALSE}
-pp |> 
+pp |>
   step_zv(all_predictors())
 ```
 
@@ -524,7 +525,7 @@ cowplot::plot_grid(plot_1, plot_2)
 Log transformation as part of the pre-processing is specified using the `step_log()` function, here applied to the model target variable (`all_outcomes()`).
 
 ```{r warning=FALSE, message=FALSE}
-recipes::recipe(WS_F ~ ., data = daily_fluxes) |>   # it's of course non-sense to model wind speed like this
+recipes::recipe(WS_F ~ ., data = daily_fluxes) |> # it's of course non-sense to model wind speed like this
   recipes::step_log(all_outcomes())
 ```
 
@@ -582,27 +583,28 @@ These steps are implemented by the code below.
 ```{r warning=FALSE, message=FALSE}
 # Data cleaning: looks ok, no obviously bad data
 # no long tail, therefore no further target engineering
-daily_fluxes |> 
-  ggplot(aes(x = GPP_NT_VUT_REF, y = ..count..)) + 
+daily_fluxes |>
+  ggplot(aes(x = GPP_NT_VUT_REF, y = ..count..)) +
   geom_histogram()
 
 # Data splitting
-set.seed(1982)  # for reproducibility
+set.seed(1982) # for reproducibility
 split <- rsample::initial_split(daily_fluxes, prop = 0.7, strata = "VPD_F")
 daily_fluxes_train <- rsample::training(split)
 daily_fluxes_test <- rsample::testing(split)
 
 # Model and pre-processing formulation, use all variables but LW_IN_F
-pp <- recipes::recipe(GPP_NT_VUT_REF ~ SW_IN_F + VPD_F + TA_F, 
-                      data = daily_fluxes_train |> drop_na()) |> 
-  recipes::step_BoxCox(recipes::all_predictors()) |> 
+pp <- recipes::recipe(GPP_NT_VUT_REF ~ SW_IN_F + VPD_F + TA_F,
+  data = daily_fluxes_train |> drop_na()
+) |>
+  recipes::step_BoxCox(recipes::all_predictors()) |>
   recipes::step_center(recipes::all_numeric(), -recipes::all_outcomes()) |>
   recipes::step_scale(recipes::all_numeric(), -recipes::all_outcomes())
 
 # Fit linear regression model
 mod_lm <- caret::train(
-  pp, 
-  data = daily_fluxes_train |> drop_na(), 
+  pp,
+  data = daily_fluxes_train |> drop_na(),
   method = "lm",
   trControl = caret::trainControl(method = "none"),
   metric = "RMSE"
@@ -610,8 +612,8 @@ mod_lm <- caret::train(
 
 # Fit KNN model
 mod_knn <- caret::train(
-  pp, 
-  data = daily_fluxes_train |> drop_na(), 
+  pp,
+  data = daily_fluxes_train |> drop_na(),
   method = "knn",
   trControl = caret::trainControl(method = "none"),
   tuneGrid = data.frame(k = 8),
@@ -623,61 +625,64 @@ We can use the model objects `mod_lm` and `mod_knn` to add the fitted values to 
 
 ```{r label="lmknn", warning=FALSE, message=FALSE, fig.cap="Evaluation of the linear regression and the KNN models on the training and the test set."}
 # make model evaluation into a function to reuse code
-eval_model <- function(mod, df_train, df_test){
-  
+eval_model <- function(mod, df_train, df_test) {
   # add predictions to the data frames
-  df_train <- df_train |> 
+  df_train <- df_train |>
     drop_na()
   df_train$fitted <- predict(mod, newdata = df_train)
-  
-  df_test <- df_test |> 
+
+  df_test <- df_test |>
     drop_na()
   df_test$fitted <- predict(mod, newdata = df_test)
-  
+
   # get metrics tables
-  metrics_train <- df_train |> 
+  metrics_train <- df_train |>
     yardstick::metrics(GPP_NT_VUT_REF, fitted)
-  
-  metrics_test <- df_test |> 
+
+  metrics_test <- df_test |>
     yardstick::metrics(GPP_NT_VUT_REF, fitted)
-  
+
   # extract values from metrics tables
-  rmse_train <- metrics_train |> 
-    filter(.metric == "rmse") |> 
+  rmse_train <- metrics_train |>
+    filter(.metric == "rmse") |>
     pull(.estimate)
-  rsq_train <- metrics_train |> 
-    filter(.metric == "rsq") |> 
+  rsq_train <- metrics_train |>
+    filter(.metric == "rsq") |>
     pull(.estimate)
-  
-  rmse_test <- metrics_test |> 
-    filter(.metric == "rmse") |> 
+
+  rmse_test <- metrics_test |>
+    filter(.metric == "rmse") |>
     pull(.estimate)
-  rsq_test <- metrics_test |> 
-    filter(.metric == "rsq") |> 
+  rsq_test <- metrics_test |>
+    filter(.metric == "rsq") |>
     pull(.estimate)
-  
+
   # visualise as a scatterplot
   # adding information of metrics as sub-titles
   plot_1 <- ggplot(data = df_train, aes(GPP_NT_VUT_REF, fitted)) +
     geom_point(alpha = 0.3) +
     geom_smooth(method = "lm", se = FALSE, color = "red") +
     geom_abline(slope = 1, intercept = 0, linetype = "dotted") +
-    labs(subtitle = bquote( italic(R)^2 == .(format(rsq_train, digits = 2)) ~~
-                            RMSE == .(format(rmse_train, digits = 3))),
-         title = "Training set") +
+    labs(
+      subtitle = bquote(italic(R)^2 == .(format(rsq_train, digits = 2)) ~ ~
+        RMSE == .(format(rmse_train, digits = 3))),
+      title = "Training set"
+    ) +
     theme_classic()
-  
+
   plot_2 <- ggplot(data = df_test, aes(GPP_NT_VUT_REF, fitted)) +
     geom_point(alpha = 0.3) +
     geom_smooth(method = "lm", se = FALSE, color = "red") +
     geom_abline(slope = 1, intercept = 0, linetype = "dotted") +
-    labs(subtitle = bquote( italic(R)^2 == .(format(rsq_test, digits = 2)) ~~
-                            RMSE == .(format(rmse_test, digits = 3))),
-         title = "Test set") +
+    labs(
+      subtitle = bquote(italic(R)^2 == .(format(rsq_test, digits = 2)) ~ ~
+        RMSE == .(format(rmse_test, digits = 3))),
+      title = "Test set"
+    ) +
     theme_classic()
-  
+
   out <- cowplot::plot_grid(plot_1, plot_2)
-  
+
   return(out)
 }
 

@@ -26,46 +26,44 @@ library(recipes)
 We're using the same data and address the same modelling challenge as in @sec-supervisedmli. Let's load the data, wrangle a bit, specify the same model formulation, and the same pre-processing steps as in the previous @sec-supervisedmli.
 
 ```{r warning=FALSE, message=FALSE}
-daily_fluxes <- readr::read_csv("./data/FLX_CH-Dav_FLUXNET2015_FULLSET_DD_1997-2014_1-3.csv") |>  
-  
+daily_fluxes <- readr::read_csv("./data/FLX_CH-Dav_FLUXNET2015_FULLSET_DD_1997-2014_1-3.csv") |>
   # select only the variables we are interested in
-  dplyr::select(TIMESTAMP,
-                GPP_NT_VUT_REF,    # the target
-                ends_with("_QC"),  # quality control info
-                ends_with("_F"),   # includes all all meteorological covariates
-                -contains("JSB")   # weird useless variable
-                ) |>
-
+  dplyr::select(
+    TIMESTAMP,
+    GPP_NT_VUT_REF, # the target
+    ends_with("_QC"), # quality control info
+    ends_with("_F"), # includes all all meteorological covariates
+    -contains("JSB") # weird useless variable
+  ) |>
   # convert to a nice date object
   dplyr::mutate(TIMESTAMP = lubridate::ymd(TIMESTAMP)) |>
-
   # set all -9999 to NA
-  dplyr::mutate(across(where(is.numeric), ~na_if(., -9999))) |> 
-
-  
+  dplyr::mutate(across(where(is.numeric), ~ na_if(., -9999))) |>
   # retain only data based on >=80% good-quality measurements
   # overwrite bad data with NA (not dropping rows)
-  dplyr::mutate(GPP_NT_VUT_REF = ifelse(NEE_VUT_REF_QC < 0.8, NA, GPP_NT_VUT_REF),
-                TA_F           = ifelse(TA_F_QC        < 0.8, NA, TA_F),
-                SW_IN_F        = ifelse(SW_IN_F_QC     < 0.8, NA, SW_IN_F),
-                LW_IN_F        = ifelse(LW_IN_F_QC     < 0.8, NA, LW_IN_F),
-                VPD_F          = ifelse(VPD_F_QC       < 0.8, NA, VPD_F),
-                PA_F           = ifelse(PA_F_QC        < 0.8, NA, PA_F),
-                P_F            = ifelse(P_F_QC         < 0.8, NA, P_F),
-                WS_F           = ifelse(WS_F_QC        < 0.8, NA, WS_F)) |> 
-
+  dplyr::mutate(
+    GPP_NT_VUT_REF = ifelse(NEE_VUT_REF_QC < 0.8, NA, GPP_NT_VUT_REF),
+    TA_F = ifelse(TA_F_QC < 0.8, NA, TA_F),
+    SW_IN_F = ifelse(SW_IN_F_QC < 0.8, NA, SW_IN_F),
+    LW_IN_F = ifelse(LW_IN_F_QC < 0.8, NA, LW_IN_F),
+    VPD_F = ifelse(VPD_F_QC < 0.8, NA, VPD_F),
+    PA_F = ifelse(PA_F_QC < 0.8, NA, PA_F),
+    P_F = ifelse(P_F_QC < 0.8, NA, P_F),
+    WS_F = ifelse(WS_F_QC < 0.8, NA, WS_F)
+  ) |>
   # drop QC variables (no longer needed)
   dplyr::select(-ends_with("_QC"))
 
 # Data splitting
-set.seed(123)  # for reproducibility
+set.seed(123) # for reproducibility
 split <- rsample::initial_split(daily_fluxes, prop = 0.7, strata = "VPD_F")
 daily_fluxes_train <- rsample::training(split)
 daily_fluxes_test <- rsample::testing(split)
 
 # The same model formulation is in the previous chapter
-pp <- recipes::recipe(GPP_NT_VUT_REF ~ SW_IN_F + VPD_F + TA_F, 
-                      data = daily_fluxes_train) |> 
+pp <- recipes::recipe(GPP_NT_VUT_REF ~ SW_IN_F + VPD_F + TA_F,
+  data = daily_fluxes_train
+) |>
   recipes::step_center(recipes::all_numeric(), -recipes::all_outcomes()) |>
   recipes::step_scale(recipes::all_numeric(), -recipes::all_outcomes())
 ```
@@ -95,7 +93,7 @@ Hyperparameters usually have to be "tuned". The optimal setting depends on the d
 source("R/eval_model.R")
 
 # specify the set of K
-df_k <- data.frame(k = c(2, 5, 10, 15, 20, 25, 30, 35, 40, 60, 100, 200, 300)) |> 
+df_k <- data.frame(k = c(2, 5, 10, 15, 20, 25, 30, 35, 40, 60, 100, 200, 300)) |>
   dplyr::mutate(idx = 1:dplyr::n())
 ```
 
@@ -105,12 +103,14 @@ df_k <- data.frame(k = c(2, 5, 10, 15, 20, 25, 30, 35, 40, 60, 100, 200, 300)) |
 # model training for the specified set of K
 list_mod_knn <- purrr::map(
   df_k$k,
-  ~caret::train(pp, 
-                data = daily_fluxes_train |> tidyr::drop_na(), 
-                method = "knn",
-                trControl = caret::trainControl(method = "none"),
-                tuneGrid = data.frame(k = .),   # '.' evaulates k
-                metric = "RMSE"))
+  ~ caret::train(pp,
+    data = daily_fluxes_train |> tidyr::drop_na(),
+    method = "knn",
+    trControl = caret::trainControl(method = "none"),
+    tuneGrid = data.frame(k = .), # '.' evaulates k
+    metric = "RMSE"
+  )
+)
 ```
 
 ```{r include=FALSE, eval=FALSE}
@@ -128,43 +128,47 @@ list_mod_knn <- readRDS("data/tutorials/smlii_list_mod_knn.rds")
 # Evaluate all models
 list_metrics <- purrr::map(
   list_mod_knn,
-  ~eval_model(., 
-              daily_fluxes_train |> drop_na(), 
-              daily_fluxes_test, 
-              return_metrics = TRUE))
+  ~ eval_model(.,
+    daily_fluxes_train |> drop_na(),
+    daily_fluxes_test,
+    return_metrics = TRUE
+  )
+)
 # extract metrics on training data
 list_metrics_train <- purrr::map(
   list_metrics,
-  "train") |> 
+  "train"
+) |>
   # add K to the data frame
-  bind_rows(.id = "idx") |> 
-  mutate(idx = as.numeric(idx)) |> 
+  bind_rows(.id = "idx") |>
+  mutate(idx = as.numeric(idx)) |>
   left_join(df_k, by = "idx")
 
 # extract metrics on testing data
 list_metrics_test <- purrr::map(
   list_metrics,
-  "test") |> 
+  "test"
+) |>
   # add K to the data frame
-  bind_rows(.id = "idx") |> 
-  mutate(idx = as.numeric(idx)) |> 
+  bind_rows(.id = "idx") |>
+  mutate(idx = as.numeric(idx)) |>
   left_join(df_k, by = "idx")
 ```
 
 
 ```{r, echo=FALSE}
 # prepare for visualisation
-df_mae <- list_metrics_train |> 
-  filter(.metric == "mae") |> 
-  mutate(set = "train") |> 
+df_mae <- list_metrics_train |>
+  filter(.metric == "mae") |>
+  mutate(set = "train") |>
   bind_rows(
-    list_metrics_test |> 
-      filter(.metric == "mae") |> 
+    list_metrics_test |>
+      filter(.metric == "mae") |>
       mutate(set = "test")
   )
 
 # visualise
-df_mae |> 
+df_mae |>
   ggplot(aes(x = k, y = .estimate, color = set)) +
   geom_point() +
   geom_line()
@@ -195,12 +199,13 @@ To do a k-fold cross validation during model training in R, we don't have to imp
 
 ```{r eval=FALSE}
 set.seed(1982)
-mod_cv <- caret::train(pp, 
-                       data = daily_fluxes_train |> drop_na(), 
-                       method = "knn",
-                       trControl = caret::trainControl(method = "cv", number = 10),
-                       tuneGrid = data.frame(k = c(2, 5, 10, 15, 20, 25, 30, 35, 40, 60, 100)),
-                       metric = "MAE")
+mod_cv <- caret::train(pp,
+  data = daily_fluxes_train |> drop_na(),
+  method = "knn",
+  trControl = caret::trainControl(method = "cv", number = 10),
+  tuneGrid = data.frame(k = c(2, 5, 10, 15, 20, 25, 30, 35, 40, 60, 100)),
+  metric = "MAE"
+)
 ```
 
 ```{r include=FALSE, eval=FALSE}
@@ -225,8 +230,8 @@ print(mod_cv)
 From the output of `print(mod_cv)`, we get information about model performance for each hyperparameter choice. The values reported are means of respective metrics determined across the ten folds. Also the optimal choice of $k$ (25) is reported. Does this correspond to the $k$ with the best performance determined on the test set? If resampling was a good approach to estimating out-of-sample model performance, then it should!
 
 ```{r}
-df_mae |>    # see hint
-  filter(set == "test") |> 
+df_mae |> # see hint
+  filter(set == "test") |>
   filter(.estimate == min(.estimate))
 ```
 

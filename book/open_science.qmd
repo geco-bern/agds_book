@@ -127,11 +127,12 @@ Practices for applying FAIR data principles involve multiple methods and resourc
 * Ensure the repository generates a *digital object identifier* (DOI) for long-term citation of uploaded datasets
 * Add *metadata* to make the dataset discoverable (keywords, subject categories, abstract).
 
-**Integrate data into your workflow**
+**Integrate data into a repository or package**
 
-* Store small (<25 MB) or intermediate datasets of a project workflow in the project’s version-controlled repository (through Git and Github, see @sec-codemgmt).
-* Use *tags and releases* to capture versions of the dataset (see @sec-open-source-software).
+* Data may be contained in a Git repository and published through that. This only makes sense if the data is stored in text-based files (e.g., CSV) and is permissible only for data files of limited size (<25 MB on Github).
+* This allows clear versioning through a [*tag*](https://git-scm.com/book/en/v2/Git-Basics-Tagging) and [*release*](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository) and allows tracking the state of the data through the *commit* history.
 * Link your Github repository to Zenodo for automatic DOI assignment when releasing a version (see [here](https://help.zenodo.org/docs/profile/linking-accounts/) and [here](https://help.zenodo.org/docs/github/enable-repository/)).
+* Extend the repository to make in [*library*](https://r-pkgs.org/) (Example: [*leaf13C*](https://traitecoevo.r-universe.dev/leaf13C)).
 
 **Provide a data availability statement**
 
@@ -154,8 +155,9 @@ Developing open source software for research is more than simply sharing code --
 
 **Make stable releases**
 
-* Use *git tags* to mark major updates of the repository. These may align with designated version names (e.g., `v1.0.0`).
-* Create releases of tags on GitHub or GitLab with notes describing changes.
+* Use a git [*tag*](https://git-scm.com/book/en/v2/Git-Basics-Tagging) to mark major updates of the repository. These may align with designated version names (e.g., `v1.0.0`).
+* Follow [*semantic versioning*](https://semver.org/) -- a standardised way of using version numbering to designate major, minor, and patch changes to the code.
+* Create [*releases*](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository) of tags on GitHub or GitLab with notes describing changes.
 * Link your Github repository to Zenodo for automatic DOI assignment when releasing a version (see [here](https://help.zenodo.org/docs/profile/linking-accounts/) and [here](https://help.zenodo.org/docs/github/enable-repository/)).
 
 **Refactor reusable components into a library**
@@ -169,11 +171,11 @@ Developing open source software for research is more than simply sharing code --
 * Write vignettes (see @sec-vignettes) or tutorials showing use cases.
 * Create a project website with documentation (e.g., using [*GitHub Pages*](https://docs.github.com/en/pages), and [*pkgdown*](https://pkgdown.r-lib.org/) for R).
 * Publish a software paper in open software description journal (e.g., *Journal of Open Source Software*).
-* Submit your library to a **central archive**: CRAN for R, or PyPI for Python.
+* Submit your library to a central archive: CRAN for R, or PyPI for Python.
 
 **Maintain and improve the project**
 
-* Keep track of issues for bug reports and feature requests (see [here](https://docs.github.com/en/issues/tracking-your-work-with-issues/learning-about-issues/about-issues)).
+* Keep track of [*issues*](https://docs.github.com/en/issues/tracking-your-work-with-issues/learning-about-issues/about-issues) for bug reports and feature requests.
 * Keep a changelog of updates and fixes.
 * Encourage community contributions through [*pull requests*](sec-pull-request) and clear contributing guidelines.
 
@@ -273,29 +275,16 @@ Developing open source software for research is more than simply sharing code --
 ## Exercises
 
 
-### A new project {-}
-
-What are the basic steps to create a reproducible workflow from a file management perspective? Create your own R project using these principles and provide details the on steps involved and why they matter.
-
-The project should be a reproducible workflow:
-
--   Download and plot a MODIS land cover map for Belgium using skills you learned in @sec-datavariety.
-
--   Write a function to count the occurrences of land cover classes in the map as a formal function using skills you learned in @sec-datawrangling.
-
--   Create a plot of the land cover map, see @sec-datavis.
-
--   Write a dynamic report describing your answers to the above questions regarding how to structure a reproducible workflow.
 
 
-### Tracking the state of your project {-}
+<!-- ### Tracking the state of your project {-} -->
 
--   Track the packages you use in the project you created using {renv}.
+<!-- -   Track the packages you use in the project you created using {renv}. -->
 
--   Install any additional library and update the state of your project.
+<!-- -   Install any additional library and update the state of your project. -->
 
--   Create a simple {targets} project using the above workflow
+<!-- -   Create a simple {targets} project using the above workflow -->
 
-    -   Make changes to the API download routine.
+<!--     -   Make changes to the API download routine. -->
 
-    -   Rerun the targets project.
+<!--     -   Rerun the targets project. -->

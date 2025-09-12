@@ -48,16 +48,16 @@ A model-agnostic way to quantify variable importance is to permute (shuffle) the
 This is implemented by the {vip} package. Note that the {vip} package has model-specific algorithms implemented but also takes model-agnostic arguments as done below.
 
 ```{r}
-vip::vip(rf_mod,                        # Fitted model object
-         train = rf_mod$trainingData |> 
-           dplyr::select(-TIMESTAMP),   # Training data used in the model
-         method = "permute",            # VIP method
-         target = "GPP_NT_VUT_REF",     # Target variable
-         nsim = 5,                      # Number of simulations
-         metric = "RMSE",               # Metric to assess quantify permutation
-         sample_frac = 0.75,            # Fraction of training data to use
-         pred_wrapper = predict         # Prediction function to use
-         )
+vip::vip(rf_mod, # Fitted model object
+  train = rf_mod$trainingData |>
+    dplyr::select(-TIMESTAMP), # Training data used in the model
+  method = "permute", # VIP method
+  target = "GPP_NT_VUT_REF", # Target variable
+  nsim = 5, # Number of simulations
+  metric = "RMSE", # Metric to assess quantify permutation
+  sample_frac = 0.75, # Fraction of training data to use
+  pred_wrapper = predict # Prediction function to use
+)
 ```
 
 This indicates that shortwave radiation ('SW_IN_F') is the most important variable for modelling GPP here. I.e., the model performance degrades most (the RMSE increases most) if the information in shortwave radiation is lost. On the other extreme, atmospheric pressure adds practically no information to the model. This variable may therefore well be dropped from the model.
@@ -85,27 +85,29 @@ This algorithm is implemented by the {pdp} package:
 ```{r}
 # XXX This takes very long
 # The predictor variables are saved in our model's recipe
-preds <- 
-  rf_mod$recipe$var_info |> 
-  dplyr::filter(role == "predictor") |> 
+preds <-
+  rf_mod$recipe$var_info |>
+  dplyr::filter(role == "predictor") |>
   dplyr::pull(variable)
 
 # The partial() function can take n=3 predictors at max and will try to create
-# a n-dimensional visulaisation to show interactive effects. However, 
-# this is computational intensive, so we only look at the simple 
+# a n-dimensional visulaisation to show interactive effects. However,
+# this is computational intensive, so we only look at the simple
 # response-predictor plots
 all_plots <- purrr::map(
   preds,
-  ~pdp::partial(
-      rf_mod,       # Model to use
-      .,            # Predictor to assess
-      plot = TRUE,  # Whether output should be a plot or dataframe
-      plot.engine = "ggplot2"  # to return ggplot objects
-    )
+  ~ pdp::partial(
+    rf_mod, # Model to use
+    ., # Predictor to assess
+    plot = TRUE, # Whether output should be a plot or dataframe
+    plot.engine = "ggplot2" # to return ggplot objects
+  )
 )
 
-pdps <- cowplot::plot_grid(all_plots[[1]], all_plots[[2]], all_plots[[3]], 
-                           all_plots[[4]], all_plots[[5]], all_plots[[6]])
+pdps <- cowplot::plot_grid(
+  all_plots[[1]], all_plots[[2]], all_plots[[3]],
+  all_plots[[4]], all_plots[[5]], all_plots[[6]]
+)
 
 pdps
 ```
@@ -115,5 +117,3 @@ These PDPs show that the variables `TA_F`, `SW_IN_F`, and `LW_IN_F` have a stron
 <!--#  TODO: Why does VPD have no negative effect on GPP at high values? Maybe this could be discussed in terms of a model not necessarily being able to capture physical processes.-->
 
 <!--# Should we include ICE? -->
-
-
