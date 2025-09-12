@@ -1,7 +1,5 @@
 # Open science practices {#sec-openscience}
 
-**Chapter lead author: Koen Hufkens**
-
 ## Learning objectives {#sec-learning-objectives-6}
 
 In this chapter, you will learn the reasons for practicing open science and some of the basic methodological techniques that we can use to facilitate an open science workflow.
@@ -16,165 +14,270 @@ In this chapter you will learn how to:
 
 <!-- https://www.nature.com/articles/sdata201618 -->
 
-## Tutorial
+## What is Open Science and why?
 
-The scientific method relies on repeated testing of a hypothesis. When dealing with data and formal analysis, one can reduce this problem to the question: could an independent scientist attain the same results given the described methodology, data and code?
+Open Science is a way of doing research that emphasizes public and free accessibility, reusability, and transparency at every stage of the scientific process. Instead of keeping data, methods, and results behind paywalls or locked on personal computers, Open Science seeks to make them available for others to examine, test, and build upon. In brief:
 
-Although this seems trivial, this issue has vexed the scientific community. These days, many scientific publications are based on complex analyses with often large data sets. More so, methods in publications are often insufficiently detailed to really capture the scope of an analysis. Even from a purely technical point of view, the reproducibility crisis or the inability to reproduce experimental results, is a complex problem. This is further compounded by social aspects and incentives. In recent decades, scientific research has seen a steady increase in speed due to the digitization of many fields and the commodification of science.
+> “Open data and content can be freely used, modified, and shared by anyone for any purpose.” ([opendefinition.org](https://opendefinition.org/))
 
-Although digitization has opened up new research possibilities, its potential for facilitating, accelerating, and advancing science are often not fully made use of. Historically, research and its output in the form of data and code has been confined to academic journals, data and code has often not been made available, and data were not shared or behind pay-walls. This limits the impact of science also in the public domain. (In many ways, this is still the case today, in year 2023 as we write). Digitization has made research output better visible and accessible, but practical obstacles and weak standards often prevent it from uptake, re-use, and further development by the wider community.
+At its core, Open Science is motivated by the requirement for *reproducibility* of scientific findings: Results should be testable by others using the same methods and data. More fundamentally, results should be *replicable*, *robust*, and *generalisable*. These descriptors can be understood as different combinations of the data and/or the analysis being identical between studies (or not). Open access data and software are the basis for a study to be reproducible. The analysis (software) may be reusable and can be applied to new data, making findings replicable. The same data may also be analysed differently. If findings are similar, they are robust. If a pattern or a relationship is identified consistently with multiple different combinations of data and analytic approaches, findings are generalisable. Within the context of this course, we focus primarily on the practical aspects for reproducible science, i.e., ensuring that given the same data and code, the results will be identical.
 
-Open and reproducible science is a movement to make scientific research (output) widely accessible to the larger public, increase research transparency and enabling robust and verifiable science. Open science aims to be as open as possible about the whole scientific process, and as closed as desirable (e.g. privacy or security reasons).
-
-It is important to acknowledge that there is a spectrum of reproducible data and code workflows which depends on the state or source of the data and the output of the code (or analysis). Within the context of this course, we focus primarily on the practical aspects for reproducible science, i.e., ensuring that given the same data and code, the results will be similar.
-
-![The reproducibility matrix by The Turing Way.](./figures/reproducible-matrix-turing-way.jpg){#fig-repromatrix width=60% fig.align='center'}
-
-The basics of open science coding and data practices rely on a number of simple concepts. The sections below describe a selection of the most important ones. Sticking to these principles and tools will increase the reproducibility of your work greatly.
-
-### Project structure
-
-Reproducible science relies on a number of key components. Data and code management and the tracking of required meta-data is the first step in an open science workflow. 
-
-In @sec-gettingstarted, you learned how to setup an R project. An R project gathers all components of your analysis in a single directory. Although current computers make it easy to "find" your files and are largely file location-agnostic, this is not the case in many research environments. Projects grow quickly, and often, the number of files will flood a single directory. Therefore, files need a precise and structured location. This structure allows you to determine both the function and order of a workflow without reading any code.
-
-It is good practice to have a consistent project structure within and between projects. This allows you to find most project components regardless of when you return to a particular project. Structuring a project in one folder also makes projects portable. All parts reside in one location making it easy to create a *git* project from this location (see @sec-codemgmt), or just copy the project to a new drive.
-
-An example data structure for raw data processing is given below and we provide an [R project template](https://github.com/geco-bern/R_proj_template) to work from and adjust through our [lab GitHub profile](https://github.com/geco-bern). A full description on using the template is provided in @sec-codemgmt.
-
-``` bash
-data-raw/
-├─ raw_data_product/
-├─ 00_download_raw_data.R
-├─ 01_process_raw_data.R
+```{r echo=FALSE}
+#| label: fig-repromatrix
+#| fig-cap: "The reproducibility matrix. This figure was created for @turingway and is used under a CC-BY 4.0 licence."
+#| out-width: 60%
+knitr::include_graphics("figures/reproducible-matrix-turing-way.jpg")
 ```
 
-### Managing workflows
+<!-- ![The reproducibility matrix by The Turing Way.](./figures/reproducible-matrix-turing-way.jpg){#fig-repromatrix width=60% fig.align='center'} -->
 
-Although some code is agnostic to the order of execution, many projects are effectively *workflows*, where the output of one routine is required for the successful execution of the next routine.
+*Reusability* of code in project-oriented workflows (see @sec-reproducible) is key to Open science. It ensures that outputs such as datasets, software, and workflows can be adapted for new purposes, speeding up discovery across disciplines. Concretely, Open Science includes practices including open data, open source software, open access publishing, and open workflows and methods (see below). Beyond methods, Open Science represents a cultural shift. It challenges the traditional “publish or perish” system, where competition and secrecy often slow progress, and instead encourages collaboration, accountability, and broader participation. Several aspects motivate the cultural shift towards Open Science:
 
-In order to make sure that your future self, or a collaborator, understands the order in which things should be executed, it is best to number scripts accordingly. This is the most basic approach to managing workflows.
+- Enables accountability and trust, and leads to robust science.
 
-In the example below, all statistics code is stored in the `statistics` folder in an overall `analysis` folder (which also includes code for figures). All statistical analyses are numbered to ensure that the output of a first analysis is available to the subsequent one.
+Access to data and code enables tests and acts as a precise documentation of how results were obtained. This also reflects a response to the reproducibility crisis that has affected scientific studies and entire scientific fields. 
 
-``` bash
-analysis/
-├─ statistics/
-│  ├─ 00_randomforest_model.R
-│  ├─ 01_randomforest_tuning.R
-├─ figures/
-│  ├─ global_model_results_map.R
-│  ├─ complex_process_visualization.R
-```
+- Creates efficient infrastructure.
+ 
+Making data freely accessible through the web enables fully reproducible workflows and the integration of data access into reproducible and continuously updated workflows.
 
-The code-chunk above is a visualisation of a folder (aka. directory) structure on your computer. The lines and indents denote folder levels. In this example, you have a folder `analysis` which holds two more folders `statistics` and `figures`, and in both sub-folders, you have different `*.R` files (`*` is a so-called "wild-card" which is a placeholder for any text). Note that different people may use different symbols to visualise folder structures but generally, folder levels are shown with indents, and files are identifiable by their suffixes.
+- Enhances impact.
 
+Making your data and code accessible and reusable enhances its uptake by the community. This makes your work valuable and visible -- you create impact.
 
-#### Automating and visualizing workflows with targets
+- Serves the public and transcends discrimination.
 
-To sidestep some of the manual management in R you can use a dedicated pipeline tool like the {targets} package in R. The package learns how your pipeline fits together, skips tasks that are already up-to-date, and runs only the necessary computation. {targets} can also visualize the progress of your workflow.
-
-![A targets visualized workflow by rOpenSci.](https://books.ropensci.org/targets/man/figures/tar_watch.png){#fig-targets width=60% fig.align='center'}
-
-Due to the added complexity of the {targets} package, we won't include extensive examples of such a workflow but refer to the excellent documentation of the package for simple examples [here](https://books.ropensci.org/targets/walkthrough.html).
+Since much research is publicly funded, its outputs should be accessible to the public and anyone, irrespective of access to resources and funding.
 
 
-### Capturing your session state
+### Open data
 
-Often, code depends on various components, packages or libraries. These libraries and all software come in specific versions, which might or might not alter the behaviour of the code and the output it produces.
+Open data refers to the practice of making research datasets available so that others can examine, validate, and reuse them. When properly shared, data becomes a resource for the entire research community, enabling new insights and reducing duplication of effort. Yet, in practice, researchers often perceive barriers to making data open. In some cases, researchers must handle sensitive or confidential data, which cannot be openly released without consent and restrictions to openness. Finally, there are strategic considerations—sharing data may feel risky in competitive environments.
 
-If you want to ensure full reproducibility, especially across several years, you will need to capture the state of the system and libraries with which you ran the original analysis.
-
-In R the [{renv} package](https://rstudio.github.io/renv/) serves this purpose and will provide an index of all the packages used in your project as well as their version. For a particular project, it will create a local library of packages with a static version. These static packages will not be updated over time, and therefore ensure consistent results. This makes your analysis isolated, portable, and reproducible. The analogue in Python would be the [virtual environments, or venv program](https://docs.python.org/3/library/venv.html).
-
-When setting up your project you can run:
-
-``` r
-# Initiate a {renv} environment
-renv::init()
-```
-
-To initiate your static R environment. Whenever you want to save the state of your project (and its packages) you can call:
-
-``` r
-# Save the current state of the environment / project
-renv::snapshot()
-```
-
-To save any changes made to your environment. All data will be saved in a project description file called a lock file (i.e. `renv.lock`). It is advised to update the state of your project regularly, and in particular before closing a project.
-
-When you move your project to a new system, or share a project on github with collaborators, you can revert to the original state of the analysis by calling:
-
-``` r
-# On a new system, or when inheriting a project
-# from a collaborator you can use a lock file
-# to restore the session/project state using
-renv::restore()
-```
-
-> NOTE: As mentioned in the {renv} documentation: "For development and collaboration, the `.Rprofile`, `renv.lock` and `renv/activate.R` files should be committed to your version control system. But the `renv/library` directory should normally be ignored. Note that `renv::init()` will attempt to write the requisite ignore statements to the project `.gitignore`." We refer to @sec-learning-objectives-6 for details on github and its use.
-
-### Capturing a system state
-
-Although R projects and the use of {targets} make your workflow consistent, the package versions used between various systems (e.g., your home computer or the cluster at the university might vary). To address issues with changes in the versions of package, you can use the {renv} package which manages package version (environments) for you. When tasks are even more complex and include components outside of R, you can use [*Docker*](https://www.docker.com/) to provide containerization of an operating system and the included ancillary application.
-
-The [{rocker} package](https://rocker-project.org/) provides access to some of these features within the context of reproducible R environments. Using these tools, you can therefore emulate the state of a machine, independently of the machine on which the docker file is run. These days, machine learning applications are often deployed as docker sessions to limit the complexity of installing required software components. The application of docker-based installs is outside the scope of the current course, but feel free to explore these resources as they are widespread in data science.
-
-### Readable reporting using Rmarkdown
-
-Within Rstudio, you can use Rmarkdown dynamic documents to combine both text and code. Rmarkdown is ideal for *reporting*, i.e., writing your final document and presenting your analysis results. A Rmarkdown document consists of a header that specifies document properties (whether it should be rendered as an html page, a docx file or a pdf), and the actual content. You have encountered RMarkdown already in @sec-rmarkdown.
-
-### Project structure
-
-In R projects, all files can be referenced relative to the top-most path of the project. When opening `your_project.Rproj` in RStudio, you can load data that is located in a sub-directory of the project directory `./data/` by `read.table("./data/some_data.csv")`. The use of *relative paths* and consistent directory structures across projects, enables that projects can easily be ported across computers and code adopted across projects.
-
-``` bash
-project/
-├─ your_project.Rproj
-├─ vignettes/
-│  ├─ your_dynamic_document.Rmd
-├─ data/
-│  ├─ some_data.csv
-```
-
-Rmarkdown files commonly reside in a sub-directory `./vignettes/` and are rendered relative to the file path where it is located. This means that to access data which resides in `data/` using code in `./vignettes/your_dynamic_document.Rmd`, we would have to write:
-```{r eval = FALSE}
-data <- read.table('../data/some_data.csv')
-```
-
-Note the `../` to go one level up. To allow for more flexibility in file locations within your project folder, you may use the [{here} package](https://here.r-lib.org/) package. I gathers the absolute path of the R project and allows for a specification of paths inside scripts and functions that always start from the top project directory, irrespective of where the script that implements the reading-code is located. Therefore, we can just write:
-```{r eval = FALSE}
-data <- read.table(here::here('data/some_data.csv'))
-```
-
-But why not use absolute paths to begin with? Portability! When I would run your `\*.Rmd` file with an absolute path on my computer, it would not render as the file `some_data.csv` would then be located at: `/my_computer/project/data/some_data.csv`
-
-#### Limitations of notebooks
-
-The file referencing issue and the common use of Rmarkdown, and notebooks in general, as a one size fits all solution, containing all aspects from data cleaning to reporting, implies some limitations. RMarkdown documents mix two cognitive tasks, writing text content (i.e. reporting) and writing code. Switching between these two modes comes with undue overhead. If you code, you should not be writing prose, and vise versa.
-
-If your R markdown file contains more code than it does text, it should be considered an R script or function (with comments or documentation). Conversely, if your RMarkdown file contains more text than code, it probably is easier to collaborate on a true word processing file (or cloud-based solution). Notebooks, such as RMarkdown, are most suitable for communicating implementations, demonstrating functions, and reporting reproducible results. They can also be used like lab notes. They are less suited for code development. 
-
-### Data retention
-
-Coding practices and documenting all moving parts in a coding workflow is only one practical aspect of open science. An additional component is long-term data and code retention and versioning.
-
-In @sec-codemgmt, you will learn more about *git* for code management and collaboration. Several online make use of *git* for providing web-based collaboration functionalities and remote storage of your repositories. Examples are [GitHub](https://github.com), [GitLab](https://gitlab.com), [Codeberg](https://codeberg.org), or [Bitbucket](https://bitbucket.org/). However, their remote storage service should only be considered an aid for collaboration, and not a place to store code into perpetuity. Furthermore, these services mostly have a limit to how much data can be stored in a repository (mostly \~2 GB). For small projects, data can be included in the repository itself. For larger projects and for making larger datasets accessible, this won't be possible.
+Despite these challenges, expectations and the culture around open data are shifting. Many journals and funding agencies now require authors to provide data availability statements in published articles, and some make data deposition in recognized open research data repositories a condition of publication. To guide these practices, the [*FAIR*](https://www.go-fair.org/fair-principles/) principles [@wilkinson_fair_2016]  -- that data should be Findable, Accessible, Interoperable, and Reusable -- have become a global standard. FAIR does not mean all data must be open, but it emphasizes that well-documented and properly archived data maximizes its potential for reuse while protecting sensitive information.
 
 To ensure long-term storage of code and data, outside of commercial for profit services (e.g., Dropbox, Google Drive etc), it is best to rely on public permanent repositories, such as [Zenodo](https://zenodo.org/). Zenodo is an effort by the European commission, but accessible to all, to facilitate archiving of science projects of all nature (code and data) up to 50 GB. In addition, Zenodo provides a citable digital object identifier or DOI. This allows data and code, even if not formally published in a journal, to be cited. Other noteworthy open science storage options include [Dryad](https://datadryad.org/stash) and the [Center for Open Science](https://osf.io/). 
 
-The broad-purpose permanent data repositories mentioned above are not edited and are therefore not ideal for data discovery. In contrast, edited data repositories often have a specific thematic scope and different repositories are established in different research communities. Below you find a list of widely used data repositories, generalist and others, that provide manual or automated download access to their data. Note that this list contains some example and is far from extensive.
+The broad-purpose permanent data repositories mentioned above are not edited and are therefore not ideal for data discovery. In contrast, edited data repositories often have a specific thematic scope and different repositories are established in different research communities. @tbl-open-data-repositories provides a list of widely used data repositories, generalist and others, that provide manual or automated download access to their data. Note that this list contains some example and is far from extensive.
 
-| Data type                                                                 | Website                             | Description                                                                                   | Download                          |
-|----------------------|---------------|-------------------------------|---------------|
-| Copernicus Climate Data Store                                             | <https://cds.climate.copernicus.eu> | Freely available climate data (reanalysis as well as future projections)                      | API                               |
-| Oak Ridge National Laboratories Digital Active Archive Center (ORNL DAAC) | <https://daac.ornl.gov/>            | Environmental data of varying sources, either remote sensing, field work and or re-analysis.  | multiple APIs or manual downloads |
-| Land Processes Digital Active Archive Center (LP DAAC)                    | <https://lpdaac.usgs.gov/>          | Remote sensing (analysis ready) data products.                                                | Login walled automated downloads  |
-| Environmental Data Initiative                                             | <https://edirepository.org/>        | Generalist data repository for study data, with a strong focus on biology.                    | Manual download                   |
-| Dryad                                                                     | <https://datadryad.org>             | Generalist data repository for study data, with a strong focus on biology.                    | Manual downloads                  |
-| Zenodo                                                                    | <https://zenodo.org/>               | Generalist data repository for study data.                                                    | Manual downloads                  |
-| Eurostat                                                                  | <https://ec.europa.eu/eurostat>     | Generalist data repository for EU wide (demographic) data.                                    | Manual downloads                  |
-| Swiss Open Government data                                                | <https://opendata.swiss/en/>        | Generalist data repository from the Swiss Federal statistics office.                          | API or manual downloads           |
+
+| Repository name                 | URL                                  | Purpose                                             | Open to contributions     |
+|------------                     |----------                            |---------------                                      |-----------------------    |
+| Zenodo                          | <https://zenodo.org/>                | Generalist data repository for research data.       | Yes                       |
+| Figshare                        | <https://figshare.com/>              | Generalist data repository for research data.       | Yes                       |
+| Dryad                           | <https://datadryad.org>              | Generalist data repository for research data.       | Yes                       |
+| Environmental Data Initiative   | <https://edirepository.org/>         | Hosts ecological and environmental data             | Yes                       |
+| World Data Center for Climate   | <https://www.wdc-climate.de/ui/>     | Hosts Earth system model data, run by Deutsches Klimarechenzentrum (DKRZ) | Yes |
+| PANGAEA                         | <https://www.pangaea.de/>            | Hosts georeferenced data from earth system research | Yes                       |
+| EnviDat                         | <https://www.envidat.ch>             | Hosts envrionmental system research with a focus on Switzerland | For researchers of the Swiss Federal Institute for Forest, Snow and Landscape WSL |
+| Climate Data Store              | <https://cds.climate.copernicus.eu/> | Provides access to climate data | No |
+| Copernicus Data Space Ecosystem | <https://dataspace.copernicus.eu/>   | Provides access to data from the Copernicus Sentinel missions | No |
+| Swiss Open Geodata              | <https://www.swisstopo.admin.ch/en/geodata-and-applications>   | Provides access to geodata by the Swiss Open Government Data | No |
+| Eurostat                        | <https://ec.europa.eu/eurostat>      | Provides access to statistical data of Europe | No |
+| Swiss Open Government data      | <https://opendata.swiss/en/>         | Generalist data from the Swiss Federal statistics office. | No |
+
+: An incomplete collection of open data repositories used in Environmental sciences and Geography. Note the distinction between repositories that are open to contributions and offer hosting and DOI-minting for user-contributed datasets, and those that are not (Column 'Open to contributions'). A more complete list of open data repositories and other access points for open research data in Environmental science and Geography can be found at @loginova_list_2025. {#tbl-open-data-repositories}
+
+
+### Open source software
+
+Software is often as central to research as data, yet historically it has been less visible in scholarly outputs. Open source software addresses this gap by making code freely accessible for anyone to use, examine, and extend. A typical project might start as a tool written for a specific study, but once shared and adapted for more general applications, it can evolve into a library that supports many projects across a community. Also specialized software, such as a model for simulating a physical system, can become widely useful if written in a non-proprietary coding language and accompanied by sufficient documentation.
+
+The benefits of open source are significant. Publicly available code enables reproducibility by letting others see exactly how analyses were performed. It also reduces dependence on proprietary systems, which may lock research into costly or opaque environments. Over time, well-maintained open source projects can attract contributions from the wider community, enhancing functionality and improving reliability. Version control platforms like *GitHub* make this collaborative development possible by offering tools for *issue tracking*, *pull requests*, and *continuous integration testing*. When paired with clear *licensing*, open source software not only supports transparency but also lays the foundation fair crediting and for cumulative progress.
+
+### Open access publishing
+
+One of the most visible aspects of Open Science is open access publishing, which aims to make research articles freely available to everyone. The motivation is straightforward: since much research is publicly funded, the public should not face paywalls to access it. However, the reality of traditional publishing has created a crisis. Commercial publishers often charge universities and libraries high subscription fees, while researchers -- who generate content, review manuscripts, and edit journals without pay -- receive little in return. The public ends up paying twice: once to fund the research through salaries and grants, and again through subscription costs.
+
+Open access offers alternative models. Some scholarly societies, such as the *European Geosciences Union* and the *American Geophysical Union*, have pioneered non-profit publishing routes where revenues sustain the scientific community rather than shareholders. *Preprint* servers also play an increasingly important role, allowing researchers to freely share findings rapidly before peer review.
+
+Within formal publishing, two main routes to open access exist. *Gold open access* makes articles immediately free to read on the publisher’s site, often supported by article processing charges (APCs) paid by authors or their institutions. *Green open access* relies on authors self-archiving preprints or accepted manuscripts in institutional or subject repositories, where they remain freely available even if the journal version is behind a paywall. Together, these models are reshaping the landscape of scholarly communication toward greater openness.
+
+### Open workflows and methods
+
+Beyond data, software, and publications, Open Science also encompasses the entire research workflow. Open workflows mean that the processes behind a study -- from data collection protocols to analysis scripts -- are documented and shared in ways that others can follow. This makes research more transparent and easier to reuse. For example, maintaining project-oriented workflows where data, code, and documentation are stored systematically helps others (and one’s future self) understand the work. In @sec-reproducible, you learned what it takes to implement reusable, project-oriented workflows. 
+
+Version control systems like Git allow researchers to capture the history of their analysis workflows, while platforms like GitHub provide mechanisms for collaboration, peer review of code, and continuous integration testing to ensure reliability. Coupled with practices like versioning and tagged releases, these tools enable researchers to share stable snapshots of their work that can be cited and archived. Open workflows are also supported by *data management plans*, which assign clear roles and responsibilities, define storage and backup strategies, and address long-term preservation of outputs. More on such practices below in @sec-practices-open-science
+
+In essence, open workflows transform research into a living, transparent process rather than a black box that only produces final results. This shift helps ensure that scientific claims can be checked, methods can be reused, and future work can build more efficiently on what has already been done.
+
+## Practices for Open Science {#sec-practices-open-science}
+
+### Open data
+
+Practices for applying FAIR data principles involve multiple methods and resources, relevant for different steps of data generation and publication.
+
+**Organise and clean your data**
+
+* Remove duplicates, errors, or inconsistencies.
+* Use clear, descriptive variable names (column names in tabular data).
+* Standardize units of measurement.
+* Make contents machine-readable (see @sec-datacleaning)
+
+**Choose an open, non-proprietary format**
+
+* For tabular data, use *CSV*.
+* For structured scientific data, consider formats like *NetCDF* or *HDF5*, which support embedded metadata.
+* For text, use *txt* or *Markdown* rather than proprietary formats (e.g., DOCX).
+* For images or media, use open formats like *PNG*, *TIFF*, *WAV*, or *MP4*.
+
+**Document your dataset**
+
+* Create a README file (plain text or Markdown, see also @sec-readme) that contains the following information:
+  * Dataset title and description.
+  * Explanation of variables (column names, units, categories).
+  * Methods used for data collection and processing.
+  * Links to related publications, software, or workflows.
+  * Author names, affiliations, and contact information.
+  * License information (e.g., [Creative Commons](https://creativecommons.org/)).
+
+**Deposit your data in a trusted open repository**
+
+* Use a *permanent repository*  with strong archival policies (see @tbl-open-data-repositories).
+* Ensure the repository generates a *digital object identifier* (DOI) for long-term citation of uploaded datasets
+* Add *metadata* to make the dataset discoverable (keywords, subject categories, abstract).
+
+**Integrate data into your workflow**
+
+* Store small (<25 MB) or intermediate datasets of a project workflow in the project’s version-controlled repository (through Git and Github, see @sec-codemgmt).
+* Use *tags and releases* to capture versions of the dataset (see @sec-open-source-software).
+* Link your Github repository to Zenodo for automatic DOI assignment when releasing a version (see [here](https://help.zenodo.org/docs/profile/linking-accounts/) and [here](https://help.zenodo.org/docs/github/enable-repository/)).
+
+**Provide a data availability statement**
+
+* Clearly indicate in your publications where the data can be found.
+* State the license and any access restrictions. Use available licenses, see e.g., [Creative Commons](https://creativecommons.org/).
+* If data is sensitive and cannot be shared, provide metadata and conditions for access.
+
+
+### Open source software {#sec-open-source-software}
+
+Developing open source software for research is more than simply sharing code -- it involves adopting practices that make your code reusable, sustainable, and valuable to the broader community. The following tools and methods are crucial to making code open.
+
+**Make it reusable**
+
+* Adopt a reusable project-oriented workflow (see @sec-reproducible).
+
+**Use version control from the start**
+
+* Make the project directory a Git repository from the start, hosted, e.g., on Github.
+
+**Make stable releases**
+
+* Use *git tags* to mark major updates of the repository. These may align with designated version names (e.g., `v1.0.0`).
+* Create releases of tags on GitHub or GitLab with notes describing changes.
+* Link your Github repository to Zenodo for automatic DOI assignment when releasing a version (see [here](https://help.zenodo.org/docs/profile/linking-accounts/) and [here](https://help.zenodo.org/docs/github/enable-repository/)).
+
+**Refactor reusable components into a library**
+
+* Further enhance reusability of functions that may be re-used across projects by creating a library (package).
+* Use a non-proprietary coding language (e.g., R, Python, Julia) for maximum accessibility of the package.
+* See [here](https://r-pkgs.org/) for a comprehensive tutorial on writing R packages.
+
+**Document**
+
+* Write vignettes (see @sec-vignettes) or tutorials showing use cases.
+* Create a project website with documentation (e.g., using [*GitHub Pages*](https://docs.github.com/en/pages), and [*pkgdown*](https://pkgdown.r-lib.org/) for R).
+* Publish a software paper in open software description journal (e.g., *Journal of Open Source Software*).
+* Submit your library to a **central archive**: CRAN for R, or PyPI for Python.
+
+**Maintain and improve the project**
+
+* Keep track of issues for bug reports and feature requests (see [here](https://docs.github.com/en/issues/tracking-your-work-with-issues/learning-about-issues/about-issues)).
+* Keep a changelog of updates and fixes.
+* Encourage community contributions through [*pull requests*](sec-pull-request) and clear contributing guidelines.
+
+
+
+<!-- ## Tutorial -->
+
+<!-- The scientific method relies on repeated testing of a hypothesis. When dealing with data and formal analysis, one can reduce this problem to the question: could an independent scientist attain the same results given the described methodology, data and code? -->
+
+<!-- Although this seems trivial, this issue has vexed the scientific community. These days, many scientific publications are based on complex analyses with often large data sets. More so, methods in publications are often insufficiently detailed to really capture the scope of an analysis. Even from a purely technical point of view, the reproducibility crisis or the inability to reproduce experimental results, is a complex problem. This is further compounded by social aspects and incentives. In recent decades, scientific research has seen a steady increase in speed due to the digitization of many fields and the commodification of science. -->
+
+<!-- Although digitization has opened up new research possibilities, its potential for facilitating, accelerating, and advancing science are often not fully made use of. Historically, research and its output in the form of data and code has been confined to academic journals, data and code has often not been made available, and data were not shared or behind pay-walls. This limits the impact of science also in the public domain. (In many ways, this is still the case today, in year 2023 as we write). Digitization has made research output better visible and accessible, but practical obstacles and weak standards often prevent it from uptake, re-use, and further development by the wider community. -->
+
+<!-- Open and reproducible science is a movement to make scientific research (output) widely accessible to the larger public, increase research transparency and enabling robust and verifiable science. Open science aims to be as open as possible about the whole scientific process, and as closed as desirable (e.g. privacy or security reasons). -->
+
+
+
+<!-- The basics of open science coding and data practices rely on a number of simple concepts. The sections below describe a selection of the most important ones. Sticking to these principles and tools will increase the reproducibility of your work greatly. -->
+
+<!-- ### Project structure -->
+
+<!-- Reproducible science relies on a number of key components. Data and code management and the tracking of required meta-data is the first step in an open science workflow.  -->
+
+<!-- In @sec-reproducible, you learned how to setup an R project. An R project gathers all components of your analysis in a single directory. Although current computers make it easy to "find" your files and are largely file location-agnostic, this is not the case in many research environments. Projects grow quickly, and often, the number of files will flood a single directory. Therefore, files need a precise and structured location. This structure allows you to determine both the function and order of a workflow without reading any code. -->
+
+<!-- It is good practice to have a consistent project structure within and between projects. This allows you to find most project components regardless of when you return to a particular project. Structuring a project in one folder also makes projects portable. All parts reside in one location making it easy to create a *git* project from this location (see @sec-codemgmt), or just copy the project to a new drive. -->
+
+<!-- An example data structure for raw data processing is given below and we provide an [R project template](https://github.com/geco-bern/R_proj_template) to work from and adjust through our [lab GitHub profile](https://github.com/geco-bern). A full description on using the template is provided in @sec-codemgmt. -->
+
+<!-- ``` bash -->
+<!-- data-raw/ -->
+<!-- ├─ raw_data_product/ -->
+<!-- ├─ 00_download_raw_data.R -->
+<!-- ├─ 01_process_raw_data.R -->
+<!-- ``` -->
+
+<!-- ### Managing workflows -->
+
+<!-- Although some code is agnostic to the order of execution, many projects are effectively *workflows*, where the output of one routine is required for the successful execution of the next routine. -->
+
+<!-- In order to make sure that your future self, or a collaborator, understands the order in which things should be executed, it is best to number scripts accordingly. This is the most basic approach to managing workflows. -->
+
+<!-- In the example below, all statistics code is stored in the `statistics` folder in an overall `analysis` folder (which also includes code for figures). All statistical analyses are numbered to ensure that the output of a first analysis is available to the subsequent one. -->
+
+<!-- ``` bash -->
+<!-- analysis/ -->
+<!-- ├─ statistics/ -->
+<!-- │  ├─ 00_randomforest_model.R -->
+<!-- │  ├─ 01_randomforest_tuning.R -->
+<!-- ├─ figures/ -->
+<!-- │  ├─ global_model_results_map.R -->
+<!-- │  ├─ complex_process_visualization.R -->
+<!-- ``` -->
+
+<!-- The code-chunk above is a visualisation of a folder (aka. directory) structure on your computer. The lines and indents denote folder levels. In this example, you have a folder `analysis` which holds two more folders `statistics` and `figures`, and in both sub-folders, you have different `*.R` files (`*` is a so-called "wild-card" which is a placeholder for any text). Note that different people may use different symbols to visualise folder structures but generally, folder levels are shown with indents, and files are identifiable by their suffixes. -->
+
+
+<!-- #### Automating and visualizing workflows with targets -->
+
+<!-- To sidestep some of the manual management in R you can use a dedicated pipeline tool like the {targets} package in R. The package learns how your pipeline fits together, skips tasks that are already up-to-date, and runs only the necessary computation. {targets} can also visualize the progress of your workflow. -->
+
+<!-- ![A targets visualized workflow by rOpenSci.](https://books.ropensci.org/targets/man/figures/tar_watch.png){#fig-targets width=60% fig.align='center'} -->
+
+<!-- Due to the added complexity of the {targets} package, we won't include extensive examples of such a workflow but refer to the excellent documentation of the package for simple examples [here](https://books.ropensci.org/targets/walkthrough.html). -->
+
+
+<!-- ### Capturing your session state -->
+
+
+<!-- ### Readable reporting using Rmarkdown -->
+
+<!-- Within Rstudio, you can use Rmarkdown dynamic documents to combine both text and code. Rmarkdown is ideal for *reporting*, i.e., writing your final document and presenting your analysis results. A Rmarkdown document consists of a header that specifies document properties (whether it should be rendered as an html page, a docx file or a pdf), and the actual content. You have encountered RMarkdown already in @sec-rmarkdown. -->
+
+<!-- ### Project structure -->
+
+<!-- In R projects, all files can be referenced relative to the top-most path of the project. When opening `your_project.Rproj` in RStudio, you can load data that is located in a sub-directory of the project directory `./data/` by `read.table("./data/some_data.csv")`. The use of *relative paths* and consistent directory structures across projects, enables that projects can easily be ported across computers and code adopted across projects. -->
+
+<!-- ``` bash -->
+<!-- project/ -->
+<!-- ├─ your_project.Rproj -->
+<!-- ├─ vignettes/ -->
+<!-- │  ├─ your_dynamic_document.Rmd -->
+<!-- ├─ data/ -->
+<!-- │  ├─ some_data.csv -->
+<!-- ``` -->
+
+<!-- But why not use absolute paths to begin with? Portability! When I would run your `\*.Rmd` file with an absolute path on my computer, it would not render as the file `some_data.csv` would then be located at: `/my_computer/project/data/some_data.csv` -->
+
+<!-- #### Limitations of notebooks -->
+
+<!-- The file referencing issue and the common use of Rmarkdown, and notebooks in general, as a one size fits all solution, containing all aspects from data cleaning to reporting, implies some limitations. RMarkdown documents mix two cognitive tasks, writing text content (i.e. reporting) and writing code. Switching between these two modes comes with undue overhead. If you code, you should not be writing prose, and vise versa. -->
+
+<!-- If your R markdown file contains more code than it does text, it should be considered an R script or function (with comments or documentation). Conversely, if your RMarkdown file contains more text than code, it probably is easier to collaborate on a true word processing file (or cloud-based solution). Notebooks, such as RMarkdown, are most suitable for communicating implementations, demonstrating functions, and reporting reproducible results. They can also be used like lab notes. They are less suited for code development.  -->
+
 
 
 ## Exercises

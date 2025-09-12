@@ -356,7 +356,7 @@ half_hourly_fluxes |>
 
 Here, the data frame has one row per date and therefore the same number of rows as the data frame `daily_fluxes`, but the data itself is not reduced by a summarising function. Instead, the data are kept at the half-hourly level, but it's nested inside the new column `data`, which now contains a list of half-hourly data frames for each day. This is just a brief perspective of what nesting is about. More is explained in Section @sec-extramaterialwrangling. More comprehensive tutorials on nesting and functional programming are provided in [Altman, Behrman and Wickham (2021)](https://dcl-prog.stanford.edu/) or in [Wickham and Grolemund (2017), Chapter 21](https://r4ds.had.co.nz/iteration.html).
 
-### Data cleaning
+### Data cleaning {#sec-datacleaning}
 
 Data cleaning is often a time-consuming task and decisions taken during data cleaning may be critical for analyses and modelling. In the following, we distinguish between cleaning formats, the identification (and removal) of "bad" data, and the gap-filling of missing or removed data. An excellent resource for further reading is the [Quartz Guide to Bad Data](https://github.com/Quartz/bad-data-guide) which provides an overview of how to deal with different types of bad data.
 

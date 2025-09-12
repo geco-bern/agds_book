@@ -1,6 +1,5 @@
 # Preface {.unnumbered}
 
- 
 ::: {.floatting}
 
 ![agds_logo](./figures/agds_logo.png){width=40% fig.align='center' style="float:right padding:20px"} <!-- #fig-agds_logo  -->
