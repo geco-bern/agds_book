@@ -1,18 +1,8 @@
-# Open science practices {#sec-openscience}
+# Open science {#sec-openscience}
 
 ## Learning objectives {#sec-learning-objectives-6}
 
 In this chapter, you will learn the reasons for practicing open science and some of the basic methodological techniques that we can use to facilitate an open science workflow.
-
-In this chapter you will learn how to:
-
--   structure a project
--   manage a project workflow
--   capture a session or machine state
--   use dynamic reporting
--   ensure data and code retention
-
-<!-- https://www.nature.com/articles/sdata201618 -->
 
 ## What is Open Science and why?
 
@@ -83,15 +73,15 @@ The broad-purpose permanent data repositories mentioned above are not edited and
 
 Software is often as central to research as data, yet historically it has been less visible in scholarly outputs. Open source software addresses this gap by making code freely accessible for anyone to use, examine, and extend. A typical project might start as a tool written for a specific study, but once shared and adapted for more general applications, it can evolve into a library that supports many projects across a community. Also specialized software, such as a model for simulating a physical system, can become widely useful if written in a non-proprietary coding language and accompanied by sufficient documentation.
 
-The benefits of open source are significant. Publicly available code enables reproducibility by letting others see exactly how analyses were performed. It also reduces dependence on proprietary systems, which may lock research into costly or opaque environments. Over time, well-maintained open source projects can attract contributions from the wider community, enhancing functionality and improving reliability. Version control platforms like *GitHub* make this collaborative development possible by offering tools for *issue tracking*, *pull requests*, and *continuous integration testing*. When paired with clear *licensing*, open source software not only supports transparency but also lays the foundation fair crediting and for cumulative progress.
+The benefits of open source are significant. Publicly available code enables reproducibility by letting others see exactly how analyses were performed. It also reduces dependence on proprietary systems, which may lock research into costly or opaque environments. Over time, well-maintained open source projects can attract contributions from the wider community, enhancing functionality and improving reliability. Version control platforms like *GitHub* make this collaborative development possible by offering tools for [*issue tracking*](https://docs.github.com/en/issues/tracking-your-work-with-issues/learning-about-issues/about-issues), [*pull requests*](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests), and [*continuous integration testing*](https://docs.github.com/en/actions/get-started/continuous-integration). When paired with clear [*licensing*](https://creativecommons.org/share-your-work/cclicenses/), open source software not only supports transparency but also lays the foundation fair crediting and for cumulative progress.
 
 ### Open access publishing
 
 One of the most visible aspects of Open Science is open access publishing, which aims to make research articles freely available to everyone. The motivation is straightforward: since much research is publicly funded, the public should not face paywalls to access it. However, the reality of traditional publishing has created a crisis. Commercial publishers often charge universities and libraries high subscription fees, while researchers -- who generate content, review manuscripts, and edit journals without pay -- receive little in return. The public ends up paying twice: once to fund the research through salaries and grants, and again through subscription costs.
 
-Open access offers alternative models. Some scholarly societies, such as the *European Geosciences Union* and the *American Geophysical Union*, have pioneered non-profit publishing routes where revenues sustain the scientific community rather than shareholders. *Preprint* servers also play an increasingly important role, allowing researchers to freely share findings rapidly before peer review.
+Open access offers alternative models. Some scholarly societies, such as the [*European Geosciences Union*](https://www.egu.eu/) and the [*American Geophysical Union*](https://www.agu.org/), have pioneered non-profit publishing routes where revenues sustain the scientific community rather than shareholders. *Preprint* servers also play an increasingly important role, allowing researchers to freely share findings rapidly before peer review.
 
-Within formal publishing, two main routes to open access exist. *Gold open access* makes articles immediately free to read on the publisher’s site, often supported by article processing charges (APCs) paid by authors or their institutions. *Green open access* relies on authors self-archiving preprints or accepted manuscripts in institutional or subject repositories, where they remain freely available even if the journal version is behind a paywall. Together, these models are reshaping the landscape of scholarly communication toward greater openness.
+Within formal publishing, two main [pathways to open access](https://open-access.network/en/information/open-access-primers/green-and-gold) exist. *Gold open access* makes articles immediately free to read on the publisher’s site, often supported by article processing charges (APCs) paid by authors or their institutions. *Green open access* relies on authors self-archiving preprints or accepted manuscripts in institutional or subject repositories, where they remain freely available even if the journal version is behind a paywall. Together, these models are reshaping the landscape of scholarly communication toward greater openness.
 
 ### Open workflows and methods
 
@@ -282,27 +272,6 @@ Developing open source software for research is more than simply sharing code --
 
 ## Exercises
 
-### External data {-}
-
-You inherit a project folder which contains the following files.
-
-```
-~/project/
-├─ survey.xlsx
-├─ xls conversion.csv
-├─ xls conversion (copy 1).csv
-├─ Model-test_1.R
-├─ Model-test-final.R
-├─ Plots.R
-├─ Figure 1.png
-├─ test.png
-├─ Rplot01.png
-├─ Report.Rmd
-├─ Report.html
-├─ my_functions.R
-```
-
-What are your steps to make this project more reproducible? Write down how and why you would organize your project.
 
 ### A new project {-}
 

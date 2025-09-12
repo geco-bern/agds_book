@@ -23,15 +23,13 @@ This book covers all steps along the data science workflow (see @fig-datascience
 
 This chapter starts by providing the context for this course: Why Applied Geodata Science? Why now?
 
-@sec-gettingstarted and @sec-programmingprimers serve as primers to get readers with a diverse background and varying data science experience up to speed with the basics for programming in R, which we rely on in later chapters.
+@sec-primers serve as a primer to get readers with a diverse background and varying data science experience up to speed with the basics for programming in R, which we rely on in later chapters.
+
+@sec-reproducible, @sec-openscience, and @sec-codemgmt introduce the motivation, concepts, and practices for reproducible and reusable workflows and Open Science.
 
 @sec-datawrangling introduces efficient handling and cleaning of large tabular data with the R *tidyverse* "programming dialect". The focus is on non-geospatial data. Closely related to transforming data and its multiple axes of variation is data visualisation, covered in  @sec-datavis.
 
-@sec-datavariety, @sec-codemgmt, and @sec-openscience introduce essential tools for the daily work with diverse data, for collaborative code development, and for an Open Science practice.
-
 With @sec-regressionclassification, @sec-supervisedmli, @sec-supervisedmlii, and @sec-randomforest, we will get into modelling and identifying patterns in the data.
-
-Chapters @sec-gettingstarted up to @sec-randomforest serve as lecture notes for *Applied Geodata Science I* and as learning material for students and scientists in any data-intensive research domain. These chapters are not explicitly dealing with geospatial data and modelling. Modelling with geospatial and temporal data is the subject of the course *Applied Geodata Science II* and will be introduced with a focus on typical applications and modelling tasks in Geography and Environmental Sciences. Respective materials are not currently contained in this book but will be added here later.
 
 All tutorials use the R programming language, and a full list of the packages used in this course are provided in Appendix @sec-references.
 
