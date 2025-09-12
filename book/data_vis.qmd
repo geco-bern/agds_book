@@ -33,7 +33,7 @@ This tutorial is inspired by the comprehensive and online available textbook Fun
 
 In @sec-datawrangling, we learned about axes of variation in the data. For example, time is an axis of variation in our example data `half_hourly_fluxes`, or site identity and the date are axes of variation in our example data `daily_fluxes`. We have also learned that we can aggregate over axes of variation, and that we can often separate an axis of variation into a hierarchy of subordinate axes of variation (e.g., years, months, days, and a half-hourly time axis).
 
-In this chapter, we will be working mainly with the same half-hourly time series data of ecosystem-atmosphere fluxes and parallel measurements of meteorological variables - as in @sec-gettingstarted and @sec-datawrangling. For time series data, the entry point of the exploratory data analysis cycle may be a visualization of some variable of interest (here `GPP_NT_VUT_REF`) against time:
+In this chapter, we will be working mainly with the same half-hourly time series data of ecosystem-atmosphere fluxes and parallel measurements of meteorological variables -- as @sec-datawrangling. For time series data, the entry point of the exploratory data analysis cycle may be a visualization of some variable of interest (here `GPP_NT_VUT_REF`) against time:
 
 ```{r results=FALSE, messages=FALSE, warning=FALSE}
 half_hourly_fluxes <- readr::read_csv("data/FLX_CH-Lae_FLUXNET2015_FULLSET_HH_2004-2006_CLEAN.csv")

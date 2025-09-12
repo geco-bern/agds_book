@@ -29,7 +29,7 @@ Current version control of code is dominated by the software tool *Git*. However
 
 In this chapter, you will learn how to use *Git* and GitHub to manage your project and collaborate on code.
 
-> NOTE: Coding style, and documentation practices of the code itself have been covered previously in @sec-programmingprimers. Although the tutorial below focuses on GitHub, the jargon and operations are transferable to other platforms such as [GitLab](https://gitlab.com) and [Codeberg](https://codeberg.org).
+> NOTE: Coding style, and documentation practices of the code itself have been covered previously in @sec-reproducible. Although the tutorial below focuses on GitHub, the jargon and operations are transferable to other platforms such as [GitLab](https://gitlab.com) and [Codeberg](https://codeberg.org).
 
 ### Git and local version control {#sec-gitworkflow}
 

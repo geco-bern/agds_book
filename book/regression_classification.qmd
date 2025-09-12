@@ -888,7 +888,7 @@ The complete workflow of reading the data, performing the stepwise forward regre
 
 ### Guide for your implementation {.unnumbered}
 
-- Remember the structure of the loops implemented for the Exercise *Nested loops* in @sec-programmingprimers.
+- Remember the structure of the loops implemented for the Exercise *Nested loops* in @sec-primers.
 - It may be helpful to write a "pseudo-code" that defines the structure of loops and conditionals and defines the points at which certain evaluations and function calls are performed, but cannot be actually run.
 - [This Stackoverflow post](https://stackoverflow.com/questions/4951442/formula-with-dynamic-number-of-variables) may be helpful for dynamically creating formulas, given a character vector or variable names, 
 - When discussing results, consider why a certain variable was not chosen in the final model. How do non-included variables relate to variables that are included? How do the model metrics change when adding variables? Can you explain their patterns with your statistical knowledge?

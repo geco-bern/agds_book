@@ -71,7 +71,7 @@ Chapters @sec-regressionclassification up to @sec-randomforest lead into the wor
 
 - Hadley Wickham and Garrett Grolemund: "R for Data Science", https://r4ds.had.co.nz/
 
-    - A comprehensive resource for data analysis (and visualisation) using R *tidyverse*. Covers contents of Chapters @sec-gettingstarted, @sec-programmingprimers, and @sec-datawrangling - but in more depth.
+    - A comprehensive resource for data analysis (and visualisation) using R *tidyverse*. Covers contents of Chapters @sec-primers and @sec-datawrangling -- but in more depth.
     
 - Max Kuhn and Kjell Johnson: "Feature Engineering and Selection: A Practical Approach for Predictive Models", http://www.feat.engineering/    
     
