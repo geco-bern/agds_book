@@ -449,11 +449,7 @@ div.csl-indent {
   <li><a href="#open-data-1" id="toc-open-data-1" class="nav-link" data-scroll-target="#open-data-1"><span class="header-section-number">5.3.1</span> Open data</a></li>
   <li><a href="#sec-open-source-software" id="toc-sec-open-source-software" class="nav-link" data-scroll-target="#sec-open-source-software"><span class="header-section-number">5.3.2</span> Open source software</a></li>
   </ul></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">5.4</span> Exercises</a>
-  <ul class="collapse">
-  <li><a href="#a-new-project" id="toc-a-new-project" class="nav-link" data-scroll-target="#a-new-project">A new project</a></li>
-  <li><a href="#tracking-the-state-of-your-project" id="toc-tracking-the-state-of-your-project" class="nav-link" data-scroll-target="#tracking-the-state-of-your-project">Tracking the state of your project</a></li>
-  </ul></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">5.4</span> Exercises</a></li>
   </ul>
 </nav>
     </div>
@@ -678,11 +674,12 @@ Table&nbsp;5.1: An incomplete collection of open data repositories used in Envir
 <li>Ensure the repository generates a <em>digital object identifier</em> (DOI) for long-term citation of uploaded datasets</li>
 <li>Add <em>metadata</em> to make the dataset discoverable (keywords, subject categories, abstract).</li>
 </ul>
-<p><strong>Integrate data into your workflow</strong></p>
+<p><strong>Integrate data into a repository or package</strong></p>
 <ul>
-<li>Store small (&lt;25 MB) or intermediate datasets of a project workflow in the project’s version-controlled repository (through Git and Github, see <a href="code_management.html" class="quarto-xref"><span>Chapter 4</span></a>).</li>
-<li>Use <em>tags and releases</em> to capture versions of the dataset (see <a href="#sec-open-source-software" class="quarto-xref"><span>Section 5.3.2</span></a>).</li>
+<li>Data may be contained in a Git repository and published through that. This only makes sense if the data is stored in text-based files (e.g., CSV) and is permissible only for data files of limited size (&lt;25 MB on Github).</li>
+<li>This allows clear versioning through a <a href="https://git-scm.com/book/en/v2/Git-Basics-Tagging"><em>tag</em></a> and <a href="https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository"><em>release</em></a> and allows tracking the state of the data through the <em>commit</em> history.</li>
 <li>Link your Github repository to Zenodo for automatic DOI assignment when releasing a version (see <a href="https://help.zenodo.org/docs/profile/linking-accounts/">here</a> and <a href="https://help.zenodo.org/docs/github/enable-repository/">here</a>).</li>
+<li>Extend the repository to make in <a href="https://r-pkgs.org/"><em>library</em></a> (Example: <a href="https://traitecoevo.r-universe.dev/leaf13C"><em>leaf13C</em></a>).</li>
 </ul>
 <p><strong>Provide a data availability statement</strong></p>
 <ul>
@@ -704,8 +701,9 @@ Table&nbsp;5.1: An incomplete collection of open data repositories used in Envir
 </ul>
 <p><strong>Make stable releases</strong></p>
 <ul>
-<li>Use <em>git tags</em> to mark major updates of the repository. These may align with designated version names (e.g., <code>v1.0.0</code>).</li>
-<li>Create releases of tags on GitHub or GitLab with notes describing changes.</li>
+<li>Use a git <a href="https://git-scm.com/book/en/v2/Git-Basics-Tagging"><em>tag</em></a> to mark major updates of the repository. These may align with designated version names (e.g., <code>v1.0.0</code>).</li>
+<li>Follow <a href="https://semver.org/"><em>semantic versioning</em></a> – a standardised way of using version numbering to designate major, minor, and patch changes to the code.</li>
+<li>Create <a href="https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository"><em>releases</em></a> of tags on GitHub or GitLab with notes describing changes.</li>
 <li>Link your Github repository to Zenodo for automatic DOI assignment when releasing a version (see <a href="https://help.zenodo.org/docs/profile/linking-accounts/">here</a> and <a href="https://help.zenodo.org/docs/github/enable-repository/">here</a>).</li>
 </ul>
 <p><strong>Refactor reusable components into a library</strong></p>
@@ -719,11 +717,11 @@ Table&nbsp;5.1: An incomplete collection of open data repositories used in Envir
 <li>Write vignettes (see <a href="reproducible_workflows.html#sec-vignettes" class="quarto-xref"><span>Section 3.4.3.4</span></a>) or tutorials showing use cases.</li>
 <li>Create a project website with documentation (e.g., using <a href="https://docs.github.com/en/pages"><em>GitHub Pages</em></a>, and <a href="https://pkgdown.r-lib.org/"><em>pkgdown</em></a> for R).</li>
 <li>Publish a software paper in open software description journal (e.g., <em>Journal of Open Source Software</em>).</li>
-<li>Submit your library to a <strong>central archive</strong>: CRAN for R, or PyPI for Python.</li>
+<li>Submit your library to a central archive: CRAN for R, or PyPI for Python.</li>
 </ul>
 <p><strong>Maintain and improve the project</strong></p>
 <ul>
-<li>Keep track of issues for bug reports and feature requests (see <a href="https://docs.github.com/en/issues/tracking-your-work-with-issues/learning-about-issues/about-issues">here</a>).</li>
+<li>Keep track of <a href="https://docs.github.com/en/issues/tracking-your-work-with-issues/learning-about-issues/about-issues"><em>issues</em></a> for bug reports and feature requests.</li>
 <li>Keep a changelog of updates and fixes.</li>
 <li>Encourage community contributions through <a href="sec-pull-request"><em>pull requests</em></a> and clear contributing guidelines.</li>
 </ul>
@@ -783,28 +781,12 @@ Table&nbsp;5.1: An incomplete collection of open data repositories used in Envir
 </section>
 <section id="exercises" class="level2" data-number="5.4">
 <h2 data-number="5.4" class="anchored" data-anchor-id="exercises"><span class="header-section-number">5.4</span> Exercises</h2>
-<section id="a-new-project" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="a-new-project">A new project</h3>
-<p>What are the basic steps to create a reproducible workflow from a file management perspective? Create your own R project using these principles and provide details the on steps involved and why they matter.</p>
-<p>The project should be a reproducible workflow:</p>
-<ul>
-<li><p>Download and plot a MODIS land cover map for Belgium using skills you learned in <a href="data_variety.html" class="quarto-xref"><span>Chapter 6</span></a>.</p></li>
-<li><p>Write a function to count the occurrences of land cover classes in the map as a formal function using skills you learned in <a href="data_wrangling.html" class="quarto-xref"><span>Chapter 7</span></a>.</p></li>
-<li><p>Create a plot of the land cover map, see <a href="data_vis.html" class="quarto-xref"><span>Chapter 8</span></a>.</p></li>
-<li><p>Write a dynamic report describing your answers to the above questions regarding how to structure a reproducible workflow.</p></li>
-</ul>
-</section>
-<section id="tracking-the-state-of-your-project" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="tracking-the-state-of-your-project">Tracking the state of your project</h3>
-<ul>
-<li><p>Track the packages you use in the project you created using {renv}.</p></li>
-<li><p>Install any additional library and update the state of your project.</p></li>
-<li><p>Create a simple {targets} project using the above workflow</p>
-<ul>
-<li><p>Make changes to the API download routine.</p></li>
-<li><p>Rerun the targets project.</p></li>
-</ul></li>
-</ul>
+<!-- ### Tracking the state of your project {-} -->
+<!-- -   Track the packages you use in the project you created using {renv}. -->
+<!-- -   Install any additional library and update the state of your project. -->
+<!-- -   Create a simple {targets} project using the above workflow -->
+<!--     -   Make changes to the API download routine. -->
+<!--     -   Rerun the targets project. -->
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
@@ -818,7 +800,6 @@ Loginova, Daria, and Ioannis Varvaris. 2025. <span>“The <span>List</span> of <
 Wilkinson, Mark D., Michel Dumontier, IJsbrand Jan Aalbersberg, Gabrielle Appleton, Myles Axton, Arie Baak, Niklas Blomberg, et al. 2016. <span>“The <span>FAIR</span> <span>Guiding</span> <span>Principles</span> for Scientific Data Management and Stewardship.”</span> <em>Scientific Data</em> 3 (1): 160018. <a href="https://doi.org/10.1038/sdata.2016.18">https://doi.org/10.1038/sdata.2016.18</a>.
 </div>
 </div>
-</section>
 </section>
 
 </main> <!-- /main -->
