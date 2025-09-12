@@ -310,17 +310,17 @@ All analyses start with one or more datasets that are obtained from external sou
 * Bad practice with absolute path:
 
   ```{r eval=FALSE}
-  read_csv("/Users/alex/Desktop/data/file.csv")
+read_csv("/Users/alex/Desktop/data/file.csv")
   ```
 * Good practice with relative path, using `here()`:
 
   ```{r eval=FALSE}
-  read_csv(here("data", "file.csv"))
+read_csv(here("data", "file.csv"))
   ```
 
 As an example, consider the following. RMarkdown files commonly reside in a sub-directory `./vignettes/` and are rendered relative to the file path where it is located. This means that to access data which resides in `data/` using code in `./vignettes/your_dynamic_document.Rmd`, we would have to write:
 ```{r eval = FALSE}
-data <- read_csv('../data/some_data.csv')
+data <- read_csv("../data/some_data.csv")
 ```
 
 Note the `../` to go one level up. However, when the same code is executed from another level of the project's directory structure, this code won't work anymore.
@@ -330,7 +330,7 @@ To allow for more flexibility in file locations within your project folder, you 
 ```{r}
 library(here)
 here()
-file.exists(here("data", "df.csv"))   # use here("data", "df.csv") instead of here("data/df.csv") to make it portable also to non-UNIX-based systems.
+file.exists(here("data", "df.csv")) # use here("data", "df.csv") instead of here("data/df.csv") to make it portable also to non-UNIX-based systems.
 ```
   
 Should any file to which a path of your project points not be contained in the project itself, an absolute path to an external file may be unavoidable. In such cases, clarify in the `README` where such absolute paths must be modified. Here, we used the function `here()` from the R package *here*. This creates a path, relative to the project's parent directory and enables full portability of the code within your project. In other words, it doesn't matter whether you run that line of code from within different subdirectories.
@@ -356,8 +356,8 @@ Adding enough white spaces and line breaks in the right locations greatly helps 
 An example for a nice bit of code:
 
 ```{r eval=F}
-if (temp > 5.0){
-  growth_temp <- growth_temp + temp  
+if (temp > 5.0) {
+  growth_temp <- growth_temp + temp
 }
 ```
 
@@ -380,7 +380,7 @@ first_day_of_the_month
 djm1
 
 # Very bad
-mean <- function(x) sum(x)/length(x) # mean() itself is already a function
+mean <- function(x) sum(x) / length(x) # mean() itself is already a function
 T <- FALSE # T is an abbreviation of TRUE
 c <- 10 # c() is used to create a vector (example <- c(1, 2, 3))
 ```
@@ -479,7 +479,7 @@ library(dplyr)
 df <- readr::read_csv(here("data", "df.csv"))
 
 # ... or to disambiguate (other functions called 'filter()' exported from other libraries which may mask dplyr::filter if loaded after dplyr)
-df |> 
+df |>
   dplyr::filter(age > 18)
 ```
 
@@ -511,3 +511,16 @@ You inherit a project folder which contains the following files.
 
 What are your steps to make this project more reproducible? Write down how and why you would organize your project.
 
+### A new project {-}
+
+What are the basic steps to create a reproducible workflow from a file management perspective? Create your own R project using these principles and provide details the on steps involved and why they matter.
+
+The project should be a reproducible workflow:
+
+-   Download and plot a MODIS land cover map for Belgium using skills you learned in @sec-datavariety.
+
+-   Write a function to count the occurrences of land cover classes in the map as a formal function using skills you learned in @sec-datawrangling.
+
+-   Create a plot of the land cover map, see @sec-datavis.
+
+-   Write a dynamic report describing your answers to the above questions regarding how to structure a reproducible workflow.
