@@ -1,9 +1,9 @@
 ```{r include = FALSE}
 RUN_MODEL <- ifelse(
-  length(system("echo $GITHUB_TOKEN", intern=TRUE)) <= 1,
+  length(system("echo $GITHUB_TOKEN", intern = TRUE)) <= 1,
   TRUE,
   FALSE
-  )
+)
 ```
 
 # Random Forest {#sec-randomforest}
@@ -46,9 +46,9 @@ $$
 -   For classification problems, the *cross-entropy* or the *Gini index* are typically maximized. Both are measures of the difference between probability distributions (main ideas in [this blogpost](https://towardsdatascience.com/entropy-and-gini-index-c04b7452efbe/)).
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, out.width="80%", fig.align='center', fig.cap="A (very) shallow decision tree."}
-# Code adopted from https://koalaverse.github.io/homlr/notebooks/09-decision-trees.nb.html 
+# Code adopted from https://koalaverse.github.io/homlr/notebooks/09-decision-trees.nb.html
 # create training data
-set.seed(1982)  # for reproducibility
+set.seed(1982) # for reproducibility
 n_samples <- 500
 
 df_train <- tibble::tibble(
@@ -58,36 +58,35 @@ df_train <- tibble::tibble(
 )
 
 # a function to plot fit results
-plot_tree_fit <- function(df, depth){
-
+plot_tree_fit <- function(df, depth) {
   # fit decision tree
   mod <- rpart::rpart(
-    y ~ x, 
-    data = df, 
+    y ~ x,
+    data = df,
     control = list(
-      cp = 0, 
-      minbucket = 5, 
+      cp = 0,
+      minbucket = 5,
       maxdepth = depth
     )
   )
-  
+
   # training results
-  df <- df |> 
+  df <- df |>
     modelr::add_predictions(mod, var = "y_pred")
-  
+
   ## at equally spaced x
   df_fit <- tibble::tibble(
     x = seq(from = min(df$x), to = max(df$x), length.out = 100)
-    ) |> 
+  ) |>
     modelr::add_predictions(mod, var = "y_pred")
-  
+
   gg <- ggplot() +
     geom_point(data = df, aes(x, y), color = "grey70") +
-    geom_line(data = df_fit, aes(x = x, y = y_pred), color = "red") + 
+    geom_line(data = df_fit, aes(x = x, y = y_pred), color = "red") +
     stat_function(fun = sin) +
     theme_classic()
-  
-  out <- list(mod = mod, gg = gg)  
+
+  out <- list(mod = mod, gg = gg)
 
   return(out)
 }
@@ -159,72 +158,74 @@ source("R/eval_model.R")
 # read daily fluxes
 daily_fluxes <- readr::read_csv(
   "./data/FLX_CH-Dav_FLUXNET2015_FULLSET_DD_1997-2014_1-3.csv"
-  )
+)
 
 # select only the variables we are interested in
 # such as the target (GPP_NT_VUT_REF), the
 # quality control parameters ending in QC,
 # the meteorological covariates ending in F,
 # while removing (-) a weird useless variable JSB
-# 
+#
 # Subsequently convert dates to a nice date format
 # set all -9999 to NA and only retain values with
 # QC value of > 0.8
-daily_fluxes <- daily_fluxes |>  
-  
+daily_fluxes <- daily_fluxes |>
   # select only the variables we are interested in
-  dplyr::select(TIMESTAMP,
-                GPP_NT_VUT_REF,    # the target
-                ends_with("_QC"),  # quality control info
-                ends_with("_F"),   # includes all all meteorological covariates
-                -contains("JSB")   # weird useless variable
-                ) |>
-  
+  dplyr::select(
+    TIMESTAMP,
+    GPP_NT_VUT_REF, # the target
+    ends_with("_QC"), # quality control info
+    ends_with("_F"), # includes all all meteorological covariates
+    -contains("JSB") # weird useless variable
+  ) |>
   # convert to a nice date object
   dplyr::mutate(TIMESTAMP = ymd(TIMESTAMP)) |>
-  
   # set all -9999 to NA
-  dplyr::mutate(across(where(is.numeric), ~na_if(., -9999))) |> 
-  
+  dplyr::mutate(across(where(is.numeric), ~ na_if(., -9999))) |>
   # retain only data based on >=80% good-quality measurements
   # overwrite bad data with NA (not dropping rows)
-  dplyr::mutate(GPP_NT_VUT_REF = ifelse(NEE_VUT_REF_QC < 0.8, NA, GPP_NT_VUT_REF),
-                TA_F           = ifelse(TA_F_QC        < 0.8, NA, TA_F),
-                SW_IN_F        = ifelse(SW_IN_F_QC     < 0.8, NA, SW_IN_F),
-                LW_IN_F        = ifelse(LW_IN_F_QC     < 0.8, NA, LW_IN_F),
-                VPD_F          = ifelse(VPD_F_QC       < 0.8, NA, VPD_F),
-                PA_F           = ifelse(PA_F_QC        < 0.8, NA, PA_F),
-                P_F            = ifelse(P_F_QC         < 0.8, NA, P_F),
-                WS_F           = ifelse(WS_F_QC        < 0.8, NA, WS_F)) |> 
+  dplyr::mutate(
+    GPP_NT_VUT_REF = ifelse(NEE_VUT_REF_QC < 0.8, NA, GPP_NT_VUT_REF),
+    TA_F = ifelse(TA_F_QC < 0.8, NA, TA_F),
+    SW_IN_F = ifelse(SW_IN_F_QC < 0.8, NA, SW_IN_F),
+    LW_IN_F = ifelse(LW_IN_F_QC < 0.8, NA, LW_IN_F),
+    VPD_F = ifelse(VPD_F_QC < 0.8, NA, VPD_F),
+    PA_F = ifelse(PA_F_QC < 0.8, NA, PA_F),
+    P_F = ifelse(P_F_QC < 0.8, NA, P_F),
+    WS_F = ifelse(WS_F_QC < 0.8, NA, WS_F)
+  ) |>
   # drop QC variables (no longer needed)
   dplyr::select(-ends_with("_QC"))
 
 # Data splitting
-set.seed(123)  # for reproducibility
+set.seed(123) # for reproducibility
 split <- rsample::initial_split(daily_fluxes, prop = 0.7, strata = "VPD_F")
 ddf_train <- rsample::training(split)
 ddf_test <- rsample::testing(split)
 
 # The same model formulation is in the previous chapter
-pp <- recipes::recipe(GPP_NT_VUT_REF ~ TA_F + SW_IN_F + LW_IN_F + VPD_F + P_F + WS_F, 
-                      data = ddf_train) |> 
+pp <- recipes::recipe(GPP_NT_VUT_REF ~ TA_F + SW_IN_F + LW_IN_F + VPD_F + P_F + WS_F,
+  data = ddf_train
+) |>
   recipes::step_center(recipes::all_numeric(), -recipes::all_outcomes()) |>
   recipes::step_scale(recipes::all_numeric(), -recipes::all_outcomes())
 
 mod <- train(
-  pp, 
-  data = ddf_train %>% 
-    drop_na(), 
+  pp,
+  data = ddf_train %>%
+    drop_na(),
   method = "ranger",
   trControl = trainControl(method = "cv", number = 5, savePredictions = "final"),
-  tuneGrid = expand.grid( .mtry = floor(6 / 3),
-                          .min.node.size = 5,
-                          .splitrule = "variance"),
+  tuneGrid = expand.grid(
+    .mtry = floor(6 / 3),
+    .min.node.size = 5,
+    .splitrule = "variance"
+  ),
   metric = "RMSE",
   replace = FALSE,
   sample.fraction = 0.5,
-  num.trees = 2000,           # high number ok since no hperparam tuning
-  seed = 1982                # for reproducibility
+  num.trees = 2000, # high number ok since no hperparam tuning
+  seed = 1982 # for reproducibility
 )
 ```
 
