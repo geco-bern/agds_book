@@ -62,9 +62,9 @@ The broad-purpose permanent data repositories mentioned above are not edited and
 | EnviDat                         | <https://www.envidat.ch>             | Hosts envrionmental system research with a focus on Switzerland | For researchers of the Swiss Federal Institute for Forest, Snow and Landscape WSL |
 | Climate Data Store              | <https://cds.climate.copernicus.eu/> | Provides access to climate data | No |
 | Copernicus Data Space Ecosystem | <https://dataspace.copernicus.eu/>   | Provides access to data from the Copernicus Sentinel missions | No |
-| Swiss Open Geodata              | <https://www.swisstopo.admin.ch/en/geodata-and-applications>   | Provides access to geodata by the Swiss Open Government Data | No |
-| Eurostat                        | <https://ec.europa.eu/eurostat>      | Provides access to statistical data of Europe | No |
+| Meteoswiss Open Data            | <https://opendatadocs.meteoswiss.ch/>| Switzerland-specific meteorological data | No |
 | Swiss Open Government data      | <https://opendata.swiss/en/>         | Generalist data from the Swiss Federal statistics office. | No |
+| Eurostat                        | <https://ec.europa.eu/eurostat>      | Provides access to statistical data of Europe | No |
 
 : An incomplete collection of open data repositories used in Environmental sciences and Geography. Note the distinction between repositories that are open to contributions and offer hosting and DOI-minting for user-contributed datasets, and those that are not (Column 'Open to contributions'). A more complete list of open data repositories and other access points for open research data in Environmental science and Geography can be found at @loginova_list_2025. {#tbl-open-data-repositories}
 
