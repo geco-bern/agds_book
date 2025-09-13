@@ -2,6 +2,8 @@
 
 **Chapter lead author: Koen Hufkens**
 
+Introduces a classification of different data types and how to work with them.
+
 ## Learning objectives
 
 As a scientist you will encounter a variety of data (formats). In this section, you will learn some of the most common formats, their structure, and the advantages and disadvantages of using a particular data format. Only singular files are considered in this section, and [databases](https://en.wikipedia.org/wiki/Database) are not covered although some files (formats) might have a mixed use.
@@ -134,7 +136,7 @@ Below, you find and example in which a file is written to a temporary location, 
 df <- data.frame(
   col_1 = c("a", "b", "c"),
   col_2 = c("d", "e", "f"),
-  col_3 = c(1,2,3)
+  col_3 = c(1, 2, 3)
 )
 
 # write table as CSV to disk
@@ -436,8 +438,10 @@ Depending on the API, authentication using a user name and a key or password is 
 status <- httr::POST(
   url = url,
   httr::authenticate(user, key),
-  httr::add_headers("Accept" = "application/json",
-                    "Content-Type" = "application/json"),
+  httr::add_headers(
+    "Accept" = "application/json",
+    "Content-Type" = "application/json"
+  ),
   body = query,
   encode = "json"
 )

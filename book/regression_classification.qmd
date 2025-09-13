@@ -56,20 +56,23 @@ half_hourly_fluxes <- readr::read_csv("./data/FLX_CH-Lae_FLUXNET2015_FULLSET_HH_
 
 set.seed(2023)
 plot_1 <- half_hourly_fluxes |>
-  sample_n(2000) |>  # to reduce the dataset
+  sample_n(2000) |> # to reduce the dataset
   ggplot(aes(x = SW_IN_F, y = GPP_NT_VUT_REF)) +
   geom_point(size = 0.75, alpha = 0.4) +
   geom_smooth(method = "lm", color = "red", se = FALSE) +
-  labs(x = expression(paste("Shortwave radiation (W m"^-2, ")")), 
-       y = expression(paste("GPP (gC m"^-2, "s"^-1, ")"))) +
+  labs(
+    x = expression(paste("Shortwave radiation (W m"^-2, ")")),
+    y = expression(paste("GPP (gC m"^-2, "s"^-1, ")"))
+  ) +
   theme_classic()
 
 segment_points <- data.frame(x0 = 332, y0 = 3.65, y_regr = 8.77)
 
 plot_1 +
-  geom_segment(aes(x = x0, y = y0, xend = x0, yend = y_regr), 
-               data = segment_points,
-               color = "blue", lwd = 1.2, alpha = 0.8)
+  geom_segment(aes(x = x0, y = y0, xend = x0, yend = y_regr),
+    data = segment_points,
+    color = "blue", lwd = 1.2, alpha = 0.8
+  )
 ```
 
 > To reproduce this code chunk, you can download the file `FLX_CH-Lae_FLUXNET2015_FULLSET_HH_2004-2006_CLEAN` from [here](https://raw.githubusercontent.com/geco-bern/agds_book/refs/heads/main/book/data/FLX_CH-Lae_FLUXNET2015_FULLSET_HH_2004-2006_CLEAN.csv) and read it from the local path where the file is stored on your machine. All data files used in this tutorials are stored [here](https://github.com/geco-bern/agds_book/tree/main/book/data).
@@ -211,9 +214,10 @@ Furthermore, the relationships between variables may be non-linear. In the previ
 Let's fit a simple quadratic regression model, just for the month of August. For this we use the `poly()` function which constructs orthogonal polynomials of a given degree. Here, a second-order polynomial (a parabola) is fitted:
 
 ```{r}
-quadmod <- lm(GPP_NT_VUT_REF ~ poly(SW_IN_F, 2), 
-              data = df_cat |>
-                filter(MONTH == 8))
+quadmod <- lm(GPP_NT_VUT_REF ~ poly(SW_IN_F, 2),
+  data = df_cat |>
+    filter(MONTH == 8)
+)
 summary(quadmod)
 ```
 
@@ -225,10 +229,14 @@ df_cat |>
   ggplot(aes(x = SW_IN_F, y = GPP_NT_VUT_REF)) +
   geom_point(alpha = 0.4) +
   geom_smooth(formula = y ~ x, method = "lm", aes(color = "lm"), se = FALSE) +
-  geom_smooth(formula = y ~ poly(x, 2), method = "lm", 
-              aes(color = "poly2"), se = FALSE) +
-  geom_smooth(formula = y ~ poly(x, 3), method = "lm",
-              aes(color = "poly3"), se = FALSE) +
+  geom_smooth(
+    formula = y ~ poly(x, 2), method = "lm",
+    aes(color = "poly2"), se = FALSE
+  ) +
+  geom_smooth(
+    formula = y ~ poly(x, 3), method = "lm",
+    aes(color = "poly3"), se = FALSE
+  ) +
   labs(x = "SW", y = "GPP", color = "Regression") +
   theme_classic()
 ```
@@ -240,133 +248,152 @@ Metrics measure the quality of fit between predicted and observed values. Metric
 To get an intuitive understanding of the different abilities of different metrics, compare the scatterplots in @fig-correlationplots and how different aspects of the model-data agreement are measured by different metrics. The observed target values $Y$ are plotted against the predicted values $\hat{Y}$ from a regression model, and the dashed line represents the ideal fit: predictions matching the data perfectly. Definitions of the metrics displayed and other metrics are given below.
 
 ```{r fig-correlationplots, echo=FALSE, fig.cap="Correlation plots between observed and fitted target values.", fig.height=10, message=FALSE, warning=FALSE}
-analyse_modobs <- function(df){
-  
+analyse_modobs <- function(df) {
   # fit linear regression model to get slope
   linmod <- lm(y ~ x, data = df)
-  
+
   # construct metrics table using the 'yardstick' library
   # simply the squared correlation between truth and estimate (0,1)
-  df_metrics <- yardstick::rsq(df, y, x)  |> 
-    
+  df_metrics <- yardstick::rsq(df, y, x) |>
     # root mean square error
-    dplyr::bind_rows(yardstick::rmse(df, y, x)) |> 
-    
+    dplyr::bind_rows(yardstick::rmse(df, y, x)) |>
     # slope of fitted vs observed
-    dplyr::bind_rows( 
-      tibble(.metric = "slope", 
-             .estimator = "standard", 
-             .estimate = coef(linmod)[2])) |> 
-
+    dplyr::bind_rows(
+      tibble(
+        .metric = "slope",
+        .estimator = "standard",
+        .estimate = coef(linmod)[2]
+      )
+    ) |>
     # bias
-    dplyr::bind_rows( 
-      tibble( .metric = "bias", 
-              .estimator = "standard", 
-              .estimate = mean(df$y - df$x))) |> 
-    
+    dplyr::bind_rows(
+      tibble(
+        .metric = "bias",
+        .estimator = "standard",
+        .estimate = mean(df$y - df$x)
+      )
+    ) |>
     # format to keep only 2 significant digits
     dplyr::mutate(.estimate_form = format(.estimate, digits = 2))
-  
-  subtitle <- bquote( 
-    italic(R)^2 == .(df_metrics |> 
-                       dplyr::filter(.metric == "rsq") |> 
-                       pull(.estimate_form)) ~~
-    RMSE == .(df_metrics |> 
-                dplyr::filter(.metric == "rmse") |> 
-                pull(.estimate_form)) ~~
-    Bias == .(df_metrics |> 
-                dplyr::filter(.metric == "bias") |> 
-                pull(.estimate_form)) ~~
-    Slope == .(df_metrics|> 
-                 dplyr::filter(.metric == "slope")|> 
-                 pull(.estimate_form))
-    )
-  
+
+  subtitle <- bquote(
+    italic(R)^2 == .(df_metrics |>
+      dplyr::filter(.metric == "rsq") |>
+      pull(.estimate_form)) ~ ~
+      RMSE == .(df_metrics |>
+        dplyr::filter(.metric == "rmse") |>
+        pull(.estimate_form)) ~ ~
+      Bias == .(df_metrics |>
+        dplyr::filter(.metric == "bias") |>
+        pull(.estimate_form)) ~ ~
+      Slope == .(df_metrics |>
+        dplyr::filter(.metric == "slope") |>
+        pull(.estimate_form))
+  )
+
   # points
-  df |> 
+  df |>
     ggplot(aes(x, y)) +
     geom_point() +
-    geom_abline(intercept = 0, slope = 1, linetype = "dotted") +  # 1:1 line
+    geom_abline(intercept = 0, slope = 1, linetype = "dotted") + # 1:1 line
     theme_classic() +
-    labs(subtitle = subtitle) + 
+    labs(subtitle = subtitle) +
     geom_smooth(
-      method = 'lm',  # regression fit
+      method = "lm", # regression fit
       color = "red",
       size = 0.5,
       se = FALSE
-      ) 
-  
+    )
 }
 
 set.seed(1982)
 
 # uncorrelated
-plot_1 <- tibble(x = rnorm(100),
-              y = rnorm(100)) |> 
+plot_1 <- tibble(
+  x = rnorm(100),
+  y = rnorm(100)
+) |>
   analyse_modobs() +
   labs(title = "Uncorrelated") +
-  ylim(-3,3) + xlim(-3, 3) +
+  ylim(-3, 3) + xlim(-3, 3) +
   xlab(expression(hat(Y))) +
-  theme(plot.title = element_text(size = 10),
-        plot.subtitle = element_text(size = 8))
+  theme(
+    plot.title = element_text(size = 10),
+    plot.subtitle = element_text(size = 8)
+  )
 
 # perfectly correlated - zero error
-plot_3 <- tibble(x = rnorm(100)) |> 
-  mutate(y = x) |> 
+plot_3 <- tibble(x = rnorm(100)) |>
+  mutate(y = x) |>
   analyse_modobs() +
   labs(title = bquote("Perfectly correlated, zero error:" ~ Y == hat(Y))) +
-  ylim(-3,3) + xlim(-3, 3) +
+  ylim(-3, 3) + xlim(-3, 3) +
   xlab(expression(hat(Y))) +
-  theme(plot.title = element_text(size = 10),
-        plot.subtitle = element_text(size = 8))
+  theme(
+    plot.title = element_text(size = 10),
+    plot.subtitle = element_text(size = 8)
+  )
 
 # perfectly correlated - scaling error
-plot_4 <- tibble(x = rnorm(100)) |> 
-  mutate(y = 0.6 * x) |> 
+plot_4 <- tibble(x = rnorm(100)) |>
+  mutate(y = 0.6 * x) |>
   analyse_modobs() +
   labs(
     title = bquote(
-      "Perfectly correlated, scaling error:" ~ Y == ~ .(0.6) ~ hat(Y))) +
-  ylim(-3,3) + xlim(-3, 3) +
+      "Perfectly correlated, scaling error:" ~ Y == ~ .(0.6) ~ hat(Y)
+    )
+  ) +
+  ylim(-3, 3) + xlim(-3, 3) +
   xlab(expression(hat(Y))) +
-  theme(plot.title = element_text(size = 10),
-        plot.subtitle = element_text(size = 8))
+  theme(
+    plot.title = element_text(size = 10),
+    plot.subtitle = element_text(size = 8)
+  )
 
 # perfectly correlated - constant error
-plot_5 <- tibble(x = rnorm(100)) |> 
+plot_5 <- tibble(x = rnorm(100)) |>
   mutate(y = x + 1) |>
   analyse_modobs() +
   labs(title = bquote(
-    "Perfectly correlated, constant error:" ~ Y == hat(Y) + 1)) +
-  ylim(-3,3) + xlim(-3, 3) +
+    "Perfectly correlated, constant error:" ~ Y == hat(Y) + 1
+  )) +
+  ylim(-3, 3) + xlim(-3, 3) +
   xlab(expression(hat(Y))) +
-  theme(plot.title = element_text(size = 10),
-        plot.subtitle = element_text(size = 8))
+  theme(
+    plot.title = element_text(size = 10),
+    plot.subtitle = element_text(size = 8)
+  )
 
 # correlated
-plot_6 <- tibble(x = rnorm(100)) |> 
-  mutate(y = x + rnorm(100)) |> 
+plot_6 <- tibble(x = rnorm(100)) |>
+  mutate(y = x + rnorm(100)) |>
   analyse_modobs() +
   labs(title = bquote("Correlated:" ~ Y == hat(Y) + epsilon[0])) +
-  ylim(-3,3) + xlim(-3, 3) +
+  ylim(-3, 3) + xlim(-3, 3) +
   xlab(expression(hat(Y))) +
-  theme(plot.title = element_text(size = 10),
-        plot.subtitle = element_text(size = 8))
+  theme(
+    plot.title = element_text(size = 10),
+    plot.subtitle = element_text(size = 8)
+  )
 
 # better correlation
-plot_7 <- tibble(x = rnorm(100)) |> 
-  mutate(y = x + 0.7 * rnorm(100)) |> 
+plot_7 <- tibble(x = rnorm(100)) |>
+  mutate(y = x + 0.7 * rnorm(100)) |>
   analyse_modobs() +
   labs(title = bquote(
-    "Better correlated:" ~ Y == hat(Y) + ~ .(0.7) ~ epsilon[0])) +
+    "Better correlated:" ~ Y == hat(Y) + ~ .(0.7) ~ epsilon[0]
+  )) +
   xlab(expression(hat(Y))) +
   # labs(title = "Better correlated (y = x + 0.7 rnorm(100))") +
-  ylim(-3,3) + xlim(-3, 3) +
-  theme(plot.title = element_text(size = 10),
-        plot.subtitle = element_text(size = 8))
+  ylim(-3, 3) + xlim(-3, 3) +
+  theme(
+    plot.title = element_text(size = 10),
+    plot.subtitle = element_text(size = 8)
+  )
 
-cowplot::plot_grid(plot_1, plot_3, plot_4, plot_5, plot_6, plot_7, 
-                   ncol = 2)
+cowplot::plot_grid(plot_1, plot_3, plot_4, plot_5, plot_6, plot_7,
+  ncol = 2
+)
 ```
 
 Common metrics used for evaluating regression fits are:
@@ -408,9 +435,9 @@ The squared value of the Pearson's *r* is often reported as "$R^2$" but is not e
 > Note the implementations in R.The $R^2$ reported by the generic `summary()` function corresponds to the base-R function `cor()^2` , to `yardstick::rsq()`, and to the definition of the square of the *Pearson's* $r$ given above. The `yardstick::rsq_trad()` returns the coefficient of determination as traditionally defined and is not equal to the values above, unless computed on the predicted values $\hat{Y}$.
 
 ```{r}
-# generate correlated random data 
+# generate correlated random data
 set.seed(1982)
-df <- tibble(x = rnorm(100)) |> 
+df <- tibble(x = rnorm(100)) |>
   mutate(y = x + rnorm(100)) |>
   mutate(y_fitted = lm(y ~ x)$fitted.values)
 
@@ -418,8 +445,8 @@ df <- tibble(x = rnorm(100)) |>
 summary(lm(y ~ x, data = df))$r.squared
 cor(df$y, df$x)^2 # remember: location and scale invariant
 yardstick::rsq(df, y, x) |> pull(.estimate)
-(sum((df$x - mean(df$x))*(df$y - mean(df$y))))^2/
-  (sum((df$y - mean(df$y))^2)*sum((df$x - mean(df$x))^2))
+(sum((df$x - mean(df$x)) * (df$y - mean(df$y))))^2 /
+  (sum((df$y - mean(df$y))^2) * sum((df$x - mean(df$x))^2))
 
 # implementations using coefficient of determination definition
 1 - sum((df$x - df$y)^2) / sum((df$y - mean(df$y))^2) # should be \hat{y}, not x
@@ -480,28 +507,30 @@ $$ Also for BIC, the goal is to minimize it. This metric has the feature that if
 Let's calculate the metrics introduced above for a few of the fitted regression models. Some of these metrics, like $R^2$ and $R^2_{adj}$ are given by the `summary()` function. Alternatively, the {yardstick} package provides implementations for a few of these metrics, which we compute below:
 
 ```{r}
-compute_regr_metrics <- function(mod){
-  
+compute_regr_metrics <- function(mod) {
   p <- length(mod$coefficients)
   n <- length(mod$residuals)
-  
+
   tibble(
     mse = mean(mod$residuals^2),
     R2 = summary(mod)$r.squared,
     R2_adj = summary(mod)$adj.r.squared,
     AIC = extractAIC(mod)[2],
-    AIC_adj = extractAIC(mod)[2] + 2*(p+2)*(p+3)/(n-p-3),
+    AIC_adj = extractAIC(mod)[2] + 2 * (p + 2) * (p + 3) / (n - p - 3),
     BIC = BIC(mod) # this implementation is based on log-likelihood
   )
 }
 
 list_metrics <- purrr::map(
-    list(linmod1, linmod2, linmod_cat, quadmod), 
-    ~compute_regr_metrics(.))
-names(list_metrics) <- c("Linear model", 
-                         "Linear model 2", 
-                         "Linear + categories",
-                         "Quadratic model")
+  list(linmod1, linmod2, linmod_cat, quadmod),
+  ~ compute_regr_metrics(.)
+)
+names(list_metrics) <- c(
+  "Linear model",
+  "Linear model 2",
+  "Linear + categories",
+  "Quadratic model"
+)
 bind_rows(list_metrics, .id = "type")
 ```
 
@@ -561,10 +590,12 @@ plot_3 <- half_hourly_fluxes_small |>
   ggplot(aes(x = SW_IN_F, y = GPP_NT_VUT_REF)) +
   geom_point(size = 0.75) +
   geom_smooth(method = "lm", color = "red", fullrange = TRUE) +
-  labs(x = expression(paste("Shortwave radiation (W m"^-2, ")")), 
-       y = expression(paste("GPP (", mu,"mol CO"[2], " m"^-2, "s"^-1, ")"))) +
+  labs(
+    x = expression(paste("Shortwave radiation (W m"^-2, ")")),
+    y = expression(paste("GPP (", mu, "mol CO"[2], " m"^-2, "s"^-1, ")"))
+  ) +
   theme_classic() +
-  ylim(-20, 40) + 
+  ylim(-20, 40) +
   xlim(0, 1100)
 
 plot_4 <- half_hourly_fluxes_small |>
@@ -572,13 +603,15 @@ plot_4 <- half_hourly_fluxes_small |>
   ggplot(aes(x = SW_IN_F, y = GPP_NT_VUT_REF)) +
   geom_point(size = 0.75) +
   geom_smooth(method = "lm", color = "red", fullrange = TRUE) +
-  labs(x = expression(paste("Shortwave radiation (W m"^-2, ")")), 
-       y = expression(paste("GPP (", mu,"mol CO"[2], " m"^-2, "s"^-1, ")"))) +
+  labs(
+    x = expression(paste("Shortwave radiation (W m"^-2, ")")),
+    y = expression(paste("GPP (", mu, "mol CO"[2], " m"^-2, "s"^-1, ")"))
+  ) +
   theme_classic() +
-  geom_point(aes(x = 1100, y = -20), colour = 'red', shape = 1, size = 3) +
-  ylim(-20, 40) + 
+  geom_point(aes(x = 1100, y = -20), colour = "red", shape = 1, size = 3) +
+  ylim(-20, 40) +
   xlim(0, 1100)
-  
+
 cowplot::plot_grid(plot_3, plot_4)
 ```
 
@@ -592,66 +625,85 @@ half_hourly_fluxes_outlier <- half_hourly_fluxes_small |>
 # Various ways to identify the outlier using graphs
 plot_5 <- ggplot(
   data = half_hourly_fluxes_outlier,
-  aes(x = GPP_NT_VUT_REF, y = after_stat(density))) +
+  aes(x = GPP_NT_VUT_REF, y = after_stat(density))
+) +
   geom_histogram(fill = "grey70", color = "black") +
-  geom_density(color = 'red')+
-  labs(title = 'Histogram, density and boxplot', 
-       x = expression(paste("GPP (gC m"^-2, "s"^-1, ")"))) +
+  geom_density(color = "red") +
+  labs(
+    title = "Histogram, density and boxplot",
+    x = expression(paste("GPP (gC m"^-2, "s"^-1, ")"))
+  ) +
   theme_classic()
 
 plot_6 <- ggplot(
   data = half_hourly_fluxes_outlier,
-  aes(x = "", y = GPP_NT_VUT_REF)) +
+  aes(x = "", y = GPP_NT_VUT_REF)
+) +
   geom_boxplot(fill = "grey70", color = "black") +
   coord_flip() +
   theme_classic() +
-  theme(axis.text.y=element_blank(),
-        axis.ticks.y=element_blank()) +
+  theme(
+    axis.text.y = element_blank(),
+    axis.ticks.y = element_blank()
+  ) +
   labs(y = expression(paste("GPP (gC m"^-2, "s"^-1, ")")))
 
 plot_7 <- ggplot(
   data = half_hourly_fluxes_outlier,
-  aes(x = SW_IN_F, y = after_stat(density))) +
+  aes(x = SW_IN_F, y = after_stat(density))
+) +
   geom_histogram(fill = "grey70", color = "black") +
-  geom_density(color = 'red')+
-  labs(title = 'Histogram, density and boxplot', 
-       x = expression(paste("Shortwave radiation (W m"^-2, ")"))) +
+  geom_density(color = "red") +
+  labs(
+    title = "Histogram, density and boxplot",
+    x = expression(paste("Shortwave radiation (W m"^-2, ")"))
+  ) +
   theme_classic()
 
 plot_8 <- ggplot(
   data = half_hourly_fluxes_outlier,
-  aes(x = "", y = SW_IN_F)) +
+  aes(x = "", y = SW_IN_F)
+) +
   geom_boxplot(fill = "grey70", color = "black") +
   coord_flip() +
   theme_classic() +
-  theme(axis.text.y=element_blank(),
-        axis.ticks.y=element_blank()) +
+  theme(
+    axis.text.y = element_blank(),
+    axis.ticks.y = element_blank()
+  ) +
   labs(y = expression(paste("Shortwave radiation (W m"^-2, ")")))
 
 cowplot::plot_grid(plot_5, plot_7, plot_6, plot_8,
-                   ncol = 2, rel_heights = c(2,1),
-                   align = 'v', axis = 'lr')
+  ncol = 2, rel_heights = c(2, 1),
+  align = "v", axis = "lr"
+)
 ```
 
 A **Q-Q Plot** depicts the sample quantiles of a variable against the theoretical quantiles of a distribution that is assumed to uderly the data. In the histograms above, GPP looks somewhat Gaussian (normally distributed) but with fatter tails and slightly skewed to the right, while shortwave radiation is clearly skewed to the right, resembling an exponential distribution. The Q-Q plots below reveal that both variables are clearly not normally distributed.
 
 ```{r}
 plot_9 <- ggplot(
-    data = half_hourly_fluxes_outlier,
-    aes(sample = GPP_NT_VUT_REF)) +
+  data = half_hourly_fluxes_outlier,
+  aes(sample = GPP_NT_VUT_REF)
+) +
   geom_qq() +
   geom_qq_line() +
-  labs(y = expression(paste("GPP (gC m"^-2, "s"^-1, ")")),
-       x = "Theoretical normal quantiles") +
+  labs(
+    y = expression(paste("GPP (gC m"^-2, "s"^-1, ")")),
+    x = "Theoretical normal quantiles"
+  ) +
   theme_classic()
 
 plot_10 <- ggplot(
   data = half_hourly_fluxes_outlier,
-  aes(sample = SW_IN_F)) +
+  aes(sample = SW_IN_F)
+) +
   geom_qq() +
   geom_qq_line() +
-  labs(y = expression(paste("Shortwave radiation (W m"^-2, ")")),
-       x = "Theoretical normal quantiles") +
+  labs(
+    y = expression(paste("Shortwave radiation (W m"^-2, ")")),
+    x = "Theoretical normal quantiles"
+  ) +
   theme_classic()
 
 cowplot::plot_grid(plot_9, plot_10, ncol = 2)
@@ -663,10 +715,12 @@ Note however, that neither the histograms, nor the boxplots, or the QQ-plots rev
 
 ```{r}
 # Fit regression with outlier
-linmod_outlier <- lm(GPP_NT_VUT_REF ~ SW_IN_F, 
-                     data = add_row(half_hourly_fluxes_small, 
-                                    SW_IN_F = 1100, 
-                                    GPP_NT_VUT_REF = -20))
+linmod_outlier <- lm(GPP_NT_VUT_REF ~ SW_IN_F,
+  data = add_row(half_hourly_fluxes_small,
+    SW_IN_F = 1100,
+    GPP_NT_VUT_REF = -20
+  )
+)
 
 plot(linmod_outlier, 5)
 ```
@@ -690,7 +744,7 @@ datasets::CO2 |>
   ggplot(aes(x = uptake, y = Type, color = Type)) +
   geom_point(size = 3, alpha = 0.5) +
   theme_classic() +
-  labs(x = expression(paste("Uptake (", mu,"mol CO"[2], " m"^-2, "s"^-1, ")"))) +
+  labs(x = expression(paste("Uptake (", mu, "mol CO"[2], " m"^-2, "s"^-1, ")"))) +
   theme(legend.position = "none")
 ```
 
@@ -706,7 +760,7 @@ The next issue is that a linear model makes continuous predictions in the entire
 
 ```{r out.width="75%", fig.align='center'}
 ggplot() +
-  geom_function(fun = function(x) exp(x)/(1 + exp(x))) +
+  geom_function(fun = function(x) exp(x) / (1 + exp(x))) +
   xlim(-5, 5) +
   labs(y = "logit(x)", x = "x") +
   theme_classic()
@@ -734,8 +788,9 @@ To fit a logistic regression in R we can use the `glm()` function, which fits a 
 
 ```{r}
 logmod <- glm(Type ~ uptake,
-              family = binomial(link = logit),
-              data = datasets::CO2)
+  family = binomial(link = logit),
+  data = datasets::CO2
+)
 summary(logmod)
 ```
 
@@ -746,21 +801,27 @@ beta <- coef(logmod)
 
 # reuse previous plot with classification line
 datasets::CO2 |>
-  ggplot(aes(x = uptake, y = as.numeric(Type)-1, color = Type)) +
+  ggplot(aes(x = uptake, y = as.numeric(Type) - 1, color = Type)) +
   geom_point(size = 3, alpha = 0.5) +
-  labs(x = expression(paste("Uptake (", mu,"mol CO"[2], " m"^-2, "s"^-1, ")")),
-       y = "") +
+  labs(
+    x = expression(paste("Uptake (", mu, "mol CO"[2], " m"^-2, "s"^-1, ")")),
+    y = ""
+  ) +
   theme_classic() +
-  
+
   # call glm model fit as part of the plotting
-  stat_smooth(method = "glm", color = "grey", se = FALSE,
-              method.args = list(family = binomial),
-              size = 3) +
-  
+  stat_smooth(
+    method = "glm", color = "grey", se = FALSE,
+    method.args = list(family = binomial),
+    size = 3
+  ) +
+
   # manually plot of logit function with fitted coefficients
-  geom_function(fun = function(x) exp(beta[1] + beta[2] * x)/(1 + exp(beta[1] + beta[2] * x)),
-                color = "black", size = 0.5) +
-  
+  geom_function(
+    fun = function(x) exp(beta[1] + beta[2] * x) / (1 + exp(beta[1] + beta[2] * x)),
+    color = "black", size = 0.5
+  ) +
+
   # visualise threshold
   geom_vline(xintercept = -beta[1] / beta[2], lty = 2, linetype = "dotted") +
   xlim(0, 60)
@@ -843,7 +904,8 @@ Now we can visualize the confusion matrix as a mosaic plot. This is quite helpfu
 
 ```{r}
 mosaicplot(conf_matrix$table,
-           main = "Confusion matrix")
+  main = "Confusion matrix"
+)
 ```
 
 ## Exercises
