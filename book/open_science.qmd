@@ -66,6 +66,15 @@ The broad-purpose permanent data repositories mentioned above are not edited and
 
 : An incomplete collection of open data repositories used in Environmental sciences and Geography. Note the distinction between repositories that are open to contributions and offer hosting and DOI-minting for user-contributed datasets, and those that are not (Column 'Open to contributions'). A more complete list of open data repositories and other access points for open research data in Environmental science and Geography can be found at @loginova_list_2025. {#tbl-open-data-repositories}
 
+There exists packages for many of these repositories, to include data hosted there in reproducible workflows (see @sec-reproducible). An example for Zenodo is shown below.
+```{r eval = FALSE}
+library(zen4R)
+# Download data from Zenodo
+zen4R::download_zenodo(
+  doi = "10.5281/zenodo.14808331", 
+  files = "rsofun_driver_data_v3.4.2.rds",
+  path = here::here("data-raw"))
+```
 
 ### Open source software
 
