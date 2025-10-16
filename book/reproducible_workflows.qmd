@@ -305,31 +305,41 @@ All analyses start with one or more datasets that are obtained from external sou
 
 ### Use relative paths
 
-... not absolute paths. The use of absolute paths, i.e., a path starting at the root of your local file system, is the enemy of portability. Since your collaborator's file system and location of the project folder with most certainly not be the same as it is on your machine, the code will break. By using relative paths and read and write only from and to locations in your project directory, you make your code -- the entire project -- portable.
+... not absolute paths. The use of absolute paths, i.e., a path starting at the root of your local file system (indicated e.g. by `/` or `C:`), is the enemy of portability. Since your collaborator's file system and location of the project folder will most certainly not be the same as it is on your machine, the code will break. By using relative paths and read and write only from and to locations in your project directory, you make your code -- the entire project -- portable.
 
 * Bad practice with absolute path:
 
   ```{r eval=FALSE}
-read_csv("/Users/alex/Desktop/data/file.csv")
+read_csv("C:/Users/alex/Desktop/data/df.csv") # on Windows
+read_csv("/Users/alex/Desktop/data/df.csv")   # on Linux or Mac
   ```
-* Good practice with relative path, using `here()`:
+* Better practice with relative path:
 
   ```{r eval=FALSE}
-read_csv(here("data", "file.csv"))
+read_csv("./data/df.csv")
+read_csv("data/df.csv")  # since ./ is optional
   ```
 
-As an example, consider the following. RMarkdown files commonly reside in a sub-directory `./vignettes/` and are rendered relative to the file path where it is located. This means that to access data which resides in `data/` using code in `./vignettes/your_dynamic_document.Rmd`, we would have to write:
+* Best practice with relative path, using `here()`:
+
+  ```{r eval=FALSE}
+read_csv(here("data", "df.csv"))
+  ```
+
+Note in above examples, how the absolute path will not work on a computer of a collaborator that doesn't have a user called `alex`. The relative path starts out in the working directory represented by the `.` and descends into a subfolder `data` in which it looks for a file `df.csv`. Note that the `./` is optional. This approach works on different computers, as long as the entire project folder was copied/cloned.
+A potential source of confusion with relative paths is its starting point: relative to what? The answer is: relative to the 'working directory'. But the tricky part is that this can change depending on how you run the R code. In RStudio the working directory of your R session is indicated above the console, just next to the R version. When using RStudio projects, the working directory should normally be set to the directory containing the `*.Rproj` file. It can also be checked with `getwd()`. This working directory is used in simpler cases, e.g. in `*.R` scripts or when directly pasting into the console (try it out by pasting `getwd()`!).
+However, for markdown documents (`*.Rmd` and `*.qmd` files), the working directory is by default set to the location of the `*.Rmd` file - not the `*.Rproj` file - (unless you changed this in the RStudio RMarkdown options). If in doubt, use `getwd()` in a markdown documents.
+
+So, if your markdown files reside in a sub-directory, e.g. `./vignettes/` or `./analysis`, they use this sub-directory as working directory. This means that to access data which resides in `./data/` using code in `./vignettes/your_dynamic_document.Rmd`, we would have to write:
 ```{r eval = FALSE}
-data <- read_csv("../data/some_data.csv")
+data <- read_csv("../data/df.csv")
 ```
 
-Note the `../` to go one level up. However, when the same code is executed from another level of the project's directory structure, this code won't work anymore.
-
-To allow for more flexibility in file locations within your project folder, you may use the [{here} package](https://here.r-lib.org/) package. I gathers the absolute path of the R project and allows for a specification of paths inside scripts and functions that always start from the top project directory, irrespective of where the script that implements the reading-code is located.
+Note the `../` to go one level up. However, when the same code is executed from another level of the project's directory structure, this code won't work anymore. For these situations, the [{here} package](https://here.r-lib.org/) package can be used to regain consistent control of the working directory. It creates paths relative to the `*.Rproj` file and thus allows for a specification of paths inside scripts and functions that always start from the top project directory, irrespective of where the script that implements the reading-code is located.
 
 ```{r}
-library(here)
-here()
+getwd() # this gives the location of the qmd file
+library(here); here()  # this gives the location of the Rproj file
 file.exists(here("data", "df.csv")) # use here("data", "df.csv") instead of here("data/df.csv") to make it portable also to non-UNIX-based systems.
 ```
   
