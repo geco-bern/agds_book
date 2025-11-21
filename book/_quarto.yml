@@ -9,7 +9,7 @@ book:
   title: "Applied Geodata Science"
   subtitle: ""
   author: "Benjamin Stocker, Koen Hufkens, Pepa Arán, and Pascal Schneider"
-  date: "2023/11/07"
+  date: "2025/09/09"
   page-navigation: true
   chapters:
     - index.qmd
